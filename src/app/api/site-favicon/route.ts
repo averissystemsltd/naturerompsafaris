@@ -3,7 +3,12 @@ import { NextResponse } from 'next/server';
 import { getPublicSiteSettings } from '@/lib/public/site-data';
 import { resolveAbsoluteSiteFaviconUrl, resolveFaviconMimeType } from '@/lib/site-favicon';
 
-export const revalidate = 300;
+// Rendered on request, never prerendered: this route proxies the favicon by
+// self-fetching an absolute URL. During `next build` there is no running server,
+// so a relative/bundled favicon (e.g. /assets/brand-favicon.png) would resolve to
+// http://localhost and fail with ECONNREFUSED. At request time the server is up
+// and the fetch succeeds. Response caching is still handled via Cache-Control.
+export const dynamic = 'force-dynamic';
 
 /**
  * Canonical /favicon.ico handler (via next.config rewrite).
