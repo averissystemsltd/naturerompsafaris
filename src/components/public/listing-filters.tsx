@@ -37,15 +37,15 @@ export function ListingFilters({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className={cn('benroso-listing-filters', !open && 'is-mobile-collapsed', className)}>
+    <div className={cn('brand-listing-filters', !open && 'is-mobile-collapsed', className)}>
       <button
         aria-controls='listing-filters-body'
         aria-expanded={open}
-        className='benroso-listing-filters__toggle'
+        className='brand-listing-filters__toggle'
         onClick={() => setOpen((value) => !value)}
         type='button'
       >
-        <span className='benroso-listing-filters__toggle-label'>
+        <span className='brand-listing-filters__toggle-label'>
           <Icons.adjustments aria-hidden className='size-4' />
           {open ? 'Hide filters' : 'Filter results'}
           {activeCount > 0 ? ` (${activeCount})` : ''}
@@ -55,27 +55,27 @@ export function ListingFilters({
           className={cn('size-4 transition-transform', open && 'rotate-180')}
         />
       </button>
-      <div className='benroso-listing-filters__header'>
-        <h2 className='benroso-listing-filters__title'>{title}</h2>
+      <div className='brand-listing-filters__header'>
+        <h2 className='brand-listing-filters__title'>{title}</h2>
         {showClear ? (
           onClear ? (
-            <button className='benroso-listing-filters__clear' onClick={onClear} type='button'>
+            <button className='brand-listing-filters__clear' onClick={onClear} type='button'>
               {clearLabel}
             </button>
           ) : (
-            <Link className='benroso-listing-filters__clear' href={clearHref!} scroll={false}>
+            <Link className='brand-listing-filters__clear' href={clearHref!} scroll={false}>
               {clearLabel}
             </Link>
           )
         ) : null}
       </div>
       {activeCount > 0 ? (
-        <p className='benroso-listing-filters__active'>
+        <p className='brand-listing-filters__active'>
           {activeCount} active {activeCount === 1 ? 'filter' : 'filters'}
         </p>
       ) : null}
       <div
-        className={cn('benroso-listing-filters__body', !open && 'is-collapsed')}
+        className={cn('brand-listing-filters__body', !open && 'is-collapsed')}
         id='listing-filters-body'
       >
         {children}
@@ -94,12 +94,12 @@ export function ListingFilterGroup({
   title: string;
 }) {
   return (
-    <section className='benroso-listing-filters__group'>
-      <div className='benroso-listing-filters__group-head'>
-        <h3 className='benroso-listing-filters__group-title'>{title}</h3>
-        {hint ? <p className='benroso-listing-filters__hint'>{hint}</p> : null}
+    <section className='brand-listing-filters__group'>
+      <div className='brand-listing-filters__group-head'>
+        <h3 className='brand-listing-filters__group-title'>{title}</h3>
+        {hint ? <p className='brand-listing-filters__hint'>{hint}</p> : null}
       </div>
-      <ul className='benroso-listing-filters__list'>{children}</ul>
+      <ul className='brand-listing-filters__list'>{children}</ul>
     </section>
   );
 }
@@ -134,15 +134,15 @@ export function ListingFilterDropdown({
   const summary = selectedCount > 0 ? `${selectedCount} selected` : (triggerLabel ?? emptyLabel);
 
   return (
-    <section className='benroso-listing-filters__group'>
-      <div className='benroso-listing-filters__group-head'>
-        <h3 className='benroso-listing-filters__group-title'>{title}</h3>
-        {hint ? <p className='benroso-listing-filters__hint'>{hint}</p> : null}
+    <section className='brand-listing-filters__group'>
+      <div className='brand-listing-filters__group-head'>
+        <h3 className='brand-listing-filters__group-title'>{title}</h3>
+        {hint ? <p className='brand-listing-filters__hint'>{hint}</p> : null}
       </div>
       <button
         aria-controls={panelId}
         aria-expanded={open}
-        className={cn('benroso-listing-filters__dropdown-trigger', open && 'is-open')}
+        className={cn('brand-listing-filters__dropdown-trigger', open && 'is-open')}
         onClick={() => setOpen((value) => !value)}
         type='button'
       >
@@ -150,13 +150,13 @@ export function ListingFilterDropdown({
         <Icons.chevronDown
           aria-hidden
           className={cn(
-            'size-4 shrink-0 text-[var(--benroso-muted)] transition-transform',
+            'size-4 shrink-0 text-[var(--brand-muted)] transition-transform',
             open && 'rotate-180'
           )}
         />
       </button>
       {open ? (
-        <ul className='benroso-listing-filters__dropdown-panel' id={panelId}>
+        <ul className='brand-listing-filters__dropdown-panel' id={panelId}>
           {children}
         </ul>
       ) : null}
@@ -189,10 +189,10 @@ export function ListingFilterOption({
 }: ListingFilterOptionProps) {
   return (
     <li>
-      <label className={cn('benroso-listing-filters__option', checked && 'is-active')} htmlFor={id}>
+      <label className={cn('brand-listing-filters__option', checked && 'is-active')} htmlFor={id}>
         <input
           checked={checked}
-          className='benroso-listing-filters__native'
+          className='brand-listing-filters__native'
           id={id}
           name={name}
           onChange={onChange}
@@ -201,15 +201,13 @@ export function ListingFilterOption({
         <span
           aria-hidden
           className={cn(
-            type === 'radio'
-              ? 'benroso-listing-filters__radio'
-              : 'benroso-listing-filters__checkbox',
+            type === 'radio' ? 'brand-listing-filters__radio' : 'brand-listing-filters__checkbox',
             checked && 'is-checked'
           )}
         />
-        <span className='benroso-listing-filters__option-label'>{label}</span>
+        <span className='brand-listing-filters__option-label'>{label}</span>
         {typeof count === 'number' ? (
-          <span className='benroso-listing-filters__count'>{count}</span>
+          <span className='brand-listing-filters__count'>{count}</span>
         ) : null}
       </label>
     </li>
@@ -232,17 +230,14 @@ export function ListingFilterNavItem({
     <li>
       <Link
         aria-current={active ? 'page' : undefined}
-        className={cn('benroso-listing-filters__option', active && 'is-active')}
+        className={cn('brand-listing-filters__option', active && 'is-active')}
         href={href}
         scroll={false}
       >
-        <span
-          aria-hidden
-          className={cn('benroso-listing-filters__radio', active && 'is-checked')}
-        />
-        <span className='benroso-listing-filters__option-label'>{label}</span>
+        <span aria-hidden className={cn('brand-listing-filters__radio', active && 'is-checked')} />
+        <span className='brand-listing-filters__option-label'>{label}</span>
         {typeof count === 'number' ? (
-          <span className='benroso-listing-filters__count'>{count}</span>
+          <span className='brand-listing-filters__count'>{count}</span>
         ) : null}
       </Link>
     </li>
@@ -302,13 +297,13 @@ export function ListingFilterRange({
   }, []);
 
   return (
-    <section className='benroso-listing-filters__group'>
-      <div className='benroso-listing-filters__group-head'>
-        <h3 className='benroso-listing-filters__group-title'>{title}</h3>
+    <section className='brand-listing-filters__group'>
+      <div className='brand-listing-filters__group-head'>
+        <h3 className='brand-listing-filters__group-title'>{title}</h3>
       </div>
-      <div className='benroso-listing-filters__range'>
+      <div className='brand-listing-filters__range'>
         <Slider
-          className='benroso-range-slider'
+          className='brand-range-slider'
           max={max}
           min={min}
           step={step}
@@ -324,13 +319,13 @@ export function ListingFilterRange({
             onCommit(pair);
           }}
         />
-        <div className='benroso-listing-filters__range-values'>
+        <div className='brand-listing-filters__range-values'>
           <span>
-            <span className='benroso-listing-filters__range-label'>Min</span>
+            <span className='brand-listing-filters__range-label'>Min</span>
             <strong>{formatValue(value[0])}</strong>
           </span>
           <span className='text-right'>
-            <span className='benroso-listing-filters__range-label'>Max</span>
+            <span className='brand-listing-filters__range-label'>Max</span>
             <strong>{formatValue(value[1])}</strong>
           </span>
         </div>
@@ -340,5 +335,5 @@ export function ListingFilterRange({
 }
 
 export function ListingFilterEmpty({ children }: { children: React.ReactNode }) {
-  return <li className='benroso-listing-filters__empty'>{children}</li>;
+  return <li className='brand-listing-filters__empty'>{children}</li>;
 }

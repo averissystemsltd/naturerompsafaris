@@ -3,8 +3,8 @@
 import Image from 'next/image';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
 import { ScrollReveal } from '@/components/public/ui/scroll-reveal';
 import { TrustedChecklist } from '@/components/public/home/home-trusted-checklist';
 import { Slider } from '@/components/public/ui/slider';
@@ -12,24 +12,24 @@ import { localePath } from '@/lib/public/locale-path';
 
 const FLEET_SLIDER_IMAGES = [
   {
-    imageUrl: '/assets/benroso-fleet-lion.png',
-    imageAlt: 'Benroso Safaris four by four with pop up roof near a lion on the plains'
+    imageUrl: '/assets/brand-fleet-lion.png',
+    imageAlt: 'Nature Romp Safaris four by four with pop up roof near a lion on the plains'
   },
   {
-    imageUrl: '/assets/benroso-4x4-safaris-fleet.png',
-    imageAlt: 'Benroso Safaris 4x4 fleet at a scenic East African viewpoint'
+    imageUrl: '/assets/brand-4x4-safaris-fleet.png',
+    imageAlt: 'Nature Romp Safaris 4x4 fleet at a scenic East African viewpoint'
   },
   {
-    imageUrl: '/assets/benroso-fleet-mara-gate.png',
-    imageAlt: 'Benroso Safaris vehicle at Lake Naivasha Sopa Resort'
+    imageUrl: '/assets/brand-fleet-mara-gate.png',
+    imageAlt: 'Nature Romp Safaris vehicle at Lake Naivasha Sopa Resort'
   },
   {
-    imageUrl: '/assets/benroso-fleet-branded.png',
-    imageAlt: 'Benroso Safaris Land Cruiser ready for off road game drives'
+    imageUrl: '/assets/brand-fleet-branded.png',
+    imageAlt: 'Nature Romp Safaris Land Cruiser ready for off road game drives'
   },
   {
-    imageUrl: '/assets/benroso-fleet-guests.png',
-    imageAlt: 'Safari guests with Benroso Safaris private safari vehicles'
+    imageUrl: '/assets/brand-fleet-guests.png',
+    imageAlt: 'Safari guests with Nature Romp Safaris private safari vehicles'
   }
 ];
 
@@ -42,31 +42,31 @@ const FLEET_HIGHLIGHTS = [
 
 export function HomeFleetGuides({ locale }: { locale: string }) {
   return (
-    <section className='border-t border-[var(--benroso-line)] bg-white'>
-      <div className='benroso-container py-16 md:py-20'>
+    <section className='border-t border-[var(--brand-line)] bg-white'>
+      <div className='brand-container py-16 md:py-20'>
         <div className='grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14'>
           <ScrollReveal from='left'>
-            <p className='benroso-eyebrow'>How You Travel With Us</p>
-            <h2 className='benroso-heading mt-3 font-display text-[clamp(1.875rem,4vw,3rem)] leading-[1.1]'>
+            <p className='brand-eyebrow'>How You Travel With Us</p>
+            <h2 className='brand-heading mt-3 font-display text-[clamp(1.875rem,4vw,3rem)] leading-[1.1]'>
               Your Vehicle and Guide Stay With You the Whole Way
             </h2>
-            <span className='benroso-gold-line benroso-gold-line--left' />
-            <p className='benroso-body mt-6 max-w-xl text-base leading-8'>
+            <span className='brand-gold-line brand-gold-line--left' />
+            <p className='brand-body mt-6 max-w-xl text-base leading-8'>
               From airport pickup to your last morning in the bush, you ride in the same private
               vehicle with the same people who already know how you like your day paced. No handoffs
               halfway through the trip, and no strangers turning up on day three.
             </p>
             <TrustedChecklist items={FLEET_HIGHLIGHTS} />
-            <BenrosoButtonGroup className='mt-8'>
-              <BenrosoButton
+            <BrandButtonGroup className='mt-8'>
+              <BrandButton
                 className='group'
                 href={localePath(locale, '/our-fleet')}
                 variant='primary'
               >
                 <Icons.fleet className='h-4 w-4 shrink-0 transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-110' />
                 View Our Fleet
-              </BenrosoButton>
-              <BenrosoButton
+              </BrandButton>
+              <BrandButton
                 className='group'
                 href={localePath(locale, '/about#team')}
                 variant='accent-outline'
@@ -74,15 +74,15 @@ export function HomeFleetGuides({ locale }: { locale: string }) {
                 <Icons.teams className='h-4 w-4 shrink-0 transition-transform duration-500 ease-out group-hover:scale-110' />
                 Meet Our Guides
                 <Icons.arrowRight className='h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1' />
-              </BenrosoButton>
-            </BenrosoButtonGroup>
+              </BrandButton>
+            </BrandButtonGroup>
           </ScrollReveal>
 
           <ScrollReveal className='relative' from='right'>
             <Slider autoPlayMs={5500} showArrows={false}>
               {FLEET_SLIDER_IMAGES.map((image) => (
                 <div
-                  className='relative aspect-[4/3] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-primary)]'
+                  className='relative aspect-[4/3] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-primary)]'
                   key={image.imageUrl}
                 >
                   <Image

@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 
 import { HeroMediaBackdrop } from '@/components/public/hero-media-backdrop';
 import { ListingAside } from '@/components/public/listing-aside';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { heroHasMedia } from '@/lib/public/page-heroes';
 import type { PageHero as PageHeroConfig } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
@@ -35,7 +35,7 @@ export function PageHero({
   return (
     <section
       className={cn(
-        'relative overflow-hidden border-b border-[var(--benroso-line)] bg-[var(--benroso-primary-dark)] text-white',
+        'relative overflow-hidden border-b border-[var(--brand-line)] bg-[var(--brand-primary-dark)] text-white',
         className
       )}
     >
@@ -49,7 +49,7 @@ export function PageHero({
           />
         </>
       ) : null}
-      <div className='benroso-container relative z-10 py-14 md:py-20'>
+      <div className='brand-container relative z-10 py-14 md:py-20'>
         {breadcrumbs?.length ? (
           <nav aria-label='Breadcrumb' className='mb-6 flex flex-wrap gap-2 text-sm text-white/70'>
             {breadcrumbs.map((crumb, index) => (
@@ -82,9 +82,8 @@ export function PageHero({
   );
 }
 
-const listingStickyTop = 'calc(var(--benroso-topbar-h) + var(--benroso-header-h) + 1rem)';
-const listingStickyMaxHeight =
-  'calc(100vh - var(--benroso-topbar-h) - var(--benroso-header-h) - 2rem)';
+const listingStickyTop = 'calc(var(--brand-topbar-h) + var(--brand-header-h) + 1rem)';
+const listingStickyMaxHeight = 'calc(100vh - var(--brand-topbar-h) - var(--brand-header-h) - 2rem)';
 
 export function ListingShell({
   children,
@@ -100,17 +99,17 @@ export function ListingShell({
   className?: string;
 }) {
   return (
-    <section className={cn('benroso-section bg-white [content-visibility:visible]', className)}>
-      <div className='benroso-container'>
+    <section className={cn('brand-section bg-white [content-visibility:visible]', className)}>
+      <div className='brand-container'>
         {title ? (
-          <h2 className='benroso-heading mb-8 font-display text-3xl md:hidden'>{title}</h2>
+          <h2 className='brand-heading mb-8 font-display text-3xl md:hidden'>{title}</h2>
         ) : null}
         <div className='grid items-start gap-8 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,260px)_minmax(0,1fr)]'>
           {filters ? (
             <ListingAside
               className={
                 filterAsideClassName ??
-                'max-lg:border-b max-lg:border-[var(--benroso-line)] max-lg:pb-8 lg:border-r lg:border-[var(--benroso-line)] lg:pr-8 xl:pr-10'
+                'max-lg:border-b max-lg:border-[var(--brand-line)] max-lg:pb-8 lg:border-r lg:border-[var(--brand-line)] lg:pr-8 xl:pr-10'
               }
               style={
                 {
@@ -141,12 +140,12 @@ export function EmptyState({
   title: string;
 }) {
   return (
-    <div className='rounded-[var(--benroso-radius)] border border-dashed border-[var(--benroso-line)] bg-white px-8 py-16 text-center'>
-      <h3 className='benroso-heading font-display text-2xl'>{title}</h3>
-      <p className='benroso-body mx-auto mt-3 max-w-xl'>{message}</p>
+    <div className='rounded-[var(--brand-radius)] border border-dashed border-[var(--brand-line)] bg-white px-8 py-16 text-center'>
+      <h3 className='brand-heading font-display text-2xl'>{title}</h3>
+      <p className='brand-body mx-auto mt-3 max-w-xl'>{message}</p>
       {actionHref && actionLabel ? (
         <div className='mt-6'>
-          <BenrosoButton href={actionHref}>{actionLabel}</BenrosoButton>
+          <BrandButton href={actionHref}>{actionLabel}</BrandButton>
         </div>
       ) : null}
     </div>

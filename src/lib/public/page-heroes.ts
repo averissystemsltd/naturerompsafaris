@@ -1,8 +1,4 @@
-import {
-  BENROSO_ABOUT_HERO,
-  BENROSO_CONTACT_HERO,
-  BENROSO_PUBLIC_HERO_IMAGES
-} from '@/config/benroso';
+import { BRAND_ABOUT_HERO, BRAND_CONTACT_HERO, BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import { normalizeHeroSlides } from './hero-slides';
 import type { PageHero, PageHeroType } from './types';
 
@@ -47,70 +43,70 @@ export const PAGE_HERO_REGISTRY: PageHeroRegistryEntry[] = [
     label: 'Destinations',
     path: '/destinations',
     description: 'Hero on the destinations listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.destinations.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.destinations.imageUrl
   },
   {
     key: 'national-parks',
     label: 'National Parks',
     path: '/national-parks',
     description: 'Hero on the national parks listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.destinations.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.destinations.imageUrl
   },
   {
     key: 'tours',
     label: 'Safari Tours',
     path: '/tours',
     description: 'Hero on the safari tours listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.tours.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.tours.imageUrl
   },
   {
     key: 'packages',
     label: 'Safari Packages',
     path: '/safari-packages',
     description: 'Hero on the safari packages listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.tours.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.tours.imageUrl
   },
   {
     key: 'experiences',
     label: 'Experiences',
     path: '/experiences',
     description: 'Hero on the experiences listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.experiences.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.experiences.imageUrl
   },
   {
     key: 'accommodations',
     label: 'Accommodations',
     path: '/accommodations',
     description: 'Hero on the accommodations listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.accommodations.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.accommodations.imageUrl
   },
   {
     key: 'fleet',
     label: 'Our Fleet',
     path: '/our-fleet',
     description: 'Hero on the safari vehicles and fleet listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.fleet.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.fleet.imageUrl
   },
   {
     key: 'blog',
     label: 'Blog',
     path: '/blog',
     description: 'Hero on the blog/articles listing page.',
-    defaultImageUrl: BENROSO_PUBLIC_HERO_IMAGES.destinations.imageUrl
+    defaultImageUrl: BRAND_PUBLIC_HERO_IMAGES.destinations.imageUrl
   },
   {
     key: 'about',
     label: 'About Us',
     path: '/about',
     description: 'Hero on the about page.',
-    defaultImageUrl: BENROSO_ABOUT_HERO.imageUrl
+    defaultImageUrl: BRAND_ABOUT_HERO.imageUrl
   },
   {
     key: 'contact',
     label: 'Contact',
     path: '/contact',
     description: 'Hero on the contact page.',
-    defaultImageUrl: BENROSO_CONTACT_HERO.imageUrl
+    defaultImageUrl: BRAND_CONTACT_HERO.imageUrl
   }
 ];
 

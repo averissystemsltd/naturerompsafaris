@@ -7,7 +7,7 @@ export const FLEET_INTRO_TITLE = 'Why Our Fleet Works for You';
 
 export const FLEET_INTRO_COLUMNS = [
   [
-    'When you travel with Benroso Safaris, you keep the same private vehicle and the same driver guide from airport pickup through your final morning in the bush. That continuity matters on long driving days, when lodges change, and when a sighting deserves an extra hour rather than a rushed departure.',
+    'When you travel with Nature Romp Safaris, you keep the same private vehicle and the same driver guide from airport pickup through your final morning in the bush. That continuity matters on long driving days, when lodges change, and when a sighting deserves an extra hour rather than a rushed departure.',
     'Our four by four cruisers are serviced on a regular schedule for the roads, dust, and distances that East African safaris demand. Pop up roofs, charging points, and standing room are standard, so you can watch wildlife clearly without feeling cramped inside the vehicle.'
   ],
   [
@@ -29,7 +29,7 @@ export const FLEET_FAQS: DirectAnswer[] = [
   {
     question: 'Will I have the same vehicle for my whole safari?',
     answer:
-      'Yes. On a private Benroso safari you travel in the same vehicle with the same driver guide from start to finish, unless a rare operational issue requires a replacement. We plan that way so you are not meeting a new team halfway through your trip.'
+      'Yes. On a private Nature Romp safari you travel in the same vehicle with the same driver guide from start to finish, unless a rare operational issue requires a replacement. We plan that way so you are not meeting a new team halfway through your trip.'
   },
   {
     question: 'How many guests fit in a safari vehicle?',

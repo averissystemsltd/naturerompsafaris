@@ -1,4 +1,4 @@
-import { BENROSO_CONTACT_DEFAULTS } from '@/config/benroso';
+import { BRAND_CONTACT_DEFAULTS } from '@/config/brand';
 
 import { absoluteUrl } from './absolute-url';
 
@@ -46,13 +46,13 @@ export function buildTravelAgencyJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
-    name: BENROSO_CONTACT_DEFAULTS.companyName,
+    name: BRAND_CONTACT_DEFAULTS.companyName,
     url: absoluteUrl('/'),
-    email: BENROSO_CONTACT_DEFAULTS.email,
-    telephone: BENROSO_CONTACT_DEFAULTS.phonePrimary,
+    email: BRAND_CONTACT_DEFAULTS.email,
+    telephone: BRAND_CONTACT_DEFAULTS.phonePrimary,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: BENROSO_CONTACT_DEFAULTS.addressShort,
+      streetAddress: BRAND_CONTACT_DEFAULTS.addressShort,
       addressLocality: 'Nairobi',
       addressCountry: 'KE'
     }

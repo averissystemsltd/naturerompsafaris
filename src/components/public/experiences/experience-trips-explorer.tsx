@@ -68,23 +68,23 @@ export function ExperienceTripsExplorer({
   const itemLabelPlural = itemLabel === 'route' ? 'routes' : 'safaris';
 
   return (
-    <div className='benroso-container'>
+    <div className='brand-container'>
       <div className='mx-auto max-w-3xl text-center'>
-        <p className='benroso-eyebrow'>Under This Experience</p>
-        <h2 className='benroso-heading mt-3 font-display text-[clamp(2rem,4vw,3rem)] leading-tight'>
+        <p className='brand-eyebrow'>Under This Experience</p>
+        <h2 className='brand-heading mt-3 font-display text-[clamp(2rem,4vw,3rem)] leading-tight'>
           {title}
         </h2>
-        <p className='benroso-body mx-auto mt-4 max-w-2xl text-base leading-7'>{description}</p>
+        <p className='brand-body mx-auto mt-4 max-w-2xl text-base leading-7'>{description}</p>
       </div>
 
       <div
         className={cn(
-          'mt-12 border-t border-[var(--benroso-line)] pt-8',
+          'mt-12 border-t border-[var(--brand-line)] pt-8',
           hideFilters ? '' : 'grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)]'
         )}
       >
         {!hideFilters ? (
-          <aside className='benroso-contact-credentials-box h-fit lg:sticky lg:top-[calc(var(--benroso-header-h)+5.25rem)]'>
+          <aside className='brand-contact-credentials-box h-fit lg:sticky lg:top-[calc(var(--brand-header-h)+5.25rem)]'>
             <div className='space-y-6'>
               <FilterGroup label='Duration'>
                 {durationOptions.map((option) => (
@@ -121,12 +121,12 @@ export function ExperienceTripsExplorer({
         <div>
           {!hideFilters ? (
             <div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
-              <p className='text-sm font-medium text-[var(--benroso-muted)]'>
+              <p className='text-sm font-medium text-[var(--brand-muted)]'>
                 {visibleTours.length} of {filteredTours.length} matching {itemLabelPlural} shown
               </p>
               {(duration !== 'all' || route !== 'all') && (
                 <button
-                  className='inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[var(--benroso-primary)] transition-colors hover:text-[var(--benroso-gold)]'
+                  className='inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-gold)]'
                   onClick={() => {
                     setDuration('all');
                     setRoute('all');
@@ -183,8 +183,8 @@ export function ExperienceTripsExplorer({
 
 function FilterGroup({ children, label }: { children: React.ReactNode; label: string }) {
   return (
-    <div className='space-y-3 border-b border-[var(--benroso-line)] pb-5 last:border-b-0 last:pb-0'>
-      <h3 className='benroso-heading font-display text-sm uppercase tracking-[0.12em]'>{label}</h3>
+    <div className='space-y-3 border-b border-[var(--brand-line)] pb-5 last:border-b-0 last:pb-0'>
+      <h3 className='brand-heading font-display text-sm uppercase tracking-[0.12em]'>{label}</h3>
       <ul className='space-y-2.5 font-sans text-sm'>{children}</ul>
     </div>
   );
@@ -203,8 +203,8 @@ function FilterButton({
     <li>
       <button
         className={cn(
-          'flex w-full items-center gap-2.5 text-left transition-colors hover:text-[var(--benroso-primary)]',
-          active ? 'font-semibold text-[var(--benroso-primary)]' : 'text-[var(--benroso-ink)]'
+          'flex w-full items-center gap-2.5 text-left transition-colors hover:text-[var(--brand-primary)]',
+          active ? 'font-semibold text-[var(--brand-primary)]' : 'text-[var(--brand-ink)]'
         )}
         onClick={onClick}
         type='button'
@@ -214,7 +214,7 @@ function FilterButton({
           className={cn(
             'h-4 w-4 rounded-[3px] border-2',
             active
-              ? 'border-[var(--benroso-primary)] bg-[var(--benroso-primary)]'
+              ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]'
               : 'border-[#bbb] bg-white'
           )}
         />

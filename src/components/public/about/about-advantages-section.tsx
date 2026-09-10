@@ -10,9 +10,9 @@ type AboutAdvantagesSectionProps = {
 
 export function AboutAdvantagesSection({ contactHref }: AboutAdvantagesSectionProps) {
   return (
-    <section className='benroso-section bg-white'>
-      <div className='benroso-container'>
-        <h2 className='text-center text-base font-bold uppercase tracking-[0.06em] text-[var(--benroso-heading)] md:text-lg'>
+    <section className='brand-section bg-white'>
+      <div className='brand-container'>
+        <h2 className='text-center text-base font-bold uppercase tracking-[0.06em] text-[var(--brand-heading)] md:text-lg'>
           {ABOUT_WHY_TRAVEL.advantagesTitle}
         </h2>
 
@@ -27,7 +27,7 @@ export function AboutAdvantagesSection({ contactHref }: AboutAdvantagesSectionPr
                 src={item.iconSrc}
                 width={52}
               />
-              <p className='mx-auto mt-4 max-w-[14rem] text-[15px] leading-6 text-[var(--benroso-muted)]'>
+              <p className='mx-auto mt-4 max-w-[14rem] text-[15px] leading-6 text-[var(--brand-muted)]'>
                 {item.text}
               </p>
             </li>
@@ -36,7 +36,7 @@ export function AboutAdvantagesSection({ contactHref }: AboutAdvantagesSectionPr
 
         <div className='mt-12 flex justify-center md:mt-14'>
           <Link
-            className='group inline-flex min-h-12 min-w-[220px] items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] bg-[var(--benroso-lime)] px-8 text-sm font-bold uppercase tracking-[0.08em] text-[var(--benroso-primary-dark)] transition-colors hover:bg-[var(--benroso-lime-hover)]'
+            className='group inline-flex min-h-12 min-w-[220px] items-center justify-center gap-2 rounded-[var(--brand-button-radius)] bg-[var(--brand-lime)] px-8 text-sm font-bold uppercase tracking-[0.08em] text-[var(--brand-primary-dark)] transition-colors hover:bg-[var(--brand-lime-hover)]'
             href={contactHref}
           >
             <span>{ABOUT_WHY_TRAVEL.ctaLabel}</span>

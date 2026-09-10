@@ -1,4 +1,4 @@
-import type { BenrosoCountryId } from '@/features/experiences/public/country-map-copy';
+import type { BrandCountryId } from '@/features/experiences/public/country-map-copy';
 import type { ExperienceLayoutVariant } from '@/features/experiences/public/layout-variant';
 
 export type PublicExperienceMedia = {
@@ -14,7 +14,7 @@ export type PublicExperienceFaq = {
 
 export type PublicExperience = {
   category: string | null;
-  countries: BenrosoCountryId[];
+  countries: BrandCountryId[];
   href: string;
   id: string;
   imageAlt: string | null;

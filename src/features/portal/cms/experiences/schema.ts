@@ -1,10 +1,10 @@
 import * as z from 'zod';
 
-import type { BenrosoCountryId } from '@/features/experiences/public/country-map-copy';
+import type { BrandCountryId } from '@/features/experiences/public/country-map-copy';
 
 import { SEO_LIMITS } from '../seo/analyze';
 
-export const benrosoCountryIdSchema = z.enum([
+export const brandCountryIdSchema = z.enum([
   'kenya',
   'tanzania',
   'uganda',
@@ -12,7 +12,7 @@ export const benrosoCountryIdSchema = z.enum([
   'south-africa'
 ]);
 
-export type ExperienceCountryId = BenrosoCountryId;
+export type ExperienceCountryId = BrandCountryId;
 
 const faqItemSchema = z.object({
   answer: z.string(),
@@ -72,7 +72,7 @@ export const experienceFormSchema = z.object({
   // Base
   category: z.string(),
   /** Operating countries where this experience is offered. */
-  countries: z.array(benrosoCountryIdSchema),
+  countries: z.array(brandCountryIdSchema),
   menuGroup: experienceMenuGroupSchema,
   /** Public page layout: safari (default) or mountain (route tables, no package grid). */
   layoutVariant: experienceLayoutVariantSchema,

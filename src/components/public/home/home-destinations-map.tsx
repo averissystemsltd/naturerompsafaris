@@ -13,8 +13,8 @@ export function HomeDestinationsMap({
   title = 'Authentic East & Southern Africa'
 }: HomeDestinationsMapProps = {}) {
   return (
-    <section className='bg-[var(--benroso-warm-gray)]'>
-      <div className='benroso-container pt-16 md:pt-20 lg:pt-24'>
+    <section className='bg-[var(--brand-warm-gray)]'>
+      <div className='brand-container pt-16 md:pt-20 lg:pt-24'>
         <SectionHeader description={description} eyebrow={eyebrow} title={title} />
       </div>
 

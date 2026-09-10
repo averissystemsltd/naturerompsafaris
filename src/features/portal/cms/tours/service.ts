@@ -10,8 +10,8 @@ import { autoTranslateTourById } from '@/lib/i18n/auto-translate-content';
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
 import { notifyPublishedContent } from '@/lib/seo/publish-notify';
 import {
-  BENROSO_OPERATING_COUNTRIES,
-  type BenrosoCountryId
+  BRAND_OPERATING_COUNTRIES,
+  type BrandCountryId
 } from '@/features/experiences/public/country-map-copy';
 import { parseTourSafariMarkets } from '@/features/experiences/public/tour-markets';
 import { revalidateTourPublicPaths } from '@/features/portal/cms/tours/revalidate-public-paths';
@@ -54,14 +54,14 @@ export interface RelationOption {
   label: string;
 }
 
-function parseExperienceCountries(value: unknown): BenrosoCountryId[] {
+function parseExperienceCountries(value: unknown): BrandCountryId[] {
   if (!Array.isArray(value)) return [];
 
-  const allowed = new Set(BENROSO_OPERATING_COUNTRIES.map((country) => country.id));
+  const allowed = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
 
   return value.filter(
-    (item): item is BenrosoCountryId =>
-      typeof item === 'string' && allowed.has(item as BenrosoCountryId)
+    (item): item is BrandCountryId =>
+      typeof item === 'string' && allowed.has(item as BrandCountryId)
   );
 }
 
@@ -527,7 +527,7 @@ export async function getTourRelationOptions(): Promise<{
   experiences: RelationOption[];
   accommodations: RelationOption[];
   fleet: RelationOption[];
-  experienceCountries: Record<string, BenrosoCountryId[]>;
+  experienceCountries: Record<string, BrandCountryId[]>;
   experienceLayoutVariants: Record<string, 'safari' | 'mountain'>;
 }> {
   const supabase = await genericClient();

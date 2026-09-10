@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { BENROSO_SOCIAL_DEFAULTS } from '@/config/benroso';
+import { BRAND_SOCIAL_DEFAULTS } from '@/config/brand';
 import type { PublicSiteSettings } from '@/lib/public/types';
 
 type FooterSocialLinksProps = {
@@ -17,19 +17,19 @@ const SOCIAL_BRANDS = [
 
 export function FooterSocialLinks({ siteSettings }: FooterSocialLinksProps) {
   const social = {
-    facebook: siteSettings.socialLinks.facebook ?? BENROSO_SOCIAL_DEFAULTS.facebook,
-    instagram: siteSettings.socialLinks.instagram ?? BENROSO_SOCIAL_DEFAULTS.instagram,
-    linkedin: siteSettings.socialLinks.linkedin ?? BENROSO_SOCIAL_DEFAULTS.linkedin,
-    twitter: siteSettings.socialLinks.twitter ?? BENROSO_SOCIAL_DEFAULTS.twitter,
-    youtube: siteSettings.socialLinks.youtube ?? BENROSO_SOCIAL_DEFAULTS.youtube
+    facebook: siteSettings.socialLinks.facebook ?? BRAND_SOCIAL_DEFAULTS.facebook,
+    instagram: siteSettings.socialLinks.instagram ?? BRAND_SOCIAL_DEFAULTS.instagram,
+    linkedin: siteSettings.socialLinks.linkedin ?? BRAND_SOCIAL_DEFAULTS.linkedin,
+    twitter: siteSettings.socialLinks.twitter ?? BRAND_SOCIAL_DEFAULTS.twitter,
+    youtube: siteSettings.socialLinks.youtube ?? BRAND_SOCIAL_DEFAULTS.youtube
   };
 
   return (
-    <div className='benroso-footer-socials'>
+    <div className='brand-footer-socials'>
       {SOCIAL_BRANDS.map(({ key, label, icon }) => (
         <a
           aria-label={label}
-          className='benroso-footer-social'
+          className='brand-footer-social'
           href={social[key]}
           key={key}
           rel='noopener noreferrer'
@@ -38,7 +38,7 @@ export function FooterSocialLinks({ siteSettings }: FooterSocialLinksProps) {
           <Image
             alt=''
             aria-hidden
-            className='benroso-footer-social-icon'
+            className='brand-footer-social-icon'
             height={24}
             src={icon}
             width={24}

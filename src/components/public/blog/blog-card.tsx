@@ -20,9 +20,9 @@ export function BlogCard({ post, titleTag: TitleTag = 'h2' }: BlogCardProps) {
   const date = formatDate(post.publishedAt);
 
   return (
-    <article className='group flex h-full flex-col overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white transition-shadow hover:shadow-md'>
+    <article className='group flex h-full flex-col overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white transition-shadow hover:shadow-md'>
       <Link
-        className='relative block aspect-[16/10] overflow-hidden bg-[var(--benroso-primary)]'
+        className='relative block aspect-[16/10] overflow-hidden bg-[var(--brand-primary)]'
         href={post.href}
       >
         {post.imageUrl ? (
@@ -34,33 +34,33 @@ export function BlogCard({ post, titleTag: TitleTag = 'h2' }: BlogCardProps) {
             src={post.imageUrl}
           />
         ) : (
-          <div className='absolute inset-0 bg-[var(--benroso-primary-light)]' />
+          <div className='absolute inset-0 bg-[var(--brand-primary-light)]' />
         )}
         {post.category ? (
-          <span className='absolute left-3 top-3 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--benroso-ink)]'>
+          <span className='absolute left-3 top-3 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-ink)]'>
             {post.category}
           </span>
         ) : null}
       </Link>
       <div className='flex flex-1 flex-col p-5'>
         {date ? (
-          <p className='text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+          <p className='text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
             {date}
           </p>
         ) : null}
-        <TitleTag className='benroso-heading mt-2 font-display text-2xl leading-tight'>
-          <Link className='transition-colors hover:text-[var(--benroso-primary)]' href={post.href}>
+        <TitleTag className='brand-heading mt-2 font-display text-2xl leading-tight'>
+          <Link className='transition-colors hover:text-[var(--brand-primary)]' href={post.href}>
             {post.title}
           </Link>
         </TitleTag>
         {post.excerpt ? (
-          <p className='benroso-body mt-3 line-clamp-3 flex-1 text-[15px] leading-7'>
+          <p className='brand-body mt-3 line-clamp-3 flex-1 text-[15px] leading-7'>
             {post.excerpt}
           </p>
         ) : null}
-        <div className='mt-5 border-t border-[var(--benroso-line)] pt-4'>
+        <div className='mt-5 border-t border-[var(--brand-line)] pt-4'>
           <Link
-            className='inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--benroso-primary)] transition-colors hover:gap-2'
+            className='inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition-colors hover:gap-2'
             href={post.href}
           >
             Read More

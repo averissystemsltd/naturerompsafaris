@@ -4,7 +4,7 @@ import { DestinationCard } from '@/components/public/cards/content-cards';
 import { DestinationFilters } from '@/components/public/destinations/destination-filters';
 import { EmptyState, ListingShell } from '@/components/public/page-shell';
 import { PublicPageHero } from '@/components/public/public-page-hero';
-import { BENROSO_PUBLIC_HERO_IMAGES } from '@/config/benroso';
+import { BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 import { getPageHero, getPublicDestinations } from '@/lib/public/site-data';
 import { buildListingPageMetadata, hasSearchParams } from '@/lib/seo/listing-metadata';
@@ -15,7 +15,7 @@ type DestinationsPageProps = {
 };
 
 const destinationsDescription =
-  'Explore East Africa safari destinations across Kenya, Tanzania, Uganda, and Rwanda with Benroso Safaris.';
+  'Explore East Africa safari destinations across Kenya, Tanzania, Uganda, and Rwanda with Nature Romp Safaris.';
 
 export async function generateMetadata({
   params,
@@ -47,7 +47,7 @@ export default async function DestinationsPage({ params, searchParams }: Destina
     getPublicDestinations(locale),
     getPageHero('destinations')
   ]);
-  const hero = BENROSO_PUBLIC_HERO_IMAGES.destinations;
+  const hero = BRAND_PUBLIC_HERO_IMAGES.destinations;
 
   const countryFacets = [
     ...new Map(
@@ -100,10 +100,10 @@ export default async function DestinationsPage({ params, searchParams }: Destina
         }
       >
         <div className='mb-6 flex items-baseline justify-between gap-3'>
-          <h2 className='benroso-heading font-display text-2xl'>
+          <h2 className='brand-heading font-display text-2xl'>
             {activeLabel ? `${activeLabel} destinations` : 'All destinations'}
           </h2>
-          <span className='text-sm text-[var(--benroso-muted)]'>
+          <span className='text-sm text-[var(--brand-muted)]'>
             {visible.length} {visible.length === 1 ? 'guide' : 'guides'}
           </span>
         </div>

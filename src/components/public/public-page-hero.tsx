@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { PublicHeroGhostCta } from '@/components/public/public-hero-ghost-cta';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { youtubeVideoId } from '@/lib/public/page-heroes';
 import type { PageHero } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
@@ -105,7 +105,7 @@ export function PublicPageHero({
   return (
     <section
       className={cn(
-        'relative flex min-h-[420px] h-[50vh] max-h-[560px] items-center overflow-hidden border-b border-[var(--benroso-line)] text-white',
+        'relative flex min-h-[420px] h-[50vh] max-h-[560px] items-center overflow-hidden border-b border-[var(--brand-line)] text-white',
         className
       )}
     >
@@ -155,7 +155,7 @@ export function PublicPageHero({
         }}
       />
       <div className='relative z-10 w-full py-10 md:py-14'>
-        <div className='benroso-container'>
+        <div className='brand-container'>
           <div className='mx-auto max-w-3xl text-center' ref={contentRef}>
             {breadcrumbs?.length ? (
               <nav
@@ -189,7 +189,7 @@ export function PublicPageHero({
               <p
                 className={cn(
                   'text-xs font-bold uppercase tracking-[0.2em]',
-                  eyebrowTone === 'white' ? 'text-white' : 'benroso-eyebrow'
+                  eyebrowTone === 'white' ? 'text-white' : 'brand-eyebrow'
                 )}
               >
                 {effectiveEyebrow}
@@ -198,12 +198,12 @@ export function PublicPageHero({
             <h1
               className={cn(
                 'mt-4 font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.08]',
-                titleTone === 'gold' ? 'text-[var(--benroso-gold)]' : 'text-white'
+                titleTone === 'gold' ? 'text-[var(--brand-gold)]' : 'text-white'
               )}
             >
               {effectiveTitle}
             </h1>
-            {showGoldLine ? <span aria-hidden className='benroso-gold-line mt-5' /> : null}
+            {showGoldLine ? <span aria-hidden className='brand-gold-line mt-5' /> : null}
             {effectiveDescription ? (
               <p className='mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/85'>
                 {effectiveDescription}
@@ -214,9 +214,9 @@ export function PublicPageHero({
                 {ctaVariant === 'ghost-hero' ? (
                   <PublicHeroGhostCta href={effectiveCta.href} label={effectiveCta.label} />
                 ) : (
-                  <BenrosoButton href={effectiveCta.href} variant='gold'>
+                  <BrandButton href={effectiveCta.href} variant='gold'>
                     {effectiveCta.label}
-                  </BenrosoButton>
+                  </BrandButton>
                 )}
               </div>
             ) : null}

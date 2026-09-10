@@ -3,8 +3,8 @@
 import Link from 'next/link';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
 import { localePath } from '@/lib/public/locale-path';
 import type { ParkListItem } from '@/lib/public/national-parks';
 import { formatTourPrice } from '@/lib/public/tour-format';
@@ -40,7 +40,7 @@ function formatSafariStats(park: ParkListItem) {
 
 function TagList({ items, shared }: { items: string[]; shared?: string[] }) {
   if (!items.length) {
-    return <span className='text-sm text-[var(--benroso-muted)]'>—</span>;
+    return <span className='text-sm text-[var(--brand-muted)]'>—</span>;
   }
 
   const sharedSet = new Set((shared ?? []).map((item) => item.toLowerCase()));
@@ -50,10 +50,10 @@ function TagList({ items, shared }: { items: string[]; shared?: string[] }) {
       {items.map((item) => (
         <span
           className={cn(
-            'rounded-[var(--benroso-radius)] px-2.5 py-1 text-xs font-semibold',
+            'rounded-[var(--brand-radius)] px-2.5 py-1 text-xs font-semibold',
             sharedSet.has(item.toLowerCase())
-              ? 'bg-[var(--benroso-lime)]/25 text-[var(--benroso-primary-dark)]'
-              : 'border border-[var(--benroso-line)] bg-white text-[var(--benroso-primary)]'
+              ? 'bg-[var(--brand-lime)]/25 text-[var(--brand-primary-dark)]'
+              : 'border border-[var(--brand-line)] bg-white text-[var(--brand-primary)]'
           )}
           key={item}
         >
@@ -66,10 +66,10 @@ function TagList({ items, shared }: { items: string[]; shared?: string[] }) {
 
 function CompareColumn({ locale, park }: { locale: string; park: ParkListItem }) {
   return (
-    <div className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-5'>
-      <p className='benroso-eyebrow'>Compare</p>
-      <h3 className='benroso-heading mt-2 font-display text-xl leading-tight'>{park.name}</h3>
-      <p className='mt-2 text-sm text-[var(--benroso-muted)]'>
+    <div className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-5'>
+      <p className='brand-eyebrow'>Compare</p>
+      <h3 className='brand-heading mt-2 font-display text-xl leading-tight'>{park.name}</h3>
+      <p className='mt-2 text-sm text-[var(--brand-muted)]'>
         {[park.region, park.country].filter(Boolean).join(', ') || '—'}
       </p>
       <div className='mt-5 space-y-4'>
@@ -78,22 +78,22 @@ function CompareColumn({ locale, park }: { locale: string; park: ParkListItem })
         <CompareRow label='Established' value={formatEstablished(park.establishedYear)} />
         <CompareRow label='Safaris' value={formatSafariStats(park)} />
       </div>
-      <BenrosoButtonGroup className='mt-5'>
-        <BenrosoButton
+      <BrandButtonGroup className='mt-5'>
+        <BrandButton
           href={localePath(locale, `/national-parks/${park.slug}`)}
           size='sm'
           variant='accent-outline'
         >
           Explore Park
-        </BenrosoButton>
-        <BenrosoButton
+        </BrandButton>
+        <BrandButton
           href={localePath(locale, `/tours?park=${encodeURIComponent(park.slug)}`)}
           size='sm'
           variant={park.tourCount ? 'accent' : 'accent-outline'}
         >
           View Safaris
-        </BenrosoButton>
-      </BenrosoButtonGroup>
+        </BrandButton>
+      </BrandButtonGroup>
     </div>
   );
 }
@@ -101,10 +101,10 @@ function CompareColumn({ locale, park }: { locale: string; park: ParkListItem })
 function CompareRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className='text-xs font-bold uppercase tracking-[0.12em] text-[var(--benroso-muted)]'>
+      <p className='text-xs font-bold uppercase tracking-[0.12em] text-[var(--brand-muted)]'>
         {label}
       </p>
-      <p className='mt-1 text-sm leading-6 text-[var(--benroso-ink)]'>{value}</p>
+      <p className='mt-1 text-sm leading-6 text-[var(--brand-ink)]'>{value}</p>
     </div>
   );
 }
@@ -116,20 +116,20 @@ export function NationalParkCompare({ locale, onClear, parks }: NationalParkComp
   const sharedWildlife = overlapWildlife(left, right);
 
   return (
-    <section className='mb-8 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-5 md:p-6'>
+    <section className='mb-8 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-5 md:p-6'>
       <div className='flex flex-wrap items-start justify-between gap-4'>
         <div>
-          <p className='benroso-eyebrow'>Compare Parks</p>
-          <h2 className='benroso-heading mt-2 font-display text-2xl leading-tight'>
+          <p className='brand-eyebrow'>Compare Parks</p>
+          <h2 className='brand-heading mt-2 font-display text-2xl leading-tight'>
             {left.name} vs {right.name}
           </h2>
-          <p className='mt-2 max-w-2xl text-sm leading-7 text-[var(--benroso-muted)]'>
+          <p className='mt-2 max-w-2xl text-sm leading-7 text-[var(--brand-muted)]'>
             Compare wildlife, activities, seasonality, and published safari availability side by
             side.
           </p>
         </div>
         <button
-          className='inline-flex items-center gap-2 text-sm font-semibold text-[var(--benroso-primary)] transition-colors hover:text-[var(--benroso-primary-dark)]'
+          className='inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-primary-dark)]'
           onClick={onClear}
           type='button'
         >
@@ -144,24 +144,24 @@ export function NationalParkCompare({ locale, onClear, parks }: NationalParkComp
       </div>
 
       <div className='mt-6 grid gap-6 lg:grid-cols-2'>
-        <div className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-5'>
-          <p className='text-xs font-bold uppercase tracking-[0.12em] text-[var(--benroso-muted)]'>
+        <div className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-5'>
+          <p className='text-xs font-bold uppercase tracking-[0.12em] text-[var(--brand-muted)]'>
             Wildlife
           </p>
           {sharedWildlife.length ? (
-            <p className='mt-2 text-sm text-[var(--benroso-primary-dark)]'>
+            <p className='mt-2 text-sm text-[var(--brand-primary-dark)]'>
               Shared highlights: {sharedWildlife.join(', ')}
             </p>
           ) : null}
           <div className='mt-4 grid gap-4 md:grid-cols-2'>
             <div>
-              <p className='text-xs font-semibold text-[var(--benroso-muted)]'>{left.name}</p>
+              <p className='text-xs font-semibold text-[var(--brand-muted)]'>{left.name}</p>
               <div className='mt-2'>
                 <TagList items={left.wildlife} shared={sharedWildlife} />
               </div>
             </div>
             <div>
-              <p className='text-xs font-semibold text-[var(--benroso-muted)]'>{right.name}</p>
+              <p className='text-xs font-semibold text-[var(--brand-muted)]'>{right.name}</p>
               <div className='mt-2'>
                 <TagList items={right.wildlife} shared={sharedWildlife} />
               </div>
@@ -169,19 +169,19 @@ export function NationalParkCompare({ locale, onClear, parks }: NationalParkComp
           </div>
         </div>
 
-        <div className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-5'>
-          <p className='text-xs font-bold uppercase tracking-[0.12em] text-[var(--benroso-muted)]'>
+        <div className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-5'>
+          <p className='text-xs font-bold uppercase tracking-[0.12em] text-[var(--brand-muted)]'>
             Activities
           </p>
           <div className='mt-4 grid gap-4 md:grid-cols-2'>
             <div>
-              <p className='text-xs font-semibold text-[var(--benroso-muted)]'>{left.name}</p>
+              <p className='text-xs font-semibold text-[var(--brand-muted)]'>{left.name}</p>
               <div className='mt-2'>
                 <TagList items={left.activities} />
               </div>
             </div>
             <div>
-              <p className='text-xs font-semibold text-[var(--benroso-muted)]'>{right.name}</p>
+              <p className='text-xs font-semibold text-[var(--brand-muted)]'>{right.name}</p>
               <div className='mt-2'>
                 <TagList items={right.activities} />
               </div>
@@ -190,10 +190,10 @@ export function NationalParkCompare({ locale, onClear, parks }: NationalParkComp
         </div>
       </div>
 
-      <p className='mt-5 text-sm text-[var(--benroso-muted)]'>
+      <p className='mt-5 text-sm text-[var(--brand-muted)]'>
         Ready to book?{' '}
         <Link
-          className='font-semibold text-[var(--benroso-primary)] hover:underline'
+          className='font-semibold text-[var(--brand-primary)] hover:underline'
           href={localePath(locale, '/contact')}
         >
           Ask a safari planner

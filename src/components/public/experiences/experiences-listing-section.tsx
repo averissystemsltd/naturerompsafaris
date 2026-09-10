@@ -63,9 +63,9 @@ export function ExperiencesListingSection({
         filters={<ExperienceListingFilters active={filters} onChange={handleFiltersChange} />}
       >
         {legacyCategory && categoryBlurb ? (
-          <div className='mb-8 border-b border-[var(--benroso-line)] pb-8'>
-            <p className='benroso-eyebrow'>{legacyCategory} Safaris</p>
-            <p className='mt-3 text-[15px] leading-7 text-[var(--benroso-ink)]'>{categoryBlurb}</p>
+          <div className='mb-8 border-b border-[var(--brand-line)] pb-8'>
+            <p className='brand-eyebrow'>{legacyCategory} Safaris</p>
+            <p className='mt-3 text-[15px] leading-7 text-[var(--brand-ink)]'>{categoryBlurb}</p>
           </div>
         ) : null}
 

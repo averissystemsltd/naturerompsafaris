@@ -31,7 +31,7 @@ import {
   SidebarRail
 } from '@/components/ui/sidebar';
 import { portalNavGroups } from '@/config/portal-nav-config';
-import { BENROSO_LOGO_HEIGHT, BENROSO_LOGO_PATH, BENROSO_LOGO_WIDTH } from '@/config/benroso';
+import { BRAND_LOGO_HEIGHT, BRAND_LOGO_PATH, BRAND_LOGO_WIDTH } from '@/config/brand';
 import { useFilteredNavGroups } from '@/hooks/use-nav';
 import { roleLabel, type PortalRole } from '@/lib/auth/roles';
 import { createClient } from '@/lib/supabase/browser';
@@ -61,12 +61,12 @@ export function PortalSidebar({ fullName, email, role }: PortalSidebarProps) {
       <SidebarHeader className='border-sidebar-border border-b px-3 py-4'>
         <Link className='flex items-center gap-3 overflow-hidden' href='/portal'>
           <Image
-            alt='Benroso Safaris'
+            alt='Nature Romp Safaris'
             className='h-8 w-auto max-w-[160px] object-contain object-left'
-            height={BENROSO_LOGO_HEIGHT}
+            height={BRAND_LOGO_HEIGHT}
             priority
-            src={BENROSO_LOGO_PATH}
-            width={BENROSO_LOGO_WIDTH}
+            src={BRAND_LOGO_PATH}
+            width={BRAND_LOGO_WIDTH}
           />
         </Link>
         <p className='text-sidebar-foreground/70 mt-2 truncate text-xs uppercase tracking-[0.12em] group-data-[collapsible=icon]:hidden'>
@@ -206,12 +206,12 @@ export function PortalBrandMark({ className }: { className?: string }) {
   return (
     <div className={cn('flex flex-col items-center', className)}>
       <Image
-        alt='Benroso Safaris'
+        alt='Nature Romp Safaris'
         className='h-12 w-auto object-contain'
-        height={BENROSO_LOGO_HEIGHT}
+        height={BRAND_LOGO_HEIGHT}
         priority
-        src={BENROSO_LOGO_PATH}
-        width={BENROSO_LOGO_WIDTH}
+        src={BRAND_LOGO_PATH}
+        width={BRAND_LOGO_WIDTH}
       />
       <p className='text-muted-foreground mt-3 text-xs uppercase tracking-[0.14em]'>Team Portal</p>
     </div>

@@ -1,8 +1,4 @@
-import {
-  BENROSO_OPERATING_COUNTRIES,
-  getCountryById,
-  type BenrosoCountryId
-} from './country-map-copy';
+import { BRAND_OPERATING_COUNTRIES, getCountryById, type BrandCountryId } from './country-map-copy';
 
 const CATEGORY_HEADINGS: Array<{ match: RegExp; heading: string }> = [
   {
@@ -51,14 +47,14 @@ const CATEGORY_HEADINGS: Array<{ match: RegExp; heading: string }> = [
   }
 ];
 
-function parseCountries(value: unknown): BenrosoCountryId[] {
+function parseCountries(value: unknown): BrandCountryId[] {
   if (!Array.isArray(value)) return [];
 
-  const allowed = new Set(BENROSO_OPERATING_COUNTRIES.map((country) => country.id));
+  const allowed = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
 
   return value.filter(
-    (item): item is BenrosoCountryId =>
-      typeof item === 'string' && allowed.has(item as BenrosoCountryId)
+    (item): item is BrandCountryId =>
+      typeof item === 'string' && allowed.has(item as BrandCountryId)
   );
 }
 

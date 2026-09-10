@@ -17,7 +17,7 @@ export function PortalOverview({ stats, userName }: PortalOverviewProps) {
       <div className='flex flex-col gap-4 rounded-lg border border-[#E5E7EB] bg-white p-6 md:flex-row md:items-center md:justify-between'>
         <div className='border-[#3C5142] pl-4 md:border-l-4'>
           <p className='text-[#3C5142] text-xs font-semibold uppercase tracking-[0.14em]'>
-            Benroso Safaris
+            Nature Romp Safaris
           </p>
           <h2 className='mt-1 text-2xl font-semibold text-[#111827]'>Welcome back, {userName}</h2>
         </div>

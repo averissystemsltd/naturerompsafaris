@@ -33,10 +33,9 @@ function formatNightPrice(price?: number | null) {
 }
 
 function availabilityBadgeClass(availability: PublicAccommodationDetail['availability']) {
-  if (availability === 'available') return 'bg-[var(--benroso-primary)] text-white';
-  if (availability === 'limited')
-    return 'bg-[var(--benroso-gold)] text-[var(--benroso-primary-dark)]';
-  return 'border border-[var(--benroso-line)] bg-white text-[var(--benroso-ink)]';
+  if (availability === 'available') return 'bg-[var(--brand-primary)] text-white';
+  if (availability === 'limited') return 'bg-[var(--brand-gold)] text-[var(--brand-primary-dark)]';
+  return 'border border-[var(--brand-line)] bg-white text-[var(--brand-ink)]';
 }
 
 export function AccommodationDetailShell({
@@ -56,25 +55,25 @@ export function AccommodationDetailShell({
     accommodation.region || accommodation.country || accommodation.locationLabel;
 
   return (
-    <main className='bg-[var(--benroso-ivory)]'>
-      <section className='border-b border-[var(--benroso-line)] bg-white'>
-        <div className='benroso-container py-6 md:py-8'>
+    <main className='bg-[var(--brand-ivory)]'>
+      <section className='border-b border-[var(--brand-line)] bg-white'>
+        <div className='brand-container py-6 md:py-8'>
           <nav
             aria-label='Breadcrumb'
-            className='mb-6 flex flex-wrap gap-2 text-sm text-[var(--benroso-muted)]'
+            className='mb-6 flex flex-wrap gap-2 text-sm text-[var(--brand-muted)]'
           >
-            <a className='hover:text-[var(--benroso-primary)]' href={localePath(locale)}>
+            <a className='hover:text-[var(--brand-primary)]' href={localePath(locale)}>
               Home
             </a>
             <span>/</span>
             <a
-              className='hover:text-[var(--benroso-primary)]'
+              className='hover:text-[var(--brand-primary)]'
               href={localePath(locale, '/accommodations')}
             >
               Accommodations
             </a>
             <span>/</span>
-            <span className='text-[var(--benroso-ink)]'>{accommodation.name}</span>
+            <span className='text-[var(--brand-ink)]'>{accommodation.name}</span>
           </nav>
 
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10'>
@@ -83,30 +82,30 @@ export function AccommodationDetailShell({
 
               <div className='mt-6 flex flex-wrap gap-2'>
                 {accommodation.propertyType ? (
-                  <span className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--benroso-ink)]'>
+                  <span className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-ink)]'>
                     {accommodation.propertyType}
                   </span>
                 ) : null}
                 <span
                   className={cn(
-                    'rounded-[var(--benroso-radius)] px-3 py-1 text-xs font-bold uppercase tracking-wide',
+                    'rounded-[var(--brand-radius)] px-3 py-1 text-xs font-bold uppercase tracking-wide',
                     availabilityBadgeClass(accommodation.availability)
                   )}
                 >
                   {availabilityLabel}
                 </span>
                 {comfortLabel ? (
-                  <span className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--benroso-ink)]'>
+                  <span className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-ink)]'>
                     {comfortLabel}
                   </span>
                 ) : null}
               </div>
 
-              <h1 className='benroso-heading mt-5 font-display text-[clamp(2rem,4vw,3rem)] leading-tight'>
+              <h1 className='brand-heading mt-5 font-display text-[clamp(2rem,4vw,3rem)] leading-tight'>
                 {accommodation.name}
               </h1>
-              <p className='mt-2 flex items-center gap-2 text-base text-[var(--benroso-muted)]'>
-                <Icons.mapPin className='size-4 shrink-0 text-[var(--benroso-primary)]' />
+              <p className='mt-2 flex items-center gap-2 text-base text-[var(--brand-muted)]'>
+                <Icons.mapPin className='size-4 shrink-0 text-[var(--brand-primary)]' />
                 {accommodation.locationLabel}
               </p>
 
@@ -121,27 +120,27 @@ export function AccommodationDetailShell({
               </div>
 
               <section className='mt-10'>
-                <h2 className='benroso-heading font-display text-2xl'>About this property</h2>
+                <h2 className='brand-heading font-display text-2xl'>About this property</h2>
                 {accommodation.descriptionHtml ? (
                   <div
-                    className='benroso-legal-prose mt-4'
+                    className='brand-legal-prose mt-4'
                     dangerouslySetInnerHTML={{ __html: accommodation.descriptionHtml }}
                   />
                 ) : accommodation.excerpt ? (
-                  <p className='benroso-body mt-4 text-[15px] leading-7'>{accommodation.excerpt}</p>
+                  <p className='brand-body mt-4 text-[15px] leading-7'>{accommodation.excerpt}</p>
                 ) : null}
               </section>
 
               {accommodation.amenities.length ? (
                 <section className='mt-10'>
-                  <h2 className='benroso-heading font-display text-2xl'>Amenities</h2>
+                  <h2 className='brand-heading font-display text-2xl'>Amenities</h2>
                   <ul className='mt-4 grid gap-3 sm:grid-cols-2'>
                     {accommodation.amenities.map((amenity) => (
                       <li
-                        className='flex items-start gap-2 text-[15px] leading-7 text-[var(--benroso-ink)]'
+                        className='flex items-start gap-2 text-[15px] leading-7 text-[var(--brand-ink)]'
                         key={amenity}
                       >
-                        <Icons.check className='mt-1 size-4 shrink-0 text-[var(--benroso-primary)]' />
+                        <Icons.check className='mt-1 size-4 shrink-0 text-[var(--brand-primary)]' />
                         <span>{amenity}</span>
                       </li>
                     ))}
@@ -155,7 +154,7 @@ export function AccommodationDetailShell({
             </div>
 
             <aside className='hidden lg:block'>
-              <div className='sticky top-[calc(var(--benroso-topbar-h)+var(--benroso-header-h)+1rem)] space-y-4'>
+              <div className='sticky top-[calc(var(--brand-topbar-h)+var(--brand-header-h)+1rem)] space-y-4'>
                 <AccommodationInquiryPanel
                   accommodationName={accommodation.name}
                   accommodationSlug={accommodation.slug}
@@ -171,13 +170,13 @@ export function AccommodationDetailShell({
       </section>
 
       {relatedAccommodations.length ? (
-        <section className='border-t border-[var(--benroso-line)]'>
-          <div className='benroso-container py-10 md:py-12'>
-            <p className='benroso-eyebrow'>More Places To Stay</p>
-            <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.25rem)] leading-tight'>
+        <section className='border-t border-[var(--brand-line)]'>
+          <div className='brand-container py-10 md:py-12'>
+            <p className='brand-eyebrow'>More Places To Stay</p>
+            <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.25rem)] leading-tight'>
               More accommodations in {relatedAreaLabel}
             </h2>
-            <p className='benroso-body mt-3 max-w-2xl text-base leading-7'>
+            <p className='brand-body mt-3 max-w-2xl text-base leading-7'>
               Other lodges and camps in the same area, so you can compare comfort, location, and
               availability before you enquire.
             </p>
@@ -201,13 +200,11 @@ function LocationMapPanel({ mapQuery }: { mapQuery: string }) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
 
   return (
-    <div className='benroso-contact-advantages-block'>
-      <h2 className='benroso-contact-sidebar-heading benroso-contact-sidebar-heading--sm'>
-        Location
-      </h2>
-      <div className='benroso-contact-credentials-box overflow-hidden !p-0'>
+    <div className='brand-contact-advantages-block'>
+      <h2 className='brand-contact-sidebar-heading brand-contact-sidebar-heading--sm'>Location</h2>
+      <div className='brand-contact-credentials-box overflow-hidden !p-0'>
         <div className='border-b border-[rgb(60_81_66/8%)] px-4 py-3'>
-          <p className='text-sm text-[var(--benroso-muted)]'>{mapQuery}</p>
+          <p className='text-sm text-[var(--brand-muted)]'>{mapQuery}</p>
         </div>
         <iframe
           allowFullScreen
@@ -220,7 +217,7 @@ function LocationMapPanel({ mapQuery }: { mapQuery: string }) {
         />
         <div className='border-t border-[rgb(60_81_66/8%)] px-4 py-3'>
           <a
-            className='inline-flex items-center gap-1.5 text-sm font-medium text-[var(--benroso-primary)] hover:underline'
+            className='inline-flex items-center gap-1.5 text-sm font-medium text-[var(--brand-primary)] hover:underline'
             href={mapsUrl}
             rel='noopener noreferrer'
             target='_blank'

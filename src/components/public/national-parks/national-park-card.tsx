@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import type { NationalParkViewMode } from '@/components/public/national-parks/national-park-view-toggle';
 import { localePath } from '@/lib/public/locale-path';
 import type { ParkListItem } from '@/lib/public/national-parks';
@@ -55,14 +55,14 @@ export function NationalParkCard({
   return (
     <article
       className={cn(
-        'group overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white shadow-sm transition-shadow hover:shadow-md',
-        compareChecked && 'ring-2 ring-[var(--benroso-primary)] ring-offset-2',
+        'group overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white shadow-sm transition-shadow hover:shadow-md',
+        compareChecked && 'ring-2 ring-[var(--brand-primary)] ring-offset-2',
         isList ? 'flex flex-col sm:flex-row' : 'flex h-full flex-col'
       )}
     >
       <Link
         className={cn(
-          'relative block shrink-0 overflow-hidden bg-[var(--benroso-primary)]',
+          'relative block shrink-0 overflow-hidden bg-[var(--brand-primary)]',
           isList
             ? 'aspect-[16/10] w-full sm:aspect-auto sm:min-h-[240px] sm:w-[min(34%,340px)] sm:min-w-[250px] sm:self-stretch'
             : 'aspect-[16/10]'
@@ -82,12 +82,12 @@ export function NationalParkCard({
             src={item.imageUrl}
           />
         ) : (
-          <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--benroso-primary)] to-[var(--benroso-primary-dark)]'>
+          <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-primary-dark)]'>
             <Icons.park className='size-12 text-white/25' />
           </div>
         )}
         {badge ? (
-          <span className='absolute left-3 top-3 rounded-[var(--benroso-radius)] border border-white/20 bg-black/55 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white backdrop-blur'>
+          <span className='absolute left-3 top-3 rounded-[var(--brand-radius)] border border-white/20 bg-black/55 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white backdrop-blur'>
             {badge}
           </span>
         ) : null}
@@ -96,18 +96,18 @@ export function NationalParkCard({
       <div className='flex flex-1 flex-col p-5 md:p-6'>
         <div className='flex items-start justify-between gap-3'>
           {location ? (
-            <p className='flex items-center gap-1.5 text-sm font-medium text-[var(--benroso-muted)]'>
-              <Icons.mapPin className='size-3.5 shrink-0 text-[var(--benroso-primary)]' />
+            <p className='flex items-center gap-1.5 text-sm font-medium text-[var(--brand-muted)]'>
+              <Icons.mapPin className='size-3.5 shrink-0 text-[var(--brand-primary)]' />
               {location}
             </p>
           ) : (
             <span />
           )}
           {onCompareToggle ? (
-            <label className='flex shrink-0 cursor-pointer items-center gap-2 text-xs font-semibold text-[var(--benroso-primary)]'>
+            <label className='flex shrink-0 cursor-pointer items-center gap-2 text-xs font-semibold text-[var(--brand-primary)]'>
               <input
                 checked={compareChecked}
-                className='benroso-contact-checkbox-input'
+                className='brand-contact-checkbox-input'
                 disabled={compareDisabled}
                 onChange={() => onCompareToggle(item.id)}
                 type='checkbox'
@@ -118,11 +118,11 @@ export function NationalParkCard({
         </div>
         <h2
           className={cn(
-            'benroso-heading mt-2 font-display leading-tight',
+            'brand-heading mt-2 font-display leading-tight',
             isList ? 'text-xl md:text-2xl' : 'text-2xl md:text-[1.75rem]'
           )}
         >
-          <Link className='transition-colors hover:text-[var(--benroso-primary)]' href={href}>
+          <Link className='transition-colors hover:text-[var(--brand-primary)]' href={href}>
             {item.name}
           </Link>
         </h2>
@@ -130,7 +130,7 @@ export function NationalParkCard({
         {item.summary ? (
           <p
             className={cn(
-              'benroso-body mt-3 text-[15px] leading-7',
+              'brand-body mt-3 text-[15px] leading-7',
               isList ? 'line-clamp-2 sm:line-clamp-3 sm:flex-1' : 'line-clamp-3 flex-1'
             )}
           >
@@ -139,15 +139,15 @@ export function NationalParkCard({
         ) : null}
 
         {statsLabel ? (
-          <p className='mt-4 flex items-center gap-2 text-sm font-semibold text-[var(--benroso-primary-dark)]'>
-            <Icons.compass className='size-4 shrink-0 text-[var(--benroso-gold)]' />
+          <p className='mt-4 flex items-center gap-2 text-sm font-semibold text-[var(--brand-primary-dark)]'>
+            <Icons.compass className='size-4 shrink-0 text-[var(--brand-gold)]' />
             {statsLabel}
           </p>
         ) : null}
 
         {item.bestTimeSummary ? (
-          <p className='mt-3 flex gap-2 text-sm leading-6 text-[var(--benroso-muted)]'>
-            <Icons.calendar className='mt-0.5 size-4 shrink-0 text-[var(--benroso-gold)]' />
+          <p className='mt-3 flex gap-2 text-sm leading-6 text-[var(--brand-muted)]'>
+            <Icons.calendar className='mt-0.5 size-4 shrink-0 text-[var(--brand-gold)]' />
             <span>{item.bestTimeSummary}</span>
           </p>
         ) : null}
@@ -156,7 +156,7 @@ export function NationalParkCard({
           <div className='mt-4 flex flex-wrap gap-2'>
             {wildlife.map((animal) => (
               <span
-                className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white px-2.5 py-1 text-xs font-semibold text-[var(--benroso-primary)]'
+                className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white px-2.5 py-1 text-xs font-semibold text-[var(--brand-primary)]'
                 key={`wildlife-${animal}`}
               >
                 {animal}
@@ -164,7 +164,7 @@ export function NationalParkCard({
             ))}
             {activities.map((activity) => (
               <span
-                className='rounded-[var(--benroso-radius)] bg-[var(--benroso-lime)]/20 px-2.5 py-1 text-xs font-semibold text-[var(--benroso-primary-dark)]'
+                className='rounded-[var(--brand-radius)] bg-[var(--brand-lime)]/20 px-2.5 py-1 text-xs font-semibold text-[var(--brand-primary-dark)]'
                 key={`activity-${activity}`}
               >
                 {activity}
@@ -173,19 +173,19 @@ export function NationalParkCard({
           </div>
         ) : null}
 
-        <div className='benroso-dual-actions mt-auto border-t border-[var(--benroso-line)] pt-4'>
-          <BenrosoButton href={href} size='sm' variant='accent-outline'>
+        <div className='brand-dual-actions mt-auto border-t border-[var(--brand-line)] pt-4'>
+          <BrandButton href={href} size='sm' variant='accent-outline'>
             Explore Park
             <Icons.arrowRight className='h-3.5 w-3.5' />
-          </BenrosoButton>
-          <BenrosoButton
+          </BrandButton>
+          <BrandButton
             href={toursHref}
             size='sm'
             variant={item.tourCount ? 'accent' : 'accent-outline'}
           >
             View Safaris
             <Icons.arrowRight className='h-3.5 w-3.5' />
-          </BenrosoButton>
+          </BrandButton>
         </div>
       </div>
     </article>

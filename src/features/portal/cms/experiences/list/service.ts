@@ -8,8 +8,8 @@ import { requirePortalSession } from '@/lib/auth/portal';
 import { SUPPORTED_LOCALES } from '@/lib/i18n';
 import { createClient } from '@/lib/supabase/server';
 import {
-  BENROSO_OPERATING_COUNTRIES,
-  type BenrosoCountryId
+  BRAND_OPERATING_COUNTRIES,
+  type BrandCountryId
 } from '@/features/experiences/public/country-map-copy';
 import {
   EXPERIENCES_PAGE_SIZE,
@@ -41,14 +41,14 @@ function revalidateExperiencePublicPaths() {
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-function parseCountries(value: unknown): BenrosoCountryId[] {
+function parseCountries(value: unknown): BrandCountryId[] {
   if (!Array.isArray(value)) return [];
 
-  const allowed = new Set(BENROSO_OPERATING_COUNTRIES.map((country) => country.id));
+  const allowed = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
 
   return value.filter(
-    (item): item is BenrosoCountryId =>
-      typeof item === 'string' && allowed.has(item as BenrosoCountryId)
+    (item): item is BrandCountryId =>
+      typeof item === 'string' && allowed.has(item as BrandCountryId)
   );
 }
 

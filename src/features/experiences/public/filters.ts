@@ -1,14 +1,10 @@
-import {
-  BENROSO_OPERATING_COUNTRIES,
-  getCountryById,
-  type BenrosoCountryId
-} from './country-map-copy';
+import { BRAND_OPERATING_COUNTRIES, getCountryById, type BrandCountryId } from './country-map-copy';
 import type { PublicExperience } from './types';
 
 export type ExperienceMenuGroup = 'top_experiences' | 'wildlife_safari';
 
 export type ExperienceListingFiltersState = {
-  countries: BenrosoCountryId[];
+  countries: BrandCountryId[];
   groups: ExperienceMenuGroup[];
 };
 
@@ -24,9 +20,9 @@ export function parseExperienceListingFilters(searchParams: {
   country?: string;
   group?: string;
 }): ExperienceListingFiltersState {
-  const allowedCountries = new Set(BENROSO_OPERATING_COUNTRIES.map((country) => country.id));
-  const countries = parseFilterList(searchParams.country).filter((item): item is BenrosoCountryId =>
-    allowedCountries.has(item as BenrosoCountryId)
+  const allowedCountries = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
+  const countries = parseFilterList(searchParams.country).filter((item): item is BrandCountryId =>
+    allowedCountries.has(item as BrandCountryId)
   );
 
   const groups = parseFilterList(searchParams.group).filter(
@@ -81,7 +77,7 @@ export function buildExperienceEmptyState(filters: ExperienceListingFiltersState
   if (!parts.length) {
     return {
       message:
-        'Published experiences will appear here once they are added through the Benroso CMS.',
+        'Published experiences will appear here once they are added through the Nature Romp CMS.',
       title: 'No experiences published yet'
     };
   }

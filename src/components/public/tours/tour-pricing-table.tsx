@@ -55,40 +55,40 @@ function tierTheme(key: PublicTourPricingTier['tier']): TierTheme {
     return {
       Icon: Icons.pro,
       button:
-        'border-[var(--benroso-primary-dark)] text-[var(--benroso-primary-dark)] hover:border-[var(--benroso-primary-dark)] hover:bg-[var(--benroso-primary-dark)] hover:text-white',
-      headBg: 'var(--benroso-primary-dark)',
+        'border-[var(--brand-primary-dark)] text-[var(--brand-primary-dark)] hover:border-[var(--brand-primary-dark)] hover:bg-[var(--brand-primary-dark)] hover:text-white',
+      headBg: 'var(--brand-primary-dark)',
       headFg: '#fff',
-      icon: 'bg-[var(--benroso-primary-dark)] text-white',
-      title: 'text-[var(--benroso-primary-dark)]'
+      icon: 'bg-[var(--brand-primary-dark)] text-white',
+      title: 'text-[var(--brand-primary-dark)]'
     };
   }
 
   return {
     Icon: Icons.exclusive,
     button:
-      'border-[var(--benroso-primary)] text-[var(--benroso-primary)] hover:border-[var(--benroso-primary)] hover:bg-[var(--benroso-primary)] hover:text-white',
-    headBg: 'var(--benroso-primary)',
+      'border-[var(--brand-primary)] text-[var(--brand-primary)] hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] hover:text-white',
+    headBg: 'var(--brand-primary)',
     headFg: '#fff',
-    icon: 'bg-[var(--benroso-primary)] text-white',
-    title: 'text-[var(--benroso-primary)]'
+    icon: 'bg-[var(--brand-primary)] text-white',
+    title: 'text-[var(--brand-primary)]'
   };
 }
 
 function openTourInquiry() {
-  window.dispatchEvent(new CustomEvent('benroso:open-tour-inquiry'));
+  window.dispatchEvent(new CustomEvent('brand:open-tour-inquiry'));
 }
 
 function PriceCell({ currency, price }: { currency: string; price: number | null | undefined }) {
   if (!price) {
-    return <span className='text-xs text-[var(--benroso-muted)]'>On request</span>;
+    return <span className='text-xs text-[var(--brand-muted)]'>On request</span>;
   }
 
   return (
     <span className='inline-flex flex-col items-center leading-tight'>
-      <strong className='font-price text-base text-[var(--benroso-heading)] sm:text-[1.05rem]'>
+      <strong className='font-price text-base text-[var(--brand-heading)] sm:text-[1.05rem]'>
         {formatTourPrice(price, currency)}
       </strong>
-      <span className='mt-1 text-[10px] font-normal text-[var(--benroso-muted)] sm:text-[11px]'>
+      <span className='mt-1 text-[10px] font-normal text-[var(--brand-muted)] sm:text-[11px]'>
         per person
       </span>
     </span>
@@ -107,7 +107,7 @@ function PricingTableIntro({
   const TierIcon = theme.Icon;
 
   return (
-    <div className='benroso-pricing-tier__intro'>
+    <div className='brand-pricing-tier__intro'>
       <div className='flex items-start gap-3'>
         <span
           aria-hidden
@@ -125,9 +125,7 @@ function PricingTableIntro({
             {label}
           </h3>
           {blurb ? (
-            <p className='mt-1.5 max-w-3xl text-sm leading-6 text-[var(--benroso-muted)]'>
-              {blurb}
-            </p>
+            <p className='mt-1.5 max-w-3xl text-sm leading-6 text-[var(--brand-muted)]'>{blurb}</p>
           ) : null}
         </div>
       </div>
@@ -138,14 +136,14 @@ function PricingTableIntro({
 export function TourPricingTable({ tiers }: TourPricingTableProps) {
   if (!tiers.length) {
     return (
-      <div className='benroso-contact-credentials-box'>
-        <h3 className='benroso-heading font-display text-xl'>Pricing on Request</h3>
-        <p className='benroso-body mt-2 text-sm leading-6'>
+      <div className='brand-contact-credentials-box'>
+        <h3 className='brand-heading font-display text-xl'>Pricing on Request</h3>
+        <p className='brand-body mt-2 text-sm leading-6'>
           Pricing can vary by dates, group size, and lodge availability. Send an enquiry and the
           team will prepare the correct quote.
         </p>
         <button
-          className='mt-5 inline-flex items-center gap-2 rounded-[var(--benroso-button-radius)] border border-[var(--benroso-primary)] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-[var(--benroso-primary)] transition hover:bg-[var(--benroso-primary)] hover:text-white'
+          className='mt-5 inline-flex items-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-primary)] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition hover:bg-[var(--brand-primary)] hover:text-white'
           onClick={openTourInquiry}
           type='button'
         >
@@ -173,7 +171,7 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
 
         return (
           <div
-            className={cn('benroso-pricing-tier', dayTrip && 'benroso-pricing-tier--day-trip')}
+            className={cn('brand-pricing-tier', dayTrip && 'brand-pricing-tier--day-trip')}
             key={tier.id}
           >
             {dayTrip ? null : (
@@ -181,9 +179,9 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
             )}
 
             {bands.length && tier.seasons.length ? (
-              <div className='benroso-thin-scrollbar overflow-x-auto lg:overflow-x-visible'>
-                <div className='benroso-pricing-tier__table-shell'>
-                  <table className='benroso-pricing-tier__table text-left text-sm'>
+              <div className='brand-thin-scrollbar overflow-x-auto lg:overflow-x-visible'>
+                <div className='brand-pricing-tier__table-shell'>
+                  <table className='brand-pricing-tier__table text-left text-sm'>
                     <colgroup>
                       {dayTrip ? null : <col style={{ width: `${seasonWidth}%` }} />}
                       {bands.map((band) => (
@@ -191,7 +189,7 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
                       ))}
                       <col style={{ width: `${actionWidth}%` }} />
                     </colgroup>
-                    <thead className='benroso-pricing-tier__head' style={headStyle}>
+                    <thead className='brand-pricing-tier__head' style={headStyle}>
                       <tr>
                         {dayTrip ? null : <th scope='col'>Season</th>}
                         {bands.map((band) => (
@@ -204,24 +202,24 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
                     </thead>
                     <tbody>
                       {tier.seasons.map((season) => (
-                        <tr className='benroso-pricing-tier__row' key={season.id}>
+                        <tr className='brand-pricing-tier__row' key={season.id}>
                           {dayTrip ? null : (
-                            <th className='benroso-pricing-tier__season' scope='row'>
+                            <th className='brand-pricing-tier__season' scope='row'>
                               {season.label}
                             </th>
                           )}
                           {bands.map((band) => {
                             const cell = season.cells.find((item) => item.groupBand === band);
                             return (
-                              <td className='benroso-pricing-tier__price tabular-nums' key={band}>
+                              <td className='brand-pricing-tier__price tabular-nums' key={band}>
                                 <PriceCell currency={tier.currency} price={cell?.price} />
                               </td>
                             );
                           })}
-                          <td className='benroso-pricing-tier__action'>
+                          <td className='brand-pricing-tier__action'>
                             <button
                               className={cn(
-                                'inline-flex w-full max-w-[5.25rem] items-center justify-center gap-1 rounded-[var(--benroso-button-radius)] border bg-white px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition sm:max-w-none sm:px-2.5 sm:py-2 sm:text-[11px]',
+                                'inline-flex w-full max-w-[5.25rem] items-center justify-center gap-1 rounded-[var(--brand-button-radius)] border bg-white px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition sm:max-w-none sm:px-2.5 sm:py-2 sm:text-[11px]',
                                 theme.button
                               )}
                               onClick={openTourInquiry}
@@ -237,20 +235,20 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
                   </table>
                 </div>
                 {bands.length > 2 ? (
-                  <p className='benroso-pricing-tier__scroll-hint'>
+                  <p className='brand-pricing-tier__scroll-hint'>
                     Swipe the table to see all prices →
                   </p>
                 ) : null}
               </div>
             ) : (
               <div className='flex min-h-36 flex-col items-center justify-center gap-3 p-6 text-center'>
-                <Icons.info className='h-7 w-7 text-[var(--benroso-gold)]' />
-                <p className='benroso-body max-w-sm text-sm leading-7'>
+                <Icons.info className='h-7 w-7 text-[var(--brand-gold)]' />
+                <p className='brand-body max-w-sm text-sm leading-7'>
                   This tier is available, but seasonal prices have not been published yet.
                 </p>
                 <button
                   className={cn(
-                    'inline-flex items-center gap-2 rounded-[var(--benroso-button-radius)] border bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide transition',
+                    'inline-flex items-center gap-2 rounded-[var(--brand-button-radius)] border bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide transition',
                     theme.button
                   )}
                   onClick={openTourInquiry}
@@ -262,7 +260,7 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
               </div>
             )}
 
-            {tier.notes ? <p className='benroso-pricing-tier__notes'>{tier.notes}</p> : null}
+            {tier.notes ? <p className='brand-pricing-tier__notes'>{tier.notes}</p> : null}
           </div>
         );
       })}

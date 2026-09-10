@@ -1,14 +1,14 @@
 export const ABOUT_HERO_DEFAULTS = {
-  eyebrow: 'About Benroso Safaris',
+  eyebrow: 'About Nature Romp Safaris',
   title: 'East Africa Safari Experts Since 2000',
   description:
-    'Meet the Nairobi team, the guides on the ground, and the fleet that carries you from park to park. This is where you learn who plans your safari, how we work, and what a Benroso journey feels like.'
+    'Meet the Nairobi team, the guides on the ground, and the fleet that carries you from park to park. This is where you learn who plans your safari, how we work, and what a Nature Romp journey feels like.'
 } as const;
 
 export const ABOUT_STORY = {
   title: 'Who We Are',
   paragraphs: [
-    'Benroso Safaris was established in 2000 with a vision to make East Africa a truly memorable destination for travelers worldwide.',
+    'Nature Romp Safaris was established in 2000 with a vision to make East Africa a truly memorable destination for travelers worldwide.',
     'More than twenty years later, we still plan every itinerary by hand: the parks, the lodges, the driving days, and the guide who stays with you throughout. We operate across Kenya, Tanzania, Uganda, and Rwanda with a Nairobi team that answers before you travel and stays reachable while you are on the road.'
   ]
 } as const;
@@ -28,7 +28,7 @@ export const ABOUT_WHY_TRAVEL = {
   title: 'Committed to the Best, Still Personal',
   intro:
     'Every itinerary is shaped around your dates, pace, and interests, with competitive pricing that never feels off the shelf. You work directly with planners who know the parks, the lodges, and the roads between them.',
-  advantagesTitle: 'Advantages of Booking With Benroso Safaris',
+  advantagesTitle: 'Advantages of Booking With Nature Romp Safaris',
   ctaLabel: 'Help Me Plan',
   items: [
     {
@@ -59,11 +59,11 @@ export const ABOUT_VISION_MISSION = {
     label: 'Our Mission',
     body: 'To conduct ethical and profitable business by providing services to our customers through committed personnel and upholding the spirit of comradeship among all the players in East Africa travel industry.'
   },
-  teamImageUrl: '/assets/benroso-safaris-kenya.webp',
-  teamImageAlt: 'Benroso Safaris team in East Africa',
+  teamImageUrl: '/assets/brand-safaris-kenya.webp',
+  teamImageAlt: 'Nature Romp Safaris team in East Africa',
   missionImageUrl: '/assets/cape-of-good-hope-team.png',
   missionImageAlt:
-    'Benroso Safaris team at the Cape of Good Hope, the south-western tip of the African continent'
+    'Nature Romp Safaris team at the Cape of Good Hope, the south-western tip of the African continent'
 } as const;
 
 export const ABOUT_GUIDES_INTRO = {
@@ -71,8 +71,8 @@ export const ABOUT_GUIDES_INTRO = {
   title: 'Professional Guides Who Know the Bush',
   description:
     'Guides bring interpretation, walking safaris, primate trekking expertise, and deep park knowledge to every itinerary.',
-  imageUrl: '/assets/benroso-fleet-lion.png',
-  imageAlt: 'Benroso Safaris guide on a game drive near wildlife'
+  imageUrl: '/assets/brand-fleet-lion.png',
+  imageAlt: 'Nature Romp Safaris guide on a game drive near wildlife'
 } as const;
 
 export const ABOUT_DRIVERS_INTRO = {
@@ -80,8 +80,8 @@ export const ABOUT_DRIVERS_INTRO = {
   title: 'Skilled on the Tracks, Focused on Your Comfort',
   description:
     'Driver guides are the face of your safari, expert at wildlife spotting, bush driving, and guest safety on every mile of your route.',
-  imageUrl: '/assets/benroso-fleet-branded.png',
-  imageAlt: 'Benroso Safaris Land Cruiser ready for off road game drives'
+  imageUrl: '/assets/brand-fleet-branded.png',
+  imageAlt: 'Nature Romp Safaris Land Cruiser ready for off road game drives'
 } as const;
 
 export const ABOUT_TEAM_SECTION = {
@@ -92,7 +92,7 @@ export const ABOUT_TEAM_SECTION = {
       'Leadership, operations, reservations, and guest care. The Nairobi team that coordinates every safari before your vehicle leaves the city.',
     emptyTitle: 'Team profiles coming soon',
     emptyMessage:
-      'Published staff profiles will appear here once they are added in the Benroso portal under Team Members.'
+      'Published staff profiles will appear here once they are added in the Nature Romp portal under Team Members.'
   },
   safari_guide: {
     eyebrow: 'Safari Guides',
@@ -100,7 +100,7 @@ export const ABOUT_TEAM_SECTION = {
     description: ABOUT_GUIDES_INTRO.description,
     emptyTitle: 'Safari guides coming soon',
     emptyMessage:
-      'Published safari guide profiles will appear here once they are added and published in the Benroso portal under Team Members.'
+      'Published safari guide profiles will appear here once they are added and published in the Nature Romp portal under Team Members.'
   },
   driver: {
     eyebrow: 'Driver Guides',
@@ -108,7 +108,7 @@ export const ABOUT_TEAM_SECTION = {
     description: ABOUT_DRIVERS_INTRO.description,
     emptyTitle: 'Driver guides coming soon',
     emptyMessage:
-      'Published driver-guide profiles will appear here once they are added and published in the Benroso portal under Team Members.'
+      'Published driver-guide profiles will appear here once they are added and published in the Nature Romp portal under Team Members.'
   }
 } as const;
 

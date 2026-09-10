@@ -58,7 +58,7 @@ export function buildExperienceListingIntro(categories: string[]) {
   return {
     lead: [
       { text: 'At ' },
-      { text: 'Benroso Safaris', emphasis: 'green' },
+      { text: 'Nature Romp Safaris', emphasis: 'green' },
       {
         text: ', safari experiences are not one-size-fits-all products. They are travel styles that shape how long you stay in each park, which lodges we recommend, and how your days unfold on the ground.'
       }

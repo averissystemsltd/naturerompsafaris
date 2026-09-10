@@ -13,11 +13,11 @@ export function RelatedArticles({ category, posts }: RelatedArticlesProps) {
   return (
     <section
       aria-labelledby='related-articles-heading'
-      className='mt-12 border-t border-[var(--benroso-line)] pt-10'
+      className='mt-12 border-t border-[var(--brand-line)] pt-10'
     >
-      <p className='benroso-eyebrow'>Keep reading</p>
+      <p className='brand-eyebrow'>Keep reading</p>
       <h2
-        className='benroso-heading mt-3 font-display text-[clamp(1.5rem,3vw,2.25rem)]'
+        className='brand-heading mt-3 font-display text-[clamp(1.5rem,3vw,2.25rem)]'
         id='related-articles-heading'
       >
         {category ? `More articles in ${category}` : 'Suggested articles'}

@@ -1,8 +1,8 @@
-# Cursor Handoff: Benroso Safaris
+# Cursor Handoff: Nature Romp Safaris
 
 ## Current State
 
-This repository is initialized from `Kiranism/next-shadcn-dashboard-starter` and has been renamed for Benroso Safaris. It is not production-ready yet. It now contains the foundation Cursor should continue from:
+This repository is initialized from `Kiranism/next-shadcn-dashboard-starter` and has been renamed for Nature Romp Safaris. It is not production-ready yet. It now contains the foundation Cursor should continue from:
 
 - Supabase folder and initial CMS migration
 - Supabase SSR/server/browser client helpers
@@ -10,8 +10,8 @@ This repository is initialized from `Kiranism/next-shadcn-dashboard-starter` and
 - Locale-first public route tree under `src/app/[locale]`
 - Blog and destination dynamic route boilerplate with Supabase translation-table lookups
 - Automated SEO/GEO/AEO helper modules
-- Benroso contact defaults and brand color constants
-- Benroso-specific README
+- Nature Romp contact defaults and brand color constants
+- Nature Romp-specific README
 
 ## Starter Cleanup Completed
 

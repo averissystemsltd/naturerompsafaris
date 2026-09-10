@@ -23,7 +23,7 @@ export async function generateMetadata(props: AccommodationPageProps): Promise<M
 
   const canonical = absoluteUrl(`/${locale}/accommodations/${accommodation.slug}`);
   const title =
-    accommodation.seoTitle || `${accommodation.name} | Safari Accommodation | Benroso Safaris`;
+    accommodation.seoTitle || `${accommodation.name} | Safari Accommodation | Nature Romp Safaris`;
   const description = accommodation.seoDescription || accommodation.excerpt || '';
 
   return {

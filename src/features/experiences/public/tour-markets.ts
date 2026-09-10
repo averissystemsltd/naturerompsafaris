@@ -1,8 +1,4 @@
-import {
-  BENROSO_OPERATING_COUNTRIES,
-  type BenrosoCountryId,
-  getCountryById
-} from './country-map-copy';
+import { BRAND_OPERATING_COUNTRIES, type BrandCountryId, getCountryById } from './country-map-copy';
 
 export const TOUR_EAST_AFRICA_MARKET_ID = 'east-africa' as const;
 
@@ -23,7 +19,7 @@ export type TourSafariMarketOption = {
 };
 
 export const TOUR_SAFARI_MARKETS: TourSafariMarketOption[] = [
-  ...BENROSO_OPERATING_COUNTRIES.map((country) => ({
+  ...BRAND_OPERATING_COUNTRIES.map((country) => ({
     id: country.id as TourSafariMarketId,
     label: `${country.name} Safaris`
   })),
@@ -37,7 +33,7 @@ const MARKET_LABELS = Object.fromEntries(
   TOUR_SAFARI_MARKETS.map((market) => [market.id, market.label])
 ) as Record<TourSafariMarketId, string>;
 
-const EAST_AFRICAN_COUNTRY_IDS: BenrosoCountryId[] = ['kenya', 'tanzania', 'uganda', 'rwanda'];
+const EAST_AFRICAN_COUNTRY_IDS: BrandCountryId[] = ['kenya', 'tanzania', 'uganda', 'rwanda'];
 
 export function parseTourSafariMarkets(value: unknown): TourSafariMarketId[] {
   if (!Array.isArray(value)) return [];
@@ -60,7 +56,7 @@ export function formatTourSafariMarketSummary(ids: TourSafariMarketId[]): string
 
 /** Union operating countries from linked experiences into tour market ids. */
 export function tourMarketsFromExperienceCountries(
-  countries: BenrosoCountryId[]
+  countries: BrandCountryId[]
 ): TourSafariMarketId[] {
   const uniqueCountries = [...new Set(countries)];
   const markets = new Set<TourSafariMarketId>(uniqueCountries as TourSafariMarketId[]);

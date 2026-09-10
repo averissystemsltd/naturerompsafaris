@@ -118,16 +118,16 @@ export function TourDetailShell({
       <SectionAnchorNav items={tabs} />
 
       <section className='bg-white'>
-        <div className='benroso-container py-10 md:py-12'>
+        <div className='brand-container py-10 md:py-12'>
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-10'>
             <article className='min-w-0'>
               <section className='scroll-mt-36' id='description'>
-                <h2 className='benroso-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
+                <h2 className='brand-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
                   Trip Overview
                 </h2>
                 {routeLabel ? (
-                  <p className='mt-3 flex flex-wrap items-center gap-2 text-base text-[var(--benroso-muted)]'>
-                    <Icons.mapPin className='size-4 text-[var(--benroso-primary)]' />
+                  <p className='mt-3 flex flex-wrap items-center gap-2 text-base text-[var(--brand-muted)]'>
+                    <Icons.mapPin className='size-4 text-[var(--brand-primary)]' />
                     <span>
                       Starts {tour.startLocation}
                       {tour.endLocation ? ` - Ends ${tour.endLocation}` : ''}
@@ -135,19 +135,19 @@ export function TourDetailShell({
                   </p>
                 ) : null}
                 {displayDescription ? (
-                  <p className='mt-4 text-lg leading-8 text-[var(--benroso-muted)]'>
+                  <p className='mt-4 text-lg leading-8 text-[var(--brand-muted)]'>
                     {displayDescription}
                   </p>
                 ) : null}
                 {introHtml ? (
                   <div
-                    className='benroso-legal-prose mt-6'
+                    className='brand-legal-prose mt-6'
                     dangerouslySetInnerHTML={{ __html: introHtml }}
                   />
                 ) : null}
                 {tour.descriptionHtml ? (
                   <div
-                    className='benroso-legal-prose mt-6'
+                    className='brand-legal-prose mt-6'
                     dangerouslySetInnerHTML={{ __html: tour.descriptionHtml }}
                   />
                 ) : null}
@@ -171,39 +171,36 @@ export function TourDetailShell({
               </div>
 
               {tour.importantNotice ? (
-                <details className='mt-8 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-5'>
-                  <summary className='cursor-pointer font-display text-lg font-bold text-[var(--benroso-heading)]'>
+                <details className='mt-8 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-5'>
+                  <summary className='cursor-pointer font-display text-lg font-bold text-[var(--brand-heading)]'>
                     Important Notice
                   </summary>
-                  <p className='benroso-body mt-3 text-sm leading-7'>{tour.importantNotice}</p>
+                  <p className='brand-body mt-3 text-sm leading-7'>{tour.importantNotice}</p>
                 </details>
               ) : null}
 
               <section
-                className='mt-12 scroll-mt-36 border-t border-[var(--benroso-line)] pt-10'
+                className='mt-12 scroll-mt-36 border-t border-[var(--brand-line)] pt-10'
                 id='itinerary'
               >
-                <h2 className='benroso-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
+                <h2 className='brand-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
                   {isMountainLayout ? 'Day-by-day overview' : 'Safari Itinerary'}
                 </h2>
-                <span aria-hidden className='benroso-gold-line benroso-gold-line--left mt-3' />
+                <span aria-hidden className='brand-gold-line brand-gold-line--left mt-3' />
                 <ItineraryTimeline days={tour.itineraryDays} />
               </section>
 
               {!isMountainLayout ? (
                 <section
-                  className='mt-12 scroll-mt-36 border-t border-[var(--benroso-line)] pt-10'
+                  className='mt-12 scroll-mt-36 border-t border-[var(--brand-line)] pt-10'
                   id='route-map'
                 >
                   <div className='flex flex-wrap items-end justify-between gap-4'>
                     <div>
-                      <h2 className='benroso-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
+                      <h2 className='brand-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
                         Route Map
                       </h2>
-                      <span
-                        aria-hidden
-                        className='benroso-gold-line benroso-gold-line--left mt-3'
-                      />
+                      <span aria-hidden className='brand-gold-line brand-gold-line--left mt-3' />
                     </div>
                   </div>
                   <RouteMapPanel
@@ -217,18 +214,18 @@ export function TourDetailShell({
               ) : null}
 
               <section
-                className='mt-12 scroll-mt-36 border-t border-[var(--benroso-line)] pt-10'
+                className='mt-12 scroll-mt-36 border-t border-[var(--brand-line)] pt-10'
                 id='price-seasons'
               >
-                <h2 className='benroso-heading font-display text-[clamp(1.75rem,2.6vw,2.35rem)] leading-tight'>
+                <h2 className='brand-heading font-display text-[clamp(1.75rem,2.6vw,2.35rem)] leading-tight'>
                   {isMountainLayout ? 'Prices' : 'Package Prices for This Trip'}
                 </h2>
                 {isMountainLayout ? (
-                  <p className='benroso-body mt-3 max-w-2xl text-base leading-7'>
+                  <p className='brand-body mt-3 max-w-2xl text-base leading-7'>
                     Camping and hut prices for this climbing route, per person.
                   </p>
                 ) : (
-                  <p className='benroso-body mt-3 max-w-2xl text-base leading-7'>
+                  <p className='brand-body mt-3 max-w-2xl text-base leading-7'>
                     Each table belongs to this itinerary. The comfort tiers show how the same trip
                     can be sold as budget, mid-range, or luxury, while the columns compare the
                     per-person cost by group size.
@@ -248,18 +245,18 @@ export function TourDetailShell({
               </section>
 
               <section
-                className='mt-12 scroll-mt-36 border-t border-[var(--benroso-line)] pt-10'
+                className='mt-12 scroll-mt-36 border-t border-[var(--brand-line)] pt-10'
                 id='included'
               >
-                <h2 className='benroso-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
+                <h2 className='brand-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
                   What&apos;s Included
                 </h2>
-                <span aria-hidden className='benroso-gold-line benroso-gold-line--left mt-3' />
+                <span aria-hidden className='brand-gold-line brand-gold-line--left mt-3' />
                 <InclusionSplit included={tour.inclusions} excluded={tour.exclusions} />
               </section>
 
               {!isMountainLayout && tour.accommodations.length ? (
-                <div className='mt-12 border-t border-[var(--benroso-line)] pt-10'>
+                <div className='mt-12 border-t border-[var(--brand-line)] pt-10'>
                   <RouteAccommodationsSection accommodations={tour.accommodations} />
                 </div>
               ) : null}
@@ -267,7 +264,7 @@ export function TourDetailShell({
               <TourFaqSection faqs={tour.faqs} />
             </article>
 
-            <aside className='hidden h-fit space-y-4 lg:block lg:sticky lg:top-[calc(var(--benroso-header-h)+5.25rem)]'>
+            <aside className='hidden h-fit space-y-4 lg:block lg:sticky lg:top-[calc(var(--brand-header-h)+5.25rem)]'>
               <TourInquiryPanel
                 days={tour.days}
                 locale={locale}
@@ -276,11 +273,11 @@ export function TourDetailShell({
                 tourSlug={tour.slug}
                 tourTitle={displayTitle}
               />
-              <div className='benroso-contact-advantages-block'>
-                <h3 className='benroso-contact-sidebar-heading benroso-contact-sidebar-heading--sm'>
+              <div className='brand-contact-advantages-block'>
+                <h3 className='brand-contact-sidebar-heading brand-contact-sidebar-heading--sm'>
                   Trip Facts
                 </h3>
-                <div className='benroso-contact-credentials-box'>
+                <div className='brand-contact-credentials-box'>
                   <dl className='space-y-3 text-sm'>
                     {tour.startLocation ? (
                       <FactRow label='Starts in' value={tour.startLocation} />
@@ -302,11 +299,11 @@ export function TourDetailShell({
                 </div>
               </div>
               <ContactScrollReveal>
-                <div className='benroso-contact-advantages-block'>
-                  <h3 className='benroso-contact-sidebar-heading benroso-contact-sidebar-heading--sm'>
-                    Advantages of Booking with Benroso Safaris
+                <div className='brand-contact-advantages-block'>
+                  <h3 className='brand-contact-sidebar-heading brand-contact-sidebar-heading--sm'>
+                    Advantages of Booking with Nature Romp Safaris
                   </h3>
-                  <div className='benroso-contact-credentials-box'>
+                  <div className='brand-contact-credentials-box'>
                     <ContactAdvantagesList />
                   </div>
                 </div>
@@ -404,7 +401,7 @@ function TourHero({
   title: string;
 }) {
   return (
-    <section className='relative isolate min-h-[500px] overflow-hidden bg-[var(--benroso-primary-dark)] text-white md:min-h-[560px]'>
+    <section className='relative isolate min-h-[500px] overflow-hidden bg-[var(--brand-primary-dark)] text-white md:min-h-[560px]'>
       {imageUrl ? (
         <Image
           alt={imageAlt ?? title}
@@ -418,7 +415,7 @@ function TourHero({
       <div className='absolute inset-0 -z-10 bg-black/60' />
       <div className='absolute inset-0 -z-10 bg-black/20' />
 
-      <div className='benroso-container flex min-h-[500px] items-center justify-center py-16 text-center md:min-h-[560px] md:py-20'>
+      <div className='brand-container flex min-h-[500px] items-center justify-center py-16 text-center md:min-h-[560px] md:py-20'>
         <div className='mx-auto w-full max-w-5xl'>
           <nav
             aria-label='Breadcrumb'
@@ -440,8 +437,8 @@ function TourHero({
           <h1 className='mx-auto mt-5 max-w-5xl font-display text-[clamp(2.6rem,5.8vw,5.25rem)] font-bold leading-[1.02] text-white'>
             {title}
           </h1>
-          <span aria-hidden className='benroso-gold-line mx-auto mt-5' />
-          <div className='mx-auto mt-8 grid max-w-4xl overflow-hidden rounded-[var(--benroso-radius)] border border-white/25 bg-black/20 text-left backdrop-blur-sm md:grid-cols-3'>
+          <span aria-hidden className='brand-gold-line mx-auto mt-5' />
+          <div className='mx-auto mt-8 grid max-w-4xl overflow-hidden rounded-[var(--brand-radius)] border border-white/25 bg-black/20 text-left backdrop-blur-sm md:grid-cols-3'>
             <HeroFact
               icon={<Icons.mapPin className='h-5 w-5' />}
               label={routeLabel || 'Route details on request'}
@@ -461,7 +458,7 @@ function TourHero({
 function HeroFact({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <div className='flex items-center gap-3 border-b border-white/20 px-4 py-3 text-sm font-bold text-white md:border-b-0 md:border-r md:last:border-r-0'>
-      <span className='shrink-0 text-[var(--benroso-lime)] [&_svg]:text-[var(--benroso-lime)]'>
+      <span className='shrink-0 text-[var(--brand-lime)] [&_svg]:text-[var(--brand-lime)]'>
         {icon}
       </span>
       <span>{label}</span>
@@ -484,11 +481,11 @@ function RouteMapPanel({
 }) {
   if (!stops.length) {
     return (
-      <div className='mt-6 flex min-h-[340px] items-center justify-center border border-dashed border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-6 text-center'>
+      <div className='mt-6 flex min-h-[340px] items-center justify-center border border-dashed border-[var(--brand-line)] bg-[var(--brand-ivory)] p-6 text-center'>
         <div>
-          <Icons.mapPin className='mx-auto h-8 w-8 text-[var(--benroso-primary)]' />
-          <h3 className='benroso-heading mt-3 font-display text-xl'>Route Preview Pending</h3>
-          <p className='benroso-body mt-2 text-sm leading-6'>
+          <Icons.mapPin className='mx-auto h-8 w-8 text-[var(--brand-primary)]' />
+          <h3 className='brand-heading mt-3 font-display text-xl'>Route Preview Pending</h3>
+          <p className='brand-body mt-2 text-sm leading-6'>
             Add start, destination, itinerary, and end details in the portal to generate this map.
           </p>
         </div>
@@ -508,17 +505,17 @@ function RouteMapPanel({
 
   return (
     <div className='mt-6 space-y-5'>
-      <div className='flex flex-wrap items-center gap-x-3 gap-y-2 border border-[var(--benroso-line)] bg-white px-4 py-4 text-sm font-semibold text-[var(--benroso-ink)]'>
-        <Icons.mapPin className='h-4 w-4 text-[var(--benroso-primary)]' />
+      <div className='flex flex-wrap items-center gap-x-3 gap-y-2 border border-[var(--brand-line)] bg-white px-4 py-4 text-sm font-semibold text-[var(--brand-ink)]'>
+        <Icons.mapPin className='h-4 w-4 text-[var(--brand-primary)]' />
         <span>{directionPoints[0] ?? startLocation ?? stops[0]?.value}</span>
         {directionPoints.slice(1).map((point, index) => (
           <span className='inline-flex items-center gap-3' key={`${point}-${index}`}>
-            <Icons.chevronRight className='h-4 w-4 text-[var(--benroso-muted)]' />
+            <Icons.chevronRight className='h-4 w-4 text-[var(--brand-muted)]' />
             <span>{point}</span>
           </span>
         ))}
       </div>
-      <div className='overflow-hidden border border-[var(--benroso-line)] bg-[var(--benroso-ivory)]'>
+      <div className='overflow-hidden border border-[var(--brand-line)] bg-[var(--brand-ivory)]'>
         <iframe
           className='h-[420px] w-full'
           loading='lazy'
@@ -537,21 +534,21 @@ function TourFaqSection({ faqs }: { faqs: PublicTourDetail['faqs'] }) {
 
   return (
     <section className='mt-12 scroll-mt-36' id='tour-faqs'>
-      <h2 className='benroso-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
+      <h2 className='brand-heading font-display text-[clamp(1.9rem,3vw,2.55rem)] leading-tight'>
         Trip FAQs
       </h2>
 
       <Accordion className='mt-7' collapsible type='single'>
         {faqs.map((faq, index) => (
           <AccordionItem
-            className='border-[var(--benroso-line)]'
+            className='border-[var(--brand-line)]'
             key={`${faq.question}-${index}`}
             value={`tour-faq-${index}`}
           >
-            <AccordionTrigger className='font-display text-base font-semibold text-[var(--benroso-heading)] hover:no-underline'>
+            <AccordionTrigger className='font-display text-base font-semibold text-[var(--brand-heading)] hover:no-underline'>
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className='text-[15px] leading-7 text-[var(--benroso-muted)]'>
+            <AccordionContent className='text-[15px] leading-7 text-[var(--brand-muted)]'>
               {faq.answer}
             </AccordionContent>
           </AccordionItem>
@@ -596,19 +593,19 @@ function InclusionColumn({
   return (
     <div
       className={cn(
-        'benroso-inclusion-panel',
-        isIncluded ? 'benroso-inclusion-panel--included' : 'benroso-inclusion-panel--excluded'
+        'brand-inclusion-panel',
+        isIncluded ? 'brand-inclusion-panel--included' : 'brand-inclusion-panel--excluded'
       )}
     >
-      <h3 className='benroso-inclusion-panel__title'>{title}</h3>
+      <h3 className='brand-inclusion-panel__title'>{title}</h3>
       {items.length ? (
-        <ul className='benroso-inclusion-panel__list'>
+        <ul className='brand-inclusion-panel__list'>
           {items.map((item) => (
-            <li className='benroso-inclusion-panel__item' key={item}>
+            <li className='brand-inclusion-panel__item' key={item}>
               <span
                 className={cn(
                   'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full',
-                  isIncluded ? 'bg-[var(--benroso-lime)] text-white' : 'bg-[#9a7358] text-white'
+                  isIncluded ? 'bg-[var(--brand-lime)] text-white' : 'bg-[#9a7358] text-white'
                 )}
               >
                 {isIncluded ? (
@@ -622,7 +619,7 @@ function InclusionColumn({
           ))}
         </ul>
       ) : (
-        <p className='benroso-inclusion-panel__empty'>{emptyText}</p>
+        <p className='brand-inclusion-panel__empty'>{emptyText}</p>
       )}
     </div>
   );
@@ -630,9 +627,9 @@ function InclusionColumn({
 
 function FactRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className='flex items-start justify-between gap-3 border-b border-[var(--benroso-line)] pb-3 last:border-b-0 last:pb-0'>
-      <dt className='text-[var(--benroso-muted)]'>{label}</dt>
-      <dd className='text-right font-semibold text-[var(--benroso-ink)]'>{value}</dd>
+    <div className='flex items-start justify-between gap-3 border-b border-[var(--brand-line)] pb-3 last:border-b-0 last:pb-0'>
+      <dt className='text-[var(--brand-muted)]'>{label}</dt>
+      <dd className='text-right font-semibold text-[var(--brand-ink)]'>{value}</dd>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export function PublicHeroGhostCta({ className, href, label }: PublicHeroGhostCt
     >
       <span
         aria-hidden
-        className='absolute inset-0 origin-left scale-x-0 bg-[var(--benroso-primary)] transition-transform duration-300 ease-out group-hover:scale-x-100'
+        className='absolute inset-0 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-300 ease-out group-hover:scale-x-100'
       />
       <span className='relative z-10'>{label}</span>
       <Icons.arrowRight

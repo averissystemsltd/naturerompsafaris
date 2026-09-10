@@ -1,15 +1,15 @@
 export type SmtpMailbox = 'enquiry' | 'guest' | 'newsletter';
 
 const MAILBOX_USERS: Record<SmtpMailbox, string> = {
-  enquiry: 'inquiries@benrososafaris.co.ke',
-  guest: 'no-reply@benrososafaris.co.ke',
-  newsletter: 'news@benrososafaris.co.ke'
+  enquiry: 'inquiries@naturerompsafaris.co.ke',
+  guest: 'no-reply@naturerompsafaris.co.ke',
+  newsletter: 'news@naturerompsafaris.co.ke'
 };
 
 const MAILBOX_FROM: Record<SmtpMailbox, string> = {
-  enquiry: 'Benroso Safaris <inquiries@benrososafaris.co.ke>',
-  guest: 'Benroso Safaris <no-reply@benrososafaris.co.ke>',
-  newsletter: 'Benroso Safaris <news@benrososafaris.co.ke>'
+  enquiry: 'Nature Romp Safaris <inquiries@naturerompsafaris.co.ke>',
+  guest: 'Nature Romp Safaris <no-reply@naturerompsafaris.co.ke>',
+  newsletter: 'Nature Romp Safaris <news@naturerompsafaris.co.ke>'
 };
 
 export function isSmtpConfigured() {
@@ -39,8 +39,8 @@ export function smtpFromAddress(mailbox: SmtpMailbox) {
 export function enquiryNotificationEmail() {
   return (
     process.env.ENQUIRY_NOTIFICATION_EMAIL?.trim() ||
-    process.env.BENROSO_ENQUIRY_EMAIL?.trim() ||
-    'info@benrososafaris.co.ke'
+    process.env.BRAND_ENQUIRY_EMAIL?.trim() ||
+    'info@naturerompsafaris.co.ke'
   );
 }
 

@@ -4,7 +4,7 @@ import { NationalParkFilters } from '@/components/public/national-parks/national
 import { NationalParksResults } from '@/components/public/national-parks/national-parks-results';
 import { ListingShell } from '@/components/public/page-shell';
 import { PublicPageHero } from '@/components/public/public-page-hero';
-import { BENROSO_PUBLIC_HERO_IMAGES } from '@/config/benroso';
+import { BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 import { getParkFilterFacets, listPublishedParks } from '@/lib/public/national-parks';
 import { getPageHero } from '@/lib/public/site-data';
@@ -36,11 +36,11 @@ export async function generateMetadata({ params }: NationalParksPageProps): Prom
   const canonical = absoluteUrl(`/${locale}/national-parks`);
 
   return {
-    title: 'National Parks & Safari Reserves | Benroso Safaris',
+    title: 'National Parks & Safari Reserves | Nature Romp Safaris',
     description: nationalParksDescription,
     alternates: { canonical },
     openGraph: {
-      title: 'National Parks & Safari Reserves | Benroso Safaris',
+      title: 'National Parks & Safari Reserves | Nature Romp Safaris',
       description: nationalParksDescription,
       type: 'website',
       url: canonical
@@ -70,7 +70,7 @@ export default async function NationalParksPage({ params, searchParams }: Nation
     getParkFilterFacets(locale),
     getPageHero('national-parks')
   ]);
-  const hero = BENROSO_PUBLIC_HERO_IMAGES.destinations;
+  const hero = BRAND_PUBLIC_HERO_IMAGES.destinations;
 
   return (
     <>

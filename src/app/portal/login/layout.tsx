@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function PortalLoginLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='bg-white font-sans text-[#111827]' data-theme='benroso'>
+    <div className='bg-white font-sans text-[#111827]' data-theme='brand'>
       {children}
     </div>
   );

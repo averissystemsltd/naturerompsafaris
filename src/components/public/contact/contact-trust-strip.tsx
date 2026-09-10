@@ -22,14 +22,14 @@ const TRUST_POINTS = [
 
 export function ContactTrustStrip() {
   return (
-    <section className='border-t border-[var(--benroso-line)] bg-white'>
-      <div className='benroso-container py-14 md:py-16'>
+    <section className='border-t border-[var(--brand-line)] bg-white'>
+      <div className='brand-container py-14 md:py-16'>
         <div className='grid gap-10 md:grid-cols-3 md:gap-8'>
           {TRUST_POINTS.map((point) => (
             <div className='max-w-sm' key={point.title}>
-              <point.icon className='h-6 w-6 text-[var(--benroso-accent)]' />
-              <h3 className='benroso-heading mt-4 font-display text-xl'>{point.title}</h3>
-              <p className='mt-3 text-sm leading-7 text-[var(--benroso-muted)]'>
+              <point.icon className='h-6 w-6 text-[var(--brand-accent)]' />
+              <h3 className='brand-heading mt-4 font-display text-xl'>{point.title}</h3>
+              <p className='mt-3 text-sm leading-7 text-[var(--brand-muted)]'>
                 {point.description}
               </p>
             </div>

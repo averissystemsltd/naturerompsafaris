@@ -48,7 +48,7 @@ export function AccommodationGallery({ images, title }: AccommodationGalleryProp
 
   if (!images.length) {
     return (
-      <div className='aspect-[16/10] rounded-[var(--benroso-radius)] bg-[var(--benroso-primary-light)]' />
+      <div className='aspect-[16/10] rounded-[var(--brand-radius)] bg-[var(--brand-primary-light)]' />
     );
   }
 
@@ -72,7 +72,7 @@ export function AccommodationGallery({ images, title }: AccommodationGalleryProp
   return (
     <div className='space-y-4'>
       <div
-        className='relative aspect-[16/10] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-primary-light)]'
+        className='relative aspect-[16/10] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-primary-light)]'
         onTouchEnd={hasMultiple ? handleTouchEnd : undefined}
         onTouchMove={hasMultiple ? handleTouchMove : undefined}
         onTouchStart={hasMultiple ? handleTouchStart : undefined}
@@ -147,9 +147,9 @@ export function AccommodationGallery({ images, title }: AccommodationGalleryProp
                 aria-label={`Show image ${index + 1}`}
                 aria-pressed={isActive}
                 className={cn(
-                  'relative aspect-[4/3] w-20 shrink-0 overflow-hidden rounded-[var(--benroso-radius)] border-2 transition-opacity duration-200 sm:w-24',
+                  'relative aspect-[4/3] w-20 shrink-0 overflow-hidden rounded-[var(--brand-radius)] border-2 transition-opacity duration-200 sm:w-24',
                   isActive
-                    ? 'border-[var(--benroso-primary)] opacity-100'
+                    ? 'border-[var(--brand-primary)] opacity-100'
                     : 'border-transparent opacity-80 hover:opacity-100'
                 )}
                 key={image.id}

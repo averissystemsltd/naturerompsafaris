@@ -77,7 +77,7 @@ export function Slider({
           {showArrows ? (
             <button
               aria-label='Previous slide'
-              className='flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] text-[var(--benroso-primary)] transition-colors hover:bg-[var(--benroso-primary)] hover:text-white'
+              className='flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--brand-radius)] border border-[var(--brand-line)] text-[var(--brand-primary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white'
               onClick={() => goTo(activeIndex - 1)}
               type='button'
             >
@@ -93,8 +93,8 @@ export function Slider({
                   className={cn(
                     'h-2 w-2 rounded-full transition-colors',
                     index === activeIndex
-                      ? 'bg-[var(--benroso-primary)]'
-                      : 'bg-[var(--benroso-line)] hover:bg-[var(--benroso-muted)]'
+                      ? 'bg-[var(--brand-primary)]'
+                      : 'bg-[var(--brand-line)] hover:bg-[var(--brand-muted)]'
                   )}
                   key={index}
                   onClick={() => goTo(index)}
@@ -107,7 +107,7 @@ export function Slider({
           {showArrows ? (
             <button
               aria-label='Next slide'
-              className='flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] text-[var(--benroso-primary)] transition-colors hover:bg-[var(--benroso-primary)] hover:text-white'
+              className='flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--brand-radius)] border border-[var(--brand-line)] text-[var(--brand-primary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white'
               onClick={() => goTo(activeIndex + 1)}
               type='button'
             >

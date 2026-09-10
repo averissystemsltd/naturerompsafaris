@@ -36,8 +36,8 @@ export function TeamMemberDetailDialog({
       <DialogContent
         className={cn(
           PUBLIC_LIGHT_DIALOG,
-          'team-member-dialog max-h-[90vh] w-[calc(100%-2rem)] gap-0 overflow-y-auto rounded-md border border-[var(--benroso-line)] p-0 shadow-2xl sm:max-w-4xl md:overflow-hidden',
-          '[&>button]:z-20 [&>button]:text-[var(--benroso-primary-dark)]'
+          'team-member-dialog max-h-[90vh] w-[calc(100%-2rem)] gap-0 overflow-y-auto rounded-md border border-[var(--brand-line)] p-0 shadow-2xl sm:max-w-4xl md:overflow-hidden',
+          '[&>button]:z-20 [&>button]:text-[var(--brand-primary-dark)]'
         )}
       >
         <DialogTitle className='sr-only'>
@@ -46,11 +46,11 @@ export function TeamMemberDetailDialog({
 
         {member ? (
           <div className='grid md:max-h-[min(90vh,620px)] md:grid-cols-[minmax(260px,300px)_1fr] md:overflow-hidden'>
-            <aside className='relative shrink-0 bg-[var(--benroso-ivory)] px-5 pb-6 pt-7 md:px-6 md:pt-8'>
-              <div className='pointer-events-none absolute inset-x-0 top-0 h-14 rounded-t-md bg-gradient-to-b from-[var(--benroso-primary-dark)]/8 to-transparent' />
+            <aside className='relative shrink-0 bg-[var(--brand-ivory)] px-5 pb-6 pt-7 md:px-6 md:pt-8'>
+              <div className='pointer-events-none absolute inset-x-0 top-0 h-14 rounded-t-md bg-gradient-to-b from-[var(--brand-primary-dark)]/8 to-transparent' />
 
               <div className='relative mx-auto w-full max-w-[200px]'>
-                <div className='relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[var(--benroso-radius)] bg-white shadow-[0_16px_40px_rgba(47,64,52,0.14)] ring-1 ring-[var(--benroso-line)]'>
+                <div className='relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[var(--brand-radius)] bg-white shadow-[0_16px_40px_rgba(47,64,52,0.14)] ring-1 ring-[var(--brand-line)]'>
                   <Image
                     alt={member.imageAlt ?? member.name}
                     className='object-cover object-top'
@@ -62,21 +62,21 @@ export function TeamMemberDetailDialog({
               </div>
 
               <div className='relative mt-5 text-center'>
-                <h2 className='benroso-heading font-display text-xl leading-tight text-[var(--benroso-primary-dark)] md:text-2xl'>
+                <h2 className='brand-heading font-display text-xl leading-tight text-[var(--brand-primary-dark)] md:text-2xl'>
                   {member.name}
                 </h2>
-                <p className='mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--benroso-muted)]'>
+                <p className='mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--brand-muted)]'>
                   {title}
                 </p>
               </div>
 
-              <div className='relative mt-4 space-y-2.5 border-t border-[var(--benroso-line)] pt-4'>
+              <div className='relative mt-4 space-y-2.5 border-t border-[var(--brand-line)] pt-4'>
                 {member.email ? (
                   <a
-                    className='flex items-start gap-3 rounded-[var(--benroso-radius)] px-1 py-1 text-sm text-[var(--benroso-ink)] transition-colors hover:text-[var(--benroso-accent)]'
+                    className='flex items-start gap-3 rounded-[var(--brand-radius)] px-1 py-1 text-sm text-[var(--brand-ink)] transition-colors hover:text-[var(--brand-accent)]'
                     href={`mailto:${member.email}`}
                   >
-                    <span className='mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-[var(--benroso-primary-dark)] ring-1 ring-[var(--benroso-line)]'>
+                    <span className='mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-[var(--brand-primary-dark)] ring-1 ring-[var(--brand-line)]'>
                       <Icons.mail className='h-4 w-4' />
                     </span>
                     <span className='min-w-0 break-all leading-6'>{member.email}</span>
@@ -84,47 +84,47 @@ export function TeamMemberDetailDialog({
                 ) : null}
                 {member.phone ? (
                   <a
-                    className='flex items-start gap-3 rounded-[var(--benroso-radius)] px-1 py-1 text-sm text-[var(--benroso-ink)] transition-colors hover:text-[var(--benroso-accent)]'
+                    className='flex items-start gap-3 rounded-[var(--brand-radius)] px-1 py-1 text-sm text-[var(--brand-ink)] transition-colors hover:text-[var(--brand-accent)]'
                     href={`tel:${member.phone}`}
                   >
-                    <span className='mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-[var(--benroso-primary-dark)] ring-1 ring-[var(--benroso-line)]'>
+                    <span className='mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-[var(--brand-primary-dark)] ring-1 ring-[var(--brand-line)]'>
                       <Icons.phone className='h-4 w-4' />
                     </span>
                     <span className='leading-6'>{member.phone}</span>
                   </a>
                 ) : null}
                 {!member.email && !member.phone ? (
-                  <p className='text-center text-sm text-[var(--benroso-muted)]'>
-                    Contact details available through Benroso Safaris.
+                  <p className='text-center text-sm text-[var(--brand-muted)]'>
+                    Contact details available through Nature Romp Safaris.
                   </p>
                 ) : null}
               </div>
             </aside>
 
-            <section className='flex min-w-0 flex-col bg-white md:min-h-0 md:border-l md:border-[var(--benroso-line)]'>
-              <div className='shrink-0 border-b border-[var(--benroso-line)] px-5 py-5 md:px-7'>
-                <p className='text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--benroso-accent)]'>
+            <section className='flex min-w-0 flex-col bg-white md:min-h-0 md:border-l md:border-[var(--brand-line)]'>
+              <div className='shrink-0 border-b border-[var(--brand-line)] px-5 py-5 md:px-7'>
+                <p className='text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--brand-accent)]'>
                   Profile
                 </p>
-                <h3 className='benroso-heading mt-2 font-display text-lg text-[var(--benroso-primary-dark)] md:text-xl'>
+                <h3 className='brand-heading mt-2 font-display text-lg text-[var(--brand-primary-dark)] md:text-xl'>
                   {member.roleLabel}
                 </h3>
                 {member.jobTitle && member.jobTitle !== member.roleLabel ? (
-                  <p className='mt-1.5 text-sm text-[var(--benroso-muted)]'>{member.jobTitle}</p>
+                  <p className='mt-1.5 text-sm text-[var(--brand-muted)]'>{member.jobTitle}</p>
                 ) : null}
                 {member.yearsExperience != null ? (
-                  <p className='mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--benroso-ivory)] px-3 py-1.5 text-sm text-[var(--benroso-ink)]'>
-                    <Icons.clock className='h-4 w-4 text-[var(--benroso-accent)]' />
+                  <p className='mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--brand-ivory)] px-3 py-1.5 text-sm text-[var(--brand-ink)]'>
+                    <Icons.clock className='h-4 w-4 text-[var(--brand-accent)]' />
                     {member.yearsExperience} years experience
                   </p>
                 ) : null}
               </div>
 
-              <div className='benroso-body px-5 py-5 md:min-h-0 md:flex-1 md:overflow-y-auto md:px-7'>
-                <p className='text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--benroso-muted)]'>
+              <div className='brand-body px-5 py-5 md:min-h-0 md:flex-1 md:overflow-y-auto md:px-7'>
+                <p className='text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--brand-muted)]'>
                   Bio
                 </p>
-                <p className='mt-3 whitespace-pre-wrap text-[15px] leading-7 text-[var(--benroso-muted)]'>
+                <p className='mt-3 whitespace-pre-wrap text-[15px] leading-7 text-[var(--brand-muted)]'>
                   {member.bio || 'Profile details will be added soon.'}
                 </p>
               </div>
@@ -147,7 +147,7 @@ export function TeamMemberCard({ member, onSelect }: TeamMemberCardProps) {
 
   return (
     <article className='group mx-auto w-full max-w-[340px]'>
-      <div className='relative aspect-[5/4] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-ivory)] shadow-[0_8px_24px_rgba(47,64,52,0.08)]'>
+      <div className='relative aspect-[5/4] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-ivory)] shadow-[0_8px_24px_rgba(47,64,52,0.08)]'>
         <Image
           alt={member.imageAlt ?? member.name}
           className='object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]'
@@ -157,11 +157,11 @@ export function TeamMemberCard({ member, onSelect }: TeamMemberCardProps) {
         />
       </div>
 
-      <div className='relative z-10 -mt-12 mx-1 bg-white px-6 py-5 text-center shadow-[0_18px_44px_rgba(15,23,42,0.12)] ring-1 ring-[var(--benroso-line)]/70'>
-        <h3 className='benroso-heading font-display text-[1.3rem] leading-tight text-[var(--benroso-ink)]'>
+      <div className='relative z-10 -mt-12 mx-1 bg-white px-6 py-5 text-center shadow-[0_18px_44px_rgba(15,23,42,0.12)] ring-1 ring-[var(--brand-line)]/70'>
+        <h3 className='brand-heading font-display text-[1.3rem] leading-tight text-[var(--brand-ink)]'>
           {member.name}
         </h3>
-        <p className='mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--benroso-muted)]'>
+        <p className='mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-muted)]'>
           {title}
         </p>
 
@@ -169,7 +169,7 @@ export function TeamMemberCard({ member, onSelect }: TeamMemberCardProps) {
           <div className='mt-4 flex items-center justify-center gap-3'>
             {member.email ? (
               <a
-                className='inline-flex size-10 items-center justify-center rounded-full border border-[var(--benroso-line)] bg-white text-[var(--benroso-primary-dark)] transition-colors hover:border-[var(--benroso-accent)] hover:text-[var(--benroso-accent)]'
+                className='inline-flex size-10 items-center justify-center rounded-full border border-[var(--brand-line)] bg-white text-[var(--brand-primary-dark)] transition-colors hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]'
                 href={`mailto:${member.email}`}
                 onClick={(event) => event.stopPropagation()}
               >
@@ -179,7 +179,7 @@ export function TeamMemberCard({ member, onSelect }: TeamMemberCardProps) {
             ) : null}
             {member.phone ? (
               <a
-                className='inline-flex size-10 items-center justify-center rounded-full border border-[var(--benroso-line)] bg-white text-[var(--benroso-primary-dark)] transition-colors hover:border-[var(--benroso-accent)] hover:text-[var(--benroso-accent)]'
+                className='inline-flex size-10 items-center justify-center rounded-full border border-[var(--brand-line)] bg-white text-[var(--brand-primary-dark)] transition-colors hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]'
                 href={`tel:${member.phone}`}
                 onClick={(event) => event.stopPropagation()}
               >
@@ -191,7 +191,7 @@ export function TeamMemberCard({ member, onSelect }: TeamMemberCardProps) {
         ) : null}
 
         <button
-          className='mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--benroso-accent)] transition-colors hover:text-[var(--benroso-primary-dark)]'
+          className='mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--brand-accent)] transition-colors hover:text-[var(--brand-primary-dark)]'
           onClick={() => onSelect(member)}
           type='button'
         >
@@ -252,7 +252,7 @@ export function TeamMembersGrid({
     }
 
     return emptyMessage ? (
-      <p className='benroso-body text-sm leading-7 text-[var(--benroso-muted)]'>{emptyMessage}</p>
+      <p className='brand-body text-sm leading-7 text-[var(--brand-muted)]'>{emptyMessage}</p>
     ) : null;
   }
 

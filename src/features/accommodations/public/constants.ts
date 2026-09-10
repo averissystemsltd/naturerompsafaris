@@ -73,15 +73,15 @@ export function comfortLevelBadgeClass(value: string | null | undefined) {
     case 'economy':
       return 'bg-[#4a7c6f] text-white';
     case 'mid-range':
-      return 'bg-[var(--benroso-primary)] text-white';
+      return 'bg-[var(--brand-primary)] text-white';
     case 'luxury':
-      return 'bg-[var(--benroso-gold)] text-[var(--benroso-primary-dark)]';
+      return 'bg-[var(--brand-gold)] text-[var(--brand-primary-dark)]';
     case 'high-end':
-      return 'bg-[var(--benroso-brown)] text-white';
+      return 'bg-[var(--brand-brown)] text-white';
     case 'ultra-luxury':
-      return 'bg-[var(--benroso-primary-dark)] text-[var(--benroso-gold)]';
+      return 'bg-[var(--brand-primary-dark)] text-[var(--brand-gold)]';
     default:
-      return 'bg-white/95 text-[var(--benroso-ink)]';
+      return 'bg-white/95 text-[var(--brand-ink)]';
   }
 }
 

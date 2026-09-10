@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { ScrollReveal } from '@/components/public/ui/scroll-reveal';
 import { TrustedChecklist } from '@/components/public/home/home-trusted-checklist';
 import { Slider } from '@/components/public/ui/slider';
@@ -11,8 +11,8 @@ import { localePath } from '@/lib/public/locale-path';
 
 const WHY_CHOOSE_IMAGES = [
   {
-    imageUrl: '/assets/benroso-safaris-kenya.webp',
-    imageAlt: 'Benroso Safaris vehicle on the plains of Kenya'
+    imageUrl: '/assets/brand-safaris-kenya.webp',
+    imageAlt: 'Nature Romp Safaris vehicle on the plains of Kenya'
   },
   {
     imageUrl: '/assets/Elephant-in-Amboseli-National-Park-2.jpeg',
@@ -33,14 +33,14 @@ export function HomeWhyChooseUs({ locale }: { locale: string }) {
   ];
 
   return (
-    <section className='border-b border-[var(--benroso-line)] bg-white' id='why-choose-us'>
-      <div className='benroso-container py-16 md:py-20'>
+    <section className='border-b border-[var(--brand-line)] bg-white' id='why-choose-us'>
+      <div className='brand-container py-16 md:py-20'>
         <div className='grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14'>
           <ScrollReveal className='relative' from='left'>
             <Slider autoPlayMs={5000} showArrows={false}>
               {WHY_CHOOSE_IMAGES.map((image) => (
                 <div
-                  className='relative aspect-[4/3] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-primary)]'
+                  className='relative aspect-[4/3] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-primary)]'
                   key={image.imageUrl}
                 >
                   <Image
@@ -57,26 +57,22 @@ export function HomeWhyChooseUs({ locale }: { locale: string }) {
           </ScrollReveal>
 
           <ScrollReveal from='right'>
-            <p className='benroso-eyebrow'>Why Choose Benroso Safaris</p>
-            <h2 className='benroso-heading mt-3 font-display text-[clamp(1.875rem,4vw,3rem)] leading-[1.1]'>
+            <p className='brand-eyebrow'>Why Choose Nature Romp Safaris</p>
+            <h2 className='brand-heading mt-3 font-display text-[clamp(1.875rem,4vw,3rem)] leading-[1.1]'>
               Trusted East Africa Safari Experts Since 2000
             </h2>
-            <span className='benroso-gold-line benroso-gold-line--left' />
-            <p className='benroso-body mt-6 text-base leading-8'>
+            <span className='brand-gold-line brand-gold-line--left' />
+            <p className='brand-body mt-6 text-base leading-8'>
               From the Great Migration to gorilla trekking and the Cape, every itinerary is designed
               by a team that has spent close to thirty years in the field. You get local expertise,
               honest advice, and logistics that simply work.
             </p>
             <TrustedChecklist items={trustPoints} />
             <div className='mt-8'>
-              <BenrosoButton
-                className='group'
-                href={localePath(locale, '/about')}
-                variant='primary'
-              >
+              <BrandButton className='group' href={localePath(locale, '/about')} variant='primary'>
                 <Icons.compass className='h-4 w-4 transition-transform duration-500 ease-out group-hover:rotate-[360deg]' />
                 Discover Our Story
-              </BenrosoButton>
+              </BrandButton>
             </div>
           </ScrollReveal>
         </div>

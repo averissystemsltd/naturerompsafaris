@@ -42,8 +42,8 @@ const inquirySchema = z.object({
   tripType: z.string()
 });
 
-const fieldClassName = 'benroso-contact-field mt-1.5';
-const labelClassName = 'block text-sm font-bold text-[var(--benroso-heading)]';
+const fieldClassName = 'brand-contact-field mt-1.5';
+const labelClassName = 'block text-sm font-bold text-[var(--brand-heading)]';
 
 const BUDGET_TIER_OPTIONS = [
   { label: 'Budget', value: 'budget' },
@@ -141,10 +141,10 @@ function CounterStepper({
   return (
     <div>
       <span className={labelClassName}>{label}</span>
-      <div className='benroso-traveler-stepper mt-1.5'>
+      <div className='brand-traveler-stepper mt-1.5'>
         <button
           aria-label={`Decrease ${label}`}
-          className='benroso-traveler-stepper-btn'
+          className='brand-traveler-stepper-btn'
           disabled={value <= min}
           onBlur={onBlur}
           onClick={() => onChange(Math.max(min, value - 1))}
@@ -152,12 +152,12 @@ function CounterStepper({
         >
           <Icons.minus className='h-4 w-4' />
         </button>
-        <span aria-live='polite' className='benroso-traveler-stepper-value'>
+        <span aria-live='polite' className='brand-traveler-stepper-value'>
           {value}
         </span>
         <button
           aria-label={`Increase ${label}`}
-          className='benroso-traveler-stepper-btn'
+          className='brand-traveler-stepper-btn'
           onBlur={onBlur}
           onClick={() => onChange(value + 1)}
           type='button'
@@ -498,12 +498,12 @@ function TourInquiryForm({
         <div className='mt-5 space-y-3'>
           <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
           <form.SubmitButton
-            className='w-full min-h-11 rounded-[var(--benroso-button-radius)] text-sm font-semibold uppercase tracking-[0.08em]'
+            className='w-full min-h-11 rounded-[var(--brand-button-radius)] text-sm font-semibold uppercase tracking-[0.08em]'
             disabled={mutation.isPending || !turnstile.canSubmit}
           >
             {mutation.isPending ? 'Sending...' : 'Send Trip Enquiry'}
           </form.SubmitButton>
-          <p className='text-xs text-[var(--benroso-muted)]'>
+          <p className='text-xs text-[var(--brand-muted)]'>
             No payment is collected here. We aim to respond within 24 hours.
           </p>
           {submitStatus === 'error' ? (
@@ -547,8 +547,8 @@ export function TourInquiryPanel({
       openForm();
     }
 
-    window.addEventListener('benroso:open-tour-inquiry', handleOpenInquiry);
-    return () => window.removeEventListener('benroso:open-tour-inquiry', handleOpenInquiry);
+    window.addEventListener('brand:open-tour-inquiry', handleOpenInquiry);
+    return () => window.removeEventListener('brand:open-tour-inquiry', handleOpenInquiry);
   }, [openForm]);
 
   function handleToggleForm() {
@@ -564,35 +564,33 @@ export function TourInquiryPanel({
 
   return (
     <div className='space-y-4'>
-      <div className='benroso-contact-credentials-box'>
+      <div className='brand-contact-credentials-box'>
         {duration ? (
-          <p className='text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+          <p className='text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
             {duration}
           </p>
         ) : null}
         {price ? (
           <p className='mt-2'>
-            <span className='text-xs uppercase tracking-wide text-[var(--benroso-muted)]'>
+            <span className='text-xs uppercase tracking-wide text-[var(--brand-muted)]'>
               Price from
             </span>
-            <strong className='font-price block text-3xl text-[var(--benroso-brown)]'>
-              {price}
-            </strong>
+            <strong className='font-price block text-3xl text-[var(--brand-brown)]'>{price}</strong>
           </p>
         ) : (
-          <p className='font-display text-2xl text-[var(--benroso-brown)]'>Custom quote</p>
+          <p className='font-display text-2xl text-[var(--brand-brown)]'>Custom quote</p>
         )}
-        <p className='mt-4 text-sm leading-6 text-[var(--benroso-muted)]'>
+        <p className='mt-4 text-sm leading-6 text-[var(--brand-muted)]'>
           Request the exact quote for your dates, comfort level, and number of travelers.
         </p>
-        <div className='mt-5 benroso-dual-actions'>
+        <div className='mt-5 brand-dual-actions'>
           <button
             aria-expanded={showForm}
             className={cn(
-              'inline-flex items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors',
+              'inline-flex items-center justify-center gap-2 rounded-[var(--brand-button-radius)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors',
               showForm
-                ? 'border border-[var(--benroso-primary)] bg-[var(--benroso-primary)] text-white'
-                : 'border border-[var(--benroso-lime)] bg-[var(--benroso-lime)] text-[var(--benroso-primary-dark)] hover:border-[var(--benroso-lime-hover)] hover:bg-[var(--benroso-lime-hover)]'
+                ? 'border border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white'
+                : 'border border-[var(--brand-lime)] bg-[var(--brand-lime)] text-[var(--brand-primary-dark)] hover:border-[var(--brand-lime-hover)] hover:bg-[var(--brand-lime-hover)]'
             )}
             onClick={handleToggleForm}
             type='button'
@@ -603,7 +601,7 @@ export function TourInquiryPanel({
             />
           </button>
           <a
-            className='inline-flex items-center justify-center rounded-[var(--benroso-button-radius)] border border-[var(--benroso-line)] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-[var(--benroso-primary)] transition hover:bg-[var(--benroso-ivory)]'
+            className='inline-flex items-center justify-center rounded-[var(--brand-button-radius)] border border-[var(--brand-line)] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition hover:bg-[var(--brand-ivory)]'
             href='#price-seasons'
           >
             View Cost Tables
@@ -612,9 +610,9 @@ export function TourInquiryPanel({
       </div>
 
       {showForm ? (
-        <div className='benroso-contact-credentials-box' ref={formRef}>
-          <h3 className='benroso-heading font-display text-lg'>Plan this trip</h3>
-          <p className='mt-1 text-sm text-[var(--benroso-muted)]'>{tourTitle}</p>
+        <div className='brand-contact-credentials-box' ref={formRef}>
+          <h3 className='brand-heading font-display text-lg'>Plan this trip</h3>
+          <p className='mt-1 text-sm text-[var(--brand-muted)]'>{tourTitle}</p>
           <div className='mt-5'>
             <TourInquiryForm locale={locale} tourSlug={tourSlug} tourTitle={tourTitle} />
           </div>

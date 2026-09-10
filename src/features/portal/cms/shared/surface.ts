@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
  * Light-theme token scope for portaled CMS surfaces.
  *
  * Radix portals (dialog / select / popover content) mount on `document.body`,
- * which sits outside the portal layout's `data-theme="benroso"` wrapper, so
+ * which sits outside the portal layout's `data-theme="brand"` wrapper, so
  * they otherwise inherit the dark root theme. Applying this class re-scopes the
  * design tokens to the portal's white palette (and brand-green primary) so
  * dropdowns, dialogs, and comboboxes stay consistent — never the black look.

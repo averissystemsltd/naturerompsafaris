@@ -31,8 +31,8 @@ const inquirySchema = z.object({
   travelStartDate: z.string().optional()
 });
 
-const fieldClassName = 'benroso-contact-field mt-1.5';
-const labelClassName = 'block text-sm font-bold text-[var(--benroso-heading)]';
+const fieldClassName = 'brand-contact-field mt-1.5';
+const labelClassName = 'block text-sm font-bold text-[var(--brand-heading)]';
 
 function FormField({ children, label }: { children: React.ReactNode; label: string }) {
   return (
@@ -202,22 +202,22 @@ function DestinationInquiryForm({
             {(field) => (
               <div>
                 <span className={labelClassName}>Travellers *</span>
-                <div className='benroso-traveler-stepper mt-1.5'>
+                <div className='brand-traveler-stepper mt-1.5'>
                   <button
                     aria-label='Decrease travellers'
-                    className='benroso-traveler-stepper-btn'
+                    className='brand-traveler-stepper-btn'
                     disabled={field.state.value <= 1}
                     onClick={() => field.handleChange(Math.max(1, field.state.value - 1))}
                     type='button'
                   >
                     <Icons.minus className='h-4 w-4' />
                   </button>
-                  <span aria-live='polite' className='benroso-traveler-stepper-value'>
+                  <span aria-live='polite' className='brand-traveler-stepper-value'>
                     {field.state.value}
                   </span>
                   <button
                     aria-label='Increase travellers'
-                    className='benroso-traveler-stepper-btn'
+                    className='brand-traveler-stepper-btn'
                     onClick={() => field.handleChange(field.state.value + 1)}
                     type='button'
                   >
@@ -249,16 +249,16 @@ function DestinationInquiryForm({
           <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
           <form.SubmitButton
             className={cn(
-              'w-full min-h-11 rounded-[var(--benroso-button-radius)] text-sm font-semibold uppercase tracking-[0.08em] shadow-none',
-              '!border-[var(--benroso-lime)] !bg-[var(--benroso-lime)] !text-[var(--benroso-primary-dark)]',
-              'hover:!border-[var(--benroso-lime-hover)] hover:!bg-[var(--benroso-lime-hover)] hover:!text-[var(--benroso-primary-dark)]'
+              'w-full min-h-11 rounded-[var(--brand-button-radius)] text-sm font-semibold uppercase tracking-[0.08em] shadow-none',
+              '!border-[var(--brand-lime)] !bg-[var(--brand-lime)] !text-[var(--brand-primary-dark)]',
+              'hover:!border-[var(--brand-lime-hover)] hover:!bg-[var(--brand-lime-hover)] hover:!text-[var(--brand-primary-dark)]'
             )}
             disabled={mutation.isPending || !turnstile.canSubmit}
             variant='outline'
           >
             {mutation.isPending ? 'Sending...' : 'Send Enquiry'}
           </form.SubmitButton>
-          <p className='text-xs text-[var(--benroso-muted)]'>
+          <p className='text-xs text-[var(--brand-muted)]'>
             No payment is collected here. We aim to respond within 24 hours.
           </p>
           {submitStatus === 'error' ? (
@@ -292,21 +292,21 @@ export function DestinationInquiryPanel(props: DestinationInquiryPanelProps) {
 
   return (
     <div className='space-y-4'>
-      <div className='benroso-contact-credentials-box'>
-        <p className='text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+      <div className='brand-contact-credentials-box'>
+        <p className='text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
           Plan your trip
         </p>
-        <p className='mt-1 font-display text-2xl text-[var(--benroso-brown)]'>
+        <p className='mt-1 font-display text-2xl text-[var(--brand-brown)]'>
           Visit {props.destinationName}
         </p>
-        <p className='mt-2 text-sm leading-6 text-[var(--benroso-muted)]'>
+        <p className='mt-2 text-sm leading-6 text-[var(--brand-muted)]'>
           Tell us your dates and group size and our safari experts will build a tailor-made
           itinerary for this destination.
         </p>
         <div className='mt-6'>
           <button
             aria-expanded={showForm}
-            className='benroso-fill-hover inline-flex w-full items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] border border-[var(--benroso-primary)] bg-[var(--benroso-primary)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors duration-200'
+            className='brand-fill-hover inline-flex w-full items-center justify-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-primary)] bg-[var(--brand-primary)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors duration-200'
             onClick={handleToggleForm}
             type='button'
           >
@@ -319,11 +319,11 @@ export function DestinationInquiryPanel(props: DestinationInquiryPanelProps) {
       </div>
 
       {showForm ? (
-        <div className='benroso-contact-credentials-box' ref={formRef}>
-          <h2 className='benroso-heading font-display text-lg'>Start your enquiry</h2>
-          <p className='mt-1 text-sm text-[var(--benroso-muted)]'>
+        <div className='brand-contact-credentials-box' ref={formRef}>
+          <h2 className='brand-heading font-display text-lg'>Start your enquiry</h2>
+          <p className='mt-1 text-sm text-[var(--brand-muted)]'>
             Enquiring about{' '}
-            <strong className='text-[var(--benroso-ink)]'>{props.destinationName}</strong>
+            <strong className='text-[var(--brand-ink)]'>{props.destinationName}</strong>
           </p>
           <div className='mt-5'>
             <DestinationInquiryForm {...props} />

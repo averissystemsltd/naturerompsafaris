@@ -40,14 +40,14 @@ export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
 
   return (
     <div>
-      <h3 className='benroso-footer-heading'>Safari Inspiration</h3>
+      <h3 className='brand-footer-heading'>Safari Inspiration</h3>
       <p className='max-w-sm text-sm leading-6 text-white/75'>
         Join our newsletter for safari deals, travel tips, and the best times to visit East Africa.
       </p>
 
       {submitted ? (
         <p className='mt-4 inline-flex items-center gap-2 text-sm text-white'>
-          <Icons.circleCheck className='h-4 w-4 text-[var(--benroso-lime)]' />
+          <Icons.circleCheck className='h-4 w-4 text-[var(--brand-lime)]' />
           Thank you. Safari inspiration is on its way.
         </p>
       ) : (
@@ -56,7 +56,7 @@ export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
             Your name
           </label>
           <input
-            className='min-h-11 rounded-[var(--benroso-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--benroso-primary-dark)] placeholder:text-[var(--benroso-primary-dark)]/45 focus:border-[var(--benroso-lime)] focus:outline-none'
+            className='min-h-11 rounded-[var(--brand-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--brand-primary-dark)] placeholder:text-[var(--brand-primary-dark)]/45 focus:border-[var(--brand-lime)] focus:outline-none'
             id='footer-newsletter-name'
             name='name'
             placeholder='Your name'
@@ -67,7 +67,7 @@ export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
           </label>
           <div className='flex flex-col gap-3 sm:flex-row'>
             <input
-              className='min-h-11 flex-1 rounded-[var(--benroso-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--benroso-primary-dark)] placeholder:text-[var(--benroso-primary-dark)]/45 focus:border-[var(--benroso-lime)] focus:outline-none'
+              className='min-h-11 flex-1 rounded-[var(--brand-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--brand-primary-dark)] placeholder:text-[var(--brand-primary-dark)]/45 focus:border-[var(--brand-lime)] focus:outline-none'
               id='footer-newsletter-email'
               name='email'
               placeholder='Your email address'
@@ -75,7 +75,7 @@ export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
               type='email'
             />
             <button
-              className='inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] bg-[var(--benroso-lime)] px-5 text-sm font-bold uppercase tracking-[0.06em] text-[var(--benroso-primary-dark)] transition-colors hover:bg-[var(--benroso-lime-hover)] disabled:cursor-not-allowed disabled:opacity-70'
+              className='inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[var(--brand-button-radius)] bg-[var(--brand-lime)] px-5 text-sm font-bold uppercase tracking-[0.06em] text-[var(--brand-primary-dark)] transition-colors hover:bg-[var(--brand-lime-hover)] disabled:cursor-not-allowed disabled:opacity-70'
               disabled={isPending}
               type='submit'
             >

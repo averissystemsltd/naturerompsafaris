@@ -198,7 +198,7 @@ export function PortalLoginForm() {
         </div>
 
         <p className='mt-6 text-center text-[13px] leading-relaxed text-[#9CA3AF]'>
-          Benroso Safaris team portal. Access is limited to approved staff accounts.
+          Nature Romp Safaris team portal. Access is limited to approved staff accounts.
         </p>
       </div>
     </PortalAuthShell>

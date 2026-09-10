@@ -1,12 +1,12 @@
-import { BENROSO_FAVICON_PATH } from '@/config/benroso';
+import { BRAND_FAVICON_PATH } from '@/config/brand';
 
 export function resolveSiteFaviconUrl(faviconUrl: string | null | undefined): string {
-  return faviconUrl?.trim() || BENROSO_FAVICON_PATH;
+  return faviconUrl?.trim() || BRAND_FAVICON_PATH;
 }
 
 export function resolveAbsoluteSiteFaviconUrl(
   faviconUrl: string | null | undefined,
-  siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://benrososafaris.com'
+  siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com'
 ): string {
   const resolved = resolveSiteFaviconUrl(faviconUrl);
   if (resolved.startsWith('http://') || resolved.startsWith('https://')) {

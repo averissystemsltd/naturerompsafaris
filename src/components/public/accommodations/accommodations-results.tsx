@@ -22,11 +22,11 @@ export function AccommodationsResults({ accommodations, locale }: Accommodations
   if (!accommodations.length) {
     return (
       <>
-        <p className='mb-6 text-sm font-medium text-[var(--benroso-muted)]'>{countLabel}</p>
+        <p className='mb-6 text-sm font-medium text-[var(--brand-muted)]'>{countLabel}</p>
         <EmptyState
           actionHref={localePath(locale, '/contact')}
           actionLabel='Request a custom quote'
-          message='Published accommodations will appear here once they are added through the Benroso CMS.'
+          message='Published accommodations will appear here once they are added through the Nature Romp CMS.'
           title='No properties match your filters'
         />
       </>
@@ -36,7 +36,7 @@ export function AccommodationsResults({ accommodations, locale }: Accommodations
   return (
     <>
       <div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
-        <p className='text-sm font-medium text-[var(--benroso-muted)]'>{countLabel}</p>
+        <p className='text-sm font-medium text-[var(--brand-muted)]'>{countLabel}</p>
         <AccommodationViewToggle />
       </div>
 

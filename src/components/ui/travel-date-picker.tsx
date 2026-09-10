@@ -118,14 +118,12 @@ export function TravelDateCarousel({
   }
 
   return (
-    <div
-      className={cn('benroso-travel-date-field', isCompact && 'benroso-travel-date-field--compact')}
-    >
-      <div className='benroso-travel-date-field-header'>
-        <p className='benroso-travel-date-label'>{label}</p>
+    <div className={cn('brand-travel-date-field', isCompact && 'brand-travel-date-field--compact')}>
+      <div className='brand-travel-date-field-header'>
+        <p className='brand-travel-date-label'>{label}</p>
         {!isCompact ? (
           <button
-            className='benroso-travel-date-show-more'
+            className='brand-travel-date-show-more'
             onClick={() => (showCalendar ? closeCalendar() : openCalendar())}
             type='button'
           >
@@ -135,10 +133,10 @@ export function TravelDateCarousel({
       </div>
 
       {!isCompact && !showCalendar ? (
-        <div className='benroso-travel-date-carousel-wrap'>
+        <div className='brand-travel-date-carousel-wrap'>
           <button
             aria-label='Show earlier dates'
-            className='benroso-travel-date-nav'
+            className='brand-travel-date-nav'
             disabled={!canGoPrev}
             onClick={handlePrevious}
             type='button'
@@ -146,7 +144,7 @@ export function TravelDateCarousel({
             <Icons.chevronLeft className='h-4 w-4' />
           </button>
 
-          <div className='benroso-travel-date-carousel'>
+          <div className='brand-travel-date-carousel'>
             {visibleDates.map((date) => {
               const iso = toIsoDate(date);
               const isSelected = value === iso;
@@ -155,33 +153,33 @@ export function TravelDateCarousel({
               return (
                 <button
                   className={cn(
-                    'benroso-travel-date-card',
-                    isSelected && 'benroso-travel-date-card--selected'
+                    'brand-travel-date-card',
+                    isSelected && 'brand-travel-date-card--selected'
                   )}
                   key={iso}
                   onClick={() => selectDate(date)}
                   type='button'
                 >
-                  <span className='benroso-travel-date-card-weekday'>
+                  <span className='brand-travel-date-card-weekday'>
                     {date.toLocaleDateString('en-US', { weekday: 'short' })}
                   </span>
-                  <span className='benroso-travel-date-card-day'>{date.getDate()}</span>
-                  <span className='benroso-travel-date-card-month'>
+                  <span className='brand-travel-date-card-day'>{date.getDate()}</span>
+                  <span className='brand-travel-date-card-month'>
                     {date.toLocaleDateString('en-US', { month: 'short' })}
                   </span>
                   {contextLabel ? (
-                    <span className='benroso-travel-date-card-badge'>{contextLabel}</span>
+                    <span className='brand-travel-date-card-badge'>{contextLabel}</span>
                   ) : null}
                 </button>
               );
             })}
 
             <button
-              className='benroso-travel-date-card benroso-travel-date-card--more'
+              className='brand-travel-date-card brand-travel-date-card--more'
               onClick={openCalendar}
               type='button'
             >
-              <Icons.calendar className='benroso-travel-date-card-more-icon' />
+              <Icons.calendar className='brand-travel-date-card-more-icon' />
               <span>Show more dates</span>
             </button>
           </div>
@@ -189,8 +187,8 @@ export function TravelDateCarousel({
           <button
             aria-label={atSliderEnd ? 'Open calendar for more dates' : 'Show later dates'}
             className={cn(
-              'benroso-travel-date-nav',
-              atSliderEnd && 'benroso-travel-date-nav--calendar'
+              'brand-travel-date-nav',
+              atSliderEnd && 'brand-travel-date-nav--calendar'
             )}
             onClick={handleNext}
             type='button'
@@ -201,7 +199,7 @@ export function TravelDateCarousel({
       ) : null}
 
       {showCalendar ? (
-        <div className='benroso-travel-date-calendar'>
+        <div className='brand-travel-date-calendar'>
           <TravelDateCalendar
             defaultMonth={selectedDate ?? minDate}
             maxDate={maxDate}
@@ -251,8 +249,8 @@ export function TravelDatePicker({
   return (
     <div
       className={cn(
-        'benroso-travel-date-picker',
-        isCompact && 'benroso-travel-date-picker--compact',
+        'brand-travel-date-picker',
+        isCompact && 'brand-travel-date-picker--compact',
         className
       )}
     >
@@ -275,12 +273,12 @@ export function TravelDatePicker({
           variant={variant}
         />
       ) : (
-        <p className='benroso-travel-date-helper'>
+        <p className='brand-travel-date-helper'>
           Select a start date to choose when your journey ends.
         </p>
       )}
 
-      <p className='benroso-travel-date-flex-note'>+/- 3 days flexibility is okay.</p>
+      <p className='brand-travel-date-flex-note'>+/- 3 days flexibility is okay.</p>
     </div>
   );
 }

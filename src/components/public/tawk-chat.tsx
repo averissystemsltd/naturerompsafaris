@@ -2,7 +2,7 @@
 
 import Script from 'next/script';
 
-import { BENROSO_TAWK } from '@/config/benroso';
+import { BRAND_TAWK } from '@/config/brand';
 
 /**
  * Tawk.to live-chat widget, loaded on the public site only. Renders nothing when
@@ -10,7 +10,7 @@ import { BENROSO_TAWK } from '@/config/benroso';
  * sits opposite the floating WhatsApp button (bottom-right).
  */
 export function TawkChat() {
-  const { propertyId, widgetId } = BENROSO_TAWK;
+  const { propertyId, widgetId } = BRAND_TAWK;
 
   if (!propertyId || !widgetId) return null;
 

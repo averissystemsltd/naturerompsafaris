@@ -23,8 +23,8 @@ function TocLink({ isActive, onNavigate, section }: TocLinkProps) {
       className={cn(
         'block text-sm leading-snug transition-colors',
         isActive
-          ? 'font-semibold text-[var(--benroso-primary)]'
-          : 'text-[var(--benroso-muted)] hover:text-[var(--benroso-accent)] hover:underline'
+          ? 'font-semibold text-[var(--brand-primary)]'
+          : 'text-[var(--brand-muted)] hover:text-[var(--brand-accent)] hover:underline'
       )}
       href={`#${section.id}`}
       onClick={onNavigate}
@@ -53,7 +53,7 @@ function TocList({ activeId, onNavigate, sections }: TocListProps) {
 }
 
 const tocCardClasses =
-  'rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-5';
+  'rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-5';
 
 export function LegalDocumentToc({ sections }: LegalDocumentTocProps) {
   const [activeId, setActiveId] = useState<string | null>(sections[0]?.id ?? null);
@@ -92,13 +92,13 @@ export function LegalDocumentToc({ sections }: LegalDocumentTocProps) {
       <Collapsible className='lg:hidden' onOpenChange={setMobileOpen} open={mobileOpen}>
         <div className={tocCardClasses}>
           <CollapsibleTrigger className='flex w-full items-center justify-between gap-3 text-left'>
-            <span className='benroso-heading text-sm font-semibold uppercase tracking-[0.12em]'>
+            <span className='brand-heading text-sm font-semibold uppercase tracking-[0.12em]'>
               On this page
             </span>
             <Icons.chevronDown
               aria-hidden
               className={cn(
-                'h-4 w-4 shrink-0 text-[var(--benroso-muted)] transition-transform duration-200',
+                'h-4 w-4 shrink-0 text-[var(--brand-muted)] transition-transform duration-200',
                 mobileOpen && 'rotate-180'
               )}
             />
@@ -116,11 +116,11 @@ export function LegalDocumentToc({ sections }: LegalDocumentTocProps) {
       <nav
         aria-label='On this page'
         className={cn(
-          'hidden h-fit lg:block lg:sticky lg:top-[calc(var(--benroso-topbar-h)+var(--benroso-header-h)+1rem)]',
+          'hidden h-fit lg:block lg:sticky lg:top-[calc(var(--brand-topbar-h)+var(--brand-header-h)+1rem)]',
           tocCardClasses
         )}
       >
-        <h2 className='benroso-heading text-sm font-semibold uppercase tracking-[0.12em]'>
+        <h2 className='brand-heading text-sm font-semibold uppercase tracking-[0.12em]'>
           On this page
         </h2>
         <div className='mt-3'>

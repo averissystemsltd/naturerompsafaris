@@ -31,7 +31,7 @@
   }
 
   body,
-  [data-theme='benroso'] {
+  [data-theme='brand'] {
     background: white !important;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;

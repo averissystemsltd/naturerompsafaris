@@ -6,12 +6,12 @@ import {
   ListingFilters,
   toggleFilterValue
 } from '@/components/public/listing-filters';
-import { BENROSO_OPERATING_COUNTRIES } from '@/features/experiences/public/country-map-copy';
+import { BRAND_OPERATING_COUNTRIES } from '@/features/experiences/public/country-map-copy';
 import type {
   ExperienceListingFiltersState,
   ExperienceMenuGroup
 } from '@/features/experiences/public/filters';
-import type { BenrosoCountryId } from '@/features/experiences/public/country-map-copy';
+import type { BrandCountryId } from '@/features/experiences/public/country-map-copy';
 
 type ExperienceListingFiltersProps = {
   active: ExperienceListingFiltersState;
@@ -55,7 +55,7 @@ export function ExperienceListingFilters({ active, onChange }: ExperienceListing
       </ListingFilterGroup>
 
       <ListingFilterGroup title='Country'>
-        {BENROSO_OPERATING_COUNTRIES.map((country) => (
+        {BRAND_OPERATING_COUNTRIES.map((country) => (
           <ListingFilterOption
             checked={active.countries.includes(country.id)}
             id={`filter-country-${country.id}`}
@@ -63,7 +63,7 @@ export function ExperienceListingFilters({ active, onChange }: ExperienceListing
             label={country.name}
             onChange={() =>
               update({
-                countries: toggleFilterValue(active.countries, country.id) as BenrosoCountryId[]
+                countries: toggleFilterValue(active.countries, country.id) as BrandCountryId[]
               })
             }
           />

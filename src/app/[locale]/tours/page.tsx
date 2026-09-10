@@ -4,7 +4,7 @@ import { TourCard } from '@/components/public/cards/content-cards';
 import { TourCatalogFilters } from '@/components/public/tours/tour-catalog-filters';
 import { EmptyState, ListingShell } from '@/components/public/page-shell';
 import { PublicPageHero } from '@/components/public/public-page-hero';
-import { BENROSO_PUBLIC_HERO_IMAGES } from '@/config/benroso';
+import { BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 import { getPageHero, getPublicTourCatalog } from '@/lib/public/site-data';
 import { TOUR_CATALOG_COUNTRIES } from '@/lib/public/tour-format';
@@ -13,7 +13,7 @@ import { buildListingPageMetadata, hasSearchParams } from '@/lib/seo/listing-met
 
 const toursPageTitle = 'Safari Tours & Itineraries';
 const toursPageDescription =
-  'Find the safari that fits you. Benroso Safaris brings together expert-led tours across Kenya, Tanzania, Uganda, Rwanda, and South Africa, so you can compare trip lengths, prices, and routes at your own pace.';
+  'Find the safari that fits you. Nature Romp Safaris brings together expert-led tours across Kenya, Tanzania, Uganda, Rwanda, and South Africa, so you can compare trip lengths, prices, and routes at your own pace.';
 
 type ToursPageProps = {
   params: Promise<{ locale: string }>;
@@ -103,7 +103,7 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
     }),
     getPageHero('tours')
   ]);
-  const hero = BENROSO_PUBLIC_HERO_IMAGES.tours;
+  const hero = BRAND_PUBLIC_HERO_IMAGES.tours;
 
   return (
     <>
@@ -121,8 +121,8 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
         filters={<TourCatalogFilters active={activeFilters} facets={facets} locale={locale} />}
       >
         <div className='mb-6 flex items-baseline justify-between gap-3'>
-          <h2 className='benroso-heading font-display text-2xl'>Safari Tours</h2>
-          <span className='text-sm text-[var(--benroso-muted)]'>
+          <h2 className='brand-heading font-display text-2xl'>Safari Tours</h2>
+          <span className='text-sm text-[var(--brand-muted)]'>
             {tours.length} {tours.length === 1 ? 'tour' : 'tours'} found
           </span>
         </div>
@@ -151,7 +151,7 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
             message={
               hasSearchParams(query)
                 ? 'No tours match these filters. Widen the duration or price range, or clear filters to see all safaris.'
-                : 'Published tours will appear here once they are added through the Benroso CMS.'
+                : 'Published tours will appear here once they are added through the Nature Romp CMS.'
             }
             title={hasSearchParams(query) ? 'No tours match' : 'No tours published yet'}
           />

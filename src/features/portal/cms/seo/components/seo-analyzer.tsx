@@ -43,7 +43,7 @@ export function SeoAnalyzer({ input, className }: SeoAnalyzerProps) {
           SEO Readiness
         </p>
         <p className='text-muted-foreground mt-1 text-[11px] leading-snug'>
-          Same-site links (paths or benrososafaris.com) count as internal — not outbound.
+          Same-site links (paths or naturerompsafaris.com) count as internal — not outbound.
         </p>
       </div>
 

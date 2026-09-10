@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 
 import { Icons } from '@/components/icons';
 import { FaqSection } from '@/components/public/faq-section';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
-import { BENROSO_PUBLIC_HERO_IMAGES } from '@/config/benroso';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
+import { BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import { getFleetVehicleBySlug } from '@/lib/public/fleet';
 import { localePath } from '@/lib/public/locale-path';
 import { absoluteUrl, buildAlternates, buildFaqJsonLd } from '@/lib/seo';
@@ -21,11 +21,11 @@ export async function generateMetadata({ params }: FleetVehiclePageProps): Promi
   if (!vehicle) notFound();
 
   const canonical = absoluteUrl(`/${locale}/our-fleet/${vehicle.slug}`);
-  const title = vehicle.seoTitle || `${vehicle.title} | Safari Fleet | Benroso Safaris`;
+  const title = vehicle.seoTitle || `${vehicle.title} | Safari Fleet | Nature Romp Safaris`;
   const description =
     vehicle.seoDescription ||
     vehicle.summary ||
-    'Explore Benroso Safaris vehicle details, comfort features, and private safari support.';
+    'Explore Nature Romp Safaris vehicle details, comfort features, and private safari support.';
 
   return {
     title,
@@ -54,7 +54,7 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
   const vehicle = await getFleetVehicleBySlug(locale, slug);
   if (!vehicle) notFound();
 
-  const heroFallback = BENROSO_PUBLIC_HERO_IMAGES.fleet;
+  const heroFallback = BRAND_PUBLIC_HERO_IMAGES.fleet;
   const heroImage = vehicle.imageUrl ?? heroFallback.imageUrl;
   const heroAlt = vehicle.imageAlt ?? heroFallback.imageAlt;
   const faqJsonLd = buildFaqJsonLd(vehicle.faqs);
@@ -75,14 +75,14 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
         />
       ) : null}
 
-      <section className='relative isolate flex min-h-[clamp(380px,54vh,580px)] items-center overflow-hidden bg-[var(--benroso-primary-dark)] text-white'>
+      <section className='relative isolate flex min-h-[clamp(380px,54vh,580px)] items-center overflow-hidden bg-[var(--brand-primary-dark)] text-white'>
         <Image alt={heroAlt} className='object-cover' fill priority sizes='100vw' src={heroImage} />
         <div aria-hidden className='absolute inset-0 bg-black/55' />
         <div
           aria-hidden
           className='absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent'
         />
-        <div className='benroso-container relative z-10 py-12'>
+        <div className='brand-container relative z-10 py-12'>
           <nav
             aria-label='Breadcrumb'
             className='mb-8 flex flex-wrap items-center justify-center gap-x-3 text-sm font-semibold uppercase tracking-[0.14em] text-white/75'
@@ -101,13 +101,13 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
             </a>
           </nav>
           <div className='mx-auto max-w-3xl text-center'>
-            <p className='text-xs font-bold uppercase tracking-[0.2em] text-[var(--benroso-lime)]'>
+            <p className='text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-lime)]'>
               {vehicle.vehicleType || 'Safari Vehicle'}
             </p>
             <h1 className='mt-4 font-display text-[clamp(2.35rem,5vw,4rem)] leading-[1.08] text-white'>
               {vehicle.title}
             </h1>
-            <span aria-hidden className='benroso-gold-line mt-5' />
+            <span aria-hidden className='brand-gold-line mt-5' />
             {vehicle.summary ? (
               <p className='mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/88'>
                 {vehicle.summary}
@@ -117,24 +117,24 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
         </div>
       </section>
 
-      <section className='border-b border-[var(--benroso-line)] bg-white'>
-        <div className='benroso-container py-8'>
+      <section className='border-b border-[var(--brand-line)] bg-white'>
+        <div className='brand-container py-8'>
           <div className='grid gap-4 md:grid-cols-3'>
             {highlights.length ? (
               highlights.map((item) => (
                 <div
-                  className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-5'
+                  className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-5'
                   key={item.label}
                 >
-                  <p className='text-xs font-bold uppercase tracking-[0.14em] text-[var(--benroso-muted)]'>
+                  <p className='text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-muted)]'>
                     {item.label}
                   </p>
-                  <p className='benroso-heading mt-2 font-display text-2xl'>{item.value}</p>
+                  <p className='brand-heading mt-2 font-display text-2xl'>{item.value}</p>
                 </div>
               ))
             ) : (
-              <div className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-5 md:col-span-3'>
-                <p className='benroso-body text-[var(--benroso-muted)]'>
+              <div className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-5 md:col-span-3'>
+                <p className='brand-body text-[var(--brand-muted)]'>
                   Vehicle facts will appear here once capacity and feature details are added in the
                   portal.
                 </p>
@@ -144,23 +144,23 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
         </div>
       </section>
 
-      <section className='benroso-section bg-white'>
-        <div className='benroso-container grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start'>
+      <section className='brand-section bg-white'>
+        <div className='brand-container grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start'>
           <article className='min-w-0'>
-            <p className='benroso-eyebrow'>Fleet Detail</p>
-            <h2 className='benroso-heading mt-3 font-display text-[clamp(1.9rem,3.5vw,2.75rem)] leading-tight'>
+            <p className='brand-eyebrow'>Fleet Detail</p>
+            <h2 className='brand-heading mt-3 font-display text-[clamp(1.9rem,3.5vw,2.75rem)] leading-tight'>
               Built for comfortable safari days
             </h2>
 
             {vehicle.descriptionHtml ? (
               <div
-                className='benroso-legal-prose mt-7 max-w-3xl'
+                className='brand-legal-prose mt-7 max-w-3xl'
                 dangerouslySetInnerHTML={{ __html: vehicle.descriptionHtml }}
               />
             ) : vehicle.summary ? (
-              <p className='benroso-body mt-7 max-w-3xl text-base leading-8'>{vehicle.summary}</p>
+              <p className='brand-body mt-7 max-w-3xl text-base leading-8'>{vehicle.summary}</p>
             ) : (
-              <p className='benroso-body mt-7 max-w-3xl text-base leading-8 text-[var(--benroso-muted)]'>
+              <p className='brand-body mt-7 max-w-3xl text-base leading-8 text-[var(--brand-muted)]'>
                 Add a public description in the portal to describe this vehicle's comfort,
                 photography setup, luggage space, and route suitability.
               </p>
@@ -168,14 +168,14 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
 
             {vehicle.features.length ? (
               <div className='mt-10'>
-                <h3 className='benroso-heading font-display text-2xl'>Vehicle Features</h3>
+                <h3 className='brand-heading font-display text-2xl'>Vehicle Features</h3>
                 <ul className='mt-5 grid gap-3 sm:grid-cols-2'>
                   {vehicle.features.map((feature) => (
                     <li
-                      className='flex items-start gap-3 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-4 text-sm leading-6 text-[var(--benroso-ink)]'
+                      className='flex items-start gap-3 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-4 text-sm leading-6 text-[var(--brand-ink)]'
                       key={feature}
                     >
-                      <Icons.check className='mt-0.5 size-4 shrink-0 text-[var(--benroso-primary)]' />
+                      <Icons.check className='mt-0.5 size-4 shrink-0 text-[var(--brand-primary)]' />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -185,11 +185,11 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
 
             {vehicle.gallery.length > 1 ? (
               <div className='mt-12'>
-                <h3 className='benroso-heading font-display text-2xl'>Gallery</h3>
+                <h3 className='brand-heading font-display text-2xl'>Gallery</h3>
                 <div className='mt-5 grid gap-4 sm:grid-cols-2'>
                   {vehicle.gallery.map((image) => (
                     <div
-                      className='relative aspect-[4/3] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-primary)]'
+                      className='relative aspect-[4/3] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-primary)]'
                       key={image.id}
                     >
                       {image.url ? (
@@ -208,7 +208,7 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
             ) : null}
           </article>
 
-          <aside className='sticky top-[calc(var(--benroso-topbar-h)+var(--benroso-header-h)+1rem)] rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-primary-dark)] p-6 text-white'>
+          <aside className='sticky top-[calc(var(--brand-topbar-h)+var(--brand-header-h)+1rem)] rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-primary-dark)] p-6 text-white'>
             <p className='text-xs font-bold uppercase tracking-[0.16em] text-white/60'>
               Plan With This Vehicle
             </p>
@@ -217,18 +217,18 @@ export default async function FleetVehicleDetailPage({ params }: FleetVehiclePag
               Share your route, dates, group size, and comfort expectations. Our team will confirm
               the best vehicle match for the safari.
             </p>
-            <BenrosoButtonGroup className='mt-6'>
-              <BenrosoButton href={localePath(locale, '/contact')} variant='gold'>
+            <BrandButtonGroup className='mt-6'>
+              <BrandButton href={localePath(locale, '/contact')} variant='gold'>
                 Enquire Now
-              </BenrosoButton>
-              <BenrosoButton
+              </BrandButton>
+              <BrandButton
                 className='border-white/35'
                 href={localePath(locale, '/tours')}
                 variant='gold-outline'
               >
                 View Safari Tours
-              </BenrosoButton>
-            </BenrosoButtonGroup>
+              </BrandButton>
+            </BrandButtonGroup>
           </aside>
         </div>
       </section>

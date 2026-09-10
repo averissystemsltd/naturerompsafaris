@@ -39,8 +39,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
         title='Request a Free Safari Quote!'
       />
 
-      <section className='bg-[var(--benroso-contact-body-bg)]'>
-        <div className='benroso-container benroso-section'>
+      <section className='bg-[var(--brand-contact-body-bg)]'>
+        <div className='brand-container brand-section'>
           <ContactFormSection locale={locale} siteSettings={siteSettings} />
         </div>
       </section>

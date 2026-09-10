@@ -33,9 +33,9 @@ const inquirySchema = z.object({
   travelStartDate: z.string().min(1, 'Select a check-in date')
 });
 
-const fieldClassName = 'benroso-contact-field mt-1.5';
+const fieldClassName = 'brand-contact-field mt-1.5';
 
-const labelClassName = 'block text-sm font-bold text-[var(--benroso-heading)]';
+const labelClassName = 'block text-sm font-bold text-[var(--brand-heading)]';
 
 function FormField({
   children,
@@ -70,10 +70,10 @@ function GuestStepper({
   return (
     <div>
       <span className={labelClassName}>{label}</span>
-      <div className='benroso-traveler-stepper mt-1.5'>
+      <div className='brand-traveler-stepper mt-1.5'>
         <button
           aria-label={`Decrease ${label}`}
-          className='benroso-traveler-stepper-btn'
+          className='brand-traveler-stepper-btn'
           disabled={value <= min}
           onBlur={onBlur}
           onClick={() => onChange(Math.max(min, value - 1))}
@@ -81,12 +81,12 @@ function GuestStepper({
         >
           <Icons.minus className='h-4 w-4' />
         </button>
-        <span aria-live='polite' className='benroso-traveler-stepper-value'>
+        <span aria-live='polite' className='brand-traveler-stepper-value'>
           {value}
         </span>
         <button
           aria-label={`Increase ${label}`}
-          className='benroso-traveler-stepper-btn'
+          className='brand-traveler-stepper-btn'
           onBlur={onBlur}
           onClick={() => onChange(value + 1)}
           type='button'
@@ -316,16 +316,16 @@ function AccommodationInquiryForm({
           <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
           <form.SubmitButton
             className={cn(
-              'w-full min-h-11 rounded-[var(--benroso-button-radius)] text-sm font-semibold uppercase tracking-[0.08em] shadow-none',
-              '!border-[var(--benroso-lime)] !bg-[var(--benroso-lime)] !text-[var(--benroso-primary-dark)]',
-              'hover:!border-[var(--benroso-lime-hover)] hover:!bg-[var(--benroso-lime-hover)] hover:!text-[var(--benroso-primary-dark)]'
+              'w-full min-h-11 rounded-[var(--brand-button-radius)] text-sm font-semibold uppercase tracking-[0.08em] shadow-none',
+              '!border-[var(--brand-lime)] !bg-[var(--brand-lime)] !text-[var(--brand-primary-dark)]',
+              'hover:!border-[var(--brand-lime-hover)] hover:!bg-[var(--brand-lime-hover)] hover:!text-[var(--brand-primary-dark)]'
             )}
             disabled={mutation.isPending || !turnstile.canSubmit}
             variant='outline'
           >
             {mutation.isPending ? 'Sending...' : 'Send Enquiry'}
           </form.SubmitButton>
-          <p className='text-xs text-[var(--benroso-muted)]'>
+          <p className='text-xs text-[var(--brand-muted)]'>
             No payment is collected here. We aim to respond within 24 hours.
           </p>
           {submitStatus === 'error' ? (
@@ -365,21 +365,21 @@ export function AccommodationInquiryPanel({
 
   return (
     <div className='space-y-4'>
-      <div className='benroso-contact-credentials-box'>
+      <div className='brand-contact-credentials-box'>
         {price ? (
           <div>
-            <p className='text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+            <p className='text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
               From
             </p>
-            <p className='mt-1 font-price text-3xl text-[var(--benroso-brown)]'>{price}</p>
-            <p className='text-sm text-[var(--benroso-muted)]'>per night (USD)</p>
+            <p className='mt-1 font-price text-3xl text-[var(--brand-brown)]'>{price}</p>
+            <p className='text-sm text-[var(--brand-muted)]'>per night (USD)</p>
           </div>
         ) : (
-          <p className='font-display text-2xl text-[var(--benroso-brown)]'>Price on request</p>
+          <p className='font-display text-2xl text-[var(--brand-brown)]'>Price on request</p>
         )}
 
-        <p className='mt-4 text-sm font-semibold text-[var(--benroso-ink)]'>{availabilityLabel}</p>
-        <p className='mt-2 text-sm leading-6 text-[var(--benroso-muted)]'>
+        <p className='mt-4 text-sm font-semibold text-[var(--brand-ink)]'>{availabilityLabel}</p>
+        <p className='mt-2 text-sm leading-6 text-[var(--brand-muted)]'>
           No payment is taken here. Our team will confirm availability and rates for your dates.
         </p>
 
@@ -387,10 +387,10 @@ export function AccommodationInquiryPanel({
           <button
             aria-expanded={showForm}
             className={cn(
-              'inline-flex w-full items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors',
+              'inline-flex w-full items-center justify-center gap-2 rounded-[var(--brand-button-radius)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors',
               showForm
-                ? 'border border-[var(--benroso-primary)] bg-[var(--benroso-primary)] text-white hover:border-[var(--benroso-primary-dark)] hover:bg-[var(--benroso-primary-dark)]'
-                : 'border border-[var(--benroso-lime)] bg-[var(--benroso-lime)] text-[var(--benroso-primary-dark)] hover:border-[var(--benroso-lime-hover)] hover:bg-[var(--benroso-lime-hover)]'
+                ? 'border border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white hover:border-[var(--brand-primary-dark)] hover:bg-[var(--brand-primary-dark)]'
+                : 'border border-[var(--brand-lime)] bg-[var(--brand-lime)] text-[var(--brand-primary-dark)] hover:border-[var(--brand-lime-hover)] hover:bg-[var(--brand-lime-hover)]'
             )}
             onClick={handleToggleForm}
             type='button'
@@ -404,11 +404,10 @@ export function AccommodationInquiryPanel({
       </div>
 
       {showForm ? (
-        <div className='benroso-contact-credentials-box' ref={formRef}>
-          <h2 className='benroso-heading font-display text-lg'>Check availability</h2>
-          <p className='mt-1 text-sm text-[var(--benroso-muted)]'>
-            Enquiring about{' '}
-            <strong className='text-[var(--benroso-ink)]'>{accommodationName}</strong>
+        <div className='brand-contact-credentials-box' ref={formRef}>
+          <h2 className='brand-heading font-display text-lg'>Check availability</h2>
+          <p className='mt-1 text-sm text-[var(--brand-muted)]'>
+            Enquiring about <strong className='text-[var(--brand-ink)]'>{accommodationName}</strong>
           </p>
           <div className='mt-5'>
             <AccommodationInquiryForm

@@ -54,8 +54,8 @@ export function CountryCombobox({ className, id, onBlur, onChange, value }: Coun
           aria-controls='country-listbox'
           aria-expanded={open}
           className={cn(
-            'benroso-contact-field benroso-country-combobox-trigger mt-1.5 h-auto min-h-11 w-full justify-between px-3 py-2.5 font-normal shadow-none focus-visible:ring-0 focus-visible:ring-offset-0',
-            value ? 'text-[var(--benroso-ink)]' : 'text-[var(--benroso-muted)]/70',
+            'brand-contact-field brand-country-combobox-trigger mt-1.5 h-auto min-h-11 w-full justify-between px-3 py-2.5 font-normal shadow-none focus-visible:ring-0 focus-visible:ring-offset-0',
+            value ? 'text-[var(--brand-ink)]' : 'text-[var(--brand-muted)]/70',
             className
           )}
           id={id}
@@ -70,20 +70,20 @@ export function CountryCombobox({ className, id, onBlur, onChange, value }: Coun
       </PopoverTrigger>
       <PopoverContent
         align='start'
-        className='benroso-country-combobox-popover w-[min(100vw-2rem,360px)] border-[#d9d9d9] bg-white p-0 text-[#1a1a1a] shadow-md'
+        className='brand-country-combobox-popover w-[min(100vw-2rem,360px)] border-[#d9d9d9] bg-white p-0 text-[#1a1a1a] shadow-md'
         collisionPadding={12}
         side='bottom'
         sideOffset={6}
       >
         <Command
-          className='benroso-country-combobox-command bg-white text-[#1a1a1a]'
+          className='brand-country-combobox-command bg-white text-[#1a1a1a]'
           shouldFilter={false}
         >
-          <div className='benroso-country-combobox-search'>
-            <Icons.search aria-hidden className='benroso-country-combobox-search-icon' />
+          <div className='brand-country-combobox-search'>
+            <Icons.search aria-hidden className='brand-country-combobox-search-icon' />
             <input
               aria-label='Search countries'
-              className='benroso-country-combobox-search-input'
+              className='brand-country-combobox-search-input'
               onChange={(event) => setSearch(event.target.value)}
               placeholder='Search countries...'
               ref={searchInputRef}
@@ -92,14 +92,14 @@ export function CountryCombobox({ className, id, onBlur, onChange, value }: Coun
             />
           </div>
 
-          <CommandList className='benroso-country-combobox-list' id='country-listbox'>
+          <CommandList className='brand-country-combobox-list' id='country-listbox'>
             <CommandEmpty className='px-3 py-6 text-sm text-[#5c665f]'>
               No country found.
             </CommandEmpty>
             <CommandGroup>
               {filteredCountries.map((country) => (
                 <CommandItem
-                  className='benroso-country-combobox-item text-[#1a1a1a] data-[selected=true]:bg-[rgb(60_81_66/0.12)] data-[selected=true]:text-[#1a1a1a]'
+                  className='brand-country-combobox-item text-[#1a1a1a] data-[selected=true]:bg-[rgb(60_81_66/0.12)] data-[selected=true]:text-[#1a1a1a]'
                   key={country}
                   onSelect={() => {
                     onChange(country);

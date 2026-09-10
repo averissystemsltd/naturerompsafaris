@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { HeroMediaBackdrop } from '@/components/public/hero-media-backdrop';
-import { BENROSO_ABOUT_HERO } from '@/config/benroso';
+import { BRAND_ABOUT_HERO } from '@/config/brand';
 import { heroHasMedia } from '@/lib/public/page-heroes';
 import type { PageHero } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
@@ -60,7 +60,7 @@ export function AboutHero({
         <div
           aria-hidden
           className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-          style={{ backgroundImage: `url("${BENROSO_ABOUT_HERO.imageUrl}")` }}
+          style={{ backgroundImage: `url("${BRAND_ABOUT_HERO.imageUrl}")` }}
         />
       )}
       <div
@@ -68,8 +68,8 @@ export function AboutHero({
         className='absolute inset-0'
         style={{ backgroundColor: `rgba(0,0,0,${overlayAlpha})` }}
       />
-      <div className='relative z-10 benroso-section py-16 md:py-24'>
-        <div className='benroso-container'>
+      <div className='relative z-10 brand-section py-16 md:py-24'>
+        <div className='brand-container'>
           {breadcrumbs?.length ? (
             <nav
               aria-label='Breadcrumb'
@@ -83,7 +83,7 @@ export function AboutHero({
                       {crumb.label}
                     </a>
                   ) : (
-                    <span className='benroso-breadcrumb-current'>{crumb.label}</span>
+                    <span className='brand-breadcrumb-current'>{crumb.label}</span>
                   )}
                 </span>
               ))}
@@ -104,7 +104,7 @@ export function AboutHero({
             >
               {effectiveTitle}
             </h1>
-            <span aria-hidden className='benroso-gold-line benroso-gold-line--brand mt-5' />
+            <span aria-hidden className='brand-gold-line brand-gold-line--brand mt-5' />
             {effectiveDescription ? (
               <p className='mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/85'>
                 {effectiveDescription}

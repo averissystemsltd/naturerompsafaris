@@ -1,7 +1,7 @@
 import { Icons } from '@/components/icons';
 import { TrustedChecklist } from '@/components/public/home/home-trusted-checklist';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
 import { FLEET_FEATURE_ITEMS } from '@/lib/public/fleet-content';
 import { localePath } from '@/lib/public/locale-path';
 
@@ -14,17 +14,17 @@ export function FleetFeatures({ locale }: FleetFeaturesProps) {
   const guidesHref = localePath(locale, '/about#team');
 
   return (
-    <section className='border-t border-[var(--benroso-line)] bg-[var(--benroso-ivory)]'>
-      <div className='benroso-container py-14 md:py-16 lg:py-20'>
+    <section className='border-t border-[var(--brand-line)] bg-[var(--brand-ivory)]'>
+      <div className='brand-container py-14 md:py-16 lg:py-20'>
         <div className='mx-auto max-w-5xl'>
           <div className='grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:items-start lg:gap-10 xl:grid-cols-[minmax(0,1fr)_19rem] xl:gap-12'>
             <div className='min-w-0'>
               <div className='text-center lg:text-left'>
-                <p className='benroso-eyebrow'>What You Can Expect</p>
-                <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3vw,2.35rem)] leading-tight'>
+                <p className='brand-eyebrow'>What You Can Expect</p>
+                <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3vw,2.35rem)] leading-tight'>
                   Fleet Features That Matter on Safari
                 </h2>
-                <span aria-hidden className='benroso-gold-line mt-5 lg:mx-0 lg:[margin-inline:0]' />
+                <span aria-hidden className='brand-gold-line mt-5 lg:mx-0 lg:[margin-inline:0]' />
               </div>
               <TrustedChecklist
                 className='mt-8 space-y-4 md:mt-10 md:space-y-5'
@@ -34,24 +34,24 @@ export function FleetFeatures({ locale }: FleetFeaturesProps) {
             </div>
 
             <aside className='mx-auto w-full max-w-sm lg:mx-0 lg:max-w-none lg:pt-6'>
-              <div className='rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-6 shadow-[0_18px_40px_-28px_rgba(28,42,31,0.35)] md:p-7'>
-                <p className='benroso-eyebrow'>Plan With Us</p>
-                <h3 className='benroso-heading mt-3 font-display text-xl leading-tight md:text-2xl'>
+              <div className='rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-6 shadow-[0_18px_40px_-28px_rgba(28,42,31,0.35)] md:p-7'>
+                <p className='brand-eyebrow'>Plan With Us</p>
+                <h3 className='brand-heading mt-3 font-display text-xl leading-tight md:text-2xl'>
                   Ready to plan your safari?
                 </h3>
-                <p className='benroso-body mt-3 text-sm leading-7 text-[var(--benroso-muted)]'>
+                <p className='brand-body mt-3 text-sm leading-7 text-[var(--brand-muted)]'>
                   Share your dates and travel style. We will match the right vehicle and guide.
                 </p>
-                <BenrosoButtonGroup className='mt-6'>
-                  <BenrosoButton className='group' href={contactHref} variant='primary'>
+                <BrandButtonGroup className='mt-6'>
+                  <BrandButton className='group' href={contactHref} variant='primary'>
                     <Icons.mail className='h-4 w-4 shrink-0 transition-transform duration-300 group-hover:scale-110' />
                     Plan My Safari
-                  </BenrosoButton>
-                  <BenrosoButton className='group' href={guidesHref} variant='accent-outline'>
+                  </BrandButton>
+                  <BrandButton className='group' href={guidesHref} variant='accent-outline'>
                     <Icons.teams className='h-4 w-4 shrink-0 transition-transform duration-300 group-hover:scale-110' />
                     Meet Our Guides
-                  </BenrosoButton>
-                </BenrosoButtonGroup>
+                  </BrandButton>
+                </BrandButtonGroup>
               </div>
             </aside>
           </div>

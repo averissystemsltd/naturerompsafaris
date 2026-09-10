@@ -38,8 +38,8 @@ export function BlogList({ contactHref, posts }: BlogListProps) {
   }, [posts, activeCategory, search]);
 
   return (
-    <section className='benroso-section bg-[var(--benroso-ivory)]'>
-      <div className='benroso-container'>
+    <section className='brand-section bg-[var(--brand-ivory)]'>
+      <div className='brand-container'>
         <div className='mb-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between'>
           <div className='flex flex-wrap gap-2'>
             <CategoryChip
@@ -58,9 +58,9 @@ export function BlogList({ contactHref, posts }: BlogListProps) {
           </div>
 
           <div className='relative w-full lg:max-w-xs'>
-            <Icons.search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--benroso-muted)]' />
+            <Icons.search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--brand-muted)]' />
             <input
-              className='w-full rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white py-2.5 pl-9 pr-3 text-sm text-[var(--benroso-ink)] outline-none focus:border-[var(--benroso-primary)]'
+              className='w-full rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white py-2.5 pl-9 pr-3 text-sm text-[var(--brand-ink)] outline-none focus:border-[var(--brand-primary)]'
               onChange={(event) => setSearch(event.target.value)}
               placeholder='Search articles'
               type='search'
@@ -104,10 +104,10 @@ function CategoryChip({
   return (
     <button
       className={cn(
-        'rounded-[var(--benroso-radius)] border px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors',
+        'rounded-[var(--brand-radius)] border px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors',
         active
-          ? 'border-[var(--benroso-primary)] bg-[var(--benroso-primary)] text-white'
-          : 'border-[var(--benroso-line)] bg-white text-[var(--benroso-ink)] hover:border-[var(--benroso-primary)]'
+          ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white'
+          : 'border-[var(--brand-line)] bg-white text-[var(--brand-ink)] hover:border-[var(--brand-primary)]'
       )}
       onClick={onClick}
       type='button'

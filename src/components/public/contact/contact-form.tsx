@@ -131,9 +131,9 @@ const otherSchema = z.object({
   phone: z.string().optional()
 });
 
-const fieldClassName = 'benroso-contact-field mt-1.5';
+const fieldClassName = 'brand-contact-field mt-1.5';
 
-const labelClassName = 'block text-sm font-bold text-[var(--benroso-heading)]';
+const labelClassName = 'block text-sm font-bold text-[var(--brand-heading)]';
 
 function FormStep({
   children,
@@ -145,12 +145,12 @@ function FormStep({
   title: string;
 }) {
   return (
-    <section className='benroso-contact-step'>
+    <section className='brand-contact-step'>
       <div className='mb-5 flex items-center gap-3'>
-        <span aria-hidden className='benroso-contact-step-number'>
+        <span aria-hidden className='brand-contact-step-number'>
           {step}
         </span>
-        <h3 className='benroso-contact-step-title'>{title}</h3>
+        <h3 className='brand-contact-step-title'>{title}</h3>
       </div>
       {children}
     </section>
@@ -186,10 +186,10 @@ function CounterStepper({
   value: number;
 }) {
   return (
-    <div className='benroso-traveler-stepper'>
+    <div className='brand-traveler-stepper'>
       <button
         aria-label='Decrease'
-        className='benroso-traveler-stepper-btn'
+        className='brand-traveler-stepper-btn'
         disabled={value <= min}
         onBlur={onBlur}
         onClick={() => onChange(Math.max(min, value - 1))}
@@ -197,12 +197,12 @@ function CounterStepper({
       >
         <Icons.minus className='h-4 w-4' />
       </button>
-      <span aria-live='polite' className='benroso-traveler-stepper-value'>
+      <span aria-live='polite' className='brand-traveler-stepper-value'>
         {value}
       </span>
       <button
         aria-label='Increase'
-        className='benroso-traveler-stepper-btn'
+        className='brand-traveler-stepper-btn'
         onBlur={onBlur}
         onClick={() => onChange(value + 1)}
         type='button'
@@ -231,12 +231,12 @@ function TravelerCategoryCard({
   value: number;
 }) {
   return (
-    <div className='benroso-traveler-card'>
-      <div className='benroso-traveler-card-icon'>
+    <div className='brand-traveler-card'>
+      <div className='brand-traveler-card-icon'>
         <Icon className='h-8 w-8' />
       </div>
-      <p className='benroso-traveler-card-label'>{label}</p>
-      <p className='benroso-traveler-card-age'>{ageRange}</p>
+      <p className='brand-traveler-card-label'>{label}</p>
+      <p className='brand-traveler-card-age'>{ageRange}</p>
       <CounterStepper min={min} onBlur={onBlur} onChange={onChange} value={value} />
     </div>
   );
@@ -256,13 +256,13 @@ function RadioOptionList({
   value: string;
 }) {
   return (
-    <fieldset className='benroso-contact-radio-list'>
+    <fieldset className='brand-contact-radio-list'>
       <legend className='sr-only'>{name}</legend>
       {options.map((option) => (
-        <label className='benroso-contact-radio-option' key={option.value}>
+        <label className='brand-contact-radio-option' key={option.value}>
           <input
             checked={value === option.value}
-            className='benroso-contact-radio-input'
+            className='brand-contact-radio-input'
             name={name}
             onBlur={onBlur}
             onChange={() => onChange(option.value)}
@@ -283,10 +283,10 @@ export function ContactForm({ locale, sidebar, sourcePath }: ContactFormProps) {
   const activeTab = ENQUIRY_TABS.find((tab) => tab.id === activeType) ?? ENQUIRY_TABS[0];
 
   return (
-    <div className='benroso-contact-layout'>
-      <div className='benroso-contact-primary'>
-        <div className='benroso-contact-tabs'>
-          <div className='border-b border-[var(--benroso-line)] pb-1'>
+    <div className='brand-contact-layout'>
+      <div className='brand-contact-primary'>
+        <div className='brand-contact-tabs'>
+          <div className='border-b border-[var(--brand-line)] pb-1'>
             <div
               aria-label='Enquiry type'
               className='flex flex-nowrap gap-1.5 sm:gap-2'
@@ -296,10 +296,10 @@ export function ContactForm({ locale, sidebar, sourcePath }: ContactFormProps) {
                 <button
                   aria-selected={activeType === tab.id}
                   className={cn(
-                    'min-w-0 flex-1 rounded-[var(--benroso-button-radius)] px-2 py-2 text-center text-[11px] font-medium leading-tight transition-colors sm:px-4 sm:py-2.5 sm:text-sm sm:leading-normal',
+                    'min-w-0 flex-1 rounded-[var(--brand-button-radius)] px-2 py-2 text-center text-[11px] font-medium leading-tight transition-colors sm:px-4 sm:py-2.5 sm:text-sm sm:leading-normal',
                     activeType === tab.id
                       ? 'bg-[#3C5142] text-white'
-                      : 'border border-[var(--benroso-line)] bg-white text-[var(--benroso-muted)] hover:border-[var(--benroso-primary)]/30 hover:text-[var(--benroso-heading)]'
+                      : 'border border-[var(--brand-line)] bg-white text-[var(--brand-muted)] hover:border-[var(--brand-primary)]/30 hover:text-[var(--brand-heading)]'
                   )}
                   key={tab.id}
                   onClick={() => {
@@ -316,8 +316,8 @@ export function ContactForm({ locale, sidebar, sourcePath }: ContactFormProps) {
           </div>
         </div>
 
-        <div className='benroso-contact-main'>
-          <p className='text-sm leading-7 text-[var(--benroso-muted)]'>{activeTab.description}</p>
+        <div className='brand-contact-main'>
+          <p className='text-sm leading-7 text-[var(--brand-muted)]'>{activeTab.description}</p>
 
           <ContactFormBody
             activeType={activeType}
@@ -330,7 +330,7 @@ export function ContactForm({ locale, sidebar, sourcePath }: ContactFormProps) {
         </div>
       </div>
 
-      {sidebar ? <div className='benroso-contact-sidebar'>{sidebar}</div> : null}
+      {sidebar ? <div className='brand-contact-sidebar'>{sidebar}</div> : null}
     </div>
   );
 }
@@ -519,7 +519,7 @@ function ContactFormBody({
                               value={field.state.value}
                             />
                             {!country ? (
-                              <p className='mt-1.5 text-xs font-normal text-[var(--benroso-muted)]'>
+                              <p className='mt-1.5 text-xs font-normal text-[var(--brand-muted)]'>
                                 Select your nationality above to enter your phone number.
                               </p>
                             ) : null}
@@ -857,7 +857,7 @@ function ContactFormBody({
               resetSignal={turnstile.resetSignal}
             />
             <form.SubmitButton
-              className='benroso-contact-submit w-full'
+              className='brand-contact-submit w-full'
               disabled={mutation.isPending || !turnstile.canSubmit}
               onMouseEnter={() => setSubmitHovered(true)}
               onMouseLeave={() => setSubmitHovered(false)}
@@ -873,7 +873,7 @@ function ContactFormBody({
                 submitLabel
               )}
             </form.SubmitButton>
-            <p className='text-xs text-[var(--benroso-muted)]'>
+            <p className='text-xs text-[var(--brand-muted)]'>
               No payment is collected on this website. We aim to respond within 24 hours.
             </p>
             {submitStatus === 'error' ? (

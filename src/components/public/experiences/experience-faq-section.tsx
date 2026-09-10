@@ -18,25 +18,25 @@ export function ExperienceFaqSection({ faqs }: ExperienceFaqSectionProps) {
   if (!faqs.length) return null;
 
   return (
-    <ExperienceScrollReveal className='benroso-section border-t border-[var(--benroso-line)] bg-white'>
-      <div className='benroso-container max-w-3xl'>
-        <p className='benroso-eyebrow'>Questions</p>
-        <h2 className='benroso-heading mt-3 font-display text-[clamp(2rem,4vw,2.75rem)] leading-tight'>
+    <ExperienceScrollReveal className='brand-section border-t border-[var(--brand-line)] bg-white'>
+      <div className='brand-container max-w-3xl'>
+        <p className='brand-eyebrow'>Questions</p>
+        <h2 className='brand-heading mt-3 font-display text-[clamp(2rem,4vw,2.75rem)] leading-tight'>
           Frequently Asked Questions
         </h2>
-        <span aria-hidden className='benroso-gold-line benroso-gold-line--left' />
+        <span aria-hidden className='brand-gold-line brand-gold-line--left' />
 
         <Accordion className='mt-8' collapsible type='single'>
           {faqs.map((faq, index) => (
             <AccordionItem
-              className='border-[var(--benroso-line)]'
+              className='border-[var(--brand-line)]'
               key={`${faq.question}-${index}`}
               value={`faq-${index}`}
             >
-              <AccordionTrigger className='font-display text-base font-semibold text-[var(--benroso-heading)] hover:no-underline'>
+              <AccordionTrigger className='font-display text-base font-semibold text-[var(--brand-heading)] hover:no-underline'>
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className='text-[15px] leading-7 text-[var(--benroso-muted)]'>
+              <AccordionContent className='text-[15px] leading-7 text-[var(--brand-muted)]'>
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

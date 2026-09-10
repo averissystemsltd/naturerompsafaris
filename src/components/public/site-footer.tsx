@@ -4,12 +4,7 @@ import Link from 'next/link';
 import { Icons } from '@/components/icons';
 import { FooterNewsletter } from '@/components/public/footer-newsletter';
 import { FooterSocialLinks } from '@/components/public/footer-social-links';
-import {
-  BENROSO_KATO,
-  BENROSO_LOGO_HEIGHT,
-  BENROSO_LOGO_PATH,
-  BENROSO_LOGO_WIDTH
-} from '@/config/benroso';
+import { BRAND_KATO, BRAND_LOGO_HEIGHT, BRAND_LOGO_PATH, BRAND_LOGO_WIDTH } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 import type { PublicFooterColumn, PublicSiteSettings } from '@/lib/public/types';
 
@@ -22,11 +17,11 @@ type SiteFooterProps = {
 function FooterLinkColumn({ column }: { column: PublicFooterColumn }) {
   return (
     <nav aria-label={column.title}>
-      <h3 className='benroso-footer-heading'>{column.title}</h3>
+      <h3 className='brand-footer-heading'>{column.title}</h3>
       <ul className='space-y-2.5'>
         {column.links.map((link) => (
           <li key={`${column.title}-${link.href}`}>
-            <Link className='benroso-footer-link' href={link.href}>
+            <Link className='brand-footer-link' href={link.href}>
               {link.label}
             </Link>
           </li>
@@ -43,8 +38,8 @@ export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterPr
   const policyColumn = footerColumns.find((column) => column.title === 'Help & Policies');
 
   return (
-    <footer className='benroso-footer bg-[var(--benroso-primary)] text-white'>
-      <div className='benroso-container py-14 lg:py-16'>
+    <footer className='brand-footer bg-[var(--brand-primary)] text-white'>
+      <div className='brand-container py-14 lg:py-16'>
         <div className='grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-12'>
           {/* Brand */}
           <div className='lg:col-span-4'>
@@ -52,9 +47,9 @@ export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterPr
               <Image
                 alt={siteSettings.companyName}
                 className='h-[52px] w-auto max-w-none'
-                height={BENROSO_LOGO_HEIGHT}
-                src={BENROSO_LOGO_PATH}
-                width={BENROSO_LOGO_WIDTH}
+                height={BRAND_LOGO_HEIGHT}
+                src={BRAND_LOGO_PATH}
+                width={BRAND_LOGO_WIDTH}
               />
             </Link>
             <p className='mt-5 max-w-sm text-sm leading-7 text-white/75'>
@@ -81,25 +76,25 @@ export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterPr
       </div>
 
       {/* KATO credential strip */}
-      <div className='border-t border-white/10 bg-[var(--benroso-primary-dark)]'>
-        <div className='benroso-container flex flex-col items-center justify-center gap-3 py-4 text-center sm:flex-row sm:gap-5'>
+      <div className='border-t border-white/10 bg-[var(--brand-primary-dark)]'>
+        <div className='brand-container flex flex-col items-center justify-center gap-3 py-4 text-center sm:flex-row sm:gap-5'>
           <a
             className='inline-flex shrink-0 items-center hover:opacity-90'
-            href={BENROSO_KATO.url}
+            href={BRAND_KATO.url}
             rel='noopener noreferrer'
             target='_blank'
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              alt={BENROSO_KATO.alt}
+              alt={BRAND_KATO.alt}
               className='h-7 w-7 shrink-0 object-contain'
               height={28}
-              src={BENROSO_KATO.logoPath}
+              src={BRAND_KATO.logoPath}
               width={28}
             />
           </a>
           <p className='inline-flex items-center gap-2 text-sm font-medium text-white/90'>
-            <Icons.badgeCheck className='h-4 w-4 text-[var(--benroso-lime)]' />
+            <Icons.badgeCheck className='h-4 w-4 text-[var(--brand-lime)]' />
             KATO Registered · Licensed Tour Operator · KPSGA Member
           </p>
         </div>
@@ -107,7 +102,7 @@ export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterPr
 
       {/* Copyright + legal */}
       <div className='border-t border-white/10 bg-[#263528]'>
-        <div className='benroso-container flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left'>
+        <div className='brand-container flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left'>
           <p className='max-w-2xl text-xs leading-5 text-white/55 md:max-w-none md:shrink-0'>
             © {new Date().getFullYear()} {siteSettings.companyName}. All rights reserved.
             {siteSettings.postalAddress ? (

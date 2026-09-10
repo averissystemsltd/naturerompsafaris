@@ -104,10 +104,10 @@ begin
     'en',
     'mount-longonot-hiking-day-trip-from-nairobi',
     'Mount Longonot Hiking Day Trip from Nairobi',
-    'Hike Mount Longonot on a full-day adventure from Nairobi with Benroso Safaris. Climb to the crater rim, enjoy sweeping Rift Valley views, stop for photography and have lunch before returning to the city.',
+    'Hike Mount Longonot on a full-day adventure from Nairobi with Nature Romp Safaris. Climb to the crater rim, enjoy sweeping Rift Valley views, stop for photography and have lunch before returning to the city.',
     jsonb_build_object(
       'html',
-      $overview$<p>The Mount Longonot Hiking Day Trip from Nairobi is an active Great Rift Valley excursion designed for travelers who enjoy walking, scenery and outdoor challenges. The journey begins with a road transfer from Nairobi to Mount Longonot National Park.</p><p>The main experience is a hike from the park entrance to the crater rim. The trail climbs steadily and rewards hikers with broad views of the volcanic crater and surrounding Rift Valley landscapes. Time is provided at the rim for rest, sightseeing and photography before beginning the descent.</p><p>After completing the hike, guests stop for lunch before traveling back to Nairobi. The route is straightforward, but the climb requires a reasonable level of fitness and preparation.</p><p>Benroso Safaris recommends this day trip for active couples, small groups, solo travelers and nature photographers. It is especially suitable for guests who want a physically engaging excursion within easy reach of Nairobi.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Mount Longonot hike</p></li><li><p>Crater-rim climb</p></li><li><p>Great Rift Valley views</p></li><li><p>Volcanic landscape exploration</p></li><li><p>Panoramic photography</p></li><li><p>Outdoor fitness adventure</p></li><li><p>Scenic road travel</p></li><li><p>Nairobi day trip</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Active travelers</p></li><li><p>Couples and small groups</p></li><li><p>Solo hikers</p></li><li><p>Nature and landscape photographers</p></li><li><p>Adventure enthusiasts</p></li><li><p>Guests with a full free day in Nairobi</p></li></ul>$overview$
+      $overview$<p>The Mount Longonot Hiking Day Trip from Nairobi is an active Great Rift Valley excursion designed for travelers who enjoy walking, scenery and outdoor challenges. The journey begins with a road transfer from Nairobi to Mount Longonot National Park.</p><p>The main experience is a hike from the park entrance to the crater rim. The trail climbs steadily and rewards hikers with broad views of the volcanic crater and surrounding Rift Valley landscapes. Time is provided at the rim for rest, sightseeing and photography before beginning the descent.</p><p>After completing the hike, guests stop for lunch before traveling back to Nairobi. The route is straightforward, but the climb requires a reasonable level of fitness and preparation.</p><p>Nature Romp Safaris recommends this day trip for active couples, small groups, solo travelers and nature photographers. It is especially suitable for guests who want a physically engaging excursion within easy reach of Nairobi.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Mount Longonot hike</p></li><li><p>Crater-rim climb</p></li><li><p>Great Rift Valley views</p></li><li><p>Volcanic landscape exploration</p></li><li><p>Panoramic photography</p></li><li><p>Outdoor fitness adventure</p></li><li><p>Scenic road travel</p></li><li><p>Nairobi day trip</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Active travelers</p></li><li><p>Couples and small groups</p></li><li><p>Solo hikers</p></li><li><p>Nature and landscape photographers</p></li><li><p>Adventure enthusiasts</p></li><li><p>Guests with a full free day in Nairobi</p></li></ul>$overview$
     ),
     '[
       {"question":"How difficult is the Mount Longonot hike?","answer":"The climb to the crater rim is moderately demanding and requires a reasonable level of fitness."},
@@ -118,9 +118,9 @@ begin
       {"question":"Where does the trip start and end?","answer":"The day trip starts and ends in Nairobi."}
     ]'::jsonb,
     'Mount Longonot Hiking Day Trip from Nairobi',
-    'Mount Longonot hiking day trip with Benroso Safaris, featuring a crater-rim climb, panoramic Rift Valley views, photography and lunch.',
+    'Mount Longonot hiking day trip with Nature Romp Safaris, featuring a crater-rim climb, panoramic Rift Valley views, photography and lunch.',
     'Mount Longonot Hiking Day Trip from Nairobi',
-    '["Mount Longonot hike","Nairobi hiking day trip","Longonot crater rim tour","Rift Valley hiking Kenya","Benroso Safaris"]'::jsonb,
+    '["Mount Longonot hike","Nairobi hiking day trip","Longonot crater rim tour","Rift Valley hiking Kenya","Nature Romp Safaris"]'::jsonb,
     null,
     v_now
   );

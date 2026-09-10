@@ -52,7 +52,7 @@ function ItineraryDescription({ description }: { description: string }) {
   if (isHtmlDescription(description)) {
     return (
       <div
-        className='benroso-body benroso-itinerary-prose mt-3 text-[15px] leading-7'
+        className='brand-body brand-itinerary-prose mt-3 text-[15px] leading-7'
         dangerouslySetInnerHTML={{ __html: description }}
       />
     );
@@ -62,7 +62,7 @@ function ItineraryDescription({ description }: { description: string }) {
   if (!blocks.length) return null;
 
   return (
-    <div className='benroso-body mt-3 space-y-3 text-[15px] leading-7'>
+    <div className='brand-body mt-3 space-y-3 text-[15px] leading-7'>
       {blocks.map((block, index) =>
         block.type === 'list' ? (
           <ul className='list-disc space-y-1.5 pl-5' key={`list-${index}`}>
@@ -83,14 +83,13 @@ function ItineraryAccommodationOptions({ options }: { options: string[] }) {
   if (!visibleOptions.length) return null;
 
   return (
-    <ul className='benroso-body mt-4 list-disc space-y-1.5 pl-5 text-[15px] leading-7'>
+    <ul className='brand-body mt-4 list-disc space-y-1.5 pl-5 text-[15px] leading-7'>
       <li>
         Dinner and overnight at:
         <ul className='mt-1.5 list-[circle] space-y-1 pl-5'>
           {visibleOptions.map((option, index) => (
             <li key={`${index}-${option}`}>
-              <strong className='text-[var(--benroso-heading)]'>Option {index + 1}:</strong>{' '}
-              {option}
+              <strong className='text-[var(--brand-heading)]'>Option {index + 1}:</strong> {option}
             </li>
           ))}
         </ul>
@@ -104,8 +103,8 @@ function ItineraryMealPlan({ mealPlan }: { mealPlan: string }) {
   if (!value) return null;
 
   return (
-    <p className='benroso-body mt-4 text-[15px] leading-7'>
-      <strong className='text-[var(--benroso-heading)]'>Meal Plan:</strong> {value}
+    <p className='brand-body mt-4 text-[15px] leading-7'>
+      <strong className='text-[var(--brand-heading)]'>Meal Plan:</strong> {value}
     </p>
   );
 }
@@ -164,9 +163,9 @@ export function ItineraryTimeline({ days }: ItineraryTimelineProps) {
 
   if (!days.length) {
     return (
-      <div className='mt-6 border border-dashed border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-6'>
-        <h3 className='benroso-heading font-display text-xl'>Itinerary Pending</h3>
-        <p className='benroso-body mt-2 text-sm leading-6'>
+      <div className='mt-6 border border-dashed border-[var(--brand-line)] bg-[var(--brand-ivory)] p-6'>
+        <h3 className='brand-heading font-display text-xl'>Itinerary Pending</h3>
+        <p className='brand-body mt-2 text-sm leading-6'>
           Add day-by-day routing in the portal so guests can understand how this safari unfolds.
         </p>
       </div>
@@ -174,11 +173,11 @@ export function ItineraryTimeline({ days }: ItineraryTimelineProps) {
   }
 
   return (
-    <ol className='benroso-itinerary-timeline relative mt-8' ref={containerRef}>
-      <div aria-hidden className='benroso-itinerary-timeline__track'>
-        <div className='benroso-itinerary-timeline__track-bg' />
+    <ol className='brand-itinerary-timeline relative mt-8' ref={containerRef}>
+      <div aria-hidden className='brand-itinerary-timeline__track'>
+        <div className='brand-itinerary-timeline__track-bg' />
         <div
-          className='benroso-itinerary-timeline__track-fill'
+          className='brand-itinerary-timeline__track-fill'
           style={{ transform: `scaleY(${progress})` }}
         />
       </div>
@@ -188,7 +187,7 @@ export function ItineraryTimeline({ days }: ItineraryTimelineProps) {
 
         return (
           <li
-            className='benroso-itinerary-timeline__item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-4 md:grid-cols-[3.25rem_minmax(0,1fr)] md:gap-6'
+            className='brand-itinerary-timeline__item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-4 md:grid-cols-[3.25rem_minmax(0,1fr)] md:gap-6'
             key={`${day.day}-${day.title}`}
           >
             <div className='flex justify-center pt-1'>
@@ -196,8 +195,8 @@ export function ItineraryTimeline({ days }: ItineraryTimelineProps) {
                 className={cn(
                   'relative z-10 flex h-10 w-10 items-center justify-center rounded-full font-display text-sm font-bold transition-colors duration-300 md:h-11 md:w-11',
                   isReached
-                    ? 'bg-[var(--benroso-primary)] text-white'
-                    : 'border border-[var(--benroso-line)] bg-white text-[var(--benroso-muted)]'
+                    ? 'bg-[var(--brand-primary)] text-white'
+                    : 'border border-[var(--brand-line)] bg-white text-[var(--brand-muted)]'
                 )}
                 ref={(node) => {
                   markerRefs.current[index] = node;
@@ -209,10 +208,10 @@ export function ItineraryTimeline({ days }: ItineraryTimelineProps) {
 
             <article className='min-w-0 border-b border-[rgb(60_81_66/8%)] pb-10 last:border-b-0'>
               <div className='py-1'>
-                <span className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--benroso-primary)]'>
+                <span className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--brand-primary)]'>
                   Day {day.day}
                 </span>
-                <h3 className='benroso-heading mt-2 font-display text-xl leading-tight'>
+                <h3 className='brand-heading mt-2 font-display text-xl leading-tight'>
                   {day.title}
                 </h3>
                 <ItineraryDescription description={day.description} />

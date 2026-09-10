@@ -26,7 +26,7 @@ function GalleryImageTile({
   title: string;
 }) {
   return (
-    <div className='relative aspect-[4/3] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-primary)]'>
+    <div className='relative aspect-[4/3] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-primary)]'>
       {image.url ? (
         <Image
           alt={image.alt || `${title} gallery ${index + 1}`}
@@ -96,7 +96,7 @@ function ExperienceGalleryCarousel({ images, title }: ExperienceGalleryProps) {
       {canScrollLeft ? (
         <button
           aria-label='Show previous gallery images'
-          className='absolute top-1/2 left-0 z-10 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white text-[var(--benroso-primary)] shadow-md transition-colors hover:bg-[var(--benroso-primary)] hover:text-white md:-translate-x-0'
+          className='absolute top-1/2 left-0 z-10 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white text-[var(--brand-primary)] shadow-md transition-colors hover:bg-[var(--brand-primary)] hover:text-white md:-translate-x-0'
           onClick={() => scrollByStep('left')}
           type='button'
         >
@@ -121,7 +121,7 @@ function ExperienceGalleryCarousel({ images, title }: ExperienceGalleryProps) {
       {canScrollRight ? (
         <button
           aria-label='Show more gallery images'
-          className='absolute top-1/2 right-0 z-10 flex h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white text-[var(--benroso-primary)] shadow-md transition-colors hover:bg-[var(--benroso-primary)] hover:text-white md:translate-x-0'
+          className='absolute top-1/2 right-0 z-10 flex h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white text-[var(--brand-primary)] shadow-md transition-colors hover:bg-[var(--brand-primary)] hover:text-white md:translate-x-0'
           onClick={() => scrollByStep('right')}
           type='button'
         >

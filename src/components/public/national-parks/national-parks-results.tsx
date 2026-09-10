@@ -43,7 +43,7 @@ export function NationalParksResults({ locale, parks }: NationalParksResultsProp
   if (!parks.length) {
     return (
       <>
-        <p className='mb-6 text-sm font-medium text-[var(--benroso-muted)]'>{countLabel}</p>
+        <p className='mb-6 text-sm font-medium text-[var(--brand-muted)]'>{countLabel}</p>
         <EmptyState
           actionHref={localePath(locale, '/contact')}
           actionLabel='Ask a Safari Planner'
@@ -59,10 +59,10 @@ export function NationalParksResults({ locale, parks }: NationalParksResultsProp
       <div className='mb-6 flex flex-wrap items-center justify-between gap-3'>
         <div className='min-w-0 flex-1'>
           <div className='flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1'>
-            <h2 className='benroso-heading font-display text-2xl'>National Parks & Reserves</h2>
-            <span className='text-sm text-[var(--benroso-muted)]'>{countLabel}</span>
+            <h2 className='brand-heading font-display text-2xl'>National Parks & Reserves</h2>
+            <span className='text-sm text-[var(--brand-muted)]'>{countLabel}</span>
           </div>
-          <p className='mt-1 text-xs text-[var(--benroso-muted)]'>
+          <p className='mt-1 text-xs text-[var(--brand-muted)]'>
             Select up to two parks to compare wildlife, seasonality, and safari availability.
           </p>
         </div>

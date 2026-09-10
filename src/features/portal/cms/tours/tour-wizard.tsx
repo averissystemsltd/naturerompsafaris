@@ -33,7 +33,7 @@ import {
   tourMarketsFromExperienceCountries,
   type TourSafariMarketId
 } from '@/features/experiences/public/tour-markets';
-import type { BenrosoCountryId } from '@/features/experiences/public/country-map-copy';
+import type { BrandCountryId } from '@/features/experiences/public/country-map-copy';
 import { ExperiencePricingSelector } from './experience-pricing-selector';
 import { ItineraryDescriptionEditor } from './itinerary-description-editor';
 import {
@@ -57,7 +57,7 @@ interface TourWizardProps {
     experiences: RelationOption[];
     accommodations: RelationOption[];
     fleet: RelationOption[];
-    experienceCountries: Record<string, BenrosoCountryId[]>;
+    experienceCountries: Record<string, BrandCountryId[]>;
     experienceLayoutVariants: Record<string, 'safari' | 'mountain'>;
   };
 }

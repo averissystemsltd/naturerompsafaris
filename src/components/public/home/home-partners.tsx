@@ -33,7 +33,7 @@ function PartnerBadge({ partner }: { partner: Partner }) {
           width={180}
         />
       ) : (
-        <span className='text-center text-sm font-semibold leading-tight text-[var(--benroso-primary)]'>
+        <span className='text-center text-sm font-semibold leading-tight text-[var(--brand-primary)]'>
           {partner.name}
         </span>
       )}
@@ -45,16 +45,16 @@ export function HomePartners() {
   const loop = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section className='border-y border-[var(--benroso-line)] bg-white'>
-      <div className='benroso-container py-14 md:py-16'>
+    <section className='border-y border-[var(--brand-line)] bg-white'>
+      <div className='brand-container py-14 md:py-16'>
         <SectionHeader
-          description='Benroso Safaris works alongside the bodies and partners that keep East African travel safe, responsible, and world class.'
+          description='Nature Romp Safaris works alongside the bodies and partners that keep East African travel safe, responsible, and world class.'
           title='Trusted & Recognised'
         />
       </div>
 
-      <div className='benroso-marquee-track overflow-hidden pb-14'>
-        <div className='benroso-marquee'>
+      <div className='brand-marquee-track overflow-hidden pb-14'>
+        <div className='brand-marquee'>
           {loop.map((partner, index) => (
             <PartnerBadge key={`${partner.name}-${index}`} partner={partner} />
           ))}

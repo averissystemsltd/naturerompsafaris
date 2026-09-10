@@ -71,7 +71,7 @@ export function NationalParkFilters({ active, facets, locale }: NationalParkFilt
       title='National parks'
     >
       {!hasFacetValues ? (
-        <p className='text-sm leading-6 text-[var(--benroso-muted)]'>
+        <p className='text-sm leading-6 text-[var(--brand-muted)]'>
           Published park filters will appear here as park guides are added.
         </p>
       ) : null}

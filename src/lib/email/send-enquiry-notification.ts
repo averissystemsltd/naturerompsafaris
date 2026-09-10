@@ -50,7 +50,7 @@ function enquiryTypeLabel(type: EnquiryRecord['enquiryType']) {
 
 function buildPlainTextBody(enquiry: EnquiryRecord) {
   const lines = [
-    `New ${enquiryTypeLabel(enquiry.enquiryType)} enquiry from benrososafaris.co.ke`,
+    `New ${enquiryTypeLabel(enquiry.enquiryType)} enquiry from naturerompsafaris.co.ke`,
     '',
     `Name: ${enquiry.name}`,
     `Email: ${enquiry.email}`,
@@ -154,7 +154,7 @@ export async function sendEnquiryNotificationEmail(enquiry: EnquiryRecord) {
     return { ok: false, skipped: true as const };
   }
 
-  const subject = `[Benroso Safaris] ${enquiryTypeLabel(enquiry.enquiryType)} — ${enquiry.name}`;
+  const subject = `[Nature Romp Safaris] ${enquiryTypeLabel(enquiry.enquiryType)} — ${enquiry.name}`;
   const result = await sendMail({
     authMailbox: 'enquiry',
     from: smtpFromAddress('enquiry'),

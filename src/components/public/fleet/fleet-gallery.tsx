@@ -54,7 +54,7 @@ export function FleetGallery({ images, locale }: FleetGalleryProps) {
       <EmptyState
         actionHref={localePath(locale, '/contact')}
         actionLabel='Ask about our vehicles'
-        message='Fleet photos will appear here once they are uploaded and saved in the Benroso portal under Our Fleet.'
+        message='Fleet photos will appear here once they are uploaded and saved in the Nature Romp portal under Our Fleet.'
         title='Fleet gallery coming soon'
       />
     );
@@ -88,7 +88,7 @@ export function FleetGallery({ images, locale }: FleetGalleryProps) {
       <div className='mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3'>
         {images.map((image, index) => (
           <button
-            className='group relative aspect-[4/3] overflow-hidden rounded-[var(--benroso-radius)] bg-[var(--benroso-primary-light)]'
+            className='group relative aspect-[4/3] overflow-hidden rounded-[var(--brand-radius)] bg-[var(--brand-primary-light)]'
             key={`${image.id}-${index}`}
             onClick={() => openAt(index)}
             type='button'

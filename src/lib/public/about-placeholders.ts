@@ -37,7 +37,7 @@ export const PLACEHOLDER_TESTIMONIALS: AboutTestimonial[] = [
     guestName: 'Thomas Berger',
     country: 'Germany',
     quote:
-      'Benroso coordinated lodges, park fees, and a private vehicle without us worrying about a single detail. The Mara crossings were unforgettable.',
+      'Nature Romp coordinated lodges, park fees, and a private vehicle without us worrying about a single detail. The Mara crossings were unforgettable.',
     tourLabel: 'Maasai Mara Private Safari',
     rating: 5
   },
@@ -46,7 +46,7 @@ export const PLACEHOLDER_TESTIMONIALS: AboutTestimonial[] = [
     guestName: 'The Okafor Family',
     country: 'Nigeria',
     quote:
-      'Traveling with three generations is not easy, yet Benroso paced the itinerary perfectly and our guide kept everyone engaged and comfortable the whole way.',
+      'Traveling with three generations is not easy, yet Nature Romp paced the itinerary perfectly and our guide kept everyone engaged and comfortable the whole way.',
     tourLabel: 'Family Safari in Kenya and Tanzania',
     rating: 5
   },
@@ -64,7 +64,7 @@ export const PLACEHOLDER_TESTIMONIALS: AboutTestimonial[] = [
     guestName: 'James & Patricia',
     country: 'United States',
     quote:
-      'We chose Benroso after reading their reviews and the experience matched every promise. Amboseli at sunrise was worth the journey on its own.',
+      'We chose Nature Romp after reading their reviews and the experience matched every promise. Amboseli at sunrise was worth the journey on its own.',
     tourLabel: 'Amboseli and Tsavo Safari',
     rating: 5
   },
@@ -84,7 +84,7 @@ export const PLACEHOLDER_PARTNERS: AboutPartner[] = [
     id: 'partner-tra',
     name: 'Tourism Regulatory Authority (TRA)',
     description:
-      'Benroso Safaris is a fully registered and licensed tour operator regulated by TRA.',
+      'Nature Romp Safaris is a fully registered and licensed tour operator regulated by TRA.',
     category: 'regulatory'
   },
   {

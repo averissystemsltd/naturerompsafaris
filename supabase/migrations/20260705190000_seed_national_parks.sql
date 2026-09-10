@@ -102,7 +102,7 @@ translation_rows as (
     dt.name,
     coalesce(
       dt.summary,
-      'Explore ' || dt.name || ' with Benroso Safaris — wildlife seasons, routes, and tailored safari options.'
+      'Explore ' || dt.name || ' with Nature Romp Safaris — wildlife seasons, routes, and tailored safari options.'
     ),
     now()
   from park_rows p

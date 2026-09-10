@@ -193,7 +193,7 @@ function TeamMemberFormDialog({
                 onChange={(event) =>
                   setForm((current) => ({ ...current, email: event.target.value || null }))
                 }
-                placeholder='name@benrososafaris.com'
+                placeholder='name@naturerompsafaris.com'
                 type='email'
                 value={form.email ?? ''}
               />

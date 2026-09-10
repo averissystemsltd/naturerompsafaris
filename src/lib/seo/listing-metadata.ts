@@ -33,7 +33,7 @@ export async function buildListingPageMetadata({
   const pageHero = heroKey ? await getPageHero(heroKey) : null;
   const title = pageHero?.heading ?? defaultTitle;
   const description = pageHero?.subheading ?? defaultDescription;
-  const metaTitle = title.includes('Benroso') ? title : `${title} | Benroso Safaris`;
+  const metaTitle = title.includes('Nature Romp') ? title : `${title} | Nature Romp Safaris`;
   const languages = Object.fromEntries(
     SUPPORTED_LOCALES.map((supportedLocale) => [
       supportedLocale,

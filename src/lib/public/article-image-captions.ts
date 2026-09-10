@@ -63,7 +63,7 @@ export function applyCaptionsToHtml(html: string, captionByUrl: Map<string, stri
     if (!caption || alreadyInFigure) {
       result += imgTag;
     } else {
-      result += `<figure class="benroso-article-figure">${imgTag}<figcaption>${escapeHtml(caption)}</figcaption></figure>`;
+      result += `<figure class="brand-article-figure">${imgTag}<figcaption>${escapeHtml(caption)}</figcaption></figure>`;
     }
 
     cursor = start + imgTag.length;

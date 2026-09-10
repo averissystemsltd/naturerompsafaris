@@ -120,10 +120,10 @@ begin
     'en',
     '2-days-lake-nakuru-wildlife-safari',
     '2 Days Lake Nakuru Wildlife Safari',
-    'Discover Lake Nakuru on a 2-day wildlife safari with Benroso Safaris. Enjoy scenic Rift Valley travel, afternoon and morning game drives, rhino and birdlife viewing, photography opportunities and an overnight stay near the park.',
+    'Discover Lake Nakuru on a 2-day wildlife safari with Nature Romp Safaris. Enjoy scenic Rift Valley travel, afternoon and morning game drives, rhino and birdlife viewing, photography opportunities and an overnight stay near the park.',
     jsonb_build_object(
       'html',
-      $overview$<p>The 2 Days Lake Nakuru Wildlife Safari is a short Rift Valley escape designed for travelers who want focused wildlife viewing within easy reach of Nairobi. The journey begins with a scenic drive through the Great Rift Valley, including a stop at a viewpoint before continuing to Lake Nakuru National Park.</p><p>An afternoon game drive provides the first opportunity to explore the park and observe its wildlife and birdlife. After an overnight stay near Lake Nakuru, the second day begins with another game drive, giving guests more time for photography and wildlife sightings before returning to Nairobi.</p><p>The itinerary is simple and well paced, making it ideal for visitors who want a short safari without covering several destinations. Benroso Safaris recommends this package for couples, families, photographers, birdwatchers and first-time safari guests with limited time in Kenya.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Lake Nakuru game drives</p></li><li><p>Great Rift Valley scenery</p></li><li><p>Rhino viewing opportunities</p></li><li><p>Bird watching</p></li><li><p>Wildlife photography</p></li><li><p>Morning game drive</p></li><li><p>Afternoon game drive</p></li><li><p>Scenic road travel</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Travelers with limited time in Kenya</p></li><li><p>Couples and small groups</p></li><li><p>Families with children</p></li><li><p>Rhino and bird-watching enthusiasts</p></li><li><p>Wildlife photographers</p></li><li><p>First-time safari guests</p></li></ul>$overview$
+      $overview$<p>The 2 Days Lake Nakuru Wildlife Safari is a short Rift Valley escape designed for travelers who want focused wildlife viewing within easy reach of Nairobi. The journey begins with a scenic drive through the Great Rift Valley, including a stop at a viewpoint before continuing to Lake Nakuru National Park.</p><p>An afternoon game drive provides the first opportunity to explore the park and observe its wildlife and birdlife. After an overnight stay near Lake Nakuru, the second day begins with another game drive, giving guests more time for photography and wildlife sightings before returning to Nairobi.</p><p>The itinerary is simple and well paced, making it ideal for visitors who want a short safari without covering several destinations. Nature Romp Safaris recommends this package for couples, families, photographers, birdwatchers and first-time safari guests with limited time in Kenya.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Lake Nakuru game drives</p></li><li><p>Great Rift Valley scenery</p></li><li><p>Rhino viewing opportunities</p></li><li><p>Bird watching</p></li><li><p>Wildlife photography</p></li><li><p>Morning game drive</p></li><li><p>Afternoon game drive</p></li><li><p>Scenic road travel</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Travelers with limited time in Kenya</p></li><li><p>Couples and small groups</p></li><li><p>Families with children</p></li><li><p>Rhino and bird-watching enthusiasts</p></li><li><p>Wildlife photographers</p></li><li><p>First-time safari guests</p></li></ul>$overview$
     ),
     '[
       {"question":"Which destination is included?","answer":"The safari focuses entirely on Lake Nakuru National Park."},
@@ -134,9 +134,9 @@ begin
       {"question":"Where does the safari start and end?","answer":"The safari starts and ends in Nairobi."}
     ]'::jsonb,
     '2 Days Lake Nakuru Wildlife Safari',
-    '2-day Lake Nakuru wildlife safari with Benroso Safaris, featuring Rift Valley views, morning and afternoon game drives, rhinos and birdlife.',
+    '2-day Lake Nakuru wildlife safari with Nature Romp Safaris, featuring Rift Valley views, morning and afternoon game drives, rhinos and birdlife.',
     '2 Days Lake Nakuru Wildlife Safari',
-    '["Lake Nakuru short safari","rhino safari Kenya","Lake Nakuru game drive","Rift Valley wildlife safari","Benroso Safaris"]'::jsonb,
+    '["Lake Nakuru short safari","rhino safari Kenya","Lake Nakuru game drive","Rift Valley wildlife safari","Nature Romp Safaris"]'::jsonb,
     null,
     v_now
   );

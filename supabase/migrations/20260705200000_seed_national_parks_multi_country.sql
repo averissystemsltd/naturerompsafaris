@@ -54,7 +54,7 @@ park_rows as (
       when coalesce(c.best_time ->> 'summary', '') <> '' then c.best_time
       else jsonb_build_object(
         'summary',
-        'Year-round travel is possible; contact Benroso Safaris for seasonal tips and availability.'
+        'Year-round travel is possible; contact Nature Romp Safaris for seasonal tips and availability.'
       )
     end,
     case
@@ -85,7 +85,7 @@ translation_rows as (
     dt.name,
     coalesce(
       dt.summary,
-      'Explore ' || dt.name || ' with Benroso Safaris - wildlife seasons, routes, and tailored safari options.'
+      'Explore ' || dt.name || ' with Nature Romp Safaris - wildlife seasons, routes, and tailored safari options.'
     ),
     now()
   from park_rows p

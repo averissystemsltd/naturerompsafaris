@@ -82,8 +82,8 @@ export const HOME_SHOWCASE_ITEMS: HomeShowcaseItem[] = [
     location: 'Across Kenya, Tanzania, Uganda & Rwanda',
     description:
       'Your own vehicle, your own pace, a driver-guide who knows where the light falls best. The original safari, done properly and tailored entirely to you.',
-    imageUrl: '/assets/benroso-safaris-kenya.webp',
-    imageAlt: 'Benroso Safaris 4x4 vehicle on the plains of Kenya',
+    imageUrl: '/assets/brand-safaris-kenya.webp',
+    imageAlt: 'Nature Romp Safaris 4x4 vehicle on the plains of Kenya',
     href: '/experiences?category=4X4%20Safari%20Tours'
   }
 ];
@@ -133,7 +133,7 @@ export const HOME_FAQS: HomeFaq[] = [
       'Both. Most of our guests travel on private safaris with their own vehicle and driver-guide, but we also arrange small group departures and tailor-made itineraries for families, couples, and larger parties.'
   },
   {
-    question: 'What does a Benroso safari include?',
+    question: 'What does a Nature Romp safari include?',
     answer:
       'Typically park fees, accommodation, a private 4x4 with a professional driver-guide, transfers, and game drives as set out in your itinerary. We send a clear day-by-day plan and a transparent price before you book, with no hidden costs.'
   },
@@ -245,7 +245,7 @@ export function sortExperienceCategoriesBySearchPopularity(
 
 /**
  * Experience categories for the grid section, modelled on the kinds of safaris
- * Benroso runs across East and Southern Africa.
+ * Nature Romp runs across East and Southern Africa.
  */
 export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
   {
@@ -284,7 +284,7 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
     id: 'big-five',
     title: 'Big 5 Safaris',
     blurb: 'Lion, leopard, elephant, buffalo, and rhino across our flagship parks.',
-    imageUrl: '/assets/benroso-safaris-kenya.webp',
+    imageUrl: '/assets/brand-safaris-kenya.webp',
     imageAlt: 'Safari vehicle searching for the Big Five on the Kenyan plains',
     href: '/experiences?category=Big%205%20Safaris'
   },
@@ -317,7 +317,7 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
     id: 'beach',
     title: 'Safari & Beach Holidays',
     blurb: 'Pair your game drives with Diani, Zanzibar, or the Kenyan coast.',
-    imageUrl: '/assets/benroso-safaris-kenya.webp',
+    imageUrl: '/assets/brand-safaris-kenya.webp',
     imageAlt: 'Safari and beach combination holiday in East Africa',
     href: '/experiences?category=Safari%20%26%20Beach%20Holidays'
   },

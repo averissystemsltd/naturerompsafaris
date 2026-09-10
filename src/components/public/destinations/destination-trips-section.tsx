@@ -1,5 +1,5 @@
 import { TourCard } from '@/components/public/cards/content-cards';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { localePath } from '@/lib/public/locale-path';
 import type { PublicTour } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
@@ -35,21 +35,19 @@ export function DestinationTripsSection({
       className={cn(
         'scroll-mt-36',
         variant === 'plain'
-          ? 'border-t border-[var(--benroso-line)] bg-white'
-          : 'benroso-section bg-[var(--benroso-ivory)]'
+          ? 'border-t border-[var(--brand-line)] bg-white'
+          : 'brand-section bg-[var(--brand-ivory)]'
       )}
       id={id}
     >
       <div
-        className={cn(
-          variant === 'plain' ? 'benroso-container py-10 md:py-12' : 'benroso-container'
-        )}
+        className={cn(variant === 'plain' ? 'brand-container py-10 md:py-12' : 'brand-container')}
       >
-        <p className='benroso-eyebrow'>{eyebrow}</p>
-        <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
+        <p className='brand-eyebrow'>{eyebrow}</p>
+        <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
           {heading}
         </h2>
-        <p className='benroso-body mt-3 max-w-2xl text-base leading-8'>{body}</p>
+        <p className='brand-body mt-3 max-w-2xl text-base leading-8'>{body}</p>
 
         {tours.length ? (
           <div className='mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
@@ -71,18 +69,16 @@ export function DestinationTripsSection({
             ))}
           </div>
         ) : (
-          <div className='mt-8 rounded-[var(--benroso-radius)] border border-dashed border-[var(--benroso-line)] bg-white px-8 py-14 text-center'>
-            <h3 className='benroso-heading font-display text-2xl'>
+          <div className='mt-8 rounded-[var(--brand-radius)] border border-dashed border-[var(--brand-line)] bg-white px-8 py-14 text-center'>
+            <h3 className='brand-heading font-display text-2xl'>
               Safaris to {destinationName} coming soon
             </h3>
-            <p className='benroso-body mx-auto mt-3 max-w-xl'>
+            <p className='brand-body mx-auto mt-3 max-w-xl'>
               We are putting together itineraries that visit {destinationName}. In the meantime, our
               team can build a custom safari around this destination for you.
             </p>
             <div className='mt-6'>
-              <BenrosoButton href={localePath(locale, '/contact')}>
-                Plan a Custom Safari
-              </BenrosoButton>
+              <BrandButton href={localePath(locale, '/contact')}>Plan a Custom Safari</BrandButton>
             </div>
           </div>
         )}

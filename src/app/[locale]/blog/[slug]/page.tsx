@@ -101,7 +101,7 @@ export async function generateMetadata(props: BlogPageProps): Promise<Metadata> 
   if (!post) notFound();
 
   const canonical = absoluteUrl(`/${locale}/blog/${post.slug}`);
-  const title = post.seo_title || `${post.title} | Benroso Safaris`;
+  const title = post.seo_title || `${post.title} | Nature Romp Safaris`;
   const description = post.seo_description || post.excerpt || '';
 
   return {
@@ -198,13 +198,13 @@ export default async function BlogPostPage(props: BlogPageProps) {
         title={post.title}
       />
       <main className='bg-white'>
-        <div className='benroso-container max-w-6xl py-10 md:py-14'>
+        <div className='brand-container max-w-6xl py-10 md:py-14'>
           {/* Top meta row: published date / read time + social share */}
-          <div className='flex flex-wrap items-center justify-between gap-4 border-b border-[var(--benroso-line)] pb-5'>
-            <div className='flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[var(--benroso-muted)]'>
+          <div className='flex flex-wrap items-center justify-between gap-4 border-b border-[var(--brand-line)] pb-5'>
+            <div className='flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[var(--brand-muted)]'>
               {publishedLabel ? (
                 <span className='inline-flex items-center gap-1.5'>
-                  <Icons.calendar className='size-4 text-[var(--benroso-primary)]' />
+                  <Icons.calendar className='size-4 text-[var(--brand-primary)]' />
                   {publishedLabel}
                 </span>
               ) : null}
@@ -217,7 +217,7 @@ export default async function BlogPostPage(props: BlogPageProps) {
               {category ? (
                 <>
                   <span aria-hidden>·</span>
-                  <span className='font-medium text-[var(--benroso-primary)]'>{category}</span>
+                  <span className='font-medium text-[var(--brand-primary)]'>{category}</span>
                 </>
               ) : null}
             </div>
@@ -228,7 +228,7 @@ export default async function BlogPostPage(props: BlogPageProps) {
             {/* Table of contents — left sidebar */}
             {toc.length ? (
               <aside className='hidden lg:block'>
-                <div className='sticky top-[calc(var(--benroso-header-h)+1.5rem)]'>
+                <div className='sticky top-[calc(var(--brand-header-h)+1.5rem)]'>
                   <ArticleToc items={toc} />
                 </div>
               </aside>
@@ -239,7 +239,7 @@ export default async function BlogPostPage(props: BlogPageProps) {
             {/* Article body */}
             <article className='min-w-0'>
               {image?.url ? (
-                <figure className='mb-8 overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white'>
+                <figure className='mb-8 overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white'>
                   <div className='relative aspect-[16/9]'>
                     <Image
                       alt={image.alt || post.title}
@@ -251,7 +251,7 @@ export default async function BlogPostPage(props: BlogPageProps) {
                     />
                   </div>
                   {post.featured_image_caption ? (
-                    <figcaption className='px-4 py-3 text-sm text-[var(--benroso-muted)]'>
+                    <figcaption className='px-4 py-3 text-sm text-[var(--brand-muted)]'>
                       {post.featured_image_caption}
                     </figcaption>
                   ) : null}
@@ -259,16 +259,13 @@ export default async function BlogPostPage(props: BlogPageProps) {
               ) : null}
 
               {bodyHtml ? (
-                <div
-                  className='benroso-legal-prose'
-                  dangerouslySetInnerHTML={{ __html: bodyHtml }}
-                />
+                <div className='brand-legal-prose' dangerouslySetInnerHTML={{ __html: bodyHtml }} />
               ) : post.excerpt ? (
-                <p className='text-lg leading-8 text-[var(--benroso-muted)]'>{post.excerpt}</p>
+                <p className='text-lg leading-8 text-[var(--brand-muted)]'>{post.excerpt}</p>
               ) : null}
 
               {/* Share again at the end */}
-              <div className='mt-10 border-t border-[var(--benroso-line)] pt-6'>
+              <div className='mt-10 border-t border-[var(--brand-line)] pt-6'>
                 <ArticleShare title={post.title} />
               </div>
 
@@ -277,14 +274,14 @@ export default async function BlogPostPage(props: BlogPageProps) {
                 <nav aria-label='More articles' className='mt-8 grid gap-4 sm:grid-cols-2'>
                   {neighbors.previous ? (
                     <Link
-                      className='group flex flex-col gap-1 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-5 transition-colors hover:border-[var(--benroso-primary)]'
+                      className='group flex flex-col gap-1 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-5 transition-colors hover:border-[var(--brand-primary)]'
                       href={neighbors.previous.href}
                     >
-                      <span className='inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+                      <span className='inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
                         <Icons.chevronLeft className='size-3.5' />
                         Previous
                       </span>
-                      <span className='font-display text-lg leading-snug text-[var(--benroso-ink)] group-hover:text-[var(--benroso-primary)]'>
+                      <span className='font-display text-lg leading-snug text-[var(--brand-ink)] group-hover:text-[var(--brand-primary)]'>
                         {neighbors.previous.title}
                       </span>
                     </Link>
@@ -293,14 +290,14 @@ export default async function BlogPostPage(props: BlogPageProps) {
                   )}
                   {neighbors.next ? (
                     <Link
-                      className='group flex flex-col items-end gap-1 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-5 text-right transition-colors hover:border-[var(--benroso-primary)]'
+                      className='group flex flex-col items-end gap-1 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-5 text-right transition-colors hover:border-[var(--brand-primary)]'
                       href={neighbors.next.href}
                     >
-                      <span className='inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+                      <span className='inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
                         Next
                         <Icons.chevronRight className='size-3.5' />
                       </span>
-                      <span className='font-display text-lg leading-snug text-[var(--benroso-ink)] group-hover:text-[var(--benroso-primary)]'>
+                      <span className='font-display text-lg leading-snug text-[var(--brand-ink)] group-hover:text-[var(--brand-primary)]'>
                         {neighbors.next.title}
                       </span>
                     </Link>

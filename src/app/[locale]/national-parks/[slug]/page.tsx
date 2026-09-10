@@ -8,7 +8,7 @@ import { TourCard } from '@/components/public/cards/content-cards';
 import { FaqSection } from '@/components/public/faq-section';
 import { ParkScrollTabs } from '@/components/public/national-parks/park-scroll-tabs';
 import { ParkWhenToGo } from '@/components/public/national-parks/park-when-to-go';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { listPublishedAccommodations } from '@/features/accommodations/public/service';
 import { getParkBySlug, getParkTours } from '@/lib/public/national-parks';
 import { localePath } from '@/lib/public/locale-path';
@@ -25,7 +25,7 @@ export async function generateMetadata(props: ParkPageProps): Promise<Metadata> 
   if (!park) notFound();
 
   const canonical = absoluteUrl(`/${locale}/national-parks/${park.slug}`);
-  const title = park.seoTitle || `${park.name} Safari Guide | Benroso Safaris`;
+  const title = park.seoTitle || `${park.name} Safari Guide | Nature Romp Safaris`;
   const description = park.seoDescription || park.summary || '';
 
   return {
@@ -92,7 +92,7 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
       ) : null}
 
       {/* Hero */}
-      <section className='relative isolate flex min-h-[clamp(360px,52vh,560px)] items-end overflow-hidden bg-[var(--benroso-primary-dark)] text-white'>
+      <section className='relative isolate flex min-h-[clamp(360px,52vh,560px)] items-end overflow-hidden bg-[var(--brand-primary-dark)] text-white'>
         {heroImage ? (
           <Image
             alt={park.ogImageAlt || park.name}
@@ -107,7 +107,7 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
           aria-hidden
           className='absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/20'
         />
-        <div className='benroso-container relative z-10 py-10 md:py-14'>
+        <div className='brand-container relative z-10 py-10 md:py-14'>
           <nav aria-label='Breadcrumb' className='mb-4 flex flex-wrap gap-2 text-sm text-white/75'>
             <a className='hover:text-white' href={localePath(locale)}>
               Home
@@ -138,7 +138,7 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
               </a>
             </p>
           ) : null}
-          <p className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--benroso-lime)]'>
+          <p className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--brand-lime)]'>
             National Park
           </p>
           <h1 className='mt-3 max-w-3xl font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.08]'>
@@ -166,32 +166,32 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
       <ParkScrollTabs tabs={tabs} />
 
       {/* Why Visit */}
-      <section className={`${SECTION_OFFSET} benroso-section bg-white`} id='why-visit'>
-        <div className='benroso-container'>
-          <p className='benroso-eyebrow'>Overview</p>
-          <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
+      <section className={`${SECTION_OFFSET} brand-section bg-white`} id='why-visit'>
+        <div className='brand-container'>
+          <p className='brand-eyebrow'>Overview</p>
+          <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
             Why Visit {park.name}
           </h2>
 
           {park.descriptionHtml ? (
             <div
-              className='benroso-legal-prose mt-6 max-w-3xl'
+              className='brand-legal-prose mt-6 max-w-3xl'
               dangerouslySetInnerHTML={{ __html: park.descriptionHtml }}
             />
           ) : park.summary ? (
-            <p className='benroso-body mt-6 max-w-3xl text-base leading-8'>{park.summary}</p>
+            <p className='brand-body mt-6 max-w-3xl text-base leading-8'>{park.summary}</p>
           ) : null}
 
           {park.wildlife.length ? (
             <div className='mt-10'>
-              <h3 className='benroso-heading font-display text-xl'>Wildlife to spot</h3>
+              <h3 className='brand-heading font-display text-xl'>Wildlife to spot</h3>
               <ul className='mt-4 flex flex-wrap gap-2'>
                 {park.wildlife.map((animal) => (
                   <li
-                    className='inline-flex items-center gap-1.5 rounded-[5px] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] px-3 py-1.5 text-sm text-[var(--benroso-ink)]'
+                    className='inline-flex items-center gap-1.5 rounded-[5px] border border-[var(--brand-line)] bg-[var(--brand-ivory)] px-3 py-1.5 text-sm text-[var(--brand-ink)]'
                     key={animal}
                   >
-                    <Icons.check className='size-3.5 text-[var(--benroso-primary)]' />
+                    <Icons.check className='size-3.5 text-[var(--brand-primary)]' />
                     {animal}
                   </li>
                 ))}
@@ -201,14 +201,14 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
 
           {park.activities.length ? (
             <div className='mt-8'>
-              <h3 className='benroso-heading font-display text-xl'>Things to do</h3>
+              <h3 className='brand-heading font-display text-xl'>Things to do</h3>
               <ul className='mt-4 flex flex-wrap gap-2'>
                 {park.activities.map((activity) => (
                   <li
-                    className='inline-flex items-center gap-1.5 rounded-[5px] border border-[var(--benroso-line)] bg-white px-3 py-1.5 text-sm text-[var(--benroso-ink)]'
+                    className='inline-flex items-center gap-1.5 rounded-[5px] border border-[var(--brand-line)] bg-white px-3 py-1.5 text-sm text-[var(--brand-ink)]'
                     key={activity}
                   >
-                    <Icons.compass className='size-3.5 text-[var(--benroso-primary)]' />
+                    <Icons.compass className='size-3.5 text-[var(--brand-primary)]' />
                     {activity}
                   </li>
                 ))}
@@ -220,7 +220,7 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
           !park.summary &&
           !park.wildlife.length &&
           !park.activities.length ? (
-            <p className='benroso-body mt-6 max-w-2xl text-base leading-8 text-[var(--benroso-muted)]'>
+            <p className='brand-body mt-6 max-w-2xl text-base leading-8 text-[var(--brand-muted)]'>
               An overview of {park.name} — wildlife, scenery and things to do — will appear here
               once it is added in the portal.
             </p>
@@ -230,12 +230,12 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
 
       {/* When to Go */}
       <section
-        className={`${SECTION_OFFSET} benroso-section bg-[var(--benroso-ivory)]`}
+        className={`${SECTION_OFFSET} brand-section bg-[var(--brand-ivory)]`}
         id='when-to-go'
       >
-        <div className='benroso-container'>
-          <p className='benroso-eyebrow'>When to Go</p>
-          <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
+        <div className='brand-container'>
+          <p className='brand-eyebrow'>When to Go</p>
+          <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
             The Best Time to Visit {park.name}
           </h2>
           <div className='mt-6'>
@@ -245,24 +245,24 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
       </section>
 
       {/* Safaris */}
-      <section className={`${SECTION_OFFSET} benroso-section bg-white`} id='safaris'>
-        <div className='benroso-container'>
+      <section className={`${SECTION_OFFSET} brand-section bg-white`} id='safaris'>
+        <div className='brand-container'>
           <div className='flex flex-wrap items-end justify-between gap-4'>
             <div>
-              <p className='benroso-eyebrow'>Safaris</p>
-              <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
+              <p className='brand-eyebrow'>Safaris</p>
+              <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
                 Safaris That Visit {park.name}
               </h2>
             </div>
             {tours.length ? (
-              <BenrosoButton
+              <BrandButton
                 href={localePath(locale, `/tours?park=${encodeURIComponent(park.slug)}`)}
                 size='sm'
                 variant='accent-outline'
               >
                 Browse All Safaris
                 <Icons.arrowRight className='h-3.5 w-3.5' />
-              </BenrosoButton>
+              </BrandButton>
             ) : null}
           </div>
           {tours.length ? (
@@ -272,18 +272,18 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
               ))}
             </div>
           ) : (
-            <div className='mt-8 rounded-[var(--benroso-radius)] border border-dashed border-[var(--benroso-line)] bg-[var(--benroso-ivory)] px-8 py-14 text-center'>
-              <h3 className='benroso-heading font-display text-2xl'>
+            <div className='mt-8 rounded-[var(--brand-radius)] border border-dashed border-[var(--brand-line)] bg-[var(--brand-ivory)] px-8 py-14 text-center'>
+              <h3 className='brand-heading font-display text-2xl'>
                 Safaris to {park.name} coming soon
               </h3>
-              <p className='benroso-body mx-auto mt-3 max-w-xl'>
+              <p className='brand-body mx-auto mt-3 max-w-xl'>
                 We are building itineraries that include {park.name}. Our team can also craft a
                 custom safari around this park for you.
               </p>
               <div className='mt-6'>
-                <BenrosoButton href={localePath(locale, '/contact')}>
+                <BrandButton href={localePath(locale, '/contact')}>
                   Plan a Custom Safari
-                </BenrosoButton>
+                </BrandButton>
               </div>
             </div>
           )}
@@ -292,12 +292,12 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
 
       {/* Accommodation */}
       <section
-        className={`${SECTION_OFFSET} benroso-section bg-[var(--benroso-ivory)]`}
+        className={`${SECTION_OFFSET} brand-section bg-[var(--brand-ivory)]`}
         id='accommodation'
       >
-        <div className='benroso-container'>
-          <p className='benroso-eyebrow'>Accommodation</p>
-          <h2 className='benroso-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
+        <div className='brand-container'>
+          <p className='brand-eyebrow'>Accommodation</p>
+          <h2 className='brand-heading mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight'>
             Where to Stay {park.country ? `in ${park.country}` : ''}
           </h2>
           {nearbyStays.length ? (
@@ -307,21 +307,18 @@ export default async function NationalParkDetailPage(props: ParkPageProps) {
               ))}
             </div>
           ) : (
-            <div className='mt-8 rounded-[var(--benroso-radius)] border border-dashed border-[var(--benroso-line)] bg-white px-8 py-14 text-center'>
-              <h3 className='benroso-heading font-display text-2xl'>
+            <div className='mt-8 rounded-[var(--brand-radius)] border border-dashed border-[var(--brand-line)] bg-white px-8 py-14 text-center'>
+              <h3 className='brand-heading font-display text-2xl'>
                 Lodges &amp; camps coming soon
               </h3>
-              <p className='benroso-body mx-auto mt-3 max-w-xl'>
+              <p className='brand-body mx-auto mt-3 max-w-xl'>
                 Hand-picked lodges and tented camps near {park.name} will appear here. Ask our team
                 for current recommendations.
               </p>
               <div className='mt-6'>
-                <BenrosoButton
-                  href={localePath(locale, '/accommodations')}
-                  variant='accent-outline'
-                >
+                <BrandButton href={localePath(locale, '/accommodations')} variant='accent-outline'>
                   Browse Accommodations
-                </BenrosoButton>
+                </BrandButton>
               </div>
             </div>
           )}

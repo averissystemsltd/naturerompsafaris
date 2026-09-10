@@ -4,7 +4,7 @@ import { ContactAdvantagesList } from '@/components/public/contact/contact-advan
 import { ContactScrollReveal } from '@/components/public/contact/contact-scroll-reveal';
 import { ContactSidebarMap } from '@/components/public/contact/contact-sidebar-map';
 import { Icons } from '@/components/icons';
-import { BENROSO_CONTACT_DEFAULTS, BENROSO_WHATSAPP } from '@/config/benroso';
+import { BRAND_CONTACT_DEFAULTS, BRAND_WHATSAPP } from '@/config/brand';
 import type { PublicSiteSettings } from '@/lib/public/types';
 import { whatsAppHref } from '@/lib/public/whatsapp';
 
@@ -14,37 +14,37 @@ type ContactDetailsProps = {
 
 export function ContactDetails({ siteSettings }: ContactDetailsProps) {
   const whatsappLink = whatsAppHref(
-    BENROSO_WHATSAPP.phone,
-    siteSettings.whatsappMessage || BENROSO_WHATSAPP.message
+    BRAND_WHATSAPP.phone,
+    siteSettings.whatsappMessage || BRAND_WHATSAPP.message
   );
 
   const phonePrimaryHref = `tel:${siteSettings.phonePrimary.replace(/[^\d+]/g, '')}`;
   const phoneSecondaryHref = `tel:${siteSettings.phoneSecondary.replace(/[^\d+]/g, '')}`;
 
   return (
-    <aside className='benroso-contact-sidebar-inner space-y-8'>
+    <aside className='brand-contact-sidebar-inner space-y-8'>
       <ContactScrollReveal>
-        <div className='benroso-contact-details-block'>
-          <h2 className='benroso-contact-sidebar-heading'>Contact Details</h2>
+        <div className='brand-contact-details-block'>
+          <h2 className='brand-contact-sidebar-heading'>Contact Details</h2>
 
-          <div className='benroso-contact-credentials-box'>
-            <dl className='benroso-contact-sidebar-list'>
-              <div className='benroso-contact-sidebar-row'>
-                <dt className='benroso-contact-sidebar-label'>Mobile &amp; Whatsapp:</dt>
-                <dd className='benroso-contact-sidebar-value'>
-                  <span className='benroso-contact-sidebar-phones'>
-                    <a className='benroso-contact-sidebar-link' href={phonePrimaryHref}>
+          <div className='brand-contact-credentials-box'>
+            <dl className='brand-contact-sidebar-list'>
+              <div className='brand-contact-sidebar-row'>
+                <dt className='brand-contact-sidebar-label'>Mobile &amp; Whatsapp:</dt>
+                <dd className='brand-contact-sidebar-value'>
+                  <span className='brand-contact-sidebar-phones'>
+                    <a className='brand-contact-sidebar-link' href={phonePrimaryHref}>
                       {siteSettings.phonePrimary}
                     </a>
-                    <span aria-hidden className='benroso-contact-sidebar-separator'>
+                    <span aria-hidden className='brand-contact-sidebar-separator'>
                       |
                     </span>
-                    <a className='benroso-contact-sidebar-link' href={phoneSecondaryHref}>
+                    <a className='brand-contact-sidebar-link' href={phoneSecondaryHref}>
                       {siteSettings.phoneSecondary}
                     </a>
                   </span>
                   <a
-                    className='benroso-contact-sidebar-link benroso-contact-sidebar-link--whatsapp'
+                    className='brand-contact-sidebar-link brand-contact-sidebar-link--whatsapp'
                     href={whatsappLink}
                     rel='noopener noreferrer'
                     target='_blank'
@@ -55,11 +55,11 @@ export function ContactDetails({ siteSettings }: ContactDetailsProps) {
                 </dd>
               </div>
 
-              <div className='benroso-contact-sidebar-row'>
-                <dt className='benroso-contact-sidebar-label'>Email:</dt>
-                <dd className='benroso-contact-sidebar-value'>
+              <div className='brand-contact-sidebar-row'>
+                <dt className='brand-contact-sidebar-label'>Email:</dt>
+                <dd className='brand-contact-sidebar-value'>
                   <a
-                    className='benroso-contact-sidebar-link benroso-contact-sidebar-link--email'
+                    className='brand-contact-sidebar-link brand-contact-sidebar-link--email'
                     href={`mailto:${siteSettings.email}`}
                   >
                     {siteSettings.email}
@@ -67,11 +67,11 @@ export function ContactDetails({ siteSettings }: ContactDetailsProps) {
                 </dd>
               </div>
 
-              <div className='benroso-contact-sidebar-row'>
-                <dt className='benroso-contact-sidebar-label'>Address:</dt>
-                <dd className='benroso-contact-sidebar-value benroso-contact-sidebar-address'>
+              <div className='brand-contact-sidebar-row'>
+                <dt className='brand-contact-sidebar-label'>Address:</dt>
+                <dd className='brand-contact-sidebar-value brand-contact-sidebar-address'>
                   <p>{siteSettings.addressShort}</p>
-                  <p>{siteSettings.postalAddress || BENROSO_CONTACT_DEFAULTS.postalAddress}</p>
+                  <p>{siteSettings.postalAddress || BRAND_CONTACT_DEFAULTS.postalAddress}</p>
                 </dd>
               </div>
             </dl>
@@ -82,11 +82,11 @@ export function ContactDetails({ siteSettings }: ContactDetailsProps) {
       </ContactScrollReveal>
 
       <ContactScrollReveal>
-        <div className='benroso-contact-advantages-block'>
-          <h3 className='benroso-contact-sidebar-heading benroso-contact-sidebar-heading--sm'>
-            Advantages of Booking with Benroso Safaris
+        <div className='brand-contact-advantages-block'>
+          <h3 className='brand-contact-sidebar-heading brand-contact-sidebar-heading--sm'>
+            Advantages of Booking with Nature Romp Safaris
           </h3>
-          <div className='benroso-contact-credentials-box'>
+          <div className='brand-contact-credentials-box'>
             <ContactAdvantagesList />
           </div>
         </div>

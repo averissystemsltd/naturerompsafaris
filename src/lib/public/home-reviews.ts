@@ -1,5 +1,5 @@
 /**
- * Real guest reviews sourced from Benroso Safaris' Google / Tripadvisor profiles.
+ * Real guest reviews sourced from Nature Romp Safaris' Google / Tripadvisor profiles.
  * Names, locations and ratings are taken from the live public reviews; quote text is
  * lightly condensed from each original review for display. Update via the dashboard
  * once a live reviews integration ships.
@@ -40,7 +40,7 @@ export const HOME_REVIEWS: HomeReview[] = [
     source: 'Tripadvisor',
     rating: 5,
     quote:
-      'Benroso made our Kenya trip seamless and incredible. Being able to plan our itinerary directly with Ben was a huge help, and our guide Stan and the drivers were exceptional — we formed real bonds throughout the journey.'
+      'Nature Romp made our Kenya trip seamless and incredible. Being able to plan our itinerary directly with Ben was a huge help, and our guide Stan and the drivers were exceptional — we formed real bonds throughout the journey.'
   },
   {
     id: 'review-andrea-d',
@@ -49,7 +49,7 @@ export const HOME_REVIEWS: HomeReview[] = [
     source: 'Tripadvisor',
     rating: 5,
     quote:
-      'Travelling all the way from the US to Kenya felt daunting, but Benroso made the complicated arrangements simple. The team was friendly, responsive and helpful, and our drivers were punctual and knowledgeable at every location.'
+      'Travelling all the way from the US to Kenya felt daunting, but Nature Romp made the complicated arrangements simple. The team was friendly, responsive and helpful, and our drivers were punctual and knowledgeable at every location.'
   },
   {
     id: 'review-ryan-m',
@@ -84,7 +84,7 @@ export const HOME_REVIEWS: HomeReview[] = [
     source: 'Tripadvisor',
     rating: 5,
     quote:
-      'The organisation was fantastic and the support responsive throughout. Benroso put together an excellent combination of safari and resort that made the whole holiday effortless. Highly recommend.'
+      'The organisation was fantastic and the support responsive throughout. Nature Romp put together an excellent combination of safari and resort that made the whole holiday effortless. Highly recommend.'
   },
   {
     id: 'review-benbenja',
@@ -101,7 +101,7 @@ export const HOME_REVIEWS: HomeReview[] = [
     source: 'Tripadvisor',
     rating: 5,
     quote:
-      'A thrilling Kenyan safari adventure. The staff were first class, the guides genuinely knowledgeable and the vehicles in great condition. I can already say I will be booking another trip with Benroso.'
+      'A thrilling Kenyan safari adventure. The staff were first class, the guides genuinely knowledgeable and the vehicles in great condition. I can already say I will be booking another trip with Nature Romp.'
   }
 ];
 

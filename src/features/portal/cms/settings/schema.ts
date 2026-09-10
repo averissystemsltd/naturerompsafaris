@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { BENROSO_FAVICON_PATH } from '@/config/benroso';
+import { BRAND_FAVICON_PATH } from '@/config/brand';
 import { normalizeSiteVerificationToken } from '@/lib/site-verification';
 import type { Tables } from '@/types/database.types';
 
@@ -97,10 +97,10 @@ export function settingsFromRow(row: Tables<'site_settings'> | null): SettingsFo
 
   return {
     general: {
-      companyName: row?.company_name ?? 'Benroso Safaris Ltd',
+      companyName: row?.company_name ?? 'Nature Romp Safaris Ltd',
       tagline: row?.tagline ?? '',
       logoUrl: row?.logo_url ?? '',
-      faviconUrl: row?.favicon_url ?? BENROSO_FAVICON_PATH,
+      faviconUrl: row?.favicon_url ?? BRAND_FAVICON_PATH,
       ogDefaultImageUrl: row?.og_default_image_url ?? '',
       themeColor: row?.theme_color ?? ''
     },

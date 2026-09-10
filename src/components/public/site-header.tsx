@@ -7,12 +7,12 @@ import { useEffect, useState } from 'react';
 
 import { Icons } from '@/components/icons';
 import {
-  BENROSO_LOGO_HEIGHT,
-  BENROSO_LOGO_PATH,
-  BENROSO_LOGO_WIDTH,
-  BENROSO_TRIPADVISOR,
-  BENROSO_WHATSAPP
-} from '@/config/benroso';
+  BRAND_LOGO_HEIGHT,
+  BRAND_LOGO_PATH,
+  BRAND_LOGO_WIDTH,
+  BRAND_TRIPADVISOR,
+  BRAND_WHATSAPP
+} from '@/config/brand';
 import { localePath, stripLocalePrefix } from '@/lib/public/locale-path';
 import { SUPPORTED_LOCALES } from '@/lib/i18n';
 import type { PublicMegaMenu, PublicNavItem, PublicSiteSettings } from '@/lib/public/types';
@@ -79,8 +79,8 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
 
   const homeHref = localePath(locale);
   const whatsappHref = whatsAppHref(
-    BENROSO_WHATSAPP.phone,
-    siteSettings.whatsappMessage || BENROSO_WHATSAPP.message
+    BRAND_WHATSAPP.phone,
+    siteSettings.whatsappMessage || BRAND_WHATSAPP.message
   );
   const navOnlyItems = navItems.filter((item) => item.label !== 'Home');
 
@@ -89,19 +89,19 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
       {/* Top utility row — desktop only; scrolls away when not at top */}
       <div
         className={cn(
-          'hidden border-b border-white/10 bg-[var(--benroso-primary-dark)] text-white transition-opacity duration-300 lg:block',
+          'hidden border-b border-white/10 bg-[var(--brand-primary-dark)] text-white transition-opacity duration-300 lg:block',
           isAtTop ? 'opacity-100' : 'hidden'
         )}
       >
-        <div className='benroso-container flex min-h-[var(--benroso-topbar-h)] flex-wrap items-center justify-between gap-4 py-3 lg:grid lg:grid-cols-[auto_1fr_auto] lg:items-center'>
+        <div className='brand-container flex min-h-[var(--brand-topbar-h)] flex-wrap items-center justify-between gap-4 py-3 lg:grid lg:grid-cols-[auto_1fr_auto] lg:items-center'>
           <Link className='inline-flex shrink-0 items-center' href={homeHref}>
             <Image
               alt={siteSettings.companyName}
               className='h-[54px] w-auto max-w-none'
-              height={BENROSO_LOGO_HEIGHT}
+              height={BRAND_LOGO_HEIGHT}
               priority
-              src={BENROSO_LOGO_PATH}
-              width={BENROSO_LOGO_WIDTH}
+              src={BRAND_LOGO_PATH}
+              width={BRAND_LOGO_WIDTH}
             />
           </Link>
 
@@ -110,7 +110,7 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
           <div className='hidden items-center justify-end gap-8 lg:flex'>
             <div className='text-right text-sm leading-6'>
               <div className='flex items-center justify-end gap-2'>
-                <Icons.phone className='h-4 w-4 shrink-0 text-[var(--benroso-lime)]' />
+                <Icons.phone className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
                 <span className='whitespace-nowrap text-white/90'>
                   <a
                     className='hover:text-white'
@@ -131,13 +131,13 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                 className='mt-1 flex items-center justify-end gap-2 hover:text-white'
                 href={`mailto:${siteSettings.email}`}
               >
-                <Icons.mail className='h-4 w-4 shrink-0 text-[var(--benroso-lime)]' />
+                <Icons.mail className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
                 {siteSettings.email}
               </a>
             </div>
             <a
               aria-label='Help me plan my safari on WhatsApp'
-              className='group benroso-fill-hover inline-flex min-h-9 items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] border border-[var(--benroso-lime)] bg-transparent px-4 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--benroso-lime)] transition-colors duration-200 hover:text-[var(--benroso-primary-dark)]'
+              className='group brand-fill-hover inline-flex min-h-9 items-center justify-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-lime)] bg-transparent px-4 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--brand-lime)] transition-colors duration-200 hover:text-[var(--brand-primary-dark)]'
               href={whatsappHref}
               rel='noopener noreferrer'
               target='_blank'
@@ -152,21 +152,19 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
       {/* Nav pins to viewport top once user scrolls past the utility bar */}
       <header
         className={cn(
-          'z-50 overflow-visible border-b border-white/10 bg-[var(--benroso-primary)] text-white',
-          isAtTop
-            ? 'relative'
-            : 'fixed inset-x-0 top-0 border-b border-[var(--benroso-primary-dark)]'
+          'z-50 overflow-visible border-b border-white/10 bg-[var(--brand-primary)] text-white',
+          isAtTop ? 'relative' : 'fixed inset-x-0 top-0 border-b border-[var(--brand-primary-dark)]'
         )}
       >
-        <div className='benroso-container relative flex h-[var(--benroso-header-h)] items-center justify-between gap-3 overflow-visible lg:justify-center lg:pr-16'>
+        <div className='brand-container relative flex h-[var(--brand-header-h)] items-center justify-between gap-3 overflow-visible lg:justify-center lg:pr-16'>
           <Link className='inline-flex shrink-0 items-center lg:hidden' href={homeHref}>
             <Image
               alt={siteSettings.companyName}
               className='h-11 w-auto max-w-[min(52vw,200px)]'
-              height={BENROSO_LOGO_HEIGHT}
+              height={BRAND_LOGO_HEIGHT}
               priority
-              src={BENROSO_LOGO_PATH}
-              width={BENROSO_LOGO_WIDTH}
+              src={BRAND_LOGO_PATH}
+              width={BRAND_LOGO_WIDTH}
             />
           </Link>
 
@@ -187,8 +185,8 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                     <Link
                       className={cn(
                         'inline-flex items-center gap-1.5 whitespace-nowrap border-b-2 border-transparent py-6 text-[15px] font-normal uppercase leading-none tracking-normal transition-colors xl:text-base',
-                        'hover:border-[var(--benroso-lime)] hover:text-[var(--benroso-lime)]',
-                        isActive && 'border-[var(--benroso-lime)] text-[var(--benroso-lime)]'
+                        'hover:border-[var(--brand-lime)] hover:text-[var(--brand-lime)]',
+                        isActive && 'border-[var(--brand-lime)] text-[var(--brand-lime)]'
                       )}
                       href={item.href}
                     >
@@ -212,11 +210,11 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                           getDropdownPositionClass(item.label)
                         )}
                       >
-                        <ul className='overflow-hidden rounded-b-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white py-1'>
+                        <ul className='overflow-hidden rounded-b-[var(--brand-radius)] border border-[var(--brand-line)] bg-white py-1'>
                           {(item.items ?? []).map((child) => (
                             <li key={`${item.label}-${child.href}`}>
                               <Link
-                                className='block px-4 py-2.5 text-[15px] leading-snug text-[var(--benroso-muted)] transition-colors hover:bg-[var(--benroso-primary)] hover:text-white'
+                                className='block px-4 py-2.5 text-[15px] leading-snug text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white'
                                 href={child.href}
                               >
                                 {child.label}
@@ -237,7 +235,7 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
             <button
               aria-expanded={mobileOpen}
               aria-label='Toggle menu'
-              className='inline-flex h-10 w-10 items-center justify-center rounded-[var(--benroso-button-radius)] border border-white/25 text-white transition-colors hover:border-white hover:text-white lg:hidden'
+              className='inline-flex h-10 w-10 items-center justify-center rounded-[var(--brand-button-radius)] border border-white/25 text-white transition-colors hover:border-white hover:text-white lg:hidden'
               onClick={() => setMobileOpen((v) => !v)}
               type='button'
             >
@@ -251,9 +249,9 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
         </div>
 
         {mobileOpen ? (
-          <div className='border-t border-white/10 bg-[var(--benroso-primary)] lg:hidden'>
-            <div className='benroso-container flex max-h-[min(calc(100dvh-var(--benroso-header-h)),560px)] flex-col'>
-              <div className='flex-1 overflow-y-auto overscroll-contain bg-[var(--benroso-primary)] py-3'>
+          <div className='border-t border-white/10 bg-[var(--brand-primary)] lg:hidden'>
+            <div className='brand-container flex max-h-[min(calc(100dvh-var(--brand-header-h)),560px)] flex-col'>
+              <div className='flex-1 overflow-y-auto overscroll-contain bg-[var(--brand-primary)] py-3'>
                 <nav aria-label='Mobile primary'>
                   {navOnlyItems.map((item) => {
                     const expanded = openGroup === item.label;
@@ -267,8 +265,8 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                             className={cn(
                               'flex-1 py-3.5 text-[15px] font-normal uppercase tracking-normal transition-colors',
                               isActive
-                                ? 'text-[var(--benroso-lime)]'
-                                : 'text-white hover:text-[var(--benroso-lime)]'
+                                ? 'text-[var(--brand-lime)]'
+                                : 'text-white hover:text-[var(--brand-lime)]'
                             )}
                             href={item.href}
                             onClick={() => setMobileOpen(false)}
@@ -279,7 +277,7 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                             <button
                               aria-expanded={expanded}
                               aria-label={`Toggle ${item.label}`}
-                              className='inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--benroso-button-radius)] border border-white/15 text-white transition-colors hover:border-white/30 hover:text-white'
+                              className='inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--brand-button-radius)] border border-white/15 text-white transition-colors hover:border-white/30 hover:text-white'
                               onClick={() => setOpenGroup(expanded ? null : item.label)}
                               type='button'
                             >
@@ -303,7 +301,7 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                             ) : item.sections?.length ? (
                               item.sections.map((section) => (
                                 <div key={`mobile-${item.label}-${section.label}`}>
-                                  <p className='pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--benroso-lime)]'>
+                                  <p className='pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--brand-lime)]'>
                                     {section.label}
                                   </p>
                                   <ul className='space-y-0.5'>
@@ -344,10 +342,10 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                 </nav>
               </div>
 
-              <div className='shrink-0 space-y-3 border-t border-white/10 bg-[var(--benroso-primary-dark)] py-4'>
+              <div className='shrink-0 space-y-3 border-t border-white/10 bg-[var(--brand-primary-dark)] py-4'>
                 <div className='space-y-2.5 text-sm leading-6 text-white/85'>
                   <div className='flex min-h-10 items-center gap-2.5 px-1'>
-                    <Icons.phone className='h-4 w-4 shrink-0 text-[var(--benroso-lime)]' />
+                    <Icons.phone className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
                     <span className='text-white/90'>
                       <a
                         className='hover:text-white'
@@ -365,16 +363,16 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
                     </span>
                   </div>
                   <a
-                    className='flex min-h-10 items-center gap-2.5 rounded-[var(--benroso-button-radius)] px-1 transition-colors hover:text-white'
+                    className='flex min-h-10 items-center gap-2.5 rounded-[var(--brand-button-radius)] px-1 transition-colors hover:text-white'
                     href={`mailto:${siteSettings.email}`}
                   >
-                    <Icons.mail className='h-4 w-4 shrink-0 text-[var(--benroso-lime)]' />
+                    <Icons.mail className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
                     <span className='truncate'>{siteSettings.email}</span>
                   </a>
                 </div>
                 <a
                   aria-label='Help me plan my safari on WhatsApp'
-                  className='group benroso-fill-hover flex min-h-11 w-full items-center justify-center gap-2 rounded-[var(--benroso-button-radius)] border border-[var(--benroso-lime)] bg-transparent px-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--benroso-lime)] transition-colors hover:text-[var(--benroso-primary-dark)]'
+                  className='group brand-fill-hover flex min-h-11 w-full items-center justify-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-lime)] bg-transparent px-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--brand-lime)] transition-colors hover:text-[var(--brand-primary-dark)]'
                   href={whatsappHref}
                   onClick={() => setMobileOpen(false)}
                   rel='noopener noreferrer'
@@ -388,7 +386,7 @@ export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }:
           </div>
         ) : null}
       </header>
-      {isAtTop ? null : <div aria-hidden className='h-[var(--benroso-header-h)] shrink-0' />}
+      {isAtTop ? null : <div aria-hidden className='h-[var(--brand-header-h)] shrink-0' />}
     </>
   );
 }
@@ -403,18 +401,18 @@ function ExperiencesMegaPanel({ sections }: { sections: NonNullable<PublicNavIte
         getDropdownPositionClass('Experiences')
       )}
     >
-      <div className='grid grid-cols-2 gap-8 rounded-b-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white px-6 py-5 text-left shadow-2xl'>
+      <div className='grid grid-cols-2 gap-8 rounded-b-[var(--brand-radius)] border border-[var(--brand-line)] bg-white px-6 py-5 text-left shadow-2xl'>
         {visibleSections.length ? (
           visibleSections.map((section) => (
             <div key={section.label}>
-              <p className='mb-3 text-sm font-bold uppercase tracking-[0.06em] text-[var(--benroso-muted)]'>
+              <p className='mb-3 text-sm font-bold uppercase tracking-[0.06em] text-[var(--brand-muted)]'>
                 {section.label}
               </p>
               <ul className='space-y-2'>
                 {section.items.map((child) => (
                   <li key={child.href}>
                     <Link
-                      className='block text-[15px] leading-snug text-[var(--benroso-muted)] transition-colors hover:text-[var(--benroso-primary)]'
+                      className='block text-[15px] leading-snug text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-primary)]'
                       href={child.href}
                     >
                       {child.label}
@@ -426,7 +424,7 @@ function ExperiencesMegaPanel({ sections }: { sections: NonNullable<PublicNavIte
           ))
         ) : (
           <div className='col-span-2'>
-            <p className='text-sm text-[var(--benroso-muted)]'>
+            <p className='text-sm text-[var(--brand-muted)]'>
               Experience categories will appear here as they are added in the portal.
             </p>
           </div>
@@ -468,11 +466,11 @@ function DestinationsMegaPanel({
 
   return (
     <div className={cn('absolute top-full z-50 pt-2', getDropdownPositionClass('Destinations'))}>
-      <div className='w-[min(720px,calc(100vw-2rem))] overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white text-left shadow-[0_24px_60px_-28px_rgba(15,35,24,0.45)]'>
+      <div className='w-[min(720px,calc(100vw-2rem))] overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white text-left shadow-[0_24px_60px_-28px_rgba(15,35,24,0.45)]'>
         <div className='flex max-h-[min(420px,62vh)]'>
           <nav
             aria-label='Safari countries'
-            className='w-[148px] shrink-0 border-r border-[var(--benroso-line)] bg-[var(--benroso-ivory)]/70 py-2'
+            className='w-[148px] shrink-0 border-r border-[var(--brand-line)] bg-[var(--brand-ivory)]/70 py-2'
           >
             <ul>
               {menu.columns.map((column, index) => {
@@ -485,8 +483,8 @@ function DestinationsMegaPanel({
                       className={cn(
                         'flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-[13px] transition-colors',
                         isActive
-                          ? 'bg-white font-semibold text-[var(--benroso-primary)] shadow-[inset_3px_0_0_var(--benroso-lime)]'
-                          : 'text-[var(--benroso-muted)] hover:bg-white/80 hover:text-[var(--benroso-primary)]'
+                          ? 'bg-white font-semibold text-[var(--brand-primary)] shadow-[inset_3px_0_0_var(--brand-lime)]'
+                          : 'text-[var(--brand-muted)] hover:bg-white/80 hover:text-[var(--brand-primary)]'
                       )}
                       onMouseEnter={() => setActiveIndex(index)}
                       type='button'
@@ -504,8 +502,8 @@ function DestinationsMegaPanel({
                           className={cn(
                             'shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums',
                             isActive
-                              ? 'bg-[var(--benroso-primary)]/10 text-[var(--benroso-primary)]'
-                              : 'bg-white text-[var(--benroso-muted)]'
+                              ? 'bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]'
+                              : 'bg-white text-[var(--brand-muted)]'
                           )}
                         >
                           {destinationCount}
@@ -518,17 +516,17 @@ function DestinationsMegaPanel({
             </ul>
           </nav>
 
-          <div className='benroso-thin-scrollbar min-w-0 flex-1 overflow-y-auto px-5 py-4'>
-            <div className='mb-3 flex items-center justify-between gap-3 border-b border-[var(--benroso-line)] pb-3'>
+          <div className='brand-thin-scrollbar min-w-0 flex-1 overflow-y-auto px-5 py-4'>
+            <div className='mb-3 flex items-center justify-between gap-3 border-b border-[var(--brand-line)] pb-3'>
               <Link
-                className='inline-flex items-center gap-1.5 font-display text-lg font-semibold text-[var(--benroso-primary)] transition-colors hover:text-[var(--benroso-lime)]'
+                className='inline-flex items-center gap-1.5 font-display text-lg font-semibold text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-lime)]'
                 href={activeColumn.href}
               >
                 {activeColumn.country}
                 <Icons.chevronRight className='h-4 w-4' />
               </Link>
               {activeColumn.destinations.length ? (
-                <span className='text-xs font-medium uppercase tracking-[0.08em] text-[var(--benroso-muted)]'>
+                <span className='text-xs font-medium uppercase tracking-[0.08em] text-[var(--brand-muted)]'>
                   {activeColumn.destinations.length} guides
                 </span>
               ) : null}
@@ -540,12 +538,12 @@ function DestinationsMegaPanel({
                   {primary.map((destination) => (
                     <li key={destination.href}>
                       <Link
-                        className='group/link flex items-center gap-2 rounded-[var(--benroso-radius)] px-2 py-2 text-[14px] leading-snug text-[var(--benroso-muted)] transition-colors hover:bg-[var(--benroso-ivory)] hover:text-[var(--benroso-primary)]'
+                        className='group/link flex items-center gap-2 rounded-[var(--brand-radius)] px-2 py-2 text-[14px] leading-snug text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-ivory)] hover:text-[var(--brand-primary)]'
                         href={destination.href}
                       >
                         <span
                           aria-hidden
-                          className='h-1 w-1 shrink-0 rounded-full bg-[var(--benroso-lime)] opacity-0 transition-opacity group-hover/link:opacity-100'
+                          className='h-1 w-1 shrink-0 rounded-full bg-[var(--brand-lime)] opacity-0 transition-opacity group-hover/link:opacity-100'
                         />
                         {destination.label}
                       </Link>
@@ -557,12 +555,12 @@ function DestinationsMegaPanel({
                     {secondary.map((destination) => (
                       <li key={destination.href}>
                         <Link
-                          className='group/link flex items-center gap-2 rounded-[var(--benroso-radius)] px-2 py-2 text-[14px] leading-snug text-[var(--benroso-muted)] transition-colors hover:bg-[var(--benroso-ivory)] hover:text-[var(--benroso-primary)]'
+                          className='group/link flex items-center gap-2 rounded-[var(--brand-radius)] px-2 py-2 text-[14px] leading-snug text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-ivory)] hover:text-[var(--brand-primary)]'
                           href={destination.href}
                         >
                           <span
                             aria-hidden
-                            className='h-1 w-1 shrink-0 rounded-full bg-[var(--benroso-lime)] opacity-0 transition-opacity group-hover/link:opacity-100'
+                            className='h-1 w-1 shrink-0 rounded-full bg-[var(--brand-lime)] opacity-0 transition-opacity group-hover/link:opacity-100'
                           />
                           {destination.label}
                         </Link>
@@ -573,11 +571,11 @@ function DestinationsMegaPanel({
               </div>
             ) : (
               <div className='py-2'>
-                <p className='text-sm text-[var(--benroso-muted)]'>
+                <p className='text-sm text-[var(--brand-muted)]'>
                   Safari routes for {activeColumn.country} are being added.
                 </p>
                 <Link
-                  className='mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[var(--benroso-primary)] transition-colors hover:text-[var(--benroso-lime)]'
+                  className='mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-lime)]'
                   href={activeColumn.href}
                 >
                   Explore {activeColumn.country}
@@ -588,9 +586,9 @@ function DestinationsMegaPanel({
           </div>
         </div>
 
-        <div className='flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-[var(--benroso-line)] bg-[var(--benroso-ivory)]/40 px-5 py-2.5'>
+        <div className='flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-[var(--brand-line)] bg-[var(--brand-ivory)]/40 px-5 py-2.5'>
           <Link
-            className='group/all inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--benroso-primary)] transition-colors hover:text-[var(--benroso-lime)]'
+            className='group/all inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-lime)]'
             href={viewAllHref}
           >
             View all destinations
@@ -598,7 +596,7 @@ function DestinationsMegaPanel({
           </Link>
           {menu.featured ? (
             <Link
-              className='inline-flex items-center gap-1 text-xs text-[var(--benroso-muted)] transition-colors hover:text-[var(--benroso-primary)]'
+              className='inline-flex items-center gap-1 text-xs text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-primary)]'
               href={menu.featured.href}
             >
               {menu.featured.cta}
@@ -649,14 +647,14 @@ function DestinationsMobileMenu({
                 onClick={onNavigate}
               >
                 <span>{column.country}</span>
-                <span className='text-xs text-[var(--benroso-lime)]'>View</span>
+                <span className='text-xs text-[var(--brand-lime)]'>View</span>
               </Link>
             )}
             {isExpanded && hasDestinations ? (
               <ul className='mb-1 space-y-0.5 border-l border-white/15 pl-3'>
                 <li>
                   <Link
-                    className='block py-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--benroso-lime)]'
+                    className='block py-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--brand-lime)]'
                     href={column.href}
                     onClick={onNavigate}
                   >
@@ -680,7 +678,7 @@ function DestinationsMobileMenu({
         );
       })}
       <Link
-        className='mt-2 inline-flex items-center gap-1.5 py-2 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--benroso-lime)]'
+        className='mt-2 inline-flex items-center gap-1.5 py-2 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--brand-lime)]'
         href={viewAllHref}
         onClick={onNavigate}
       >
@@ -695,7 +693,7 @@ function TripAdvisorBadge() {
   return (
     <a
       className='hidden items-center justify-center gap-2.5 hover:opacity-90 lg:flex'
-      href={BENROSO_TRIPADVISOR.url}
+      href={BRAND_TRIPADVISOR.url}
       rel='noopener noreferrer'
       target='_blank'
     >
@@ -705,17 +703,17 @@ function TripAdvisorBadge() {
         alt='Tripadvisor'
         className='h-7 w-[133px] shrink-0 object-contain object-left'
         height={28}
-        src={BENROSO_TRIPADVISOR.wordmarkPath}
+        src={BRAND_TRIPADVISOR.wordmarkPath}
         width={133}
       />
       <span className='flex items-center gap-2'>
         <span className='text-sm font-normal leading-none text-white'>
-          {BENROSO_TRIPADVISOR.rating}
+          {BRAND_TRIPADVISOR.rating}
         </span>
         <TripAdvisorRatingDots />
       </span>
       <span className='text-sm font-normal uppercase leading-none text-white'>
-        {BENROSO_TRIPADVISOR.reviewLabel}
+        {BRAND_TRIPADVISOR.reviewLabel}
       </span>
     </a>
   );
@@ -746,17 +744,17 @@ function LanguageSelector({
 
   return (
     <details className={cn('relative', className)}>
-      <summary className='flex h-10 min-w-10 cursor-pointer list-none items-center justify-center gap-1 rounded-[var(--benroso-button-radius)] border border-white/25 px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors hover:border-white hover:text-white [&::-webkit-details-marker]:hidden'>
+      <summary className='flex h-10 min-w-10 cursor-pointer list-none items-center justify-center gap-1 rounded-[var(--brand-button-radius)] border border-white/25 px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors hover:border-white hover:text-white [&::-webkit-details-marker]:hidden'>
         <Icons.world className='h-3.5 w-3.5 shrink-0' />
         <span>{locale}</span>
       </summary>
-      <ul className='absolute right-0 top-full z-50 mt-2 min-w-[120px] overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white py-1'>
+      <ul className='absolute right-0 top-full z-50 mt-2 min-w-[120px] overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white py-1'>
         {SUPPORTED_LOCALES.map((code) => (
           <li key={code}>
             <Link
               className={cn(
-                'block px-3 py-2 text-sm uppercase text-[var(--benroso-muted)] hover:bg-[var(--benroso-ivory)]',
-                code === locale && 'font-semibold text-[var(--benroso-primary)]'
+                'block px-3 py-2 text-sm uppercase text-[var(--brand-muted)] hover:bg-[var(--brand-ivory)]',
+                code === locale && 'font-semibold text-[var(--brand-primary)]'
               )}
               href={localePath(code, basePath)}
             >

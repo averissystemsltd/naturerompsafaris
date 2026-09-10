@@ -26,7 +26,7 @@ function renderLegalText(text: string, locale: string): ReactNode {
 
       return (
         <Link
-          className='text-[var(--benroso-primary)] hover:underline'
+          className='text-[var(--brand-primary)] hover:underline'
           href={path}
           key={`${part}-${index}`}
         >
@@ -71,9 +71,9 @@ function LegalIntro({ intro, locale }: { intro: string | string[]; locale: strin
   const paragraphs = Array.isArray(intro) ? intro : [intro];
 
   return (
-    <div className='benroso-legal-intro mt-6 space-y-4'>
+    <div className='brand-legal-intro mt-6 space-y-4'>
       {paragraphs.map((paragraph, index) => (
-        <p className='benroso-body' key={`intro-${index}`}>
+        <p className='brand-body' key={`intro-${index}`}>
           {renderLegalText(paragraph, locale)}
         </p>
       ))}
@@ -96,33 +96,33 @@ export function LegalDocument({ locale, page }: LegalDocumentProps) {
         eyebrow={page.eyebrow}
         title={page.title}
       />
-      <section className='benroso-section bg-[var(--benroso-contact-body-bg)]'>
-        <div className='benroso-container'>
+      <section className='brand-section bg-[var(--brand-contact-body-bg)]'>
+        <div className='brand-container'>
           <div className='grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10'>
             <aside className='min-w-0'>
               <LegalDocumentToc sections={page.sections} />
             </aside>
 
             <div className='min-w-0'>
-              <p className='benroso-body text-sm'>Last updated: {formattedDate}</p>
+              <p className='brand-body text-sm'>Last updated: {formattedDate}</p>
 
               {page.intro ? <LegalIntro intro={page.intro} locale={locale} /> : null}
 
-              <article className='benroso-legal-prose mt-8'>
+              <article className='brand-legal-prose mt-8'>
                 {page.sections.map((section) => (
-                  <section className='benroso-legal-section' id={section.id} key={section.id}>
+                  <section className='brand-legal-section' id={section.id} key={section.id}>
                     <h2>{section.title}</h2>
                     <LegalSectionContent locale={locale} section={section} />
                   </section>
                 ))}
               </article>
 
-              <div className='mt-12 border-t border-[var(--benroso-line)] pt-8'>
-                <p className='benroso-body text-sm'>
+              <div className='mt-12 border-t border-[var(--brand-line)] pt-8'>
+                <p className='brand-body text-sm'>
                   Related policies:{' '}
                   {page.slug !== 'privacy-policy' ? (
                     <Link
-                      className='text-[var(--benroso-primary)] hover:underline'
+                      className='text-[var(--brand-primary)] hover:underline'
                       href={localePath(locale, '/privacy-policy')}
                     >
                       Privacy Policy
@@ -132,7 +132,7 @@ export function LegalDocument({ locale, page }: LegalDocumentProps) {
                     <>
                       {page.slug !== 'privacy-policy' ? ' · ' : null}
                       <Link
-                        className='text-[var(--benroso-primary)] hover:underline'
+                        className='text-[var(--brand-primary)] hover:underline'
                         href={localePath(locale, '/cookie-policy')}
                       >
                         Cookie Policy
@@ -143,7 +143,7 @@ export function LegalDocument({ locale, page }: LegalDocumentProps) {
                     <>
                       {' · '}
                       <Link
-                        className='text-[var(--benroso-primary)] hover:underline'
+                        className='text-[var(--brand-primary)] hover:underline'
                         href={localePath(locale, '/terms-conditions')}
                       >
                         Terms &amp; Conditions
@@ -154,7 +154,7 @@ export function LegalDocument({ locale, page }: LegalDocumentProps) {
                     <>
                       {' · '}
                       <Link
-                        className='text-[var(--benroso-primary)] hover:underline'
+                        className='text-[var(--brand-primary)] hover:underline'
                         href={localePath(locale, '/payment-terms')}
                       >
                         Payment Terms
@@ -165,7 +165,7 @@ export function LegalDocument({ locale, page }: LegalDocumentProps) {
                     <>
                       {' · '}
                       <Link
-                        className='text-[var(--benroso-primary)] hover:underline'
+                        className='text-[var(--brand-primary)] hover:underline'
                         href={localePath(locale, '/service-level-agreement')}
                       >
                         Service Level Agreement

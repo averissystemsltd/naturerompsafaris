@@ -1,5 +1,5 @@
 /**
- * Newsletter campaign delivery via Benroso SMTP (news@benrososafaris.co.ke).
+ * Newsletter campaign delivery via Nature Romp SMTP (news@naturerompsafaris.co.ke).
  */
 
 import { sendMail } from '@/lib/email/mailer';
@@ -24,7 +24,7 @@ export interface SendCampaignResult {
 }
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://benrososafaris.com').replace(/\/$/, '');
+  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com').replace(/\/$/, '');
 }
 
 function unsubscribeUrl(token: string): string {
@@ -41,12 +41,12 @@ export function buildCampaignHtml(content: CampaignContent, unsubscribeLink: str
     <div style="font-family:Arial,Helvetica,sans-serif;color:#1f2937;line-height:1.6;max-width:640px;margin:0 auto;">
       ${preheader}
       <div style="padding:8px 0 16px;">
-        <strong style="font-size:18px;color:#3c5142;">Benroso Safaris</strong>
+        <strong style="font-size:18px;color:#3c5142;">Nature Romp Safaris</strong>
       </div>
       <div>${content.bodyHtml}</div>
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:32px 0 16px;" />
       <p style="font-size:12px;color:#6b7280;margin:0;">
-        You are receiving this because you subscribed to Benroso Safaris updates.
+        You are receiving this because you subscribed to Nature Romp Safaris updates.
         <a href="${unsubscribeLink}" style="color:#6b7280;">Unsubscribe</a>.
       </p>
     </div>

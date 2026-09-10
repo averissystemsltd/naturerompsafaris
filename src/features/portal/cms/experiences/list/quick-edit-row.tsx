@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/select';
 import { TableCell, TableRow } from '@/components/ui/table';
 import {
-  BENROSO_OPERATING_COUNTRIES,
-  type BenrosoCountryId
+  BRAND_OPERATING_COUNTRIES,
+  type BrandCountryId
 } from '@/features/experiences/public/country-map-copy';
 import { CMS_SURFACE } from '../../shared/surface';
 import type { ExperienceListItem, ExperienceQuickEditInput } from './types';
@@ -47,13 +47,13 @@ export function QuickEditRow({ item, columnCount, isSaving, onCancel, onSave }: 
   const [title, setTitle] = React.useState(item.title);
   const [slug, setSlug] = React.useState(item.slug);
   const [category, setCategory] = React.useState(item.category ?? '');
-  const [countries, setCountries] = React.useState<BenrosoCountryId[]>(item.countries);
+  const [countries, setCountries] = React.useState<BrandCountryId[]>(item.countries);
   const [status, setStatus] = React.useState<'published' | 'draft'>(
     item.status === 'published' ? 'published' : 'draft'
   );
   const [publishedAt, setPublishedAt] = React.useState(toLocalInput(item.publishedAt));
 
-  function toggleCountry(countryId: BenrosoCountryId) {
+  function toggleCountry(countryId: BrandCountryId) {
     setCountries((current) =>
       current.includes(countryId)
         ? current.filter((id) => id !== countryId)
@@ -138,7 +138,7 @@ export function QuickEditRow({ item, columnCount, isSaving, onCancel, onSave }: 
               Select every country where this experience is offered.
             </p>
             <div className='grid gap-2 sm:grid-cols-2 lg:grid-cols-3'>
-              {BENROSO_OPERATING_COUNTRIES.map((country) => {
+              {BRAND_OPERATING_COUNTRIES.map((country) => {
                 const checked = countries.includes(country.id);
 
                 return (

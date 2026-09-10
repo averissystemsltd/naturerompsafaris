@@ -7,12 +7,12 @@ function siteHost() {
   try {
     return new URL(absoluteUrl('/')).host;
   } catch {
-    return 'benrososafaris.com';
+    return 'naturerompsafaris.com';
   }
 }
 
 export function indexNowKey() {
-  return process.env.INDEXNOW_API_KEY || 'benroso-safaris-indexnow';
+  return process.env.INDEXNOW_API_KEY || 'naturerompsafaris-indexnow';
 }
 
 export function indexNowKeyLocation() {

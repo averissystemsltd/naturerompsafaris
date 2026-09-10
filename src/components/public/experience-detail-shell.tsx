@@ -9,8 +9,8 @@ import { ExperienceScrollReveal } from '@/components/public/experiences/experien
 import { ExperienceTripsExplorer } from '@/components/public/experiences/experience-trips-explorer';
 import { SectionAnchorNav } from '@/components/public/section-anchor-nav';
 import { SectionHeader } from '@/components/public/ui/section-header';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
 import { localePath } from '@/lib/public/locale-path';
 import { buildExperienceGuideHeading } from '@/features/experiences/public/guide-heading';
 import { isMountainExperienceLayout } from '@/features/experiences/public/layout-variant';
@@ -93,18 +93,18 @@ export function ExperienceDetailShell({
 
       <main className='bg-white'>
         <ExperienceScrollReveal
-          className='benroso-section scroll-mt-36 bg-white'
+          className='brand-section scroll-mt-36 bg-white'
           id='experience-overview'
         >
-          <div className='benroso-container'>
+          <div className='brand-container'>
             <section className='mx-auto max-w-4xl text-center'>
-              <p className='benroso-eyebrow'>Experience Guide</p>
-              <h2 className='benroso-heading mt-3 font-display text-[clamp(2rem,4vw,3.2rem)] leading-tight'>
+              <p className='brand-eyebrow'>Experience Guide</p>
+              <h2 className='brand-heading mt-3 font-display text-[clamp(2rem,4vw,3.2rem)] leading-tight'>
                 {guideHeading}
               </h2>
               {experience.contentHtml ? (
                 <article
-                  className='benroso-legal-prose mx-auto mt-8 max-w-3xl text-left'
+                  className='brand-legal-prose mx-auto mt-8 max-w-3xl text-left'
                   dangerouslySetInnerHTML={{ __html: experience.contentHtml }}
                 />
               ) : null}
@@ -119,21 +119,21 @@ export function ExperienceDetailShell({
             {experience.highlights.length ? (
               <section className='mx-auto mt-14 max-w-5xl scroll-mt-36' id='experience-expect'>
                 <div className='mx-auto max-w-2xl text-center'>
-                  <p className='benroso-eyebrow'>What To Expect</p>
-                  <h2 className='benroso-heading mt-3 font-display text-3xl leading-tight'>
+                  <p className='brand-eyebrow'>What To Expect</p>
+                  <h2 className='brand-heading mt-3 font-display text-3xl leading-tight'>
                     The Experience At a Glance
                   </h2>
                 </div>
                 <div className='mt-8 grid gap-x-10 gap-y-0 md:grid-cols-2'>
                   {experience.highlights.map((item, index) => (
                     <div
-                      className='grid grid-cols-[56px_1fr] gap-4 border-t border-[var(--benroso-line)] py-5'
+                      className='grid grid-cols-[56px_1fr] gap-4 border-t border-[var(--brand-line)] py-5'
                       key={item}
                     >
-                      <span className='font-display text-3xl text-[var(--benroso-gold)]'>
+                      <span className='font-display text-3xl text-[var(--brand-gold)]'>
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <p className='text-[15px] leading-7 text-[var(--benroso-ink)]'>{item}</p>
+                      <p className='text-[15px] leading-7 text-[var(--brand-ink)]'>{item}</p>
                     </div>
                   ))}
                 </div>
@@ -143,7 +143,7 @@ export function ExperienceDetailShell({
         </ExperienceScrollReveal>
 
         <ExperienceScrollReveal
-          className='benroso-section scroll-mt-36 border-y border-[var(--benroso-line)] bg-white'
+          className='brand-section scroll-mt-36 border-y border-[var(--brand-line)] bg-white'
           id='experience-trips'
           stagger
         >
@@ -168,11 +168,11 @@ export function ExperienceDetailShell({
 
         {accommodations.length ? (
           <ExperienceScrollReveal
-            className='benroso-section scroll-mt-36 bg-white'
+            className='brand-section scroll-mt-36 bg-white'
             id='experience-lodges'
             stagger
           >
-            <div className='benroso-container'>
+            <div className='brand-container'>
               <SectionHeader
                 align='left'
                 description='Lodges and camps featured on linked safari routes. Each stay is chosen for location, comfort, and access to the wildlife areas that define this experience.'
@@ -182,12 +182,12 @@ export function ExperienceDetailShell({
               <div className='mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
                 {accommodations.map((accommodation) => (
                   <article
-                    className='flex h-full flex-col overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white'
+                    className='flex h-full flex-col overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white'
                     data-reveal-item
                     key={accommodation.id}
                   >
                     <Link
-                      className='group relative block aspect-[4/3] overflow-hidden bg-[var(--benroso-primary)]'
+                      className='group relative block aspect-[4/3] overflow-hidden bg-[var(--brand-primary)]'
                       href={accommodation.href}
                     >
                       {accommodation.imageUrl ? (
@@ -199,31 +199,31 @@ export function ExperienceDetailShell({
                           src={accommodation.imageUrl}
                         />
                       ) : (
-                        <div className='absolute inset-0 bg-[var(--benroso-primary-light)]' />
+                        <div className='absolute inset-0 bg-[var(--brand-primary-light)]' />
                       )}
                     </Link>
                     <div className='flex flex-1 flex-col p-5'>
                       {accommodation.locationLabel ? (
-                        <p className='text-xs font-bold uppercase tracking-wide text-[var(--benroso-gold)]'>
+                        <p className='text-xs font-bold uppercase tracking-wide text-[var(--brand-gold)]'>
                           {accommodation.locationLabel}
                         </p>
                       ) : null}
-                      <h3 className='benroso-heading mt-2 font-display text-xl leading-tight'>
+                      <h3 className='brand-heading mt-2 font-display text-xl leading-tight'>
                         <Link
-                          className='transition-colors hover:text-[var(--benroso-primary)]'
+                          className='transition-colors hover:text-[var(--brand-primary)]'
                           href={accommodation.href}
                         >
                           {accommodation.name}
                         </Link>
                       </h3>
                       {accommodation.summary ? (
-                        <p className='benroso-body mt-3 line-clamp-3 flex-1 text-[15px] leading-7'>
+                        <p className='brand-body mt-3 line-clamp-3 flex-1 text-[15px] leading-7'>
                           {accommodation.summary}
                         </p>
                       ) : null}
-                      <div className='mt-5 border-t border-[var(--benroso-line)] pt-4'>
+                      <div className='mt-5 border-t border-[var(--brand-line)] pt-4'>
                         <Link
-                          className='inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--benroso-primary)] transition-colors hover:text-[var(--benroso-gold)]'
+                          className='inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-gold)]'
                           href={accommodation.href}
                         >
                           View Lodge
@@ -243,25 +243,25 @@ export function ExperienceDetailShell({
           styleImage={experience.imageUrl}
         >
           <div aria-hidden className='absolute inset-0 bg-black/55' />
-          <div className='benroso-container benroso-section relative flex justify-center'>
-            <div className='w-full max-w-xl rounded-[var(--benroso-radius)] bg-white p-8 text-center shadow-2xl md:p-10'>
-              <p className='benroso-eyebrow'>Plan With Benroso Safaris</p>
-              <h2 className='benroso-heading mt-3 font-display text-3xl leading-tight'>
+          <div className='brand-container brand-section relative flex justify-center'>
+            <div className='w-full max-w-xl rounded-[var(--brand-radius)] bg-white p-8 text-center shadow-2xl md:p-10'>
+              <p className='brand-eyebrow'>Plan With Nature Romp Safaris</p>
+              <h2 className='brand-heading mt-3 font-display text-3xl leading-tight'>
                 Ready to start planning?
               </h2>
-              <p className='benroso-body mx-auto mt-3 max-w-md'>
+              <p className='brand-body mx-auto mt-3 max-w-md'>
                 {isMountainLayout
                   ? 'Tell us your preferred route, month, and group size. We will confirm camping or hut arrangements and guide support.'
                   : 'Tell us your month, group size, and comfort level. We will match the right safari route and prepare a quote for your trip.'}
               </p>
-              <BenrosoButtonGroup align='center' className='mt-7'>
-                <BenrosoButton href={localePath(locale, '/contact')}>
+              <BrandButtonGroup align='center' className='mt-7'>
+                <BrandButton href={localePath(locale, '/contact')}>
                   {isMountainLayout ? 'Plan My Climb' : 'Plan My Safari'}
-                </BenrosoButton>
-                <BenrosoButton href={localePath(locale, '/experiences')} variant='accent-outline'>
+                </BrandButton>
+                <BrandButton href={localePath(locale, '/experiences')} variant='accent-outline'>
                   All Experiences
-                </BenrosoButton>
-              </BenrosoButtonGroup>
+                </BrandButton>
+              </BrandButtonGroup>
             </div>
           </div>
         </ExperienceScrollReveal>

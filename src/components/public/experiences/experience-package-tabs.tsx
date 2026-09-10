@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { formatTourPrice } from '@/lib/public/tour-format';
 import { localePath } from '@/lib/public/locale-path';
 import { cn } from '@/lib/utils';
@@ -84,43 +84,42 @@ function tierTheme(key: PublicExperiencePackageLevel['key']) {
   if (key === 'luxury') {
     return {
       Icon: Icons.pro,
-      active:
-        'border-[var(--benroso-gold)] bg-[var(--benroso-gold)] text-[var(--benroso-primary-dark)]',
-      headBg: 'var(--benroso-gold)',
-      headFg: 'var(--benroso-primary-dark)',
+      active: 'border-[var(--brand-gold)] bg-[var(--brand-gold)] text-[var(--brand-primary-dark)]',
+      headBg: 'var(--brand-gold)',
+      headFg: 'var(--brand-primary-dark)',
       inactive:
-        'border-[var(--benroso-gold)]/40 text-[var(--benroso-brown)] hover:border-[var(--benroso-gold)]'
+        'border-[var(--brand-gold)]/40 text-[var(--brand-brown)] hover:border-[var(--brand-gold)]'
     };
   }
   if (key === 'high_end') {
     return {
       Icon: Icons.sparkles,
-      active: 'border-[var(--benroso-primary-dark)] bg-[var(--benroso-primary-dark)] text-white',
-      headBg: 'var(--benroso-primary-dark)',
+      active: 'border-[var(--brand-primary-dark)] bg-[var(--brand-primary-dark)] text-white',
+      headBg: 'var(--brand-primary-dark)',
       inactive:
-        'border-[var(--benroso-primary-dark)]/25 text-[var(--benroso-primary-dark)] hover:border-[var(--benroso-primary-dark)]'
+        'border-[var(--brand-primary-dark)]/25 text-[var(--brand-primary-dark)] hover:border-[var(--brand-primary-dark)]'
     };
   }
   return {
     Icon: Icons.exclusive,
-    active: 'border-[var(--benroso-primary)] bg-[var(--benroso-primary)] text-white',
-    headBg: 'var(--benroso-primary)',
+    active: 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white',
+    headBg: 'var(--brand-primary)',
     inactive:
-      'border-[var(--benroso-primary)]/25 text-[var(--benroso-primary)] hover:border-[var(--benroso-primary)]'
+      'border-[var(--brand-primary)]/25 text-[var(--brand-primary)] hover:border-[var(--brand-primary)]'
   };
 }
 
 function PriceCell({ currency, price }: { currency: string; price: number | null | undefined }) {
   if (!price) {
-    return <span className='text-xs text-[var(--benroso-muted)]'>On request</span>;
+    return <span className='text-xs text-[var(--brand-muted)]'>On request</span>;
   }
 
   return (
     <span className='inline-flex flex-col items-center leading-tight'>
-      <strong className='font-price text-base text-[var(--benroso-heading)] sm:text-[1.05rem]'>
+      <strong className='font-price text-base text-[var(--brand-heading)] sm:text-[1.05rem]'>
         {formatTourPrice(price, currency)}
       </strong>
-      <span className='mt-1 text-[10px] font-normal text-[var(--benroso-muted)] sm:text-[11px]'>
+      <span className='mt-1 text-[10px] font-normal text-[var(--brand-muted)] sm:text-[11px]'>
         per person
       </span>
     </span>
@@ -129,16 +128,16 @@ function PriceCell({ currency, price }: { currency: string; price: number | null
 
 function EmptyPackageGuide({ locale }: { locale: string }) {
   return (
-    <div className='benroso-contact-credentials-box'>
-      <h3 className='benroso-heading font-display text-2xl'>Package Prices On Request</h3>
-      <p className='benroso-body mt-3 max-w-2xl text-sm leading-7'>
+    <div className='brand-contact-credentials-box'>
+      <h3 className='brand-heading font-display text-2xl'>Package Prices On Request</h3>
+      <p className='brand-body mt-3 max-w-2xl text-sm leading-7'>
         This experience can be shaped around economy, mid-range, luxury, or high-end comfort levels.
         Pricing depends on the selected trip, season, lodge availability, and group size.
       </p>
       <div className='mt-5'>
-        <BenrosoButton href={localePath(locale, '/contact')} size='sm'>
+        <BrandButton href={localePath(locale, '/contact')} size='sm'>
           Request Package Prices
-        </BenrosoButton>
+        </BrandButton>
       </div>
     </div>
   );
@@ -191,10 +190,10 @@ export function ExperiencePackageTabs({ levels, locale }: ExperiencePackageTabsP
               role='tab'
               aria-selected={active}
               className={cn(
-                'inline-flex items-center gap-2 rounded-[var(--benroso-radius)] border bg-white px-5 py-3 text-xs font-bold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--benroso-gold)]',
+                'inline-flex items-center gap-2 rounded-[var(--brand-radius)] border bg-white px-5 py-3 text-xs font-bold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]',
                 active ? theme.active : theme.inactive,
                 !level &&
-                  'cursor-not-allowed border-[var(--benroso-line)] text-[var(--benroso-muted)] opacity-45 hover:border-[var(--benroso-line)]'
+                  'cursor-not-allowed border-[var(--brand-line)] text-[var(--brand-muted)] opacity-45 hover:border-[var(--brand-line)]'
               )}
               onClick={() => {
                 if (level) setActiveKey(level.key);
@@ -209,25 +208,25 @@ export function ExperiencePackageTabs({ levels, locale }: ExperiencePackageTabsP
 
       <div className='mx-auto mt-8 max-w-5xl'>
         <div className='mb-6 text-center'>
-          <h3 className='benroso-heading font-display text-2xl'>{activeLevel.label}</h3>
-          <p className='benroso-body mx-auto mt-2 max-w-2xl text-sm leading-7'>
+          <h3 className='brand-heading font-display text-2xl'>{activeLevel.label}</h3>
+          <p className='brand-body mx-auto mt-2 max-w-2xl text-sm leading-7'>
             {activeLevel.blurb ||
               PACKAGE_LEVELS.find((level) => level.key === activeLevel.key)?.fallbackBlurb}
           </p>
         </div>
 
-        <div className='benroso-pricing-tier benroso-pricing-tier--table-only'>
+        <div className='brand-pricing-tier brand-pricing-tier--table-only'>
           {bands.length && activeLevel.seasons.length ? (
-            <div className='benroso-thin-scrollbar overflow-x-auto lg:overflow-x-visible'>
-              <div className='benroso-pricing-tier__table-shell'>
-                <table className='benroso-pricing-tier__table text-left text-sm'>
+            <div className='brand-thin-scrollbar overflow-x-auto lg:overflow-x-visible'>
+              <div className='brand-pricing-tier__table-shell'>
+                <table className='brand-pricing-tier__table text-left text-sm'>
                   <colgroup>
                     <col style={{ width: `${seasonWidth}%` }} />
                     {bands.map((band) => (
                       <col key={band} style={{ width: `${paxWidth}%` }} />
                     ))}
                   </colgroup>
-                  <thead className='benroso-pricing-tier__head' style={headStyle}>
+                  <thead className='brand-pricing-tier__head' style={headStyle}>
                     <tr>
                       <th scope='col'>Travel period</th>
                       {bands.map((band) => (
@@ -239,14 +238,14 @@ export function ExperiencePackageTabs({ levels, locale }: ExperiencePackageTabsP
                   </thead>
                   <tbody>
                     {activeLevel.seasons.map((season) => (
-                      <tr className='benroso-pricing-tier__row' key={season.label}>
-                        <th className='benroso-pricing-tier__season' scope='row'>
+                      <tr className='brand-pricing-tier__row' key={season.label}>
+                        <th className='brand-pricing-tier__season' scope='row'>
                           {season.label}
                         </th>
                         {bands.map((band) => {
                           const cell = season.cells.find((item) => item.groupBand === band);
                           return (
-                            <td className='benroso-pricing-tier__price tabular-nums' key={band}>
+                            <td className='brand-pricing-tier__price tabular-nums' key={band}>
                               <PriceCell currency={activeLevel.currency} price={cell?.price} />
                             </td>
                           );
@@ -257,15 +256,15 @@ export function ExperiencePackageTabs({ levels, locale }: ExperiencePackageTabsP
                 </table>
               </div>
               {bands.length > 2 ? (
-                <p className='benroso-pricing-tier__scroll-hint'>
+                <p className='brand-pricing-tier__scroll-hint'>
                   Swipe the table to see all prices →
                 </p>
               ) : null}
             </div>
           ) : (
             <div className='flex min-h-48 flex-col items-center justify-center gap-3 p-6 text-center'>
-              <Icons.info className='h-8 w-8 text-[var(--benroso-gold)]' />
-              <p className='benroso-body max-w-sm text-sm leading-7'>
+              <Icons.info className='h-8 w-8 text-[var(--brand-gold)]' />
+              <p className='brand-body max-w-sm text-sm leading-7'>
                 Detailed group-size prices for this level are still being prepared.
               </p>
             </div>
@@ -273,11 +272,11 @@ export function ExperiencePackageTabs({ levels, locale }: ExperiencePackageTabsP
         </div>
 
         <div className='mt-5 flex flex-col gap-3 border-t border-[rgb(60_81_66/8%)] pt-5 sm:flex-row sm:items-center sm:justify-between'>
-          <p className='text-sm leading-6 text-[var(--benroso-muted)]'>
+          <p className='text-sm leading-6 text-[var(--brand-muted)]'>
             Prices are per person and vary by travel period, rooming, park fees, and lodge
             availability.
           </p>
-          <BenrosoButton
+          <BrandButton
             className='group'
             href={localePath(locale, '/contact')}
             size='sm'
@@ -288,7 +287,7 @@ export function ExperiencePackageTabs({ levels, locale }: ExperiencePackageTabsP
               <Icons.whatsapp className='absolute h-4 w-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100' />
             </span>
             Enquire
-          </BenrosoButton>
+          </BrandButton>
         </div>
       </div>
     </div>

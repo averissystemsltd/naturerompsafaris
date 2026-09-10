@@ -120,10 +120,10 @@ begin
     'en',
     '2-days-maasai-mara-safari-from-nairobi',
     '2 Days Maasai Mara Safari from Nairobi',
-    'Explore the Maasai Mara on a 2-day safari from Nairobi with Benroso Safaris. Travel through the Great Rift Valley, enjoy afternoon and morning game drives, search for the Big Five and spend one night in Kenya''s most famous reserve.',
+    'Explore the Maasai Mara on a 2-day safari from Nairobi with Nature Romp Safaris. Travel through the Great Rift Valley, enjoy afternoon and morning game drives, search for the Big Five and spend one night in Kenya''s most famous reserve.',
     jsonb_build_object(
       'html',
-      $overview$<p>The 2 Days Maasai Mara Safari from Nairobi is designed for travelers who want a quick introduction to Kenya's best-known wildlife reserve. The journey begins in Nairobi and follows the road through the Great Rift Valley toward the Maasai Mara.</p><p>An afternoon game drive on the first day provides the first opportunity to explore the reserve and search for wildlife across its open plains. After an overnight stay in the Mara, the second day begins with another game drive before the return journey to Nairobi.</p><p>The itinerary is short and straightforward, making it suitable for guests with limited time who still want to experience the atmosphere and wildlife of the Maasai Mara. Benroso Safaris recommends this package for couples, families, small groups, business travelers and first-time safari guests.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Maasai Mara game drives</p></li><li><p>Big Five viewing opportunities</p></li><li><p>Great Rift Valley scenery</p></li><li><p>Wildlife photography</p></li><li><p>Morning game drive</p></li><li><p>Afternoon game drive</p></li><li><p>Scenic road safari</p></li><li><p>Overnight in Maasai Mara</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Travelers with limited time in Kenya</p></li><li><p>Couples and small private groups</p></li><li><p>Families with children</p></li><li><p>Business travelers adding a short safari</p></li><li><p>First-time safari guests</p></li><li><p>Wildlife and photography enthusiasts</p></li></ul>$overview$
+      $overview$<p>The 2 Days Maasai Mara Safari from Nairobi is designed for travelers who want a quick introduction to Kenya's best-known wildlife reserve. The journey begins in Nairobi and follows the road through the Great Rift Valley toward the Maasai Mara.</p><p>An afternoon game drive on the first day provides the first opportunity to explore the reserve and search for wildlife across its open plains. After an overnight stay in the Mara, the second day begins with another game drive before the return journey to Nairobi.</p><p>The itinerary is short and straightforward, making it suitable for guests with limited time who still want to experience the atmosphere and wildlife of the Maasai Mara. Nature Romp Safaris recommends this package for couples, families, small groups, business travelers and first-time safari guests.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Maasai Mara game drives</p></li><li><p>Big Five viewing opportunities</p></li><li><p>Great Rift Valley scenery</p></li><li><p>Wildlife photography</p></li><li><p>Morning game drive</p></li><li><p>Afternoon game drive</p></li><li><p>Scenic road safari</p></li><li><p>Overnight in Maasai Mara</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Travelers with limited time in Kenya</p></li><li><p>Couples and small private groups</p></li><li><p>Families with children</p></li><li><p>Business travelers adding a short safari</p></li><li><p>First-time safari guests</p></li><li><p>Wildlife and photography enthusiasts</p></li></ul>$overview$
     ),
     '[
       {"question":"How long is the drive from Nairobi to Maasai Mara?","answer":"The exact duration depends on traffic, road conditions and the location of the selected accommodation."},
@@ -134,9 +134,9 @@ begin
       {"question":"Where does the safari start and end?","answer":"The safari starts and ends in Nairobi."}
     ]'::jsonb,
     '2 Days Maasai Mara Safari from Nairobi',
-    '2-day Maasai Mara safari with Benroso Safaris, featuring Rift Valley travel, morning and afternoon game drives and Big Five viewing.',
+    '2-day Maasai Mara safari with Nature Romp Safaris, featuring Rift Valley travel, morning and afternoon game drives and Big Five viewing.',
     '2 Days Maasai Mara Safari from Nairobi',
-    '["Maasai Mara short safari","Nairobi to Maasai Mara safari","Big Five safari Kenya","2-day Kenya safari","Benroso Safaris"]'::jsonb,
+    '["Maasai Mara short safari","Nairobi to Maasai Mara safari","Big Five safari Kenya","2-day Kenya safari","Nature Romp Safaris"]'::jsonb,
     null,
     v_now
   );

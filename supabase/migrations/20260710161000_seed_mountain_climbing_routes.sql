@@ -134,7 +134,7 @@ begin
     '8 Days Mt Kenya: Burguret Route down Chogoria',
     'A classic 8-day traverse from the Burguret forest approach to the Chogoria descent, with summit night on Point Lenana.',
     '{"html":"<p>An 8-day Mt Kenya hiking itinerary via the Burguret route and Chogoria descent, with camping or hut accommodation options.</p>"}'::jsonb,
-    '8 Days Mt Kenya Burguret to Chogoria | Benroso Safaris',
+    '8 Days Mt Kenya Burguret to Chogoria | Nature Romp Safaris',
     'Hike Mt Kenya on the 8-day Burguret to Chogoria route with camping or hut prices, guided support, and park fees included.',
     v_now,
     v_now
@@ -146,7 +146,7 @@ begin
     '5 Days Mt Kenya: Sirimon to Chogoria with Acclimatization',
     'The Sirimon approach with a dedicated acclimatization day at Shipton''s camp before the Lenana summit and Chogoria descent.',
     '{"html":"<p>A 5-day Sirimon to Chogoria route with an acclimatization day at Shipton''s camp for safer summit pacing.</p>"}'::jsonb,
-    '5 Days Mt Kenya Sirimon Chogoria with Acclimatization | Benroso Safaris',
+    '5 Days Mt Kenya Sirimon Chogoria with Acclimatization | Nature Romp Safaris',
     '5-day Mt Kenya trek up Sirimon and down Chogoria with acclimatization day. Camping and hut prices per person.',
     v_now,
     v_now
@@ -158,7 +158,7 @@ begin
     '5 Days Mt Kenya: Sirimon to Chogoria without Acclimatization',
     'A faster 5-day Sirimon to Chogoria traverse with summit push from Shipton''s and overnight at Hall''s Tarn.',
     '{"html":"<p>A 5-day Sirimon to Chogoria route without a separate acclimatization day, ideal for fit trekkers.</p>"}'::jsonb,
-    '5 Days Mt Kenya Sirimon Chogoria | Benroso Safaris',
+    '5 Days Mt Kenya Sirimon Chogoria | Nature Romp Safaris',
     '5-day Mt Kenya Sirimon to Chogoria trek without acclimatization day. Camping and hut prices per person.',
     v_now,
     v_now

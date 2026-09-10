@@ -32,7 +32,7 @@ const baseConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'grgnxuuywrhwsvhhrqoo.supabase.co',
+        hostname: 'aboxocmprjtkprzcvxns.supabase.co',
         port: ''
       },
       {

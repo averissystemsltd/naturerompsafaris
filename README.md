@@ -1,8 +1,8 @@
-# Benroso Safaris
+# Nature Romp Safaris
 
-Premium multilingual safari website and custom CMS for Benroso Safaris Ltd.
+Premium multilingual safari website and custom CMS for Nature Romp Safaris Ltd.
 
-This project was initialized from `Kiranism/next-shadcn-dashboard-starter` so the team can reuse a strong shadcn dashboard shell, tables, forms, theme infrastructure, and admin layout. The business application is Benroso-specific: a high-end tourism website and custom CMS backed by Supabase.
+This project was initialized from `Kiranism/next-shadcn-dashboard-starter` so the team can reuse a strong shadcn dashboard shell, tables, forms, theme infrastructure, and admin layout. The business application is Nature Romp-specific: a high-end tourism website and custom CMS backed by Supabase.
 
 ## Stack
 
@@ -34,13 +34,13 @@ This project was initialized from `Kiranism/next-shadcn-dashboard-starter` so th
 
 ## Brand Defaults
 
-Initial Benroso contact defaults are stored in `src/config/benroso.ts` and should be seeded into `site_settings` while remaining editable in the dashboard.
+Initial Nature Romp contact defaults are stored in `src/config/brand.ts` and should be seeded into `site_settings` while remaining editable in the dashboard.
 
 Confirmed public contact references:
 
-- Current site: https://benrososafaris.co.ke/
-- Contact page: https://benrososafaris.co.ke/contact-benroso-safaris/
-- KATO profile: https://katokenya.org/membership-account/profile/benroso-safaris-ltd/
+- Current site: https://naturerompsafaris.co.ke/
+- Contact page: https://naturerompsafaris.com/contact/
+- KATO profile: https://katokenya.org/ (TODO: add Nature Romp KATO profile)
 
 Default brand palette:
 
@@ -211,5 +211,5 @@ GEO/AEO requirements:
 ## Dashboard Starter Reference
 
 - Source starter: https://github.com/Kiranism/next-shadcn-dashboard-starter
-- Keep useful dashboard layout, sidebar, tables, forms, themes, charts, and command palette only where they serve Benroso CMS/admin workflows.
+- Keep useful dashboard layout, sidebar, tables, forms, themes, charts, and command palette only where they serve Nature Romp CMS/admin workflows.
 - Remove generic SaaS, billing, workspace, product, chat, Pokémon, and demo pages unless explicitly repurposed for the CMS.

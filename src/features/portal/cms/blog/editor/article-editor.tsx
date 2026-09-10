@@ -58,7 +58,7 @@ interface ArticleEditorProps {
 
 type AutosaveState = 'idle' | 'saving' | 'saved' | 'error';
 
-const LOCAL_DRAFT_PREFIX = 'benroso-article-draft:';
+const LOCAL_DRAFT_PREFIX = 'brand-article-draft:';
 const LOCAL_SAVE_MS = 400;
 const SERVER_AUTOSAVE_MS = 1500;
 

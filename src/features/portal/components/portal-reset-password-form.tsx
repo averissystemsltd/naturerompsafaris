@@ -59,7 +59,7 @@ export function PortalResetPasswordForm() {
             Set new password
           </h1>
           <p className='mt-2 text-[15px] text-[#6B7280]'>
-            Choose a strong password for your Benroso portal account.
+            Choose a strong password for your Nature Romp portal account.
           </p>
         </div>
 

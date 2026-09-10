@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { Icons } from '@/components/icons';
 
-const REFERRAL_STORAGE_KEY = 'benroso-referral-step-dismissed';
+const REFERRAL_STORAGE_KEY = 'brand-referral-step-dismissed';
 
 export const REFERRAL_SOURCE_OPTIONS = [
   { label: 'Promotional campaigns', value: 'promotional' },
@@ -42,26 +42,26 @@ export function ContactReferralStep({ onChange, value }: ContactReferralStepProp
   if (isDismissed) return null;
 
   return (
-    <section className='benroso-contact-step'>
+    <section className='brand-contact-step'>
       <div className='mb-5 flex items-center gap-3'>
-        <span aria-hidden className='benroso-contact-step-number'>
+        <span aria-hidden className='brand-contact-step-number'>
           9
         </span>
-        <h3 className='benroso-contact-step-title'>How did you hear about Benroso Safaris?</h3>
+        <h3 className='brand-contact-step-title'>How did you hear about Nature Romp Safaris?</h3>
       </div>
 
-      <div className='benroso-referral-step'>
+      <div className='brand-referral-step'>
         <button
           aria-label='Dismiss referral question'
-          className='benroso-referral-step-close'
+          className='brand-referral-step-close'
           onClick={handleDismiss}
           type='button'
         >
           <Icons.close className='h-4 w-4' />
         </button>
 
-        <div className='benroso-referral-step-inner'>
-          <div className='benroso-referral-step-art'>
+        <div className='brand-referral-step-inner'>
+          <div className='brand-referral-step-art'>
             <Image
               alt=''
               aria-hidden
@@ -72,14 +72,14 @@ export function ContactReferralStep({ onChange, value }: ContactReferralStepProp
             />
           </div>
 
-          <div className='benroso-referral-step-content'>
-            <fieldset className='benroso-contact-radio-list benroso-contact-radio-list--inline'>
+          <div className='brand-referral-step-content'>
+            <fieldset className='brand-contact-radio-list brand-contact-radio-list--inline'>
               <legend className='sr-only'>Referral source</legend>
               {REFERRAL_SOURCE_OPTIONS.map((option) => (
-                <label className='benroso-contact-radio-option' key={option.value}>
+                <label className='brand-contact-radio-option' key={option.value}>
                   <input
                     checked={value === option.value}
-                    className='benroso-contact-radio-input'
+                    className='brand-contact-radio-input'
                     name='referralSource'
                     onChange={() => onChange(option.value)}
                     type='radio'

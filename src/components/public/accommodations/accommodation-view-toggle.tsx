@@ -23,7 +23,7 @@ export function AccommodationViewToggle({ className }: AccommodationViewTogglePr
   return (
     <div
       className={cn(
-        'flex rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white',
+        'flex rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white',
         className
       )}
       role='group'
@@ -36,8 +36,8 @@ export function AccommodationViewToggle({ className }: AccommodationViewTogglePr
         className={cn(
           'inline-flex items-center justify-center px-2.5 py-1.5 transition-colors',
           view === 'grid'
-            ? 'bg-[var(--benroso-primary)] text-white'
-            : 'text-[var(--benroso-muted)] hover:text-[var(--benroso-ink)]'
+            ? 'bg-[var(--brand-primary)] text-white'
+            : 'text-[var(--brand-muted)] hover:text-[var(--brand-ink)]'
         )}
         onClick={() => void setView('grid')}
       >
@@ -48,10 +48,10 @@ export function AccommodationViewToggle({ className }: AccommodationViewTogglePr
         aria-label='List view'
         aria-pressed={view === 'list'}
         className={cn(
-          'inline-flex items-center justify-center border-l border-[var(--benroso-line)] px-2.5 py-1.5 transition-colors',
+          'inline-flex items-center justify-center border-l border-[var(--brand-line)] px-2.5 py-1.5 transition-colors',
           view === 'list'
-            ? 'bg-[var(--benroso-primary)] text-white'
-            : 'text-[var(--benroso-muted)] hover:text-[var(--benroso-ink)]'
+            ? 'bg-[var(--brand-primary)] text-white'
+            : 'text-[var(--brand-muted)] hover:text-[var(--brand-ink)]'
         )}
         onClick={() => void setView('list')}
       >

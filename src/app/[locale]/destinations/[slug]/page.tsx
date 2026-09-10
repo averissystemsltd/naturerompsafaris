@@ -61,7 +61,7 @@ export async function generateMetadata(props: DestinationPageProps): Promise<Met
   if (!destination) notFound();
 
   const canonical = absoluteUrl(`/${locale}/destinations/${destination.slug}`);
-  const title = destination.seo_title || `${destination.name} Safari Guide | Benroso Safaris`;
+  const title = destination.seo_title || `${destination.name} Safari Guide | Nature Romp Safaris`;
   const description = destination.seo_description || destination.summary || '';
 
   return {
@@ -146,8 +146,8 @@ export default async function DestinationDetailPage(props: DestinationPageProps)
         parks={destinationParks}
       />
       {accommodations.length ? (
-        <section className='benroso-section scroll-mt-36 bg-white' id='accommodation'>
-          <div className='benroso-container'>
+        <section className='brand-section scroll-mt-36 bg-white' id='accommodation'>
+          <div className='brand-container'>
             <RouteAccommodationsSection
               accommodations={accommodations}
               description={`These properties are linked through safari routes that include ${destination.name}, keeping accommodation recommendations relevant to the destination.`}
@@ -182,20 +182,20 @@ function DestinationCostsSection({
   const max = prices.length ? Math.max(...prices) : null;
 
   return (
-    <section className='benroso-section scroll-mt-36 bg-[var(--benroso-ivory)]' id='costs'>
-      <div className='benroso-container'>
-        <div className='benroso-contact-credentials-box grid gap-8 !p-6 md:grid-cols-[1fr_280px] md:!p-8'>
+    <section className='brand-section scroll-mt-36 bg-[var(--brand-ivory)]' id='costs'>
+      <div className='brand-container'>
+        <div className='brand-contact-credentials-box grid gap-8 !p-6 md:grid-cols-[1fr_280px] md:!p-8'>
           <div>
-            <p className='benroso-eyebrow'>Costs</p>
-            <h2 className='benroso-heading mt-3 font-display text-2xl'>
+            <p className='brand-eyebrow'>Costs</p>
+            <h2 className='brand-heading mt-3 font-display text-2xl'>
               {destinationName} Safari Cost Guide
             </h2>
-            <p className='benroso-body mt-3 text-base leading-7'>
+            <p className='brand-body mt-3 text-base leading-7'>
               Costs are based on published tours linked to this destination. Final quotes depend on
               travel dates, group size, lodge tier, and route adjustments.
             </p>
           </div>
-          <div className='rounded-[var(--benroso-radius)] bg-[var(--benroso-primary)] p-5 text-white'>
+          <div className='rounded-[var(--brand-radius)] bg-[var(--brand-primary)] p-5 text-white'>
             <span className='block text-xs font-bold uppercase tracking-[0.14em] text-white/70'>
               Published Range
             </span>

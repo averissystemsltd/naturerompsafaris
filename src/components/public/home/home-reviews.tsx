@@ -14,8 +14,8 @@ function Stars({ rating }: { rating: number }) {
         <Icons.exclusive
           className={`h-4 w-4 ${
             i < rating
-              ? 'fill-[var(--benroso-gold)] text-[var(--benroso-gold)]'
-              : 'text-[var(--benroso-line)]'
+              ? 'fill-[var(--brand-gold)] text-[var(--brand-gold)]'
+              : 'text-[var(--brand-line)]'
           }`}
           key={i}
         />
@@ -28,12 +28,12 @@ function ReviewSlide({ review }: { review: HomeReview }) {
   return (
     <figure className='mx-auto flex max-w-3xl flex-col items-center px-2 text-center md:px-8'>
       <Stars rating={review.rating} />
-      <blockquote className='benroso-heading mt-6 font-display text-xl leading-[1.5] md:text-[1.7rem] md:leading-[1.45]'>
+      <blockquote className='brand-heading mt-6 font-display text-xl leading-[1.5] md:text-[1.7rem] md:leading-[1.45]'>
         &ldquo;{review.quote}&rdquo;
       </blockquote>
       <figcaption className='mt-7'>
-        <p className='benroso-heading font-display text-lg'>{review.guestName}</p>
-        <p className='mt-1 text-xs uppercase tracking-[0.12em] text-[var(--benroso-muted)]'>
+        <p className='brand-heading font-display text-lg'>{review.guestName}</p>
+        <p className='mt-1 text-xs uppercase tracking-[0.12em] text-[var(--brand-muted)]'>
           {review.location ? `${review.location} · ` : ''}via {review.source}
         </p>
       </figcaption>
@@ -73,26 +73,26 @@ export function HomeReviews() {
     <section
       aria-roledescription='carousel'
       aria-label='Guest reviews'
-      className='border-t border-[var(--benroso-line)] bg-white'
+      className='border-t border-[var(--brand-line)] bg-white'
     >
-      <div className='benroso-container benroso-section'>
+      <div className='brand-container brand-section'>
         {/* Header — descriptive, not boxed */}
         <div className='mx-auto max-w-2xl text-center'>
-          <p className='benroso-eyebrow'>Do Not Take Our Word For It</p>
-          <h2 className='benroso-heading mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.15]'>
+          <p className='brand-eyebrow'>Do Not Take Our Word For It</p>
+          <h2 className='brand-heading mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.15]'>
             What Our Clients Say
           </h2>
           <div className='mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-3'>
             <span className='inline-flex items-center gap-1'>
               {Array.from({ length: 5 }).map((_, i) => (
                 <Icons.exclusive
-                  className='h-5 w-5 fill-[var(--benroso-gold)] text-[var(--benroso-gold)]'
+                  className='h-5 w-5 fill-[var(--brand-gold)] text-[var(--brand-gold)]'
                   key={i}
                 />
               ))}
             </span>
-            <span className='text-sm font-semibold text-[var(--benroso-heading)]'>
-              <span className='text-[var(--benroso-gold)]'>{HOME_REVIEWS_SUMMARY.count}</span>{' '}
+            <span className='text-sm font-semibold text-[var(--brand-heading)]'>
+              <span className='text-[var(--brand-gold)]'>{HOME_REVIEWS_SUMMARY.count}</span>{' '}
               {HOME_REVIEWS_SUMMARY.label}
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -137,7 +137,7 @@ export function HomeReviews() {
         <div className='mt-10 flex items-center justify-center gap-6'>
           <button
             aria-label='Previous review'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--benroso-line)] text-[var(--benroso-heading)] transition-colors hover:border-[var(--benroso-gold)] hover:text-[var(--benroso-gold)]'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-line)] text-[var(--brand-heading)] transition-colors hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'
             onClick={() => go(active - 1)}
             type='button'
           >
@@ -151,8 +151,8 @@ export function HomeReviews() {
                 aria-label={`Go to review ${i + 1}`}
                 className={`h-2 rounded-full transition-all ${
                   i === active
-                    ? 'w-6 bg-[var(--benroso-gold)]'
-                    : 'w-2 bg-[var(--benroso-line)] hover:bg-[var(--benroso-muted)]'
+                    ? 'w-6 bg-[var(--brand-gold)]'
+                    : 'w-2 bg-[var(--brand-line)] hover:bg-[var(--brand-muted)]'
                 }`}
                 key={review.id}
                 onClick={() => go(i)}
@@ -163,7 +163,7 @@ export function HomeReviews() {
 
           <button
             aria-label='Next review'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--benroso-line)] text-[var(--benroso-heading)] transition-colors hover:border-[var(--benroso-gold)] hover:text-[var(--benroso-gold)]'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brand-line)] text-[var(--brand-heading)] transition-colors hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)]'
             onClick={() => go(active + 1)}
             type='button'
           >

@@ -41,24 +41,24 @@ export function FaqSection({
       : 'Everything you need to know before you travel with us. Still unsure about something? Our safari planners are always happy to help.');
 
   const accordion = (
-    <Accordion className='border-t border-[var(--benroso-line)]' collapsible type='single'>
+    <Accordion className='border-t border-[var(--brand-line)]' collapsible type='single'>
       {faqs.map((faq, index) => (
         <AccordionItem
-          className='border-[var(--benroso-line)]'
+          className='border-[var(--brand-line)]'
           key={`${index}-${faq.question}`}
           value={`faq-${index}`}
         >
           <AccordionTrigger
             className={cn(
-              'items-center gap-4 py-5 text-left leading-snug hover:no-underline hover:text-[var(--benroso-primary)] data-[state=open]:text-[var(--benroso-primary)] [&>svg]:size-5 [&>svg]:text-[var(--benroso-lime)]',
+              'items-center gap-4 py-5 text-left leading-snug hover:no-underline hover:text-[var(--brand-primary)] data-[state=open]:text-[var(--brand-primary)] [&>svg]:size-5 [&>svg]:text-[var(--brand-lime)]',
               embedded
-                ? 'text-[15px] font-medium text-[var(--benroso-ink)] md:text-base'
-                : 'font-display py-6 text-lg text-[var(--benroso-heading)] md:text-xl'
+                ? 'text-[15px] font-medium text-[var(--brand-ink)] md:text-base'
+                : 'font-display py-6 text-lg text-[var(--brand-heading)] md:text-xl'
             )}
           >
             {faq.question}
           </AccordionTrigger>
-          <AccordionContent className='max-w-2xl pb-5 text-[15px] leading-7 text-[var(--benroso-muted)]'>
+          <AccordionContent className='max-w-2xl pb-5 text-[15px] leading-7 text-[var(--brand-muted)]'>
             {faq.answer}
           </AccordionContent>
         </AccordionItem>
@@ -69,23 +69,23 @@ export function FaqSection({
   return (
     <section
       aria-labelledby={headingId}
-      className={cn(embedded ? 'scroll-mt-36' : 'benroso-section bg-white', className)}
+      className={cn(embedded ? 'scroll-mt-36' : 'brand-section bg-white', className)}
     >
-      <div className={cn(embedded ? '' : 'benroso-container')}>
+      <div className={cn(embedded ? '' : 'brand-container')}>
         {embedded ? (
           <div>
             <h2
               className={cn(
-                'benroso-heading font-display text-2xl leading-tight tracking-tight',
+                'brand-heading font-display text-2xl leading-tight tracking-tight',
                 headingClassName
               )}
               id={headingId}
             >
               {title}
             </h2>
-            <span aria-hidden className='benroso-gold-line benroso-gold-line--left mt-3' />
+            <span aria-hidden className='brand-gold-line brand-gold-line--left mt-3' />
             {resolvedDescription ? (
-              <p className='benroso-body mt-4 max-w-2xl text-[15px] leading-7'>
+              <p className='brand-body mt-4 max-w-2xl text-[15px] leading-7'>
                 {resolvedDescription}
               </p>
             ) : null}

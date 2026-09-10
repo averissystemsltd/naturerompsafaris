@@ -309,7 +309,7 @@ function ContactTab({ initial }: { initial: ContactValues }) {
           id='whatsappMessage'
           label='Default WhatsApp message'
           onChange={(whatsappMessage) => set({ whatsappMessage })}
-          placeholder='Hello Benroso Safaris, I would like help planning a safari.'
+          placeholder='Hello Nature Romp Safaris, I would like help planning a safari.'
           value={values.whatsappMessage ?? ''}
         />
       </SectionCard>
@@ -389,7 +389,7 @@ function NotificationsTab({ initial }: { initial: NotificationsValues }) {
           <Textarea
             id='notifyEmails'
             onChange={(event) => setEmailsText(event.target.value)}
-            placeholder='sales@benrososafaris.co.ke'
+            placeholder='sales@naturerompsafaris.co.ke'
             rows={3}
             value={emailsText}
           />

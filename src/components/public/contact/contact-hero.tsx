@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { HeroMediaBackdrop } from '@/components/public/hero-media-backdrop';
-import { BENROSO_CONTACT_HERO } from '@/config/benroso';
+import { BRAND_CONTACT_HERO } from '@/config/brand';
 import { heroHasMedia } from '@/lib/public/page-heroes';
 import type { PageHero } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
@@ -30,7 +30,7 @@ export function ContactHero({
   description,
   eyebrow,
   hero,
-  imageUrl = BENROSO_CONTACT_HERO.imageUrl,
+  imageUrl = BRAND_CONTACT_HERO.imageUrl,
   title
 }: ContactHeroProps) {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -72,8 +72,8 @@ export function ContactHero({
         className='absolute inset-0'
         style={{ backgroundColor: `rgba(0,0,0,${overlayAlpha})` }}
       />
-      <div className='relative z-10 benroso-section py-16 md:py-24'>
-        <div className='benroso-container'>
+      <div className='relative z-10 brand-section py-16 md:py-24'>
+        <div className='brand-container'>
           {breadcrumbs?.length ? (
             <nav
               aria-label='Breadcrumb'
@@ -87,7 +87,7 @@ export function ContactHero({
                       {crumb.label}
                     </a>
                   ) : (
-                    <span className='benroso-breadcrumb-current'>{crumb.label}</span>
+                    <span className='brand-breadcrumb-current'>{crumb.label}</span>
                   )}
                 </span>
               ))}
@@ -108,7 +108,7 @@ export function ContactHero({
             >
               {effectiveTitle}
             </h1>
-            <span aria-hidden className='benroso-gold-line benroso-gold-line--brand mt-5' />
+            <span aria-hidden className='brand-gold-line brand-gold-line--brand mt-5' />
             {effectiveDescription ? (
               <p className='mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/85'>
                 {effectiveDescription}

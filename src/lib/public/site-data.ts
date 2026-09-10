@@ -1,6 +1,6 @@
 import { unstable_cache } from 'next/cache';
 
-import { BENROSO_CONTACT_DEFAULTS, BENROSO_FAVICON_PATH } from '@/config/benroso';
+import { BRAND_CONTACT_DEFAULTS, BRAND_FAVICON_PATH } from '@/config/brand';
 import { DEFAULT_LOCALE } from '@/lib/i18n';
 import { listPublishedAccommodations } from '@/features/accommodations/public/service';
 import type { PublicAccommodation } from '@/features/accommodations/public/types';
@@ -165,7 +165,7 @@ async function resolveMediaByIds(ids: string[]): Promise<Map<string, PublicDesti
 }
 
 const DEFAULT_DESCRIPTION =
-  'Benroso Safaris crafts premium Kenya and Tanzania safari holidays with local experts, tailored itineraries, and trusted on-the-ground support.';
+  'Nature Romp Safaris crafts premium Kenya and Tanzania safari holidays with local experts, tailored itineraries, and trusted on-the-ground support.';
 
 function unwrapRelation<T>(value: T | T[] | null | undefined): T | null {
   if (!value) return null;
@@ -221,24 +221,24 @@ async function fetchPublicSiteSettings(): Promise<PublicSiteSettings> {
   const social = (data?.social_links as Record<string, string> | null) ?? {};
 
   return {
-    addressShort: data?.address_short ?? BENROSO_CONTACT_DEFAULTS.addressShort,
+    addressShort: data?.address_short ?? BRAND_CONTACT_DEFAULTS.addressShort,
     analytics: readAnalytics(data?.analytics),
-    companyName: data?.company_name ?? BENROSO_CONTACT_DEFAULTS.companyName,
+    companyName: data?.company_name ?? BRAND_CONTACT_DEFAULTS.companyName,
     description: DEFAULT_DESCRIPTION,
-    email: data?.email ?? BENROSO_CONTACT_DEFAULTS.email,
-    faviconUrl: data?.favicon_url ?? BENROSO_FAVICON_PATH,
+    email: data?.email ?? BRAND_CONTACT_DEFAULTS.email,
+    faviconUrl: data?.favicon_url ?? BRAND_FAVICON_PATH,
     faviconVersion: data?.updated_at ?? null,
     logoUrl: data?.logo_url ?? null,
     ogImage: data?.og_default_image_url ?? null,
-    phoneOffice: data?.phone_office ?? BENROSO_CONTACT_DEFAULTS.phoneOffice,
-    phonePrimary: data?.phone_primary ?? BENROSO_CONTACT_DEFAULTS.phonePrimary,
-    phoneSecondary: data?.phone_secondary ?? BENROSO_CONTACT_DEFAULTS.phoneSecondary,
-    postalAddress: data?.postal_address ?? BENROSO_CONTACT_DEFAULTS.postalAddress,
+    phoneOffice: data?.phone_office ?? BRAND_CONTACT_DEFAULTS.phoneOffice,
+    phonePrimary: data?.phone_primary ?? BRAND_CONTACT_DEFAULTS.phonePrimary,
+    phoneSecondary: data?.phone_secondary ?? BRAND_CONTACT_DEFAULTS.phoneSecondary,
+    postalAddress: data?.postal_address ?? BRAND_CONTACT_DEFAULTS.postalAddress,
     socialLinks: social,
     tagline: data?.tagline ?? null,
     themeColor: data?.theme_color ?? null,
     whatsappMessage:
-      data?.whatsapp_message ?? 'Hello Benroso Safaris, I would like help planning a safari.'
+      data?.whatsapp_message ?? 'Hello Nature Romp Safaris, I would like help planning a safari.'
   };
 }
 

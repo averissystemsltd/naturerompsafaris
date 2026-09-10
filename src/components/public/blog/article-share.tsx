@@ -31,11 +31,11 @@ export function ArticleShare({ title, className }: { title: string; className?: 
   }
 
   const buttonClass =
-    'inline-flex size-9 items-center justify-center rounded-full border border-[var(--benroso-line)] bg-white text-[var(--benroso-ink)] transition-colors hover:border-[var(--benroso-primary)] hover:bg-[var(--benroso-primary)] hover:text-white';
+    'inline-flex size-9 items-center justify-center rounded-full border border-[var(--brand-line)] bg-white text-[var(--brand-ink)] transition-colors hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] hover:text-white';
 
   return (
     <div className={cn('flex flex-wrap items-center gap-2', className)}>
-      <span className='mr-1 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)]'>
+      <span className='mr-1 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)]'>
         <Icons.share className='size-4' />
         Share
       </span>
@@ -75,7 +75,7 @@ export function ArticleShare({ title, className }: { title: string; className?: 
         aria-label='Copy link'
         className={cn(
           buttonClass,
-          copied && 'border-[var(--benroso-primary)] text-[var(--benroso-primary)]'
+          copied && 'border-[var(--brand-primary)] text-[var(--brand-primary)]'
         )}
         onClick={copyLink}
         type='button'

@@ -10,7 +10,7 @@ export const Figure = Node.create({
     return [{ tag: 'figure' }];
   },
   renderHTML({ HTMLAttributes }) {
-    return ['figure', mergeAttributes(HTMLAttributes, { class: 'benroso-article-figure' }), 0];
+    return ['figure', mergeAttributes(HTMLAttributes, { class: 'brand-article-figure' }), 0];
   }
 });
 

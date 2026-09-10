@@ -1,4 +1,4 @@
-import type { BenrosoCountryId } from '@/features/experiences/public/country-map-copy';
+import type { BrandCountryId } from '@/features/experiences/public/country-map-copy';
 
 /** WordPress-style status views for the experiences list table. */
 export type ExperienceListStatus = 'all' | 'published' | 'draft' | 'trash';
@@ -10,7 +10,7 @@ export interface ExperienceListItem {
   /** `published` | `draft` | `trash`. */
   status: string;
   category: string | null;
-  countries: BenrosoCountryId[];
+  countries: BrandCountryId[];
   /** Publish timestamp from the English translation (null when never published). */
   publishedAt: string | null;
   updatedAt: string;
@@ -54,7 +54,7 @@ export interface ExperienceQuickEditInput {
   title: string;
   slug: string;
   category: string;
-  countries: BenrosoCountryId[];
+  countries: BrandCountryId[];
   status: 'published' | 'draft';
   /** ISO timestamp for the publish date/time, or empty to leave unset. */
   publishedAt: string;

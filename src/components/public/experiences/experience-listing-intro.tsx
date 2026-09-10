@@ -22,7 +22,7 @@ function IntroParagraphText({ segments }: { segments: IntroParagraph }) {
         if (segment.emphasis === 'green') {
           return (
             <span
-              className='font-semibold text-[var(--benroso-primary)]'
+              className='font-semibold text-[var(--brand-primary)]'
               key={`${segment.text}-${index}`}
             >
               {segment.text}
@@ -33,7 +33,7 @@ function IntroParagraphText({ segments }: { segments: IntroParagraph }) {
         if (segment.emphasis === 'strong') {
           return (
             <strong
-              className='font-semibold text-[var(--benroso-ink)]'
+              className='font-semibold text-[var(--brand-ink)]'
               key={`${segment.text}-${index}`}
             >
               {segment.text}
@@ -50,16 +50,16 @@ function IntroParagraphText({ segments }: { segments: IntroParagraph }) {
 export function ExperienceListingIntro({ intro }: ExperienceListingIntroProps) {
   return (
     <ExperienceScrollReveal>
-      <section className='border-b border-[var(--benroso-line)] bg-white'>
-        <div className='benroso-container py-16 md:py-20 lg:py-24'>
+      <section className='border-b border-[var(--brand-line)] bg-white'>
+        <div className='brand-container py-16 md:py-20 lg:py-24'>
           <div className='mx-auto max-w-4xl text-center'>
-            <h2 className='benroso-heading font-display text-3xl leading-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]'>
+            <h2 className='brand-heading font-display text-3xl leading-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]'>
               {EXPERIENCE_LISTING_INTRO_TITLE}
             </h2>
-            <span aria-hidden className='benroso-gold-line mt-6 [width:90px]' />
+            <span aria-hidden className='brand-gold-line mt-6 [width:90px]' />
             <div
               className={cn(
-                'benroso-body mx-auto mt-8 max-w-[52rem] space-y-5 text-lg leading-relaxed md:text-xl md:leading-[1.75]'
+                'brand-body mx-auto mt-8 max-w-[52rem] space-y-5 text-lg leading-relaxed md:text-xl md:leading-[1.75]'
               )}
             >
               <IntroParagraphText segments={intro.lead} />

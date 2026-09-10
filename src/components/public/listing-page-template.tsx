@@ -34,8 +34,8 @@ export function createListingPage({
           hero={pageHero}
           title={title}
         />
-        <section className='benroso-section bg-[var(--benroso-ivory)]'>
-          <div className='benroso-container'>
+        <section className='brand-section bg-[var(--brand-ivory)]'>
+          <div className='brand-container'>
             <EmptyState
               actionHref={localePath(locale, '/contact')}
               actionLabel='Contact Our Team'

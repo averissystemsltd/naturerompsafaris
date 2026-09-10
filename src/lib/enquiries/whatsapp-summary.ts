@@ -29,7 +29,7 @@ const BUDGET_TIER_LABELS: Record<string, string> = {
 
 export function buildWhatsAppEnquirySummary(enquiry: EnquirySummaryInput) {
   const lines = [
-    '*New Benroso Safaris enquiry*',
+    '*New Nature Romp Safaris enquiry*',
     `Type: ${enquiry.enquiryType}`,
     `Name: ${enquiry.name}`,
     `Email: ${enquiry.email}`

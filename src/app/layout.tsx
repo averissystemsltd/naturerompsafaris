@@ -19,16 +19,16 @@ export async function generateMetadata(): Promise<Metadata> {
   const { analytics } = settings;
   const googleVerification = normalizeSiteVerificationToken(analytics.googleSiteVerification);
   const bingVerification = normalizeSiteVerificationToken(analytics.bingSiteVerification);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://benrososafaris.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com';
 
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: 'Benroso Safaris | Kenya & Tanzania Safari Holidays',
-      template: '%s | Benroso Safaris'
+      default: 'Nature Romp Safaris | Kenya & Tanzania Safari Holidays',
+      template: '%s | Nature Romp Safaris'
     },
     description:
-      'Premium Kenya and Tanzania safari holidays with Benroso Safaris — tailor-made itineraries, expert guides, and trusted local support.',
+      'Premium Kenya and Tanzania safari holidays with Nature Romp Safaris — tailor-made itineraries, expert guides, and trusted local support.',
     icons: buildFaviconMetadataIcons(settings.faviconUrl, {
       cacheKey: settings.faviconVersion
     }),

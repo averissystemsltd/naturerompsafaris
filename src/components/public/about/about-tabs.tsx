@@ -118,8 +118,8 @@ export function AboutTabs({ locale, teamMembers }: AboutTabsProps) {
         />
       </TabsContent>
 
-      <div aria-hidden className='benroso-container bg-white'>
-        <div className='h-px w-full bg-[var(--benroso-line)]' />
+      <div aria-hidden className='brand-container bg-white'>
+        <div className='h-px w-full bg-[var(--brand-line)]' />
       </div>
       <AboutAdvantagesSection contactHref={contactHref} />
 

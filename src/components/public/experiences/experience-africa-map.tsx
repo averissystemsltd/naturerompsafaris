@@ -9,11 +9,11 @@ import { geoNaturalEarth1, geoPath, type GeoPermissibleObjects } from 'd3-geo';
 
 import { Icons } from '@/components/icons';
 import {
-  BENROSO_OPERATING_COUNTRIES,
-  DEFAULT_BENROSO_COUNTRY_ID,
+  BRAND_OPERATING_COUNTRIES,
+  DEFAULT_BRAND_COUNTRY_ID,
   getCountryById,
   OPERATING_ISO_TO_ID,
-  type BenrosoCountryId
+  type BrandCountryId
 } from '@/features/experiences/public/country-map-copy';
 import { cn } from '@/lib/utils';
 
@@ -35,7 +35,7 @@ type GeoJsonCollection = GeoJSON.FeatureCollection<
 >;
 
 type CountryLabel = {
-  id: BenrosoCountryId;
+  id: BrandCountryId;
   name: string;
   x: number;
   y: number;
@@ -44,7 +44,7 @@ type CountryLabel = {
 type RenderFeature = {
   d: string;
   isoA3: string;
-  operatingId: BenrosoCountryId | null;
+  operatingId: BrandCountryId | null;
 };
 
 type MapSize = {
@@ -111,7 +111,7 @@ function buildMapGeometry(
     }))
     .filter((feature) => feature.d.length > 0);
 
-  const labels: CountryLabel[] = BENROSO_OPERATING_COUNTRIES.map((country) => {
+  const labels: CountryLabel[] = BRAND_OPERATING_COUNTRIES.map((country) => {
     const feature = data.features.find((item) => item.properties.ISO_A3 === country.isoA3);
     const labelLon = feature?.properties.LABEL_X ?? 0;
     const labelLat = feature?.properties.LABEL_Y ?? 0;
@@ -133,7 +133,7 @@ function CountryInfoCard({
   onClose,
   cardRef
 }: {
-  countryId: BenrosoCountryId;
+  countryId: BrandCountryId;
   onClose: () => void;
   cardRef: React.RefObject<HTMLDivElement | null>;
 }) {
@@ -156,12 +156,12 @@ function CountryInfoCard({
 
   return (
     <div
-      className='relative overflow-hidden rounded-[3px] border border-[var(--benroso-line)] bg-white'
+      className='relative overflow-hidden rounded-[3px] border border-[var(--brand-line)] bg-white'
       ref={cardRef}
     >
       <button
         aria-label='Close country details'
-        className='absolute right-3 top-3 z-20 inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--benroso-line)] bg-white text-[var(--benroso-muted)] transition-colors hover:border-[var(--benroso-primary)] hover:text-[var(--benroso-primary)]'
+        className='absolute right-3 top-3 z-20 inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--brand-line)] bg-white text-[var(--brand-muted)] transition-colors hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'
         onClick={onClose}
         type='button'
       >
@@ -169,7 +169,7 @@ function CountryInfoCard({
       </button>
 
       <div ref={contentRef}>
-        <div className='relative h-40 w-full bg-[var(--benroso-ivory)] md:h-44'>
+        <div className='relative h-40 w-full bg-[var(--brand-ivory)] md:h-44'>
           <Image
             alt={country.name}
             className='object-cover'
@@ -183,8 +183,8 @@ function CountryInfoCard({
           <p className='font-display text-[1.5rem] leading-tight text-[#3c5142] md:text-[1.625rem]'>
             {country.name}
           </p>
-          <span aria-hidden className='benroso-gold-line benroso-gold-line--left mt-3' />
-          <p className='mt-3 line-clamp-4 text-[14px] leading-6 text-[var(--benroso-ink)] md:text-[15px] md:leading-[1.65]'>
+          <span aria-hidden className='brand-gold-line brand-gold-line--left mt-3' />
+          <p className='mt-3 line-clamp-4 text-[14px] leading-6 text-[var(--brand-ink)] md:text-[15px] md:leading-[1.65]'>
             {country.blurb}
           </p>
         </div>
@@ -201,16 +201,14 @@ export function ExperienceAfricaMap() {
   const [mapSize, setMapSize] = useState<MapSize | null>(null);
   const [renderFeatures, setRenderFeatures] = useState<RenderFeature[]>([]);
   const [labels, setLabels] = useState<CountryLabel[]>([]);
-  const [activeCountryId, setActiveCountryId] = useState<BenrosoCountryId>(
-    DEFAULT_BENROSO_COUNTRY_ID
-  );
+  const [activeCountryId, setActiveCountryId] = useState<BrandCountryId>(DEFAULT_BRAND_COUNTRY_ID);
   const [cardVisible, setCardVisible] = useState(true);
-  const [hoveredCountryId, setHoveredCountryId] = useState<BenrosoCountryId | null>(null);
+  const [hoveredCountryId, setHoveredCountryId] = useState<BrandCountryId | null>(null);
 
   const highlightedCountryId = hoveredCountryId ?? activeCountryId;
 
   const operatingById = useMemo(
-    () => Object.fromEntries(BENROSO_OPERATING_COUNTRIES.map((country) => [country.id, country])),
+    () => Object.fromEntries(BRAND_OPERATING_COUNTRIES.map((country) => [country.id, country])),
     []
   );
 
@@ -295,7 +293,7 @@ export function ExperienceAfricaMap() {
     { scope: sectionRef }
   );
 
-  function handleCountrySelect(id: BenrosoCountryId) {
+  function handleCountrySelect(id: BrandCountryId) {
     setActiveCountryId(id);
     setCardVisible(true);
   }
@@ -315,11 +313,11 @@ export function ExperienceAfricaMap() {
 
   return (
     <section
-      className='border-b border-[var(--benroso-line)] bg-[var(--benroso-warm-gray)]'
+      className='border-b border-[var(--brand-line)] bg-[var(--brand-warm-gray)]'
       ref={sectionRef}
     >
-      <div className='benroso-container pb-16 md:pb-20 lg:pb-24'>
-        <div aria-hidden className='h-px w-full bg-[var(--benroso-line)]' data-map-reveal />
+      <div className='brand-container pb-16 md:pb-20 lg:pb-24'>
+        <div aria-hidden className='h-px w-full bg-[var(--brand-line)]' data-map-reveal />
 
         <div
           className='relative mt-8 w-full overflow-hidden md:mt-10'
@@ -329,7 +327,7 @@ export function ExperienceAfricaMap() {
         >
           {mapReady ? (
             <svg
-              aria-label='Map of Benroso Safaris operating countries in East and Southern Africa'
+              aria-label='Map of Nature Romp Safaris operating countries in East and Southern Africa'
               className='absolute inset-0 block h-full w-full'
               height={mapSize!.height}
               preserveAspectRatio='none'

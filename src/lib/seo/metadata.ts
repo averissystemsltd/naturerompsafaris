@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { absoluteUrl } from './absolute-url';
 
-const SITE_NAME = 'Benroso Safaris';
+const SITE_NAME = 'Nature Romp Safaris';
 
 type BuildMetadataInput = {
   canonicalPath: string;
@@ -33,7 +33,8 @@ export function buildMetadata({
   type = 'website'
 }: BuildMetadataInput): Metadata {
   const canonical = absoluteUrl(canonicalPath);
-  const safeDescription = description || 'Plan a tailored East Africa safari with Benroso Safaris.';
+  const safeDescription =
+    description || 'Plan a tailored East Africa safari with Nature Romp Safaris.';
   const ogImages = imageUrl ? [{ url: imageUrl, alt: imageAlt || title }] : undefined;
   const absoluteLanguages = toAbsoluteLanguages(languages);
 

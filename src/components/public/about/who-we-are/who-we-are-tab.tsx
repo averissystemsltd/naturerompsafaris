@@ -6,8 +6,8 @@ import { ABOUT_VISION_MISSION } from '@/lib/public/about-content';
 
 function SectionDivider() {
   return (
-    <div aria-hidden className='benroso-container'>
-      <div className='h-px w-full bg-[var(--benroso-line)]' />
+    <div aria-hidden className='brand-container'>
+      <div className='h-px w-full bg-[var(--brand-line)]' />
     </div>
   );
 }
@@ -22,16 +22,16 @@ export function WhoWeAreTab() {
       <section
         className='relative isolate bg-cover bg-center bg-fixed'
         style={{
-          backgroundImage: "url('/assets/benroso-safaris-kenya.webp')"
+          backgroundImage: "url('/assets/brand-safaris-kenya.webp')"
         }}
       >
         <div aria-hidden className='absolute inset-0 bg-black/65' />
 
-        <div className='benroso-container benroso-section relative mx-auto max-w-4xl text-center'>
+        <div className='brand-container brand-section relative mx-auto max-w-4xl text-center'>
           <h2 className='font-display text-[clamp(2rem,4vw,3rem)] leading-tight text-white'>
             Our Vision
           </h2>
-          <span aria-hidden className='benroso-gold-line mt-5' />
+          <span aria-hidden className='brand-gold-line mt-5' />
           <blockquote className='mt-8'>
             <p className='font-display text-[clamp(1.35rem,2.5vw,1.85rem)] italic leading-relaxed text-white/95'>
               &ldquo;{ABOUT_VISION_MISSION.vision.body}&rdquo;

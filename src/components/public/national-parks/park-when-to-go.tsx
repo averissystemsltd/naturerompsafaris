@@ -70,12 +70,10 @@ export function ParkWhenToGo({
   // Clear empty state when the editor has not added best-time guidance yet.
   if (!summary) {
     return (
-      <div className='rounded-[var(--benroso-radius)] border border-dashed border-[var(--benroso-line)] bg-white px-8 py-14 text-center'>
-        <Icons.calendar className='mx-auto size-8 text-[var(--benroso-muted)]/50' />
-        <h3 className='benroso-heading mt-3 font-display text-xl'>
-          Best time to visit coming soon
-        </h3>
-        <p className='benroso-body mx-auto mt-2 max-w-xl'>
+      <div className='rounded-[var(--brand-radius)] border border-dashed border-[var(--brand-line)] bg-white px-8 py-14 text-center'>
+        <Icons.calendar className='mx-auto size-8 text-[var(--brand-muted)]/50' />
+        <h3 className='brand-heading mt-3 font-display text-xl'>Best time to visit coming soon</h3>
+        <p className='brand-body mx-auto mt-2 max-w-xl'>
           Seasonal travel guidance for {parkName} will appear here once it is added in the portal.
         </p>
       </div>
@@ -86,9 +84,9 @@ export function ParkWhenToGo({
 
   return (
     <div>
-      <div className='flex flex-wrap items-center gap-3 rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] px-5 py-4'>
-        <Icons.calendar className='size-5 shrink-0 text-[var(--benroso-primary)]' />
-        <p className='text-[15px] leading-7 text-[var(--benroso-ink)]'>
+      <div className='flex flex-wrap items-center gap-3 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] px-5 py-4'>
+        <Icons.calendar className='size-5 shrink-0 text-[var(--brand-primary)]' />
+        <p className='text-[15px] leading-7 text-[var(--brand-ink)]'>
           <span className='font-semibold'>Best time to visit {parkName}:</span> {summary}
         </p>
       </div>
@@ -101,8 +99,8 @@ export function ParkWhenToGo({
                 className={cn(
                   'rounded-[5px] border px-1 py-2 text-center text-xs font-bold',
                   months[index]
-                    ? 'border-[var(--benroso-primary)] bg-[var(--benroso-primary)] text-white'
-                    : 'border-[var(--benroso-line)] bg-white text-[var(--benroso-muted)]'
+                    ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white'
+                    : 'border-[var(--brand-line)] bg-white text-[var(--brand-muted)]'
                 )}
                 key={label}
               >
@@ -110,8 +108,8 @@ export function ParkWhenToGo({
               </div>
             ))}
           </div>
-          <p className='mt-3 inline-flex items-center gap-1.5 text-xs text-[var(--benroso-muted)]'>
-            <span className='size-3 rounded-[3px] bg-[var(--benroso-primary)]' />
+          <p className='mt-3 inline-flex items-center gap-1.5 text-xs text-[var(--brand-muted)]'>
+            <span className='size-3 rounded-[3px] bg-[var(--brand-primary)]' />
             Recommended travel months
           </p>
         </div>

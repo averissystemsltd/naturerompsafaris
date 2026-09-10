@@ -1,4 +1,4 @@
-import { BENROSO_BRAND_COLORS, BENROSO_CONTACT_DEFAULTS } from '@/config/benroso';
+import { BRAND_COLORS, BRAND_CONTACT_DEFAULTS } from '@/config/brand';
 import { sendMail } from '@/lib/email/mailer';
 import { enquiryReplyToEmail, isSmtpConfigured, smtpFromAddress } from '@/lib/email/smtp-config';
 import { getGuestFirstName } from '@/lib/enquiries/enquiry-comms';
@@ -28,7 +28,7 @@ function buildPlainTextBody(payload: GuestEnquiryConfirmationPayload) {
   const lines = [
     `Hello ${firstName},`,
     '',
-    'Thank you for reaching out to Benroso Safaris. We have received your enquiry and a member of our team will be in touch shortly.',
+    'Thank you for reaching out to Nature Romp Safaris. We have received your enquiry and a member of our team will be in touch shortly.',
     '',
     'We listen first and tailor suggestions to your interests. There is no hard sell, and no payment is collected through our website.',
     '',
@@ -42,9 +42,9 @@ function buildPlainTextBody(payload: GuestEnquiryConfirmationPayload) {
   lines.push(
     '',
     'Warm regards,',
-    'The Benroso Safaris Team',
-    BENROSO_CONTACT_DEFAULTS.email,
-    BENROSO_CONTACT_DEFAULTS.phonePrimary
+    'The Nature Romp Safaris Team',
+    BRAND_CONTACT_DEFAULTS.email,
+    BRAND_CONTACT_DEFAULTS.phonePrimary
   );
 
   return lines.join('\n');
@@ -57,25 +57,25 @@ function buildHtmlBody(payload: GuestEnquiryConfirmationPayload) {
 
   const referenceBlock =
     reference && reference !== 'BENS-PENDING'
-      ? `<p style="margin:0 0 16px;font-family:monospace;font-size:14px;color:${BENROSO_BRAND_COLORS.primary};">Reference: ${reference}</p>`
+      ? `<p style="margin:0 0 16px;font-family:monospace;font-size:14px;color:${BRAND_COLORS.primary};">Reference: ${reference}</p>`
       : '';
 
   return `
     <div style="font-family:Arial,sans-serif;color:#1f2937;line-height:1.65;max-width:560px;">
-      <div style="border-bottom:3px solid ${BENROSO_BRAND_COLORS.primary};padding-bottom:16px;margin-bottom:24px;">
-        <p style="margin:0;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#6b7280;">${BENROSO_CONTACT_DEFAULTS.companyName}</p>
-        <h1 style="margin:8px 0 0;font-size:22px;color:${BENROSO_BRAND_COLORS.primary};">${heading}</h1>
+      <div style="border-bottom:3px solid ${BRAND_COLORS.primary};padding-bottom:16px;margin-bottom:24px;">
+        <p style="margin:0;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#6b7280;">${BRAND_CONTACT_DEFAULTS.companyName}</p>
+        <h1 style="margin:8px 0 0;font-size:22px;color:${BRAND_COLORS.primary};">${heading}</h1>
       </div>
       <p style="margin:0 0 16px;">Hello ${firstName},</p>
-      <p style="margin:0 0 16px;">Thank you for reaching out to Benroso Safaris. We have received your enquiry and a member of our team will be in touch shortly.</p>
+      <p style="margin:0 0 16px;">Thank you for reaching out to Nature Romp Safaris. We have received your enquiry and a member of our team will be in touch shortly.</p>
       <p style="margin:0 0 16px;">We listen first and tailor suggestions to your interests. There is no hard sell, and no payment is collected through our website.</p>
       <p style="margin:0 0 16px;">Our safari experts aim to respond within 24 hours with thoughtful guidance based on what you shared.</p>
       ${referenceBlock}
       <p style="margin:24px 0 0;color:#374151;">
         Warm regards,<br />
-        The Benroso Safaris Team<br />
-        <a href="mailto:${BENROSO_CONTACT_DEFAULTS.email}" style="color:${BENROSO_BRAND_COLORS.primary};">${BENROSO_CONTACT_DEFAULTS.email}</a><br />
-        ${BENROSO_CONTACT_DEFAULTS.phonePrimary}
+        The Nature Romp Safaris Team<br />
+        <a href="mailto:${BRAND_CONTACT_DEFAULTS.email}" style="color:${BRAND_COLORS.primary};">${BRAND_CONTACT_DEFAULTS.email}</a><br />
+        ${BRAND_CONTACT_DEFAULTS.phonePrimary}
       </p>
     </div>
   `;
@@ -85,10 +85,10 @@ function buildSubject(payload: GuestEnquiryConfirmationPayload) {
   const reference = payload.referenceCode?.trim();
 
   if (reference && reference !== 'BENS-PENDING') {
-    return `We received your enquiry ${reference} – ${BENROSO_CONTACT_DEFAULTS.companyName}`;
+    return `We received your enquiry ${reference} – ${BRAND_CONTACT_DEFAULTS.companyName}`;
   }
 
-  return `We received your enquiry – ${BENROSO_CONTACT_DEFAULTS.companyName}`;
+  return `We received your enquiry – ${BRAND_CONTACT_DEFAULTS.companyName}`;
 }
 
 export function shouldSendGuestEnquiryConfirmation() {

@@ -23,7 +23,7 @@ export async function generateMetadata(props: ExperiencePageProps): Promise<Meta
   if (!experience) notFound();
 
   const canonical = absoluteUrl(`/${locale}/experiences/${experience.slug}`);
-  const title = experience.seoTitle || `${experience.title} | Benroso Safaris`;
+  const title = experience.seoTitle || `${experience.title} | Nature Romp Safaris`;
   const description = experience.seoDescription || experience.summary || '';
 
   return {

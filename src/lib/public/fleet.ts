@@ -62,29 +62,29 @@ function galleryIds(value: unknown): string[] {
 
 const FLEET_GALLERY_FALLBACK: PublicDestinationMedia[] = [
   {
-    id: 'benroso-fleet-lion',
-    url: '/assets/benroso-fleet-lion.png',
-    alt: 'Benroso Safaris four by four with pop up roof near a lion on the plains'
+    id: 'brand-fleet-lion',
+    url: '/assets/brand-fleet-lion.png',
+    alt: 'Nature Romp Safaris four by four with pop up roof near a lion on the plains'
   },
   {
-    id: 'benroso-4x4-safaris-fleet',
-    url: '/assets/benroso-4x4-safaris-fleet.png',
-    alt: 'Benroso Safaris 4x4 fleet at a scenic East African viewpoint'
+    id: 'brand-4x4-safaris-fleet',
+    url: '/assets/brand-4x4-safaris-fleet.png',
+    alt: 'Nature Romp Safaris 4x4 fleet at a scenic East African viewpoint'
   },
   {
-    id: 'benroso-fleet-mara-gate',
-    url: '/assets/benroso-fleet-mara-gate.png',
-    alt: 'Benroso Safaris vehicle at Lake Naivasha Sopa Resort'
+    id: 'brand-fleet-mara-gate',
+    url: '/assets/brand-fleet-mara-gate.png',
+    alt: 'Nature Romp Safaris vehicle at Lake Naivasha Sopa Resort'
   },
   {
-    id: 'benroso-fleet-branded',
-    url: '/assets/benroso-fleet-branded.png',
-    alt: 'Benroso Safaris Land Cruiser ready for off road game drives'
+    id: 'brand-fleet-branded',
+    url: '/assets/brand-fleet-branded.png',
+    alt: 'Nature Romp Safaris Land Cruiser ready for off road game drives'
   },
   {
-    id: 'benroso-fleet-guests',
-    url: '/assets/benroso-fleet-guests.png',
-    alt: 'Safari guests with Benroso Safaris private safari vehicles'
+    id: 'brand-fleet-guests',
+    url: '/assets/brand-fleet-guests.png',
+    alt: 'Safari guests with Nature Romp Safaris private safari vehicles'
   }
 ];
 

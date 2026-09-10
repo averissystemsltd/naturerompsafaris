@@ -51,8 +51,8 @@ export function DestinationsMultiSelect({
           <Button
             aria-expanded={open}
             className={cn(
-              'benroso-contact-field benroso-destination-trigger h-auto min-h-11 w-full justify-between px-3 py-2.5 font-normal shadow-none focus-visible:ring-0 focus-visible:ring-offset-0',
-              selected.length ? 'text-[var(--benroso-ink)]' : 'text-[var(--benroso-muted)]/70'
+              'brand-contact-field brand-destination-trigger h-auto min-h-11 w-full justify-between px-3 py-2.5 font-normal shadow-none focus-visible:ring-0 focus-visible:ring-offset-0',
+              selected.length ? 'text-[var(--brand-ink)]' : 'text-[var(--brand-muted)]/70'
             )}
             type='button'
             variant='ghost'
@@ -64,14 +64,14 @@ export function DestinationsMultiSelect({
 
         <PopoverContent
           align='start'
-          className='benroso-destination-popover w-[min(100vw-2rem,320px)] border-[#d9d9d9] bg-white p-0 text-[#1a1a1a] shadow-md'
+          className='brand-destination-popover w-[min(100vw-2rem,320px)] border-[#d9d9d9] bg-white p-0 text-[#1a1a1a] shadow-md'
           collisionPadding={12}
           side='bottom'
           sideOffset={6}
         >
           <div
             aria-label='Safari destination countries'
-            className='benroso-destination-popover-list'
+            className='brand-destination-popover-list'
             role='group'
           >
             {SAFARI_DESTINATION_OPTIONS.map(({ code, country }) => {
@@ -80,19 +80,19 @@ export function DestinationsMultiSelect({
               return (
                 <label
                   className={cn(
-                    'benroso-destination-popover-item',
-                    isSelected && 'benroso-destination-popover-item--selected'
+                    'brand-destination-popover-item',
+                    isSelected && 'brand-destination-popover-item--selected'
                   )}
                   key={country}
                 >
                   <input
                     checked={isSelected}
-                    className='benroso-contact-checkbox-input'
+                    className='brand-contact-checkbox-input'
                     onChange={() => toggleCountry(country)}
                     type='checkbox'
                   />
-                  <span className='benroso-destination-popover-item-label'>{country}</span>
-                  <span className='benroso-destination-popover-item-code'>{code}</span>
+                  <span className='brand-destination-popover-item-label'>{country}</span>
+                  <span className='brand-destination-popover-item-code'>{code}</span>
                 </label>
               );
             })}
@@ -101,10 +101,10 @@ export function DestinationsMultiSelect({
       </Popover>
 
       {!selected.length ? (
-        <p className='mt-1.5 text-xs text-[var(--benroso-muted)]'>Choose at least one country.</p>
+        <p className='mt-1.5 text-xs text-[var(--brand-muted)]'>Choose at least one country.</p>
       ) : null}
       {selected.length > 0 && !open ? (
-        <p className='mt-1.5 text-xs text-[var(--benroso-muted)]'>
+        <p className='mt-1.5 text-xs text-[var(--brand-muted)]'>
           We will use the selected countries to tailor your itinerary.
         </p>
       ) : null}

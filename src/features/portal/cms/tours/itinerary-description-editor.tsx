@@ -90,7 +90,7 @@ export function ItineraryDescriptionEditor({
       }),
       Highlight.configure({
         HTMLAttributes: {
-          class: 'benroso-desc-highlight'
+          class: 'brand-desc-highlight'
         }
       })
     ],

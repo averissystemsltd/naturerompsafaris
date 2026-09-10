@@ -1,6 +1,6 @@
-# Benroso Safaris — SEO / AEO / GEO Content Map
+# Nature Romp Safaris — SEO / AEO / GEO Content Map
 
-Production site: **https://benrososafaris.com**
+Production site: **https://naturerompsafaris.com**
 
 This document maps every indexable route, metadata sources, structured data, crawl files, and instant-indexing behavior.
 
@@ -13,12 +13,12 @@ This document maps every indexable route, metadata sources, structured data, cra
 | Sitemap | `/sitemap.xml` | `src/app/sitemap.ts` — dynamic, all published routes × locales |
 | Robots | `/robots.txt` | `src/app/robots.ts` — disallows portal/admin/api/dashboard |
 | LLMs file | `/llms.txt` | `src/app/llms.txt/route.ts` — AEO/GEO site summary for AI crawlers |
-| IndexNow key | `/benroso-safaris-indexnow.txt` | `src/app/benroso-safaris-indexnow.txt/route.ts` |
+| IndexNow key | `/naturerompsafaris-indexnow.txt` | `src/app/naturerompsafaris-indexnow.txt/route.ts` |
 
 ### Google Search Console setup (manual)
 
 1. Verify ownership at [Google Search Console](https://search.google.com/search-console) using the verification code in **Portal → Settings → Analytics** (`googleSiteVerification` → root layout metadata).
-2. Submit sitemap: `https://benrososafaris.com/sitemap.xml`
+2. Submit sitemap: `https://naturerompsafaris.com/sitemap.xml`
 3. Request indexing for homepage after first deploy of this SEO stack.
 
 ### Bing Webmaster setup (manual)
@@ -140,7 +140,7 @@ Wired in:
 
 Env:
 
-- `INDEXNOW_API_KEY` (default `benroso-safaris-indexnow`)
+- `INDEXNOW_API_KEY` (default `naturerompsafaris-indexnow`)
 - `GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON` — service account JSON (or base64). Enable Web Search Indexing API, add the service account email as a Search Console **Owner**.
 
 ---
@@ -174,7 +174,7 @@ Env:
 src/app/sitemap.ts
 src/app/robots.ts
 src/app/llms.txt/route.ts
-src/app/benroso-safaris-indexnow.txt/route.ts
+src/app/naturerompsafaris-indexnow.txt/route.ts
 src/lib/seo/sitemap-data.ts
 src/lib/seo/indexing.ts
 src/lib/seo/publish-notify.ts

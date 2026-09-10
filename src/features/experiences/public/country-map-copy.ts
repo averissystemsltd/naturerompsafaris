@@ -1,7 +1,7 @@
-export type BenrosoCountryId = 'kenya' | 'tanzania' | 'uganda' | 'rwanda' | 'south-africa';
+export type BrandCountryId = 'kenya' | 'tanzania' | 'uganda' | 'rwanda' | 'south-africa';
 
-export type BenrosoCountryMapEntry = {
-  id: BenrosoCountryId;
+export type BrandCountryMapEntry = {
+  id: BrandCountryId;
   /** Two-letter country code shown on listing cards (e.g. KE, TZ) */
   code: string;
   isoA3: string;
@@ -15,7 +15,7 @@ export type BenrosoCountryMapEntry = {
   dotFill: string;
 };
 
-export const BENROSO_OPERATING_COUNTRIES: BenrosoCountryMapEntry[] = [
+export const BRAND_OPERATING_COUNTRIES: BrandCountryMapEntry[] = [
   {
     id: 'kenya',
     code: 'KE',
@@ -23,8 +23,8 @@ export const BENROSO_OPERATING_COUNTRIES: BenrosoCountryMapEntry[] = [
     name: 'Kenya',
     headline: 'Maasai Mara, Amboseli & the Great Migration',
     blurb:
-      'Benroso Safaris routes across Kenya pair Maasai Mara big-cat country, Amboseli elephants below Kilimanjaro, and migration river crossings with sensible drives and lodges matched to your style.',
-    image: '/assets/benroso-safaris-kenya.webp',
+      'Nature Romp Safaris routes across Kenya pair Maasai Mara big-cat country, Amboseli elephants below Kilimanjaro, and migration river crossings with sensible drives and lodges matched to your style.',
+    image: '/assets/brand-safaris-kenya.webp',
     fill: '#2a9d8f',
     dotFill: '#2a9d8f'
   },
@@ -47,7 +47,7 @@ export const BENROSO_OPERATING_COUNTRIES: BenrosoCountryMapEntry[] = [
     name: 'Uganda',
     headline: 'Mountain gorillas & the Pearl of Africa',
     blurb:
-      'Benroso Safaris handles Uganda gorilla permits, forest logistics, and lodge access so you can combine Bwindi or Mgahinga trekking with Queen Elizabeth or Murchison Falls savannah days.',
+      'Nature Romp Safaris handles Uganda gorilla permits, forest logistics, and lodge access so you can combine Bwindi or Mgahinga trekking with Queen Elizabeth or Murchison Falls savannah days.',
     image: '/assets/Elephant-in-Amboseli-National-Park-2.jpeg',
     fill: '#c9a227',
     dotFill: '#c9a227'
@@ -71,7 +71,7 @@ export const BENROSO_OPERATING_COUNTRIES: BenrosoCountryMapEntry[] = [
     name: 'South Africa',
     headline: 'Kruger, private reserves & Cape extensions',
     blurb:
-      'Benroso Safaris connects Kruger and private reserve Big Five viewing with optional Cape Town, wine country, or coast extensions for a longer southern Africa journey.',
+      'Nature Romp Safaris connects Kruger and private reserve Big Five viewing with optional Cape Town, wine country, or coast extensions for a longer southern Africa journey.',
     image:
       '/assets/The-Ultimate-Guided-Rhino-Tracking-on-Foot-in-Kenya-Conservation-Safari-A-Journey-to-Save-the-Giants.jpg',
     fill: '#007749',
@@ -79,20 +79,20 @@ export const BENROSO_OPERATING_COUNTRIES: BenrosoCountryMapEntry[] = [
   }
 ];
 
-export const DEFAULT_BENROSO_COUNTRY_ID: BenrosoCountryId = 'kenya';
+export const DEFAULT_BRAND_COUNTRY_ID: BrandCountryId = 'kenya';
 
 export const OPERATING_ISO_TO_ID = Object.fromEntries(
-  BENROSO_OPERATING_COUNTRIES.map((country) => [country.isoA3, country.id])
-) as Record<string, BenrosoCountryId>;
+  BRAND_OPERATING_COUNTRIES.map((country) => [country.isoA3, country.id])
+) as Record<string, BrandCountryId>;
 
-export function getCountryById(id: BenrosoCountryId) {
-  return BENROSO_OPERATING_COUNTRIES.find((country) => country.id === id)!;
+export function getCountryById(id: BrandCountryId) {
+  return BRAND_OPERATING_COUNTRIES.find((country) => country.id === id)!;
 }
 
-export function formatExperienceCountryCodes(countries: BenrosoCountryId[]) {
+export function formatExperienceCountryCodes(countries: BrandCountryId[]) {
   return countries.map((id) => getCountryById(id).code);
 }
 
-export function formatExperienceCountryNames(countries: BenrosoCountryId[]) {
+export function formatExperienceCountryNames(countries: BrandCountryId[]) {
   return countries.map((id) => getCountryById(id).name.toUpperCase()).join(', ');
 }

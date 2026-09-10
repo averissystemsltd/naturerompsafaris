@@ -1,9 +1,9 @@
-export function titleTemplate(contentTitle: string, suffix = 'Benroso Safaris') {
+export function titleTemplate(contentTitle: string, suffix = 'Nature Romp Safaris') {
   return `${contentTitle} | ${suffix}`;
 }
 
 export function destinationTitleTemplate(destination: string) {
-  return `${destination} Safari Guide | Benroso Safaris`;
+  return `${destination} Safari Guide | Nature Romp Safaris`;
 }
 
 export function tourTitleTemplate(tour: string) {

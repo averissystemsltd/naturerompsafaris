@@ -49,17 +49,17 @@ begin
       'en',
       'short-safaris',
       'Short Safaris',
-      'Make the most of a short stay with Benroso Safaris short Kenya safaris. Choose compact 2 to 4 day itineraries to Lake Nakuru, Lake Naivasha, Maasai Mara, or Amboseli without long itineraries.',
+      'Make the most of a short stay with Nature Romp Safaris short Kenya safaris. Choose compact 2 to 4 day itineraries to Lake Nakuru, Lake Naivasha, Maasai Mara, or Amboseli without long itineraries.',
       jsonb_build_object(
         'html',
-        $html$<p>Short safaris are designed for travellers who want a focused wildlife experience in a limited amount of time. These compact itineraries typically run for two to four days and concentrate on one or two parks close enough to Nairobi for an efficient road safari.</p><p>Popular short safari options include Lake Nakuru, Lake Naivasha, Maasai Mara, and Amboseli. Each route balances travel time with game drives so guests spend more of their holiday watching wildlife rather than transferring between destinations.</p><p>Benroso Safaris plans short safaris around private 4x4 game drives, carefully timed departures from Nairobi, and comfortable mid-range lodges or tented camps. They work well for first-time visitors, couples, families, and guests adding a safari to a Kenya city or beach holiday.</p>$html$
+        $html$<p>Short safaris are designed for travellers who want a focused wildlife experience in a limited amount of time. These compact itineraries typically run for two to four days and concentrate on one or two parks close enough to Nairobi for an efficient road safari.</p><p>Popular short safari options include Lake Nakuru, Lake Naivasha, Maasai Mara, and Amboseli. Each route balances travel time with game drives so guests spend more of their holiday watching wildlife rather than transferring between destinations.</p><p>Nature Romp Safaris plans short safaris around private 4x4 game drives, carefully timed departures from Nairobi, and comfortable mid-range lodges or tented camps. They work well for first-time visitors, couples, families, and guests adding a safari to a Kenya city or beach holiday.</p>$html$
       ),
       'Short Safaris Kenya | 2 to 4 Day Wildlife Trips',
-      'Book short Kenya safaris with Benroso Safaris. Compact 2 to 4 day trips to Lake Nakuru, Naivasha, Maasai Mara, and Amboseli.',
+      'Book short Kenya safaris with Nature Romp Safaris. Compact 2 to 4 day trips to Lake Nakuru, Naivasha, Maasai Mara, and Amboseli.',
       '[
         {"question":"How long is a short safari?","answer":"Most short safaris run for 2 to 4 days, depending on the parks included and your travel pace."},
         {"question":"Which parks work best for short safaris?","answer":"Lake Nakuru, Lake Naivasha, Maasai Mara, and Amboseli are the most popular short safari destinations from Nairobi."},
-        {"question":"Are short safaris private?","answer":"Yes. Benroso Safaris short safari packages are arranged as private guided experiences unless a shared departure is specifically requested."}
+        {"question":"Are short safaris private?","answer":"Yes. Nature Romp Safaris short safari packages are arranged as private guided experiences unless a shared departure is specifically requested."}
       ]'::jsonb,
       'Short Safaris',
       '["short Kenya safari","2 day safari Kenya","weekend safari Nairobi","Lake Nakuru short safari","Maasai Mara short safari"]'::jsonb,
@@ -124,17 +124,17 @@ begin
       'en',
       'budget-camping-safaris',
       'Budget Camping Safaris',
-      'Explore Kenya on a budget with Benroso Safaris camping safaris. Enjoy classic wildlife parks, campfire evenings, and affordable guided game drives without sacrificing the adventure.',
+      'Explore Kenya on a budget with Nature Romp Safaris camping safaris. Enjoy classic wildlife parks, campfire evenings, and affordable guided game drives without sacrificing the adventure.',
       jsonb_build_object(
         'html',
-        $html$<p>Budget camping safaris are a practical way to experience Kenya’s national parks while keeping costs lower than lodge-based itineraries. Guests stay in tents at designated campsites, travel with an experienced driver-guide, and enjoy game drives in parks such as Maasai Mara, Amboseli, Lake Nakuru, and Tsavo.</p><p>These safaris suit backpackers, student groups, adventure travellers, and anyone who wants a classic camping safari atmosphere with good value. Meals are usually prepared by a safari cook, and itineraries can be arranged as shared departures or private camping trips.</p><p>Benroso Safaris helps match the right parks, camping style, and travel pace so your budget safari still feels well organised, safe, and wildlife-focused.</p>$html$
+        $html$<p>Budget camping safaris are a practical way to experience Kenya’s national parks while keeping costs lower than lodge-based itineraries. Guests stay in tents at designated campsites, travel with an experienced driver-guide, and enjoy game drives in parks such as Maasai Mara, Amboseli, Lake Nakuru, and Tsavo.</p><p>These safaris suit backpackers, student groups, adventure travellers, and anyone who wants a classic camping safari atmosphere with good value. Meals are usually prepared by a safari cook, and itineraries can be arranged as shared departures or private camping trips.</p><p>Nature Romp Safaris helps match the right parks, camping style, and travel pace so your budget safari still feels well organised, safe, and wildlife-focused.</p>$html$
       ),
       'Budget Camping Safaris Kenya | Affordable Wildlife Trips',
-      'Book budget camping safaris in Kenya with Benroso Safaris. Affordable camping itineraries to Maasai Mara, Amboseli, Nakuru, and more.',
+      'Book budget camping safaris in Kenya with Nature Romp Safaris. Affordable camping itineraries to Maasai Mara, Amboseli, Nakuru, and more.',
       '[
         {"question":"What is included in a budget camping safari?","answer":"Typical inclusions are transport in a safari vehicle, camping equipment, a cook, meals on safari, park fees where stated, and guided game drives. Exact inclusions depend on the package."},
         {"question":"Are budget camping safaris comfortable?","answer":"Camping is simpler than lodge stays, but tents, mattresses, and camp meals keep the experience practical. It suits travellers who prioritise wildlife time and value."},
-        {"question":"Can budget camping safaris be private?","answer":"Yes. Benroso Safaris can arrange private camping safaris or advise on shared budget camping departures when available."}
+        {"question":"Can budget camping safaris be private?","answer":"Yes. Nature Romp Safaris can arrange private camping safaris or advise on shared budget camping departures when available."}
       ]'::jsonb,
       'Budget Camping Safaris',
       '["budget camping safari Kenya","cheap Kenya safari camping","Maasai Mara camping safari","affordable Kenya safari","camping safari from Nairobi"]'::jsonb,

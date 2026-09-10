@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
 import { localePath } from '@/lib/public/locale-path';
 import { youtubeVideoId } from '@/lib/public/page-heroes';
 import type { HeroSlide, PageHero } from '@/lib/public/types';
@@ -72,7 +72,7 @@ export function HomeHero({
     configuredSlides && configuredSlides.length > 0 ? configuredSlides : HERO_FALLBACK_SLIDES;
   const videoId = hero?.type === 'youtube' ? youtubeVideoId(hero.youtubeUrl) : null;
 
-  const eyebrow = hero?.eyebrow ?? 'Welcome to Benroso Safaris';
+  const eyebrow = hero?.eyebrow ?? 'Welcome to Nature Romp Safaris';
   const heading = hero?.heading ?? 'Unforgettable East African Safaris, Crafted Around You';
   const fallbackHomeSubheading =
     'For twenty-five years we have guided travelers across Kenya, Tanzania, Uganda, and Rwanda. Every itinerary is built by people who know these parks firsthand, not from a brochure. Tell us how you like to travel, and we will take care of the rest.';
@@ -95,12 +95,12 @@ export function HomeHero({
   }, [heroSlides.length, videoId]);
 
   return (
-    <section className='relative min-h-[min(92vh,960px)] overflow-hidden bg-[var(--benroso-primary-dark)] text-white'>
+    <section className='relative min-h-[min(92vh,960px)] overflow-hidden bg-[var(--brand-primary-dark)] text-white'>
       {videoId ? (
         <>
           {heroSlides[0]?.mediaUrl ? (
             <Image
-              alt={heroSlides[0].alt ?? 'Benroso Safaris'}
+              alt={heroSlides[0].alt ?? 'Nature Romp Safaris'}
               className='object-cover'
               fill
               fetchPriority='high'
@@ -139,7 +139,7 @@ export function HomeHero({
               </video>
             ) : (
               <Image
-                alt={slide.alt ?? 'Benroso Safaris'}
+                alt={slide.alt ?? 'Nature Romp Safaris'}
                 className='object-cover'
                 fetchPriority={index === 0 ? 'high' : undefined}
                 fill
@@ -163,28 +163,28 @@ export function HomeHero({
 
       <div className='relative z-10 flex min-h-[min(92vh,960px)] flex-col justify-between'>
         <div className='flex flex-1 items-center'>
-          <div className='benroso-container py-20'>
-            <p className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--benroso-gold)]'>
+          <div className='brand-container py-20'>
+            <p className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--brand-gold)]'>
               {eyebrow}
             </p>
             <h1 className='mt-4 max-w-3xl font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] text-white'>
               {heading}
             </h1>
             <p className='mt-6 max-w-2xl text-lg leading-8 text-white/90'>{subheading}</p>
-            <BenrosoButtonGroup className='mt-8'>
-              <BenrosoButton
-                className='border-[var(--benroso-lime)] bg-[var(--benroso-lime)] text-white [--benroso-fill:var(--benroso-primary)]'
+            <BrandButtonGroup className='mt-8'>
+              <BrandButton
+                className='border-[var(--brand-lime)] bg-[var(--brand-lime)] text-white [--brand-fill:var(--brand-primary)]'
                 href={primaryCtaHref}
                 variant='accent'
               >
                 <Icons.compass className='h-4 w-4 shrink-0' />
                 {primaryCtaLabel}
-              </BenrosoButton>
-              <BenrosoButton href={toursHref} variant='gold-outline'>
+              </BrandButton>
+              <BrandButton href={toursHref} variant='gold-outline'>
                 View Safari Tours
                 <Icons.arrowRight className='h-4 w-4 shrink-0' />
-              </BenrosoButton>
-            </BenrosoButtonGroup>
+              </BrandButton>
+            </BrandButtonGroup>
           </div>
         </div>
       </div>

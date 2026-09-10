@@ -13,7 +13,7 @@ function lp(locale: string, path: string) {
   return localePath(locale, path);
 }
 
-/** The countries Benroso operates in, in preferred column order, with flags. */
+/** The countries Nature Romp operates in, in preferred column order, with flags. */
 const COUNTRY_COLUMNS: { country: string; slug: string; flag: string }[] = [
   { country: 'Kenya', slug: 'kenya', flag: '🇰🇪' },
   { country: 'Tanzania', slug: 'tanzania', flag: '🇹🇿' },

@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 import {
-  BENROSO_CONTACT_DEFAULTS,
-  BENROSO_LOGO_HEIGHT,
-  BENROSO_LOGO_PATH,
-  BENROSO_LOGO_WIDTH
-} from '@/config/benroso';
+  BRAND_CONTACT_DEFAULTS,
+  BRAND_LOGO_HEIGHT,
+  BRAND_LOGO_PATH,
+  BRAND_LOGO_WIDTH
+} from '@/config/brand';
 import type { Enquiry } from '@/features/enquiries/api/types';
 import { EnquiryStatusBadge } from '@/features/enquiries/components/enquiry-status-badge';
 import { EnquiryTypeBadge } from '@/features/enquiries/components/enquiry-type-badge';
@@ -237,25 +237,25 @@ export function EnquiryDetailDocument({ enquiry }: EnquiryDetailDocumentProps) {
         <div className='flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between'>
           <div className='shrink-0'>
             <Image
-              alt='Benroso Safaris'
+              alt='Nature Romp Safaris'
               className='h-auto w-[180px] max-w-full object-contain sm:w-[220px]'
-              height={BENROSO_LOGO_HEIGHT}
+              height={BRAND_LOGO_HEIGHT}
               priority
-              src={BENROSO_LOGO_PATH}
-              width={BENROSO_LOGO_WIDTH}
+              src={BRAND_LOGO_PATH}
+              width={BRAND_LOGO_WIDTH}
             />
           </div>
 
           <address className='text-right text-sm leading-6 text-[#374151] not-italic sm:max-w-xs'>
-            <p className='font-semibold text-[#111827]'>{BENROSO_CONTACT_DEFAULTS.companyName}</p>
-            <p>{BENROSO_CONTACT_DEFAULTS.phonePrimary}</p>
-            <p>{BENROSO_CONTACT_DEFAULTS.phoneSecondary}</p>
+            <p className='font-semibold text-[#111827]'>{BRAND_CONTACT_DEFAULTS.companyName}</p>
+            <p>{BRAND_CONTACT_DEFAULTS.phonePrimary}</p>
+            <p>{BRAND_CONTACT_DEFAULTS.phoneSecondary}</p>
             <p>
               <a
                 className='text-[#3C5142] print:text-[#111827]'
-                href={`mailto:${BENROSO_CONTACT_DEFAULTS.email}`}
+                href={`mailto:${BRAND_CONTACT_DEFAULTS.email}`}
               >
-                {BENROSO_CONTACT_DEFAULTS.email}
+                {BRAND_CONTACT_DEFAULTS.email}
               </a>
             </p>
             <p>

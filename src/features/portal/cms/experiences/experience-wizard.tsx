@@ -15,7 +15,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useAppForm } from '@/components/ui/tanstack-form';
 import { useFormStepper } from '@/hooks/use-stepper';
 import { slugify } from '@/lib/utils';
-import { BENROSO_OPERATING_COUNTRIES } from '@/features/experiences/public/country-map-copy';
+import { BRAND_OPERATING_COUNTRIES } from '@/features/experiences/public/country-map-copy';
 import { getMediaByIds } from '../media/api/client';
 import { mediaKeys } from '../media/api/queries';
 import { MediaGalleryField } from '../media/components/media-picker';
@@ -503,7 +503,7 @@ export function ExperienceWizard({
                     multiple destinations.
                   </p>
                   <div className='grid gap-2 sm:grid-cols-2'>
-                    {BENROSO_OPERATING_COUNTRIES.map((country) => {
+                    {BRAND_OPERATING_COUNTRIES.map((country) => {
                       const checked = field.state.value.includes(country.id);
 
                       return (

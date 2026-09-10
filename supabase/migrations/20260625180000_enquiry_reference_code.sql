@@ -1,5 +1,5 @@
 -- Human-readable enquiry reference codes (industry format: PREFIX-YEAR-SEQUENCE)
--- Display format: BENS-2026-00001 (Benroso Safaris, calendar year, zero-padded sequence)
+-- Display format: BENS-2026-00001 (Nature Romp Safaris, calendar year, zero-padded sequence)
 
 create table if not exists public.enquiry_reference_counters (
   year integer primary key,

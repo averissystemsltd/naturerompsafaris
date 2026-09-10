@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   return buildListingPageMetadata({
     canonicalPath: `/${locale}/blog`,
     defaultDescription:
-      'Safari travel insights, destination guides, and planning tips from the Benroso Safaris team.',
+      'Safari travel insights, destination guides, and planning tips from the Nature Romp Safaris team.',
     defaultTitle: 'Safari Travel Insights',
     heroKey: 'blog',
     locale
@@ -33,7 +33,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     <>
       <ContactHero
         breadcrumbs={[{ href: localePath(locale), label: 'Home' }, { label: 'Blog' }]}
-        description='Safari travel insights, destination guides, and planning tips from the Benroso Safaris team.'
+        description='Safari travel insights, destination guides, and planning tips from the Nature Romp Safaris team.'
         eyebrow='Blog'
         hero={pageHero}
         title='Safari Travel Insights'

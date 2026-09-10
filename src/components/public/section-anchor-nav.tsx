@@ -48,20 +48,20 @@ export function SectionAnchorNav({ className, items }: SectionAnchorNavProps) {
     <nav
       aria-label='Page sections'
       className={cn(
-        'sticky top-[var(--benroso-header-h)] z-40 border-b border-[var(--benroso-line)] bg-white',
+        'sticky top-[var(--brand-header-h)] z-40 border-b border-[var(--brand-line)] bg-white',
         className
       )}
     >
-      <div className='benroso-container flex snap-x snap-mandatory overflow-x-auto'>
+      <div className='brand-container flex snap-x snap-mandatory overflow-x-auto'>
         {items.map((item) => {
           const active = activeHref === item.href;
           return (
             <a
               className={cn(
-                'shrink-0 snap-start px-5 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[var(--benroso-muted)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--benroso-lime)] md:px-6',
+                'shrink-0 snap-start px-5 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[var(--brand-muted)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--brand-lime)] md:px-6',
                 active
-                  ? 'bg-[var(--benroso-lime)] text-[var(--benroso-primary-dark)]'
-                  : 'hover:bg-[var(--benroso-ivory)] hover:text-[var(--benroso-primary)]'
+                  ? 'bg-[var(--brand-lime)] text-[var(--brand-primary-dark)]'
+                  : 'hover:bg-[var(--brand-ivory)] hover:text-[var(--brand-primary)]'
               )}
               href={item.href}
               key={item.href}

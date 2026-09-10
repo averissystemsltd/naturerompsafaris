@@ -99,11 +99,11 @@ export function TrustedChecklist({
     <ul className={className} ref={rootRef}>
       {items.map((item) => (
         <li
-          className={cn('flex gap-3.5 text-sm leading-7 text-[var(--benroso-ink)]', itemClassName)}
+          className={cn('flex gap-3.5 text-sm leading-7 text-[var(--brand-ink)]', itemClassName)}
           key={item}
         >
           <Icons.circleCheck
-            className='mt-1 h-5 w-5 shrink-0 text-[var(--benroso-primary)] md:h-6 md:w-6'
+            className='mt-1 h-5 w-5 shrink-0 text-[var(--brand-primary)] md:h-6 md:w-6'
             data-tick
           />
           <span className='min-w-0 flex-1'>

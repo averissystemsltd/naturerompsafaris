@@ -467,7 +467,7 @@ export function analyzeSeo(input: SeoAnalysisInput): SeoAnalysis {
             id: 'internal-links',
             label: 'Internal links',
             status: 'good',
-            message: `${count} same-site links to other Benroso pages.`
+            message: `${count} same-site links to other Nature Romp pages.`
           }
         : count === 1
           ? {

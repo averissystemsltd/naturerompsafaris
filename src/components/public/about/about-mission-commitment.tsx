@@ -5,7 +5,7 @@ import { ABOUT_VISION_MISSION, ABOUT_WHY_TRAVEL } from '@/lib/public/about-conte
 export function AboutMissionCommitment() {
   return (
     <section className='grid lg:grid-cols-2 lg:items-stretch'>
-      <div className='relative bg-[var(--benroso-primary-dark)] px-6 py-14 md:px-10 md:py-16 lg:px-12 lg:py-20'>
+      <div className='relative bg-[var(--brand-primary-dark)] px-6 py-14 md:px-10 md:py-16 lg:px-12 lg:py-20'>
         <div
           aria-hidden
           className='pointer-events-none absolute inset-0 opacity-20'
@@ -17,16 +17,13 @@ export function AboutMissionCommitment() {
 
         <div className='relative grid gap-10 md:grid-cols-2 md:gap-8 lg:gap-12'>
           <div>
-            <p className='font-display text-[clamp(1.5rem,3vw,2rem)] italic leading-none text-[var(--benroso-lime)]/75'>
+            <p className='font-display text-[clamp(1.5rem,3vw,2rem)] italic leading-none text-[var(--brand-lime)]/75'>
               Our
             </p>
             <h2 className='font-display text-[clamp(2rem,4vw,2.75rem)] font-bold leading-tight text-white'>
               Mission
             </h2>
-            <span
-              aria-hidden
-              className='benroso-gold-line benroso-gold-line--left mt-5 opacity-80'
-            />
+            <span aria-hidden className='brand-gold-line brand-gold-line--left mt-5 opacity-80' />
             <p className='mt-6 text-base leading-8 text-white/90'>
               {ABOUT_VISION_MISSION.mission.body}
             </p>
@@ -36,10 +33,7 @@ export function AboutMissionCommitment() {
             <h2 className='font-display text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-tight text-white'>
               {ABOUT_WHY_TRAVEL.title}
             </h2>
-            <span
-              aria-hidden
-              className='benroso-gold-line benroso-gold-line--left mt-5 opacity-80'
-            />
+            <span aria-hidden className='brand-gold-line brand-gold-line--left mt-5 opacity-80' />
             <p className='mt-6 text-base leading-8 text-white/90'>{ABOUT_WHY_TRAVEL.intro}</p>
           </div>
         </div>
@@ -55,7 +49,7 @@ export function AboutMissionCommitment() {
         />
         <div
           aria-hidden
-          className='pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-[var(--benroso-primary-dark)]/35 to-transparent lg:block'
+          className='pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-[var(--brand-primary-dark)]/35 to-transparent lg:block'
         />
       </div>
     </section>

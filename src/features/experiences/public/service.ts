@@ -4,7 +4,7 @@ import { localePath } from '@/lib/public/locale-path';
 import { getPublicToursByIds } from '@/lib/public/site-data';
 import { createEnquiryPublicClient } from '@/lib/supabase/service-role';
 
-import { BENROSO_OPERATING_COUNTRIES, type BenrosoCountryId } from './country-map-copy';
+import { BRAND_OPERATING_COUNTRIES, type BrandCountryId } from './country-map-copy';
 import { isMountainExperienceLayout, normalizeExperienceLayoutVariant } from './layout-variant';
 import type {
   PublicExperience,
@@ -135,14 +135,14 @@ function mediaAlt(
   return unwrapRelation(asset)?.alt ?? fallback;
 }
 
-function parseCountries(value: unknown): BenrosoCountryId[] {
+function parseCountries(value: unknown): BrandCountryId[] {
   if (!Array.isArray(value)) return [];
 
-  const allowed = new Set(BENROSO_OPERATING_COUNTRIES.map((country) => country.id));
+  const allowed = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
 
   return value.filter(
-    (item): item is BenrosoCountryId =>
-      typeof item === 'string' && allowed.has(item as BenrosoCountryId)
+    (item): item is BrandCountryId =>
+      typeof item === 'string' && allowed.has(item as BrandCountryId)
   );
 }
 
@@ -330,7 +330,7 @@ function normalizeMenuGroup(
 async function fetchPublishedTranslationRows(
   locale: string,
   filters?: {
-    countries?: BenrosoCountryId[];
+    countries?: BrandCountryId[];
     menuGroups?: PublicExperienceMenuItem['menuGroup'][];
   }
 ) {
@@ -385,7 +385,7 @@ async function fetchPublishedExperiences({
   locale,
   menuGroups
 }: {
-  countries?: BenrosoCountryId[];
+  countries?: BrandCountryId[];
   locale: string;
   menuGroups?: PublicExperienceMenuItem['menuGroup'][];
 }): Promise<PublicExperience[]> {
@@ -407,7 +407,7 @@ export async function listPublishedExperiences({
   locale,
   menuGroups
 }: {
-  countries?: BenrosoCountryId[];
+  countries?: BrandCountryId[];
   locale: string;
   menuGroups?: PublicExperienceMenuItem['menuGroup'][];
 }): Promise<PublicExperience[]> {
@@ -487,9 +487,9 @@ export async function listExperienceMenuItems(locale: string): Promise<PublicExp
   )();
 }
 
-export async function getExperienceCountries(locale: string): Promise<BenrosoCountryId[]> {
+export async function getExperienceCountries(locale: string): Promise<BrandCountryId[]> {
   const experiences = await listPublishedExperiences({ locale });
-  const countries = new Set<BenrosoCountryId>();
+  const countries = new Set<BrandCountryId>();
 
   for (const experience of experiences) {
     for (const country of experience.countries) {
@@ -497,7 +497,7 @@ export async function getExperienceCountries(locale: string): Promise<BenrosoCou
     }
   }
 
-  return BENROSO_OPERATING_COUNTRIES.map((country) => country.id).filter((id) => countries.has(id));
+  return BRAND_OPERATING_COUNTRIES.map((country) => country.id).filter((id) => countries.has(id));
 }
 
 export async function getExperienceCategories(locale: string): Promise<string[]> {

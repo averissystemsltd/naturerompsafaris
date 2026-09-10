@@ -1,4 +1,4 @@
-import { BENROSO_CONTACT_DEFAULTS } from '@/config/benroso';
+import { BRAND_CONTACT_DEFAULTS } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 
 export type LegalSection = {
@@ -24,9 +24,9 @@ export type LegalFooterLink = {
   label: string;
 };
 
-const company = BENROSO_CONTACT_DEFAULTS.companyName;
-const email = BENROSO_CONTACT_DEFAULTS.email;
-const address = BENROSO_CONTACT_DEFAULTS.addressShort;
+const company = BRAND_CONTACT_DEFAULTS.companyName;
+const email = BRAND_CONTACT_DEFAULTS.email;
+const address = BRAND_CONTACT_DEFAULTS.addressShort;
 
 export const LEGAL_PAGES: LegalPageDefinition[] = [
   {
@@ -34,14 +34,14 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     title: 'Privacy Policy',
     eyebrow: 'Legal',
     description:
-      'How Benroso Safaris collects, uses, stores, and protects personal data in line with GDPR and international privacy standards.',
+      'How Nature Romp Safaris collects, uses, stores, and protects personal data in line with GDPR and international privacy standards.',
     lastUpdated: '2026-06-22',
     sections: [
       {
         id: 'introduction',
         title: '1. Introduction',
         paragraphs: [
-          `${company} ("Benroso Safaris", "we", "us") respects your privacy and is committed to protecting personal data. This Privacy Policy explains how we process information when you visit our website, enquire about a safari, book travel services, or communicate with us.`,
+          `${company} ("Nature Romp Safaris", "we", "us") respects your privacy and is committed to protecting personal data. This Privacy Policy explains how we process information when you visit our website, enquire about a safari, book travel services, or communicate with us.`,
           'This policy is designed to meet the transparency requirements of the EU General Data Protection Regulation (GDPR), the UK GDPR, and comparable international privacy frameworks.'
         ]
       },
@@ -144,10 +144,10 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     slug: 'cookie-policy',
     title: 'Cookie Policy',
     description:
-      'How Benroso Safaris uses cookies and similar technologies to improve your browsing experience and understand website performance.',
+      'How Nature Romp Safaris uses cookies and similar technologies to improve your browsing experience and understand website performance.',
     lastUpdated: '2026-06-25',
     intro: [
-      'This Cookie Policy explains how Benroso Safaris may use cookies and similar technologies on our website to improve user experience, understand website performance, and support our online services.',
+      'This Cookie Policy explains how Nature Romp Safaris may use cookies and similar technologies on our website to improve user experience, understand website performance, and support our online services.',
       'By using our website, you agree to the use of cookies as described in this policy, unless you disable them through your browser settings.'
     ],
     sections: [
@@ -161,10 +161,10 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
       },
       {
         id: 'how-we-use-cookies',
-        title: '2. How Benroso Safaris Uses Cookies',
+        title: '2. How Nature Romp Safaris Uses Cookies',
         listAfterParagraphIndex: 0,
         paragraphs: [
-          'Benroso Safaris may use cookies to:',
+          'Nature Romp Safaris may use cookies to:',
           'Cookies do not give us access to your computer, mobile device, or personal files.'
         ],
         listItems: [
@@ -186,13 +186,13 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
           'Without these cookies, some parts of the website may not function correctly.',
           '**Performance and Analytics Cookies**',
           'These cookies help us understand how visitors interact with our website. For example, they may show us which pages are visited most often, how long visitors stay on the website, and whether users experience errors.',
-          'This information helps Benroso Safaris improve the website and create better safari content for visitors.',
+          'This information helps Nature Romp Safaris improve the website and create better safari content for visitors.',
           '**Functionality Cookies**',
           'Functionality cookies allow the website to remember certain preferences or actions, such as form entries, region preferences, or previous interactions.',
           'These cookies help make your browsing experience smoother and more convenient.',
           '**Marketing and Advertising Cookies**',
-          'Benroso Safaris may use marketing cookies or similar tracking technologies to understand the effectiveness of online campaigns or show relevant safari-related content to users who have visited our website.',
-          'These cookies may be set by Benroso Safaris or by trusted third-party platforms, such as advertising, analytics, or social media tools.'
+          'Nature Romp Safaris may use marketing cookies or similar tracking technologies to understand the effectiveness of online campaigns or show relevant safari-related content to users who have visited our website.',
+          'These cookies may be set by Nature Romp Safaris or by trusted third-party platforms, such as advertising, analytics, or social media tools.'
         ]
       },
       {
@@ -202,7 +202,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         paragraphs: [
           'Some cookies on our website may be placed by third-party services that help us manage, measure, or improve our website.',
           'These may include services such as:',
-          'Third-party providers may collect information according to their own privacy and cookie policies. Benroso Safaris does not control how third-party cookies are used once they are set by those external platforms.'
+          'Third-party providers may collect information according to their own privacy and cookie policies. Nature Romp Safaris does not control how third-party cookies are used once they are set by those external platforms.'
         ],
         listItems: [
           'Website analytics tools',
@@ -219,7 +219,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         paragraphs: [
           'Cookies may collect general technical information such as browser type, device type, IP address, pages visited, time spent on the website, and referral source.',
           'Where cookies are linked to personal information submitted through an inquiry form, such information will be handled in accordance with our [Privacy Policy](/privacy-policy).',
-          'Benroso Safaris does not use cookies to collect payment card details, bank details, or sensitive financial information through the website.'
+          'Nature Romp Safaris does not use cookies to collect payment card details, bank details, or sensitive financial information through the website.'
         ]
       },
       {
@@ -243,7 +243,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'cookie-consent',
         title: '7. Cookie Consent',
         paragraphs: [
-          'Where required, Benroso Safaris may display a cookie notice or consent banner when you visit the website. This allows you to accept, reject, or manage certain cookie categories depending on the website setup.',
+          'Where required, Nature Romp Safaris may display a cookie notice or consent banner when you visit the website. This allows you to accept, reject, or manage certain cookie categories depending on the website setup.',
           'Essential cookies may still be used because they are necessary for the website to operate correctly.'
         ]
       },
@@ -251,7 +251,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'updates',
         title: '8. Updates to This Cookie Policy',
         paragraphs: [
-          'Benroso Safaris may update this Cookie Policy from time to time to reflect changes in website features, technology, legal requirements, or how cookies are used.',
+          'Nature Romp Safaris may update this Cookie Policy from time to time to reflect changes in website features, technology, legal requirements, or how cookies are used.',
           'Any updates will be posted on this page with the revised effective date.'
         ]
       },
@@ -259,7 +259,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'contact-us',
         title: '9. Contact Us',
         paragraphs: [
-          'For questions about this Cookie Policy or how Benroso Safaris uses cookies, please [contact us](/contact) through the official contact details provided on our website.'
+          'For questions about this Cookie Policy or how Nature Romp Safaris uses cookies, please [contact us](/contact) through the official contact details provided on our website.'
         ]
       }
     ]
@@ -269,7 +269,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     title: 'Terms & Conditions',
     eyebrow: 'Legal',
     description:
-      'General terms governing use of the Benroso Safaris website and safari booking services.',
+      'General terms governing use of the Nature Romp Safaris website and safari booking services.',
     lastUpdated: '2026-06-22',
     sections: [
       {
@@ -284,7 +284,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'services',
         title: '2. Our Services',
         paragraphs: [
-          'Benroso Safaris arranges tailor-made and packaged safari tours, transfers, accommodation, and related travel services in East Africa. We act as an agent for certain suppliers and as a principal where stated in your booking confirmation.',
+          'Nature Romp Safaris arranges tailor-made and packaged safari tours, transfers, accommodation, and related travel services in East Africa. We act as an agent for certain suppliers and as a principal where stated in your booking confirmation.',
           'Itineraries, prices, and availability on this website are indicative until confirmed in writing.'
         ]
       },
@@ -322,7 +322,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'intellectual-property',
         title: '7. Intellectual Property',
         paragraphs: [
-          'Website content, logos, and materials are owned by Benroso Safaris or licensors. You may not reproduce or distribute content without written permission.'
+          'Website content, logos, and materials are owned by Nature Romp Safaris or licensors. You may not reproduce or distribute content without written permission.'
         ]
       },
       {
@@ -341,10 +341,10 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     title: 'Payment Terms',
     eyebrow: 'Legal',
     description:
-      'Deposits, payment schedules, currency, refunds, and billing conditions for Benroso Safaris bookings.',
+      'Deposits, payment schedules, currency, refunds, and billing conditions for Nature Romp Safaris bookings.',
     lastUpdated: '2026-06-25',
     intro: [
-      'These Payment Terms apply to all safari, tour, accommodation, transport, group travel, incentive travel, and related travel arrangements booked with Benroso Safaris.',
+      'These Payment Terms apply to all safari, tour, accommodation, transport, group travel, incentive travel, and related travel arrangements booked with Nature Romp Safaris.',
       'By confirming a booking with us, the client agrees to the payment terms outlined below.'
     ],
     sections: [
@@ -352,7 +352,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'booking-confirmation',
         title: '1. Booking Confirmation',
         paragraphs: [
-          'A booking is considered confirmed once Benroso Safaris has issued a written confirmation and the required deposit has been received within the stated payment period.',
+          'A booking is considered confirmed once Nature Romp Safaris has issued a written confirmation and the required deposit has been received within the stated payment period.',
           'All bookings are subject to availability at the time of confirmation. Accommodation, transport, flights, guides, park arrangements, and other services can only be secured once the required payment has been received.'
         ]
       },
@@ -384,7 +384,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         paragraphs: [
           'Clients are responsible for ensuring that payments are made by the due dates stated on the invoice, quotation, or booking confirmation.',
           'Failure to make payment within the required period may result in:',
-          'Benroso Safaris shall not be held responsible for any loss of availability, rate changes, or supplier cancellation caused by late payment.'
+          'Nature Romp Safaris shall not be held responsible for any loss of availability, rate changes, or supplier cancellation caused by late payment.'
         ],
         listItems: [
           'Delay in confirming the booking',
@@ -399,7 +399,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'invoices-quotations',
         title: '5. Invoices and Quotations',
         paragraphs: [
-          'Benroso Safaris may issue a quotation before a booking is confirmed. A quotation does not guarantee availability until the required deposit has been received and the booking has been confirmed in writing.',
+          'Nature Romp Safaris may issue a quotation before a booking is confirmed. A quotation does not guarantee availability until the required deposit has been received and the booking has been confirmed in writing.',
           'Invoices will show the amount payable, payment schedule, due dates, and any applicable booking details.',
           'All prices are based on the services, dates, destinations, accommodation, transport, and activities included in the confirmed itinerary.'
         ]
@@ -409,7 +409,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '6. Currency and Exchange Rates',
         paragraphs: [
           'Tour prices may be quoted in United States Dollars, Kenya Shillings, or another agreed currency depending on the nature of the booking.',
-          'Where payments are made in a currency different from the quoted currency, the final amount received by Benroso Safaris must match the invoiced amount after any exchange rate differences, bank charges, transaction fees, or transfer costs have been applied.',
+          'Where payments are made in a currency different from the quoted currency, the final amount received by Nature Romp Safaris must match the invoiced amount after any exchange rate differences, bank charges, transaction fees, or transfer costs have been applied.',
           'Any shortfall resulting from exchange rate changes or transfer deductions shall be payable by the client.'
         ]
       },
@@ -418,26 +418,26 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '7. Bank Charges and Transaction Fees',
         paragraphs: [
           'All bank charges, mobile money charges, transfer fees, card charges, intermediary bank fees, foreign exchange charges, and transaction costs are the responsibility of the client unless otherwise agreed in writing.',
-          'The full invoiced amount must be received by Benroso Safaris.'
+          'The full invoiced amount must be received by Nature Romp Safaris.'
         ]
       },
       {
         id: 'accepted-payment-methods',
         title: '8. Accepted Payment Methods',
         paragraphs: [
-          'Benroso Safaris will provide official payment instructions directly to the client during the booking process.',
+          'Nature Romp Safaris will provide official payment instructions directly to the client during the booking process.',
           'Accepted payment methods may vary depending on the booking type, location of the client, currency, and operational requirements.',
-          'Clients should only make payments using the official payment details shared by Benroso Safaris through recognized communication channels.',
-          'For security reasons, clients are encouraged to confirm payment details directly with Benroso Safaris before making any payment.'
+          'Clients should only make payments using the official payment details shared by Nature Romp Safaris through recognized communication channels.',
+          'For security reasons, clients are encouraged to confirm payment details directly with Nature Romp Safaris before making any payment.'
         ]
       },
       {
         id: 'online-payments',
         title: '9. Online Payments',
         paragraphs: [
-          'Payments are not processed directly on the Benroso Safaris website.',
-          'The website is used for safari inquiries, quotation requests, destination information, and communication with our team. After a client submits an inquiry, the Benroso Safaris team may contact the client to prepare a customized itinerary, confirm availability, issue a quotation, and share official payment instructions where applicable.',
-          'Benroso Safaris does not collect or store debit card, credit card, bank account, or online payment details through the website.'
+          'Payments are not processed directly on the Nature Romp Safaris website.',
+          'The website is used for safari inquiries, quotation requests, destination information, and communication with our team. After a client submits an inquiry, the Nature Romp Safaris team may contact the client to prepare a customized itinerary, confirm availability, issue a quotation, and share official payment instructions where applicable.',
+          'Nature Romp Safaris does not collect or store debit card, credit card, bank account, or online payment details through the website.'
         ]
       },
       {
@@ -475,14 +475,14 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '12. Late Bookings',
         paragraphs: [
           'Bookings made close to the travel date may require immediate full payment to secure accommodation, transport, flights, permits, park arrangements, and other services.',
-          'Benroso Safaris will advise the client of the payment requirements at the time of confirmation.'
+          'Nature Romp Safaris will advise the client of the payment requirements at the time of confirmation.'
         ]
       },
       {
         id: 'post-tour-billing',
         title: '13. Post-Tour Billing',
         paragraphs: [
-          'Any post-tour billing must be authorized by mutual agreement between Benroso Safaris and the client.',
+          'Any post-tour billing must be authorized by mutual agreement between Nature Romp Safaris and the client.',
           'Post-tour charges may include additional services requested during the trip, extra mileage, itinerary extensions, upgraded accommodation, optional activities, personal expenses, or other costs not included in the original invoice.',
           'Such charges shall be payable within the period agreed between both parties.'
         ]
@@ -491,8 +491,8 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'receipts-proof-of-payment',
         title: '14. Receipts and Proof of Payment',
         paragraphs: [
-          'Clients should share proof of payment with Benroso Safaris once payment has been made.',
-          'A booking will only be treated as paid once the funds have been received and confirmed by Benroso Safaris.',
+          'Clients should share proof of payment with Nature Romp Safaris once payment has been made.',
+          'A booking will only be treated as paid once the funds have been received and confirmed by Nature Romp Safaris.',
           'Payment receipts or acknowledgements may be issued after payment confirmation.'
         ]
       },
@@ -501,9 +501,9 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '15. Cancellations and Refunds',
         listAfterParagraphIndex: 1,
         paragraphs: [
-          'Cancellation fees shall apply in accordance with the Benroso Safaris Terms and Conditions and Cancellation Policy.',
+          'Cancellation fees shall apply in accordance with the Nature Romp Safaris Terms and Conditions and Cancellation Policy.',
           'Refunds, where applicable, will be subject to:',
-          'Cancellations must be submitted in writing and will take effect from the date received by Benroso Safaris.'
+          'Cancellations must be submitted in writing and will take effect from the date received by Nature Romp Safaris.'
         ],
         listItems: [
           'The date of cancellation',
@@ -528,11 +528,11 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     slug: 'service-level-agreement',
     title: 'Service Level Agreement',
     description:
-      'Service standards, support commitments, and responsibilities when booking safaris, tours, and travel services with Benroso Safaris.',
+      'Service standards, support commitments, and responsibilities when booking safaris, tours, and travel services with Nature Romp Safaris.',
     lastUpdated: '2026-06-25',
     intro: [
-      'This Service Level Agreement outlines the level of service, support, communication, and responsibility clients can expect when booking a safari, tour, transfer, accommodation arrangement, or related travel service with Benroso Safaris.',
-      'At Benroso Safaris, we are committed to providing reliable, professional, and well-coordinated safari experiences while recognizing that travel in natural environments may be affected by factors beyond our control.'
+      'This Service Level Agreement outlines the level of service, support, communication, and responsibility clients can expect when booking a safari, tour, transfer, accommodation arrangement, or related travel service with Nature Romp Safaris.',
+      'At Nature Romp Safaris, we are committed to providing reliable, professional, and well-coordinated safari experiences while recognizing that travel in natural environments may be affected by factors beyond our control.'
     ],
     sections: [
       {
@@ -540,7 +540,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '1. Our Service Commitment',
         listAfterParagraphIndex: 1,
         paragraphs: [
-          'Benroso Safaris is committed to offering clients a professional, responsive, and personalized travel planning experience from the first inquiry to the completion of the safari.',
+          'Nature Romp Safaris is committed to offering clients a professional, responsive, and personalized travel planning experience from the first inquiry to the completion of the safari.',
           'We aim to:'
         ],
         listItems: [
@@ -557,7 +557,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'inquiry-and-communication-support',
         title: '2. Inquiry and Communication Support',
         paragraphs: [
-          'When a client submits an inquiry through our website, email, phone, WhatsApp, or any other communication channel, the Benroso Safaris team will review the request and respond with relevant information, recommendations, or follow-up questions where necessary.',
+          'When a client submits an inquiry through our website, email, phone, WhatsApp, or any other communication channel, the Nature Romp Safaris team will review the request and respond with relevant information, recommendations, or follow-up questions where necessary.',
           'Our team may contact the client to clarify travel dates, destination interests, number of travelers, accommodation preferences, budget range, and any special requirements.',
           'All safari proposals and quotations are prepared based on the information provided by the client and the availability of services at the time of planning.'
         ]
@@ -567,7 +567,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '3. Customized Safari Planning',
         listAfterParagraphIndex: 1,
         paragraphs: [
-          "Benroso Safaris specializes in creating tailor-made safari experiences. We make every reasonable effort to design itineraries that reflect the client's travel interests, preferred destinations, comfort level, budget, and schedule.",
+          "Nature Romp Safaris specializes in creating tailor-made safari experiences. We make every reasonable effort to design itineraries that reflect the client's travel interests, preferred destinations, comfort level, budget, and schedule.",
           'Safari planning may include recommendations on:',
           'All proposed itineraries remain subject to availability, seasonal conditions, supplier confirmation, park regulations, and payment requirements.'
         ],
@@ -585,18 +585,18 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'booking-coordination',
         title: '4. Booking Coordination',
         paragraphs: [
-          'Once a booking is confirmed and the required payment has been received, Benroso Safaris will proceed to secure the agreed services with relevant suppliers.',
+          'Once a booking is confirmed and the required payment has been received, Nature Romp Safaris will proceed to secure the agreed services with relevant suppliers.',
           'These may include accommodation providers, transport providers, domestic airlines, guides, park authorities, activity providers, and other service partners involved in the itinerary.',
-          'Benroso Safaris will make reasonable efforts to ensure that all confirmed services are properly coordinated. However, certain services are provided by independent third parties, and their own terms, operational standards, cancellation policies, and service conditions may apply.'
+          'Nature Romp Safaris will make reasonable efforts to ensure that all confirmed services are properly coordinated. However, certain services are provided by independent third parties, and their own terms, operational standards, cancellation policies, and service conditions may apply.'
         ]
       },
       {
         id: 'accuracy-of-information',
         title: '5. Accuracy of Information',
         paragraphs: [
-          'Benroso Safaris aims to provide accurate and up-to-date information on its website, itineraries, quotations, and communication materials.',
+          'Nature Romp Safaris aims to provide accurate and up-to-date information on its website, itineraries, quotations, and communication materials.',
           'However, travel information may change from time to time due to supplier updates, park regulations, seasonal conditions, government directives, flight schedule changes, conservation fee revisions, exchange rates, or other circumstances.',
-          'While we make every effort to keep information accurate, Benroso Safaris does not guarantee that all website content, prices, availability, descriptions, or travel details will always be complete, current, or free from errors.',
+          'While we make every effort to keep information accurate, Nature Romp Safaris does not guarantee that all website content, prices, availability, descriptions, or travel details will always be complete, current, or free from errors.',
           'Where an error or change is identified, we will make reasonable efforts to correct it and advise affected clients accordingly.'
         ]
       },
@@ -606,8 +606,8 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         listAfterParagraphIndex: 1,
         paragraphs: [
           'Safari travel may be affected by conditions that require changes to routes, accommodation, activities, timing, or transport arrangements.',
-          'Benroso Safaris reserves the right to make necessary adjustments before or during a safari where circumstances require. Such circumstances may include, but are not limited to:',
-          'Where changes are necessary, Benroso Safaris will make reasonable efforts to provide suitable alternatives of comparable standard and value where possible.'
+          'Nature Romp Safaris reserves the right to make necessary adjustments before or during a safari where circumstances require. Such circumstances may include, but are not limited to:',
+          'Where changes are necessary, Nature Romp Safaris will make reasonable efforts to provide suitable alternatives of comparable standard and value where possible.'
         ],
         listItems: [
           'Weather conditions',
@@ -628,7 +628,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'wildlife-nature-and-safari-experience-disclaimer',
         title: '7. Wildlife, Nature, and Safari Experience Disclaimer',
         paragraphs: [
-          'Safaris take place in natural and wildlife-rich environments. While Benroso Safaris and its guides make every reasonable effort to provide rewarding safari experiences, wildlife sightings cannot be guaranteed.',
+          'Safaris take place in natural and wildlife-rich environments. While Nature Romp Safaris and its guides make every reasonable effort to provide rewarding safari experiences, wildlife sightings cannot be guaranteed.',
           'Animal movement, weather, vegetation, migration patterns, park conditions, and natural behavior may affect what is seen during a safari.',
           'Clients acknowledge that safari experiences involve natural unpredictability and that no specific animal sighting, river crossing, migration moment, photography opportunity, or wildlife encounter can be promised.'
         ]
@@ -638,10 +638,10 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '8. Client Safety and Conduct',
         listAfterParagraphIndex: 2,
         paragraphs: [
-          'The safety and comfort of our clients is important to Benroso Safaris. Clients are expected to follow guidance provided by driver-guides, tour leaders, accommodation staff, park rangers, and other authorized personnel during the safari.',
+          'The safety and comfort of our clients is important to Nature Romp Safaris. Clients are expected to follow guidance provided by driver-guides, tour leaders, accommodation staff, park rangers, and other authorized personnel during the safari.',
           'Clients are responsible for conducting themselves in a respectful and safe manner throughout the trip.',
           'This includes:',
-          'Benroso Safaris reserves the right to refuse or discontinue service to any client whose conduct threatens the safety, comfort, or enjoyment of other travelers, staff, guides, suppliers, wildlife, or local communities.'
+          'Nature Romp Safaris reserves the right to refuse or discontinue service to any client whose conduct threatens the safety, comfort, or enjoyment of other travelers, staff, guides, suppliers, wildlife, or local communities.'
         ],
         listItems: [
           'Following park and conservancy rules',
@@ -650,7 +650,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
           'Respecting local communities, cultures, and customs',
           'Avoiding behavior that may endanger themselves or others',
           'Observing accommodation and activity provider rules',
-          'Informing Benroso Safaris of any medical, mobility, dietary, or special requirements before travel'
+          'Informing Nature Romp Safaris of any medical, mobility, dietary, or special requirements before travel'
         ]
       },
       {
@@ -658,9 +658,9 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '9. Health, Medical, and Travel Preparedness',
         paragraphs: [
           'Clients are responsible for ensuring that they are medically fit to travel and participate in the activities included in their itinerary.',
-          'Benroso Safaris recommends that all travelers consult a qualified medical professional or travel clinic before visiting safari destinations, especially regarding vaccinations, malaria precautions, medication, allergies, mobility limitations, and any existing medical conditions.',
+          'Nature Romp Safaris recommends that all travelers consult a qualified medical professional or travel clinic before visiting safari destinations, especially regarding vaccinations, malaria precautions, medication, allergies, mobility limitations, and any existing medical conditions.',
           'Clients are also responsible for carrying any personal medication, medical documents, vaccination certificates, or health-related travel documents required for their journey.',
-          "Benroso Safaris shall not be held responsible for medical complications, denied entry, travel disruption, or additional costs arising from a client's failure to meet health or travel requirements."
+          "Nature Romp Safaris shall not be held responsible for medical complications, denied entry, travel disruption, or additional costs arising from a client's failure to meet health or travel requirements."
         ]
       },
       {
@@ -669,7 +669,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         paragraphs: [
           'Clients are responsible for ensuring that they have valid passports, visas, permits, vaccination certificates, insurance documents, and any other travel documents required for their trip.',
           'Passport, visa, immigration, health, and entry requirements may change without notice. Clients should confirm current requirements with relevant embassies, consulates, airlines, immigration authorities, or official government sources before travel.',
-          'Benroso Safaris may provide general guidance where possible, but the responsibility for correct and valid travel documents remains with the client.'
+          'Nature Romp Safaris may provide general guidance where possible, but the responsibility for correct and valid travel documents remains with the client.'
         ]
       },
       {
@@ -677,9 +677,9 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '11. Travel Insurance',
         listAfterParagraphIndex: 1,
         paragraphs: [
-          'Benroso Safaris strongly recommends that all clients obtain comprehensive travel insurance before departure.',
+          'Nature Romp Safaris strongly recommends that all clients obtain comprehensive travel insurance before departure.',
           'Travel insurance should ideally cover:',
-          'Benroso Safaris shall not be held responsible for costs, losses, or disruptions that could have been covered by suitable travel insurance.'
+          'Nature Romp Safaris shall not be held responsible for costs, losses, or disruptions that could have been covered by suitable travel insurance.'
         ],
         listItems: [
           'Medical emergencies',
@@ -697,8 +697,8 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '12. Third-Party Services',
         paragraphs: [
           'Some services included in a safari itinerary may be provided by independent third parties, including lodges, camps, hotels, airlines, transport companies, activity providers, park authorities, and conservation bodies.',
-          'Benroso Safaris carefully selects suppliers and partners where possible, but we do not directly control the operations, staff, facilities, schedules, policies, or decisions of third-party providers.',
-          'Benroso Safaris shall not be liable for delays, omissions, service failures, accidents, losses, damages, or additional costs caused by third-party providers, except where such liability is required by law.'
+          'Nature Romp Safaris carefully selects suppliers and partners where possible, but we do not directly control the operations, staff, facilities, schedules, policies, or decisions of third-party providers.',
+          'Nature Romp Safaris shall not be liable for delays, omissions, service failures, accidents, losses, damages, or additional costs caused by third-party providers, except where such liability is required by law.'
         ]
       },
       {
@@ -706,9 +706,9 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '13. Force Majeure and Events Beyond Our Control',
         listAfterParagraphIndex: 1,
         paragraphs: [
-          'Benroso Safaris shall not be liable for failure to perform, delays, changes, losses, additional costs, or disruption caused by events beyond our reasonable control.',
+          'Nature Romp Safaris shall not be liable for failure to perform, delays, changes, losses, additional costs, or disruption caused by events beyond our reasonable control.',
           'Such events may include, but are not limited to:',
-          'In such situations, Benroso Safaris will make reasonable efforts to assist clients, rearrange services where possible, or provide suitable guidance depending on the circumstances.'
+          'In such situations, Nature Romp Safaris will make reasonable efforts to assist clients, rearrange services where possible, or provide suitable guidance depending on the circumstances.'
         ],
         listItems: [
           'Extreme weather',
@@ -730,8 +730,8 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'complaints-and-service-concerns',
         title: '14. Complaints and Service Concerns',
         paragraphs: [
-          'If a client experiences any issue during their safari, they should notify the driver-guide, tour leader, or Benroso Safaris team as soon as possible so that reasonable efforts can be made to resolve the matter during the trip.',
-          'Complaints raised only after the completion of the safari may be more difficult to investigate or resolve, especially where Benroso Safaris was not given an opportunity to address the concern during travel.',
+          'If a client experiences any issue during their safari, they should notify the driver-guide, tour leader, or Nature Romp Safaris team as soon as possible so that reasonable efforts can be made to resolve the matter during the trip.',
+          'Complaints raised only after the completion of the safari may be more difficult to investigate or resolve, especially where Nature Romp Safaris was not given an opportunity to address the concern during travel.',
           'Any post-tour complaint should be submitted in writing with relevant details. Please [contact us](/contact) through the official contact details provided on our website.'
         ]
       },
@@ -739,8 +739,8 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'limitations-of-responsibility',
         title: '15. Limitations of Responsibility',
         paragraphs: [
-          'Benroso Safaris will make reasonable efforts to deliver the services agreed in the confirmed itinerary. However, clients acknowledge that safari travel involves natural, operational, logistical, and third-party factors that may affect the final experience.',
-          'Benroso Safaris shall not be responsible for loss, inconvenience, injury, delay, damage, additional expense, disappointment, or disruption arising from circumstances beyond our reasonable control, client negligence, failure to follow instructions, third-party actions, or natural safari conditions.',
+          'Nature Romp Safaris will make reasonable efforts to deliver the services agreed in the confirmed itinerary. However, clients acknowledge that safari travel involves natural, operational, logistical, and third-party factors that may affect the final experience.',
+          'Nature Romp Safaris shall not be responsible for loss, inconvenience, injury, delay, damage, additional expense, disappointment, or disruption arising from circumstances beyond our reasonable control, client negligence, failure to follow instructions, third-party actions, or natural safari conditions.',
           'Nothing in this Service Level Agreement is intended to exclude liability where such exclusion is not permitted by applicable law.'
         ]
       },
@@ -748,7 +748,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'client-responsibility',
         title: '16. Client Responsibility',
         listAfterParagraphIndex: 0,
-        paragraphs: ['By booking with Benroso Safaris, the client agrees to:'],
+        paragraphs: ['By booking with Nature Romp Safaris, the client agrees to:'],
         listItems: [
           'Provide accurate personal and travel information',
           'Make payments within the required timelines',

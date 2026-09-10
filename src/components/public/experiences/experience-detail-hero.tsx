@@ -7,18 +7,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
 import {
   formatExperienceCountryNames,
-  type BenrosoCountryId
+  type BrandCountryId
 } from '@/features/experiences/public/country-map-copy';
 import { localePath } from '@/lib/public/locale-path';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 type ExperienceDetailHeroProps = {
-  countries: BenrosoCountryId[];
+  countries: BrandCountryId[];
   imageAlt: string | null;
   imageUrl: string | null;
   locale: string;
@@ -84,13 +84,13 @@ export function ExperienceDetailHero({
             src={imageUrl}
           />
         ) : (
-          <div className='absolute inset-0 bg-[var(--benroso-primary-light)]' />
+          <div className='absolute inset-0 bg-[var(--brand-primary-light)]' />
         )}
       </div>
       <div aria-hidden className='absolute inset-0 bg-black/60' />
 
       <div className='relative z-10 flex min-h-[min(78vh,720px)] items-center'>
-        <div className='benroso-container w-full py-28 md:py-32'>
+        <div className='brand-container w-full py-28 md:py-32'>
           <nav
             aria-label='Breadcrumb'
             className='mb-8 flex flex-wrap justify-center gap-2 text-sm text-white/75'
@@ -109,7 +109,7 @@ export function ExperienceDetailHero({
           <div className='mx-auto max-w-4xl text-center' ref={contentRef}>
             {countryLabel ? (
               <p className='inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white'>
-                <Icons.mapPin className='size-3.5 shrink-0 text-[var(--benroso-gold)]' />
+                <Icons.mapPin className='size-3.5 shrink-0 text-[var(--brand-gold)]' />
                 {countryLabel}
               </p>
             ) : null}
@@ -119,20 +119,20 @@ export function ExperienceDetailHero({
             {summary ? (
               <p className='mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/88'>{summary}</p>
             ) : null}
-            <BenrosoButtonGroup align='center' className='mt-8'>
-              <BenrosoButton className='group' href={localePath(locale, '/contact')}>
+            <BrandButtonGroup align='center' className='mt-8'>
+              <BrandButton className='group' href={localePath(locale, '/contact')}>
                 Let&apos;s Start Planning
                 <Icons.arrowRight className='h-4 w-4 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
-              </BenrosoButton>
-              <BenrosoButton
+              </BrandButton>
+              <BrandButton
                 className='group'
                 href={localePath(locale, '/tours')}
                 variant='gold-outline'
               >
                 View Tours
                 <Icons.arrowRight className='h-4 w-4 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100' />
-              </BenrosoButton>
-            </BenrosoButtonGroup>
+              </BrandButton>
+            </BrandButtonGroup>
           </div>
         </div>
       </div>

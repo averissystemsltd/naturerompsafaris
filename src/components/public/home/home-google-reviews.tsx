@@ -67,7 +67,7 @@ function Rating({ rating, source }: { rating: number; source: HomeReviewSource }
         {Array.from({ length: 5 }).map((_, i) => (
           <span
             className={`h-3.5 w-3.5 rounded-full ${
-              i < filled ? 'bg-[#00AA6C]' : 'bg-[var(--benroso-line)]'
+              i < filled ? 'bg-[#00AA6C]' : 'bg-[var(--brand-line)]'
             }`}
             key={i}
           />
@@ -81,7 +81,7 @@ function Rating({ rating, source }: { rating: number; source: HomeReviewSource }
       {Array.from({ length: 5 }).map((_, i) => (
         <Icons.exclusive
           className={`h-4 w-4 ${
-            i < filled ? 'fill-[#FBBC04] text-[#FBBC04]' : 'text-[var(--benroso-line)]'
+            i < filled ? 'fill-[#FBBC04] text-[#FBBC04]' : 'text-[var(--brand-line)]'
           }`}
           key={i}
         />
@@ -103,12 +103,12 @@ export function HomeGoogleReviews({ reviews }: { reviews?: HomeReviewItem[] }) {
   const items = reviews?.length ? reviews : FALLBACK_HOME_REVIEWS;
 
   return (
-    <section aria-label='Guest reviews' className='border-t border-[var(--benroso-line)] bg-white'>
-      <div className='benroso-container benroso-section'>
+    <section aria-label='Guest reviews' className='border-t border-[var(--brand-line)] bg-white'>
+      <div className='brand-container brand-section'>
         {/* Header — descriptive, not boxed */}
         <div className='mx-auto max-w-2xl text-center'>
-          <p className='benroso-eyebrow'>Do Not Take Our Word For It</p>
-          <h2 className='benroso-heading mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.15]'>
+          <p className='brand-eyebrow'>Do Not Take Our Word For It</p>
+          <h2 className='brand-heading mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.15]'>
             What Our Clients Say
           </h2>
           <div className='mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2'>
@@ -117,11 +117,11 @@ export function HomeGoogleReviews({ reviews }: { reviews?: HomeReviewItem[] }) {
                 <Icons.exclusive className='h-5 w-5 fill-[#FBBC04] text-[#FBBC04]' key={i} />
               ))}
             </span>
-            <span className='text-sm font-semibold text-[var(--benroso-heading)]'>
+            <span className='text-sm font-semibold text-[var(--brand-heading)]'>
               5 Star Reviews on
             </span>
             <GoogleGlyph className='h-5 w-5 shrink-0' />
-            <span className='text-sm font-semibold text-[var(--benroso-muted)]'>+</span>
+            <span className='text-sm font-semibold text-[var(--brand-muted)]'>+</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt='Tripadvisor'
@@ -137,7 +137,7 @@ export function HomeGoogleReviews({ reviews }: { reviews?: HomeReviewItem[] }) {
           <Slider autoPlayMs={7000} slideClassName='md:basis-1/2 xl:basis-1/3 md:w-1/2 xl:w-1/3'>
             {items.map((review, index) => (
               <article
-                className='flex h-full flex-col rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white p-6'
+                className='flex h-full flex-col rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white p-6'
                 key={review.id || `${review.authorName}-${index}`}
               >
                 <div className='flex items-center gap-3'>
@@ -151,15 +151,15 @@ export function HomeGoogleReviews({ reviews }: { reviews?: HomeReviewItem[] }) {
                       width={44}
                     />
                   ) : (
-                    <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--benroso-primary)] text-sm font-bold text-white'>
+                    <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--brand-primary)] text-sm font-bold text-white'>
                       {initials(review.authorName)}
                     </span>
                   )}
                   <div className='min-w-0 flex-1'>
-                    <p className='benroso-heading truncate font-display text-base leading-tight'>
+                    <p className='brand-heading truncate font-display text-base leading-tight'>
                       {review.authorName}
                     </p>
-                    <p className='truncate text-xs text-[var(--benroso-muted)]'>
+                    <p className='truncate text-xs text-[var(--brand-muted)]'>
                       {review.authorLocation
                         ? `${review.authorLocation} · via ${SOURCE_LABEL[review.source]}`
                         : `via ${SOURCE_LABEL[review.source]}`}
@@ -170,7 +170,7 @@ export function HomeGoogleReviews({ reviews }: { reviews?: HomeReviewItem[] }) {
                 <div className='mt-3'>
                   <Rating rating={review.rating} source={review.source} />
                 </div>
-                <p className='benroso-body mt-3 line-clamp-5 flex-1 text-sm leading-7'>
+                <p className='brand-body mt-3 line-clamp-5 flex-1 text-sm leading-7'>
                   {review.body}
                 </p>
               </article>

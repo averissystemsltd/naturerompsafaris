@@ -52,7 +52,7 @@ const BEST_TIME_OPTIONS: ComboboxOption[] = [
   { value: 'June to October', label: 'June to October (peak safari)' }
 ];
 
-/** The countries where Benroso Safaris operates, seeded as the main options on
+/** The countries where Nature Romp Safaris operates, seeded as the main options on
  *  the destination area selector. Combos like "Combined Kenya & Tanzania" can
  *  still be added on the fly via the country combobox. */
 const COUNTRY_PRESETS: ComboboxOption[] = [

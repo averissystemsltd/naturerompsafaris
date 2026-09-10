@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { BENROSO_PORTAL_AUTH_IMAGE } from '@/config/benroso';
+import { BRAND_PORTAL_AUTH_IMAGE } from '@/config/brand';
 import { cn } from '@/lib/utils';
 
 interface PortalAuthShellProps {
@@ -19,17 +19,17 @@ export function PortalAuthShell({ children, className }: PortalAuthShellProps) {
       >
         <div className='relative hidden min-h-[620px] md:block'>
           <Image
-            alt={BENROSO_PORTAL_AUTH_IMAGE.alt}
+            alt={BRAND_PORTAL_AUTH_IMAGE.alt}
             className='object-cover'
             fill
             priority
             sizes='(min-width: 768px) 490px, 0px'
-            src={BENROSO_PORTAL_AUTH_IMAGE.src}
+            src={BRAND_PORTAL_AUTH_IMAGE.src}
           />
           <div className='absolute inset-0 bg-linear-to-t from-[#2A2A2A]/35 via-transparent to-transparent' />
           <div className='absolute inset-x-0 bottom-0 p-8'>
             <p className='text-sm font-medium uppercase tracking-[0.14em] text-white/90'>
-              Benroso Safaris
+              Nature Romp Safaris
             </p>
             <p className='mt-1 max-w-xs text-lg font-semibold leading-snug text-white'>
               Kenya &amp; East Africa safari experiences

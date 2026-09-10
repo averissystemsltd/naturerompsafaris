@@ -5,7 +5,7 @@ import { AccommodationsResults } from '@/components/public/accommodations/accomm
 import { parseFilterList } from '@/features/accommodations/public/filters';
 import { ListingShell } from '@/components/public/page-shell';
 import { PublicPageHero } from '@/components/public/public-page-hero';
-import { BENROSO_PUBLIC_HERO_IMAGES } from '@/config/benroso';
+import { BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import {
   getAccommodationFilterFacets,
   listPublishedAccommodations
@@ -41,11 +41,11 @@ export async function generateMetadata({ params }: AccommodationsPageProps): Pro
   const canonical = absoluteUrl(`/${locale}/accommodations`);
 
   return {
-    title: 'Safari Accommodations & Lodges | Benroso Safaris',
+    title: 'Safari Accommodations & Lodges | Nature Romp Safaris',
     description: accommodationsDescription,
     alternates: { canonical },
     openGraph: {
-      title: 'Safari Accommodations & Lodges | Benroso Safaris',
+      title: 'Safari Accommodations & Lodges | Nature Romp Safaris',
       description: accommodationsDescription,
       url: canonical,
       type: 'website'
@@ -85,7 +85,7 @@ export default async function AccommodationsPage({
   ]);
 
   const pageHero = await getPageHero('accommodations');
-  const hero = BENROSO_PUBLIC_HERO_IMAGES.accommodations;
+  const hero = BRAND_PUBLIC_HERO_IMAGES.accommodations;
 
   return (
     <>

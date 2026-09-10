@@ -26,8 +26,8 @@ create table public.media_assets (
 create table public.site_settings (
   id uuid primary key default gen_random_uuid(),
   singleton_key text not null unique default 'default',
-  company_name text not null default 'Benroso Safaris Ltd',
-  email text not null default 'info@benrososafaris.co.ke',
+  company_name text not null default 'Nature Romp Safaris Ltd',
+  email text not null default 'info@naturerompsafaris.co.ke',
   phone_primary text not null default '+254 720 092309',
   phone_secondary text default '+254 731 201500',
   phone_office text default '+254 20 2147799',

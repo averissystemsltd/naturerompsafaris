@@ -4,9 +4,9 @@ import { Suspense } from 'react';
 import { ExperienceListingIntro } from '@/components/public/experiences/experience-listing-intro';
 import { ExperiencesListingSection } from '@/components/public/experiences/experiences-listing-section';
 import { PublicPageHero } from '@/components/public/public-page-hero';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
-import { BenrosoButtonGroup } from '@/components/public/ui/benroso-button-group';
-import { BENROSO_PUBLIC_HERO_IMAGES } from '@/config/benroso';
+import { BrandButton } from '@/components/public/ui/brand-button';
+import { BrandButtonGroup } from '@/components/public/ui/brand-button-group';
+import { BRAND_PUBLIC_HERO_IMAGES } from '@/config/brand';
 import {
   buildExperienceListingIntro,
   getExperienceCategoryBlurb
@@ -25,18 +25,18 @@ type ExperiencesPageProps = {
 };
 
 const experiencesDescription =
-  'Explore Benroso Safaris experiences for family travel, honeymoons, migration routes, private guiding, and special-interest trips across Kenya, Tanzania, Uganda, Rwanda, and South Africa.';
+  'Explore Nature Romp Safaris experiences for family travel, honeymoons, migration routes, private guiding, and special-interest trips across Kenya, Tanzania, Uganda, Rwanda, and South Africa.';
 
 export async function generateMetadata({ params }: ExperiencesPageProps): Promise<Metadata> {
   const { locale } = await params;
   const canonical = absoluteUrl(`/${locale}/experiences`);
 
   return {
-    title: 'Safari Experiences | Benroso Safaris',
+    title: 'Safari Experiences | Nature Romp Safaris',
     description: experiencesDescription,
     alternates: { canonical },
     openGraph: {
-      title: 'Safari Experiences | Benroso Safaris',
+      title: 'Safari Experiences | Nature Romp Safaris',
       description: experiencesDescription,
       url: canonical,
       type: 'website'
@@ -46,14 +46,14 @@ export async function generateMetadata({ params }: ExperiencesPageProps): Promis
 
 function ExperiencesListingFallback() {
   return (
-    <div className='benroso-section bg-white'>
-      <div className='benroso-container'>
+    <div className='brand-section bg-white'>
+      <div className='brand-container'>
         <div className='grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10'>
-          <div className='h-64 animate-pulse rounded-[var(--benroso-radius)] bg-[var(--benroso-line)]/40' />
+          <div className='h-64 animate-pulse rounded-[var(--brand-radius)] bg-[var(--brand-line)]/40' />
           <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
             {Array.from({ length: 6 }).map((_, index) => (
               <div
-                className='aspect-[4/5] animate-pulse rounded-[var(--benroso-radius)] bg-[var(--benroso-line)]/40'
+                className='aspect-[4/5] animate-pulse rounded-[var(--brand-radius)] bg-[var(--brand-line)]/40'
                 key={index}
               />
             ))}
@@ -77,7 +77,7 @@ export default async function ExperiencesPage({ params, searchParams }: Experien
 
   const intro = buildExperienceListingIntro(categories);
   const categoryBlurb = getExperienceCategoryBlurb(legacyCategory);
-  const hero = BENROSO_PUBLIC_HERO_IMAGES.experiences;
+  const hero = BRAND_PUBLIC_HERO_IMAGES.experiences;
 
   return (
     <>
@@ -94,14 +94,14 @@ export default async function ExperiencesPage({ params, searchParams }: Experien
         title='Safari Experiences'
         titleTone='white'
       >
-        <BenrosoButtonGroup align='center' className='mt-8'>
-          <BenrosoButton href={localePath(locale, '/contact')} variant='gold'>
+        <BrandButtonGroup align='center' className='mt-8'>
+          <BrandButton href={localePath(locale, '/contact')} variant='gold'>
             Help Me Plan
-          </BenrosoButton>
-          <BenrosoButton href='#experiences-list' variant='gold-outline'>
+          </BrandButton>
+          <BrandButton href='#experiences-list' variant='gold-outline'>
             View Experiences
-          </BenrosoButton>
-        </BenrosoButtonGroup>
+          </BrandButton>
+        </BrandButtonGroup>
       </PublicPageHero>
       <div className='bg-white'>
         <ExperienceListingIntro intro={intro} />

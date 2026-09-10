@@ -27,7 +27,7 @@ Review the portal pages and wizards:
 - `/portal/destinations`
 - `/portal/accommodations`
 
-Compare what exists against the product model below, then implement in small, verified steps. Keep the Benroso design system consistent: deep green, lime accent, ivory/white surfaces, low-radius cards/buttons, Playfair headings on public pages, dense but calm portal UI, and clear conversion CTAs.
+Compare what exists against the product model below, then implement in small, verified steps. Keep the Nature Romp design system consistent: deep green, lime accent, ivory/white surfaces, low-radius cards/buttons, Playfair headings on public pages, dense but calm portal UI, and clear conversion CTAs.
 
 ## Product Model
 

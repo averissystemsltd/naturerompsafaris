@@ -28,18 +28,18 @@ export function TeamMembersSection({
 }: TeamMembersSectionProps) {
   return (
     <div className='space-y-0 bg-white' id={anchorId}>
-      <section className='benroso-section'>
-        <div className='benroso-container mx-auto max-w-3xl'>
+      <section className='brand-section'>
+        <div className='brand-container mx-auto max-w-3xl'>
           <SectionHeader description={description} eyebrow={eyebrow} title={title} />
         </div>
       </section>
 
-      <div aria-hidden className='benroso-container'>
-        <div className='h-px w-full bg-[var(--benroso-line)]' />
+      <div aria-hidden className='brand-container'>
+        <div className='h-px w-full bg-[var(--brand-line)]' />
       </div>
 
-      <section className='benroso-section pt-0'>
-        <div className='benroso-container'>
+      <section className='brand-section pt-0'>
+        <div className='brand-container'>
           <TeamMembersGrid
             emptyActionHref={localePath(locale, '/contact')}
             emptyActionLabel='Speak with our team'

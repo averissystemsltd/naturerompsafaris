@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   return buildListingPageMetadata({
     canonicalPath: `/${locale}`,
     defaultDescription:
-      'Premium Kenya and Tanzania safari holidays with Benroso Safaris — tailor-made itineraries, expert guides, and trusted local support.',
-    defaultTitle: 'Benroso Safaris | Kenya & Tanzania Safari Holidays',
+      'Premium Kenya and Tanzania safari holidays with Nature Romp Safaris — tailor-made itineraries, expert guides, and trusted local support.',
+    defaultTitle: 'Nature Romp Safaris | Kenya & Tanzania Safari Holidays',
     heroKey: 'home',
     locale
   });

@@ -88,10 +88,10 @@ export function ContactAdvantagesList({ className }: ContactAdvantagesListProps)
   );
 
   return (
-    <ul className={cn('benroso-contact-sidebar-advantages', className)} ref={listRef}>
+    <ul className={cn('brand-contact-sidebar-advantages', className)} ref={listRef}>
       {ADVANTAGES.map((advantage) => (
-        <li className='benroso-contact-sidebar-advantage' data-advantage-item key={advantage}>
-          <span aria-hidden className='benroso-contact-sidebar-advantage-icon' data-advantage-icon>
+        <li className='brand-contact-sidebar-advantage' data-advantage-item key={advantage}>
+          <span aria-hidden className='brand-contact-sidebar-advantage-icon' data-advantage-icon>
             <Icons.check />
           </span>
           <span data-advantage-text data-full-text={advantage}>

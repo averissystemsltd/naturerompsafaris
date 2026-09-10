@@ -4,7 +4,7 @@ import { Icons } from '@/components/icons';
 import { ContourBackground } from '@/components/public/contour-background';
 import { ScrollReveal } from '@/components/public/ui/scroll-reveal';
 import { SectionHeader } from '@/components/public/ui/section-header';
-import { BENROSO_TRIPADVISOR } from '@/config/benroso';
+import { BRAND_TRIPADVISOR } from '@/config/brand';
 
 const PILLARS = [
   {
@@ -24,16 +24,16 @@ const PILLARS = [
   },
   {
     icon: 'exclusive' as const,
-    title: `Rated ${BENROSO_TRIPADVISOR.rating} by Travelers`,
+    title: `Rated ${BRAND_TRIPADVISOR.rating} by Travelers`,
     copy: 'Verified reviews on TripAdvisor and SafariBookings.com from guests around the world.'
   }
 ];
 
 export function HomeTrustBadges() {
   return (
-    <section className='relative overflow-hidden border-b border-[var(--benroso-line)] bg-white'>
+    <section className='relative overflow-hidden border-b border-[var(--brand-line)] bg-white'>
       <ContourBackground opacity={0.08} />
-      <div className='benroso-container relative py-14 md:py-16'>
+      <div className='brand-container relative py-14 md:py-16'>
         <SectionHeader
           description='Nearly three decades of safaris, the right credentials, and a team that treats your trip as if it were our own.'
           title='Booked With Confidence, Guided With Care'
@@ -44,17 +44,17 @@ export function HomeTrustBadges() {
             const Icon = Icons[pillar.icon];
             return (
               <article
-                className='flex flex-col items-start rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-[var(--benroso-ivory)] p-6'
+                className='flex flex-col items-start rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-[var(--brand-ivory)] p-6'
                 data-reveal-item
                 key={pillar.title}
               >
-                <span className='flex h-12 w-12 items-center justify-center rounded-[var(--benroso-radius)] bg-[var(--benroso-primary)] text-white'>
+                <span className='flex h-12 w-12 items-center justify-center rounded-[var(--brand-radius)] bg-[var(--brand-primary)] text-white'>
                   <Icon className='h-6 w-6' />
                 </span>
-                <h3 className='benroso-heading mt-4 font-display text-lg leading-tight'>
+                <h3 className='brand-heading mt-4 font-display text-lg leading-tight'>
                   {pillar.title}
                 </h3>
-                <p className='benroso-body mt-2 text-sm leading-6'>{pillar.copy}</p>
+                <p className='brand-body mt-2 text-sm leading-6'>{pillar.copy}</p>
               </article>
             );
           })}

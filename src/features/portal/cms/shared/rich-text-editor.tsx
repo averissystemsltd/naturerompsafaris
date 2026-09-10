@@ -296,8 +296,8 @@ function LinkDialog({
         <DialogHeader>
           <DialogTitle>Insert link</DialogTitle>
           <DialogDescription>
-            Prefer Internal page for Benroso URLs (including full https://benrososafaris.com/…
-            links). Web address is only for other websites.
+            Prefer Internal page for Nature Romp URLs (including full
+            https://naturerompsafaris.com/… links). Web address is only for other websites.
           </DialogDescription>
         </DialogHeader>
 
@@ -325,7 +325,7 @@ function LinkDialog({
               onChange={(event) => setHref(event.target.value)}
               placeholder={
                 mode === 'internal'
-                  ? '/en/blog/your-article or https://benrososafaris.com/en/…'
+                  ? '/en/blog/your-article or https://naturerompsafaris.com/en/…'
                   : 'https://example.com'
               }
             />

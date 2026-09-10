@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Icons } from '@/components/icons';
-import { BenrosoButton } from '@/components/public/ui/benroso-button';
+import { BrandButton } from '@/components/public/ui/brand-button';
 import { ScrollReveal } from '@/components/public/ui/scroll-reveal';
 import { SectionHeader } from '@/components/public/ui/section-header';
 import type { PublicExperience } from '@/features/experiences/public/types';
@@ -76,7 +76,7 @@ export function HomeExperiencesGrid({ experiences, locale }: HomeExperiencesGrid
   ).slice(0, HOME_EXPERIENCE_GRID_LIMIT);
 
   return (
-    <section className='benroso-section relative overflow-hidden bg-white'>
+    <section className='brand-section relative overflow-hidden bg-white'>
       <span
         aria-hidden
         className='pointer-events-none absolute -right-6 top-0 h-56 w-56 opacity-40 md:-right-2 md:top-2 md:h-72 md:w-72'
@@ -93,7 +93,7 @@ export function HomeExperiencesGrid({ experiences, locale }: HomeExperiencesGrid
           maskImage: 'radial-gradient(ellipse at bottom left, black 15%, transparent 72%)'
         }}
       />
-      <div className='benroso-container relative'>
+      <div className='brand-container relative'>
         <SectionHeader
           description='From first-time family safaris to fly-in luxury and gorilla treks, choose the kind of journey that fits you. Every experience is tailorable.'
           title='A Safari for Every Kind of Traveler'
@@ -105,7 +105,7 @@ export function HomeExperiencesGrid({ experiences, locale }: HomeExperiencesGrid
         >
           {items.map((item) => (
             <Link
-              className='group relative block aspect-[4/5] overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)]'
+              className='group relative block aspect-[4/5] overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)]'
               data-reveal-item
               href={item.href}
               key={item.id}
@@ -119,7 +119,7 @@ export function HomeExperiencesGrid({ experiences, locale }: HomeExperiencesGrid
                   src={item.imageUrl}
                 />
               ) : (
-                <span aria-hidden className='absolute inset-0 bg-[var(--benroso-primary-light)]' />
+                <span aria-hidden className='absolute inset-0 bg-[var(--brand-primary-light)]' />
               )}
               <span
                 aria-hidden
@@ -134,7 +134,7 @@ export function HomeExperiencesGrid({ experiences, locale }: HomeExperiencesGrid
                     {item.blurb}
                   </span>
                 ) : null}
-                <span className='mt-2 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--benroso-gold)]'>
+                <span className='mt-2 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-gold)]'>
                   View Details
                   <Icons.arrowRight className='h-3 w-3 transition-transform group-hover:translate-x-1' />
                 </span>
@@ -144,9 +144,9 @@ export function HomeExperiencesGrid({ experiences, locale }: HomeExperiencesGrid
         </ScrollReveal>
 
         <div className='mt-10 flex justify-center'>
-          <BenrosoButton href={localePath(locale, '/experiences')} variant='accent-outline'>
+          <BrandButton href={localePath(locale, '/experiences')} variant='accent-outline'>
             See All Experiences
-          </BenrosoButton>
+          </BrandButton>
         </div>
       </div>
     </section>

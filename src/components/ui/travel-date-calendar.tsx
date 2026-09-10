@@ -83,11 +83,11 @@ export function TravelDateCalendar({
   }
 
   return (
-    <div className={cn('benroso-travel-date-calendar-ui', className)}>
-      <div className='benroso-travel-date-calendar-header'>
+    <div className={cn('brand-travel-date-calendar-ui', className)}>
+      <div className='brand-travel-date-calendar-header'>
         <button
           aria-label='Previous month'
-          className='benroso-travel-date-calendar-nav'
+          className='brand-travel-date-calendar-nav'
           disabled={!canGoPrevious}
           onClick={goToPreviousMonth}
           type='button'
@@ -95,13 +95,13 @@ export function TravelDateCalendar({
           <Icons.chevronLeft className='h-4 w-4' />
         </button>
 
-        <p className='benroso-travel-date-calendar-title'>
+        <p className='brand-travel-date-calendar-title'>
           {viewMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
         </p>
 
         <button
           aria-label='Next month'
-          className='benroso-travel-date-calendar-nav'
+          className='brand-travel-date-calendar-nav'
           disabled={!canGoNext}
           onClick={goToNextMonth}
           type='button'
@@ -110,15 +110,15 @@ export function TravelDateCalendar({
         </button>
       </div>
 
-      <div className='benroso-travel-date-calendar-weekdays' role='row'>
+      <div className='brand-travel-date-calendar-weekdays' role='row'>
         {WEEKDAY_LABELS.map((label) => (
-          <span className='benroso-travel-date-calendar-weekday' key={label} role='columnheader'>
+          <span className='brand-travel-date-calendar-weekday' key={label} role='columnheader'>
             {label}
           </span>
         ))}
       </div>
 
-      <div className='benroso-travel-date-calendar-grid' role='grid'>
+      <div className='brand-travel-date-calendar-grid' role='grid'>
         {days.map((date) => {
           const inCurrentMonth = date.getMonth() === viewMonth.getMonth();
           const iso = toIsoDate(date);
@@ -127,7 +127,7 @@ export function TravelDateCalendar({
             return (
               <span
                 aria-hidden='true'
-                className='benroso-travel-date-calendar-cell benroso-travel-date-calendar-cell--empty'
+                className='brand-travel-date-calendar-cell brand-travel-date-calendar-cell--empty'
                 key={iso}
               />
             );
@@ -147,10 +147,10 @@ export function TravelDateCalendar({
               })}
               aria-selected={isSelected}
               className={cn(
-                'benroso-travel-date-calendar-cell',
-                disabled && 'benroso-travel-date-calendar-cell--disabled',
-                isSelected && 'benroso-travel-date-calendar-cell--selected',
-                isToday && !isSelected && 'benroso-travel-date-calendar-cell--today'
+                'brand-travel-date-calendar-cell',
+                disabled && 'brand-travel-date-calendar-cell--disabled',
+                isSelected && 'brand-travel-date-calendar-cell--selected',
+                isToday && !isSelected && 'brand-travel-date-calendar-cell--today'
               )}
               disabled={disabled}
               key={iso}

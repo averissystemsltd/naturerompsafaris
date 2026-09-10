@@ -1,4 +1,4 @@
-import { BENROSO_CONTACT_DEFAULTS, BENROSO_WHATSAPP } from '@/config/benroso';
+import { BRAND_CONTACT_DEFAULTS, BRAND_WHATSAPP } from '@/config/brand';
 import type { Enquiry, EnquiryFormData } from '@/features/enquiries/api/types';
 import { BUDGET_TIER_LABELS, labelFor } from '@/features/enquiries/constants/enquiry-labels';
 import { formatPreferredDatesWithDuration } from '@/lib/travel-date-utils';
@@ -77,10 +77,10 @@ function buildEmailSubject(enquiry: EnquiryCommsInput) {
         : 'enquiry';
 
   if (reference && reference !== 'BENS-PENDING') {
-    return `Re: Your ${enquiryLabel} ${reference} – Benroso Safaris`;
+    return `Re: Your ${enquiryLabel} ${reference} – Nature Romp Safaris`;
   }
 
-  return `Re: Your ${enquiryLabel} – Benroso Safaris`;
+  return `Re: Your ${enquiryLabel} – Nature Romp Safaris`;
 }
 
 function buildEmailBody(enquiry: EnquiryCommsInput) {
@@ -91,16 +91,16 @@ function buildEmailBody(enquiry: EnquiryCommsInput) {
 
   if (enquiry.enquiryType === 'safari-quote') {
     lines.push(
-      'Thank you for your safari enquiry with Benroso Safaris. It was a pleasure to receive your travel plans, and we are reviewing the details carefully.'
+      'Thank you for your safari enquiry with Nature Romp Safaris. It was a pleasure to receive your travel plans, and we are reviewing the details carefully.'
     );
   } else if (enquiry.enquiryType === 'general') {
     const topic = enquiry.topic ?? enquiry.formData?.topic;
     lines.push(
-      `Thank you for contacting Benroso Safaris${topic ? ` regarding ${topic.toLowerCase()}` : ''}. We appreciate you reaching out.`
+      `Thank you for contacting Nature Romp Safaris${topic ? ` regarding ${topic.toLowerCase()}` : ''}. We appreciate you reaching out.`
     );
   } else {
     lines.push(
-      'Thank you for your message to Benroso Safaris. We have received your enquiry and will review it shortly.'
+      'Thank you for your message to Nature Romp Safaris. We have received your enquiry and will review it shortly.'
     );
   }
 
@@ -121,9 +121,9 @@ function buildEmailBody(enquiry: EnquiryCommsInput) {
     'Our team will be in touch shortly — usually within 24 hours. We listen first and tailor suggestions to your interests, never a hard sell.',
     '',
     'Warm regards,',
-    'The Benroso Safaris Team',
-    BENROSO_CONTACT_DEFAULTS.email,
-    BENROSO_CONTACT_DEFAULTS.phonePrimary
+    'The Nature Romp Safaris Team',
+    BRAND_CONTACT_DEFAULTS.email,
+    BRAND_CONTACT_DEFAULTS.phonePrimary
   );
 
   return lines.join('\n');
@@ -155,7 +155,7 @@ export function buildEnquiryWhatsAppMessage(enquiry: EnquiryCommsInput) {
 
   lines.push('');
   lines.push(
-    'This is the team at Benroso Safaris following up on your enquiry. We wanted to connect and see how we can help with your travel plans.'
+    'This is the team at Nature Romp Safaris following up on your enquiry. We wanted to connect and see how we can help with your travel plans.'
   );
 
   if (tripLines.length) {
@@ -177,11 +177,11 @@ export function buildEnquiryWhatsAppMessage(enquiry: EnquiryCommsInput) {
   return lines.join('\n');
 }
 
-export function getBenrosoWhatsAppPhone() {
+export function getBrandWhatsAppPhone() {
   return (
-    process.env.BENROSO_WHATSAPP_PHONE?.trim() ||
-    process.env.NEXT_PUBLIC_BENROSO_WHATSAPP_PHONE?.trim() ||
-    BENROSO_WHATSAPP.phone
+    process.env.BRAND_WHATSAPP_PHONE?.trim() ||
+    process.env.NEXT_PUBLIC_BRAND_WHATSAPP_PHONE?.trim() ||
+    BRAND_WHATSAPP.phone
   );
 }
 

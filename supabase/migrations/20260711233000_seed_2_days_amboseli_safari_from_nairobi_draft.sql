@@ -119,10 +119,10 @@ begin
     'en',
     '2-days-amboseli-safari-from-nairobi',
     '2 Days Amboseli Safari from Nairobi',
-    'Explore Amboseli on a 2-day safari from Nairobi with Benroso Safaris. Enjoy afternoon and morning game drives, elephant viewing, wildlife photography and possible views of Mount Kilimanjaro.',
+    'Explore Amboseli on a 2-day safari from Nairobi with Nature Romp Safaris. Enjoy afternoon and morning game drives, elephant viewing, wildlife photography and possible views of Mount Kilimanjaro.',
     jsonb_build_object(
       'html',
-      $overview$<p>The 2 Days Amboseli Safari from Nairobi is a compact wildlife experience designed for travelers who want to visit one of Kenya's best-known elephant destinations within a short itinerary. The journey begins in Nairobi and continues by road to Amboseli National Park.</p><p>An afternoon game drive on the first day introduces guests to the park's open plains and wildlife. Amboseli is particularly associated with large elephant herds, while Mount Kilimanjaro may provide a striking backdrop when weather and visibility are favorable.</p><p>After an overnight stay in the park area, the second day begins with a morning game drive. This offers another opportunity for elephant viewing, wildlife photography and appreciation of Amboseli's landscapes before returning to Nairobi.</p><p>Benroso Safaris recommends this short safari for couples, families, photographers, first-time visitors and travelers with limited time. It is especially suitable for guests whose main interests are elephants, scenery and a quick safari from Nairobi.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Amboseli game drives</p></li><li><p>Elephant viewing</p></li><li><p>Mount Kilimanjaro views</p></li><li><p>Wildlife photography</p></li><li><p>Morning game drive</p></li><li><p>Afternoon game drive</p></li><li><p>Scenic road travel</p></li><li><p>Overnight in Amboseli</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Travelers with limited time in Kenya</p></li><li><p>Couples and small private groups</p></li><li><p>Families with children</p></li><li><p>Elephant and wildlife enthusiasts</p></li><li><p>Nature photographers</p></li><li><p>First-time safari guests</p></li></ul>$overview$
+      $overview$<p>The 2 Days Amboseli Safari from Nairobi is a compact wildlife experience designed for travelers who want to visit one of Kenya's best-known elephant destinations within a short itinerary. The journey begins in Nairobi and continues by road to Amboseli National Park.</p><p>An afternoon game drive on the first day introduces guests to the park's open plains and wildlife. Amboseli is particularly associated with large elephant herds, while Mount Kilimanjaro may provide a striking backdrop when weather and visibility are favorable.</p><p>After an overnight stay in the park area, the second day begins with a morning game drive. This offers another opportunity for elephant viewing, wildlife photography and appreciation of Amboseli's landscapes before returning to Nairobi.</p><p>Nature Romp Safaris recommends this short safari for couples, families, photographers, first-time visitors and travelers with limited time. It is especially suitable for guests whose main interests are elephants, scenery and a quick safari from Nairobi.</p><h2>Experiences Associated With This Trip</h2><ul><li><p>Amboseli game drives</p></li><li><p>Elephant viewing</p></li><li><p>Mount Kilimanjaro views</p></li><li><p>Wildlife photography</p></li><li><p>Morning game drive</p></li><li><p>Afternoon game drive</p></li><li><p>Scenic road travel</p></li><li><p>Overnight in Amboseli</p></li></ul><h2>This Is Suitable For</h2><ul><li><p>Travelers with limited time in Kenya</p></li><li><p>Couples and small private groups</p></li><li><p>Families with children</p></li><li><p>Elephant and wildlife enthusiasts</p></li><li><p>Nature photographers</p></li><li><p>First-time safari guests</p></li></ul>$overview$
     ),
     '[
       {"question":"How many game drives are included?","answer":"The itinerary includes an afternoon game drive on Day 1 and a morning game drive on Day 2."},
@@ -133,9 +133,9 @@ begin
       {"question":"Where does the safari start and end?","answer":"The safari starts and ends in Nairobi."}
     ]'::jsonb,
     '2 Days Amboseli Safari from Nairobi',
-    '2-day Amboseli safari with Benroso Safaris, featuring elephant viewing, morning and afternoon game drives and Kilimanjaro views.',
+    '2-day Amboseli safari with Nature Romp Safaris, featuring elephant viewing, morning and afternoon game drives and Kilimanjaro views.',
     '2 Days Amboseli Safari from Nairobi',
-    '["Amboseli short safari","Nairobi to Amboseli safari","elephant safari Kenya","Kilimanjaro safari views","Benroso Safaris"]'::jsonb,
+    '["Amboseli short safari","Nairobi to Amboseli safari","elephant safari Kenya","Kilimanjaro safari views","Nature Romp Safaris"]'::jsonb,
     null,
     v_now
   );

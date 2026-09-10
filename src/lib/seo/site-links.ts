@@ -20,7 +20,7 @@ function addHost(hosts: Set<string>, raw?: string | null): void {
 export function siteHosts(): Set<string> {
   const hosts = new Set<string>();
   addHost(hosts, process.env.NEXT_PUBLIC_SITE_URL);
-  addHost(hosts, 'https://benrososafaris.com');
+  addHost(hosts, 'https://naturerompsafaris.com');
   return hosts;
 }
 

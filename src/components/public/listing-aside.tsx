@@ -21,7 +21,7 @@ export function ListingAside({ children, className, style }: ListingAsideProps) 
   return (
     <aside
       className={cn(
-        'benroso-listing-aside bg-white lg:sticky lg:top-[var(--listing-sticky-top)] lg:max-h-[var(--listing-sticky-max-h)] lg:self-start lg:overflow-y-auto lg:overscroll-contain',
+        'brand-listing-aside bg-white lg:sticky lg:top-[var(--listing-sticky-top)] lg:max-h-[var(--listing-sticky-max-h)] lg:self-start lg:overflow-y-auto lg:overscroll-contain',
         className
       )}
       onWheel={(event) => {

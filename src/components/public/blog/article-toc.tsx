@@ -53,26 +53,26 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
   return (
     <nav
       aria-label='Table of contents'
-      className='overflow-hidden rounded-[var(--benroso-radius)] border border-[var(--benroso-line)] bg-white shadow-sm'
+      className='overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white shadow-sm'
     >
-      <div className='flex items-center justify-between gap-2 border-b border-[var(--benroso-line)] bg-[var(--benroso-ivory)] px-4 py-3'>
-        <p className='inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-[var(--benroso-ink)]'>
-          <Icons.listBullet className='size-4 text-[var(--benroso-primary)]' />
+      <div className='flex items-center justify-between gap-2 border-b border-[var(--brand-line)] bg-[var(--brand-ivory)] px-4 py-3'>
+        <p className='inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-[var(--brand-ink)]'>
+          <Icons.listBullet className='size-4 text-[var(--brand-primary)]' />
           On this page
         </p>
-        <span className='text-[10px] font-semibold tabular-nums text-[var(--benroso-muted)]'>
+        <span className='text-[10px] font-semibold tabular-nums text-[var(--brand-muted)]'>
           {Math.round(progress * 100)}%
         </span>
       </div>
 
-      <div className='h-1 w-full bg-[var(--benroso-line)]'>
+      <div className='h-1 w-full bg-[var(--brand-line)]'>
         <div
-          className='h-full bg-[var(--benroso-primary)] transition-[width] duration-150 ease-out'
+          className='h-full bg-[var(--brand-primary)] transition-[width] duration-150 ease-out'
           style={{ width: `${progress * 100}%` }}
         />
       </div>
 
-      <ul className='my-3 max-h-[58vh] space-y-0.5 overflow-y-auto border-l border-[var(--benroso-line)] px-3'>
+      <ul className='my-3 max-h-[58vh] space-y-0.5 overflow-y-auto border-l border-[var(--brand-line)] px-3'>
         {items.map((item) => (
           <li key={item.id}>
             <a
@@ -80,8 +80,8 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
                 '-ml-3 block border-l-2 py-1.5 leading-snug transition-colors',
                 item.level === 3 ? 'pl-6 text-[13px]' : 'pl-3.5 text-sm',
                 active === item.id
-                  ? 'border-[var(--benroso-primary)] bg-[var(--benroso-ivory)] font-semibold text-[var(--benroso-primary)]'
-                  : 'border-transparent text-[var(--benroso-muted)] hover:border-[var(--benroso-line)] hover:text-[var(--benroso-primary)]'
+                  ? 'border-[var(--brand-primary)] bg-[var(--brand-ivory)] font-semibold text-[var(--brand-primary)]'
+                  : 'border-transparent text-[var(--brand-muted)] hover:border-[var(--brand-line)] hover:text-[var(--brand-primary)]'
               )}
               href={`#${item.id}`}
               onClick={(event) => handleClick(event, item.id)}
@@ -92,9 +92,9 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
         ))}
       </ul>
 
-      <div className='border-t border-[var(--benroso-line)] p-3'>
+      <div className='border-t border-[var(--brand-line)] p-3'>
         <button
-          className='inline-flex w-full items-center justify-center gap-1.5 rounded-[5px] py-2 text-xs font-semibold uppercase tracking-wide text-[var(--benroso-muted)] transition-colors hover:bg-[var(--benroso-ivory)] hover:text-[var(--benroso-primary)]'
+          className='inline-flex w-full items-center justify-center gap-1.5 rounded-[5px] py-2 text-xs font-semibold uppercase tracking-wide text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-ivory)] hover:text-[var(--brand-primary)]'
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           type='button'
         >
