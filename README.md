@@ -83,6 +83,13 @@ Default brand palette:
 
 ## Deploy on Vercel
 
+Build settings are pinned in `vercel.json`. Leave the Vercel dashboard overrides off:
+
+- Framework: Next.js
+- Install: `bun install`
+- Build: `bun run build` (runs `next build --webpack`)
+- Output: leave empty (Next.js, not standalone)
+
 1. Import `.env.vercel` (not `.env.local`) into the Vercel project for Production, Preview, and Development.
 2. Connect `naturerompsafaris.com` as the production domain before the first production build so `NEXT_PUBLIC_SITE_URL` matches.
 3. In Supabase → Authentication → URL Configuration, set Site URL to `https://naturerompsafaris.com` and add redirect URLs:
