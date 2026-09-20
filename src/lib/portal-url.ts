@@ -1,7 +1,10 @@
 import type { NextRequest } from 'next/server';
 
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com').replace(/\/$/, '');
+  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com').replace(
+    /\/$/,
+    ''
+  );
 }
 
 export function getPortalHost() {

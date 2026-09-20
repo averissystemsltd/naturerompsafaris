@@ -61,6 +61,29 @@ const baseConfig: NextConfig = {
       }
     ];
   },
+  async redirects() {
+    const publicSite = 'https://kenyatanzaniasafariadventures.com';
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.kenyatanzaniasafariadventures.com' }],
+        destination: `${publicSite}/:path*`,
+        permanent: true
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'naturerompsafaris.com' }],
+        destination: `${publicSite}/:path*`,
+        permanent: true
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.naturerompsafaris.com' }],
+        destination: `${publicSite}/:path*`,
+        permanent: true
+      }
+    ];
+  },
   webpack: (config, { dev }) => {
     // Windows webpack persistent cache + dual compilers can concatenate
     // prerender-manifest.json, which Next then JSON.parse()s on every request.

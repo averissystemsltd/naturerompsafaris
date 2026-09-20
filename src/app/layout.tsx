@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { analytics } = settings;
   const googleVerification = normalizeSiteVerificationToken(analytics.googleSiteVerification);
   const bingVerification = normalizeSiteVerificationToken(analytics.bingSiteVerification);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com';
 
   return {
     metadataBase: new URL(siteUrl),

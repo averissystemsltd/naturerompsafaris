@@ -38,8 +38,8 @@ Initial Nature Romp contact defaults are stored in `src/config/brand.ts` and sho
 
 Confirmed public contact references:
 
-- Current site: https://naturerompsafaris.co.ke/
-- Contact page: https://naturerompsafaris.com/contact/
+- Current site: https://kenyatanzaniasafariadventures.com/
+- Contact page: https://kenyatanzaniasafariadventures.com/contact/
 - KATO profile: https://katokenya.org/ (TODO: add Nature Romp KATO profile)
 
 Default brand palette:
@@ -91,16 +91,18 @@ Build settings are pinned in `vercel.json`. Leave the Vercel dashboard overrides
 - Output: leave empty (Next.js, not standalone)
 
 1. Import `.env.vercel` (not `.env.local`) into the Vercel project for Production, Preview, and Development.
-2. Connect `naturerompsafaris.com` as the production domain before the first production build so `NEXT_PUBLIC_SITE_URL` matches.
-3. In Supabase → Authentication → URL Configuration, set Site URL to `https://naturerompsafaris.com` and add redirect URLs:
-   - `https://naturerompsafaris.com/auth/confirm`
-   - `https://naturerompsafaris.com/portal`
-   - `https://naturerompsafaris.com/portal/login`
-   - `https://naturerompsafaris.com/portal/login/reset-password`
-   - `https://naturerompsafaris.com/**`
+2. Connect these Vercel domains before the first production build:
+   - `kenyatanzaniasafariadventures.com` (public site)
+   - `www.kenyatanzaniasafariadventures.com` (301 to apex)
+   - `portal.kenyatanzaniasafariadventures.com` (CMS)
+3. Keep `naturerompsafaris.com` on cPanel for mail. Point its web traffic with a 301 to `https://kenyatanzaniasafariadventures.com` (cPanel, or add the domain on Vercel — Next.js already 301s that host).
+4. In Supabase → Authentication → URL Configuration, set Site URL to `https://kenyatanzaniasafariadventures.com` and add redirect URLs:
+   - `https://kenyatanzaniasafariadventures.com/auth/confirm`
+   - `https://kenyatanzaniasafariadventures.com/**`
+   - `https://portal.kenyatanzaniasafariadventures.com/auth/confirm`
+   - `https://portal.kenyatanzaniasafariadventures.com/**`
    - the Vercel preview URL pattern (`https://*-averissystemsltd.vercel.app/**`) so preview auth still works
-4. Keep `BUILD_STANDALONE=false` and `NEXT_PUBLIC_SENTRY_DISABLED=true` until Sentry is configured.
-5. Portal lives at `https://naturerompsafaris.com/portal` on this first deploy. Do not set `NEXT_PUBLIC_PORTAL_HOST` until the portal subdomain is on Vercel.
+5. Keep `BUILD_STANDALONE=false` and `NEXT_PUBLIC_SENTRY_DISABLED=true` until Sentry is configured.
 
 Other scripts:
 

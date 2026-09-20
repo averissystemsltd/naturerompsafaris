@@ -7,7 +7,7 @@ function siteHost() {
   try {
     return new URL(absoluteUrl('/')).host;
   } catch {
-    return 'naturerompsafaris.com';
+    return 'kenyatanzaniasafariadventures.com';
   }
 }
 

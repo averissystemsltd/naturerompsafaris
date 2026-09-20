@@ -24,7 +24,10 @@ export interface SendCampaignResult {
 }
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com').replace(/\/$/, '');
+  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com').replace(
+    /\/$/,
+    ''
+  );
 }
 
 function unsubscribeUrl(token: string): string {

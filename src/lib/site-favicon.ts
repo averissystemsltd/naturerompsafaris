@@ -6,7 +6,7 @@ export function resolveSiteFaviconUrl(faviconUrl: string | null | undefined): st
 
 export function resolveAbsoluteSiteFaviconUrl(
   faviconUrl: string | null | undefined,
-  siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://naturerompsafaris.com'
+  siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com'
 ): string {
   const resolved = resolveSiteFaviconUrl(faviconUrl);
   if (resolved.startsWith('http://') || resolved.startsWith('https://')) {

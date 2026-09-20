@@ -1,4 +1,8 @@
-const DEFAULT_PORTAL_SIGNUP_DOMAINS = ['naturerompsafaris.com', 'averissystems.com'] as const;
+const DEFAULT_PORTAL_SIGNUP_DOMAINS = [
+  'naturerompsafaris.com',
+  'kenyatanzaniasafariadventures.com',
+  'averissystems.com'
+] as const;
 
 function splitList(value: string | undefined): string[] {
   return (value ?? '')
