@@ -81,6 +81,20 @@ Default brand palette:
 
    The app runs at [http://localhost:3000](http://localhost:3000).
 
+## Deploy on Vercel
+
+1. Import `.env.vercel` (not `.env.local`) into the Vercel project for Production, Preview, and Development.
+2. Connect `naturerompsafaris.com` as the production domain before the first production build so `NEXT_PUBLIC_SITE_URL` matches.
+3. In Supabase → Authentication → URL Configuration, set Site URL to `https://naturerompsafaris.com` and add redirect URLs:
+   - `https://naturerompsafaris.com/auth/confirm`
+   - `https://naturerompsafaris.com/portal`
+   - `https://naturerompsafaris.com/portal/login`
+   - `https://naturerompsafaris.com/portal/login/reset-password`
+   - `https://naturerompsafaris.com/**`
+   - the Vercel preview URL pattern (`https://*-averissystemsltd.vercel.app/**`) so preview auth still works
+4. Keep `BUILD_STANDALONE=false` and `NEXT_PUBLIC_SENTRY_DISABLED=true` until Sentry is configured.
+5. Portal lives at `https://naturerompsafaris.com/portal` on this first deploy. Do not set `NEXT_PUBLIC_PORTAL_HOST` until the portal subdomain is on Vercel.
+
 Other scripts:
 
 ```bash
