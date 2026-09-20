@@ -1,4 +1,7 @@
+import { Suspense } from 'react';
+
 import PageContainer from '@/components/layout/page-container';
+import { PortalPageSkeleton } from '@/components/layout/portal-page-skeleton';
 import { createClient } from '@/lib/supabase/server';
 import {
   Table,
@@ -9,7 +12,17 @@ import {
   TableRow
 } from '@/components/ui/table';
 
-export default async function PortalRedirectsPage() {
+export default function PortalRedirectsPage() {
+  return (
+    <PageContainer pageTitle='Redirects'>
+      <Suspense fallback={<PortalPageSkeleton padded={false} showHeader={false} />}>
+        <RedirectsContent />
+      </Suspense>
+    </PageContainer>
+  );
+}
+
+async function RedirectsContent() {
   const supabase = await createClient();
   const { data: redirects } = await supabase
     .from('redirects')
@@ -17,38 +30,38 @@ export default async function PortalRedirectsPage() {
     .order('created_at', { ascending: false })
     .limit(50);
 
+  if (!redirects?.length) {
+    return (
+      <div className='text-muted-foreground rounded-lg border border-dashed px-6 py-12 text-center text-sm'>
+        No redirects configured yet.
+      </div>
+    );
+  }
+
   return (
-    <PageContainer pageTitle='Redirects'>
-      {!redirects?.length ? (
-        <div className='text-muted-foreground rounded-lg border border-dashed px-6 py-12 text-center text-sm'>
-          No redirects configured yet.
-        </div>
-      ) : (
-        <div className='rounded-lg border'>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>From</TableHead>
-                <TableHead>To</TableHead>
-                <TableHead>Code</TableHead>
-                <TableHead>Created</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {redirects.map((row) => (
-                <TableRow key={row.source_path}>
-                  <TableCell className='font-mono text-xs'>{row.source_path}</TableCell>
-                  <TableCell className='font-mono text-xs'>{row.destination_path}</TableCell>
-                  <TableCell>{row.status_code}</TableCell>
-                  <TableCell className='text-muted-foreground text-sm'>
-                    {new Date(row.created_at).toLocaleDateString()}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      )}
-    </PageContainer>
+    <div className='rounded-lg border'>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>From</TableHead>
+            <TableHead>To</TableHead>
+            <TableHead>Code</TableHead>
+            <TableHead>Created</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {redirects.map((row) => (
+            <TableRow key={row.source_path}>
+              <TableCell className='font-mono text-xs'>{row.source_path}</TableCell>
+              <TableCell className='font-mono text-xs'>{row.destination_path}</TableCell>
+              <TableCell>{row.status_code}</TableCell>
+              <TableCell className='text-muted-foreground text-sm'>
+                {new Date(row.created_at).toLocaleDateString()}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

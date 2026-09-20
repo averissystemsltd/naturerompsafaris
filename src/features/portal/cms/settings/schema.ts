@@ -97,7 +97,7 @@ export function settingsFromRow(row: Tables<'site_settings'> | null): SettingsFo
 
   return {
     general: {
-      companyName: row?.company_name ?? 'Nature Romp Safaris Ltd',
+      companyName: row?.company_name ?? 'Nature Romp Safaris',
       tagline: row?.tagline ?? '',
       logoUrl: row?.logo_url ?? '',
       faviconUrl: row?.favicon_url ?? BRAND_FAVICON_PATH,

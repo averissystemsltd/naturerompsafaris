@@ -84,7 +84,6 @@
     "motion": "^11.18.2",
     "next": "16.2.6",
     "next-intl": "^4.6.1",
-    "nextjs-toploader": "^3.9.17",
     "nodemailer": "^9.0.3",
     "nuqs": "^2.8.9",
     "postcss": "8.5.14",

@@ -30,7 +30,7 @@ export function PortalAuthButton({
     <button
       aria-busy={isLoading || undefined}
       className={cn(
-        'grid h-12 w-full place-items-center rounded-lg bg-[#3C5142] text-[15px] font-semibold text-white transition-colors hover:bg-[#2F4034] disabled:pointer-events-none disabled:opacity-70 [&>*]:col-start-1 [&>*]:row-start-1',
+        'grid h-12 w-full place-items-center rounded-lg bg-[#5D2411] text-[15px] font-semibold text-white transition-colors hover:bg-[#4A1C0D] disabled:pointer-events-none disabled:opacity-70 [&>*]:col-start-1 [&>*]:row-start-1',
         className
       )}
       disabled={disabled || isLoading}

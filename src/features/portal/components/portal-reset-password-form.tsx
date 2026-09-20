@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { PortalAuthButton } from '@/features/portal/components/portal-auth-button';
 import { PortalAuthLogo } from '@/features/portal/components/portal-auth-logo';
 import { PortalAuthShell } from '@/features/portal/components/portal-auth-shell';
+import { toPublicAuthError } from '@/lib/auth/public-auth-error';
 import { createClient } from '@/lib/supabase/browser';
 import { cn } from '@/lib/utils';
 
@@ -41,7 +42,7 @@ export function PortalResetPasswordForm() {
     setIsLoading(false);
 
     if (updateError) {
-      setError(updateError.message);
+      setError(toPublicAuthError(updateError, 'Unable to update your password right now.'));
       return;
     }
 

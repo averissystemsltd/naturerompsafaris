@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { ensurePortalProfile } from '@/lib/auth/ensure-portal-profile';
+import { isAllowedPortalSignupEmail, portalSignupDeniedMessage } from '@/lib/auth/signup-allowlist';
 import { createClient } from '@/lib/supabase/server';
 
 export async function POST() {
@@ -11,6 +12,10 @@ export async function POST() {
 
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (!isAllowedPortalSignupEmail(user.email)) {
+    return NextResponse.json({ error: portalSignupDeniedMessage() }, { status: 403 });
   }
 
   const result = await ensurePortalProfile(supabase, user);

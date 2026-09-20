@@ -24,6 +24,7 @@ import { restoreEnquiry } from '@/features/enquiries/api/service';
 import type { Enquiry } from '@/features/enquiries/api/types';
 import { EnquiriesViewTabs } from '@/features/enquiries/components/enquiries-view-tabs';
 import { EnquiryTypeBadge } from '@/features/enquiries/components/enquiry-type-badge';
+import { CmsTableRowsSkeleton } from '@/features/portal/cms/shared/cms-table-skeleton';
 import { CMS_SURFACE } from '@/features/portal/cms/shared/surface';
 import { cn } from '@/lib/utils';
 
@@ -96,10 +97,11 @@ export function TrashedEnquiriesList() {
     setSearchInput(search);
   }, [search]);
 
-  const { data, isFetching, refetch } = useQuery({
+  const { data, isFetching, isPending, refetch } = useQuery({
     ...trashedEnquiriesListQueryOptions({ page, search }),
     placeholderData: keepPreviousData
   });
+  const showSkeleton = isPending || (isFetching && !data);
 
   const items = data?.items ?? [];
   const total = data?.total ?? 0;
@@ -169,7 +171,6 @@ export function TrashedEnquiriesList() {
       <div className='flex items-center justify-between text-sm'>
         <p className='text-muted-foreground'>
           {total} trashed {total === 1 ? 'enquiry' : 'enquiries'}
-          {isFetching ? ' · refreshing…' : null}
         </p>
       </div>
 
@@ -187,10 +188,12 @@ export function TrashedEnquiriesList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {!items.length ? (
+            {showSkeleton ? (
+              <CmsTableRowsSkeleton columns={5} />
+            ) : !items.length ? (
               <TableRow>
                 <TableCell className='text-muted-foreground py-12 text-center' colSpan={5}>
-                  {isFetching ? 'Loading trashed enquiries…' : 'No trashed enquiries.'}
+                  No trashed enquiries.
                 </TableCell>
               </TableRow>
             ) : (

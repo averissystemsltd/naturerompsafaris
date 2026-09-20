@@ -56,30 +56,46 @@ const MAP_PADDING = 2;
 const MAP_PADDING_RIGHT = 0;
 const CARD_LEFT_INSET_MD = 32;
 const MAP_HORIZONTAL_SCALE = 1.07;
-const FIT_WEST_BUFFER_ISOS = ['COD', 'AGO', 'NAM', 'BWA', 'MOZ'];
+const DEFAULT_FIT_WEST_BUFFER_ISOS = ['COD', 'AGO', 'NAM', 'BWA', 'MOZ'];
 const MAP_SURFACE = '#f5f4f0';
 const MUTED_FILL = '#dcdcd8';
 const MUTED_STROKE = '#ffffff';
-const ACTIVE_STROKE = '#3c5142';
+const ACTIVE_STROKE = '#5d2411';
+
+type ExperienceAfricaMapProps = {
+  excludedCountryIds?: readonly BrandCountryId[];
+  fitWestBufferIsos?: readonly string[];
+};
 
 function getCardLeftInset(width: number): number {
   if (width < 768) return MAP_PADDING;
   return CARD_LEFT_INSET_MD;
 }
 
+function resolveOperatingId(
+  isoA3: string,
+  excludedCountryIds: ReadonlySet<BrandCountryId>
+): BrandCountryId | null {
+  const operatingId = OPERATING_ISO_TO_ID[isoA3] ?? null;
+  if (!operatingId || excludedCountryIds.has(operatingId)) return null;
+  return operatingId;
+}
+
 function buildMapGeometry(
   data: GeoJsonCollection,
   width: number,
-  height: number
+  height: number,
+  excludedCountryIds: ReadonlySet<BrandCountryId>,
+  fitWestBufferIsos: readonly string[]
 ): { features: RenderFeature[]; labels: CountryLabel[] } {
   const projection = geoNaturalEarth1();
 
   const operatingFeatures = data.features.filter(
-    (feature) => OPERATING_ISO_TO_ID[feature.properties.ISO_A3] !== undefined
+    (feature) => resolveOperatingId(feature.properties.ISO_A3, excludedCountryIds) !== null
   );
 
   const westBufferFeatures = data.features.filter((feature) =>
-    FIT_WEST_BUFFER_ISOS.includes(feature.properties.ISO_A3)
+    fitWestBufferIsos.includes(feature.properties.ISO_A3)
   );
 
   const fitCollection: GeoJsonCollection = {
@@ -107,11 +123,17 @@ function buildMapGeometry(
     .map((feature) => ({
       d: pathGenerator(feature as GeoPermissibleObjects) ?? '',
       isoA3: feature.properties.ISO_A3,
-      operatingId: OPERATING_ISO_TO_ID[feature.properties.ISO_A3] ?? null
+      operatingId: resolveOperatingId(feature.properties.ISO_A3, excludedCountryIds)
     }))
-    .filter((feature) => feature.d.length > 0);
+    .filter((feature) => {
+      if (!feature.d.length) return false;
+      const mappedId = OPERATING_ISO_TO_ID[feature.isoA3];
+      return !(mappedId && excludedCountryIds.has(mappedId));
+    });
 
-  const labels: CountryLabel[] = BRAND_OPERATING_COUNTRIES.map((country) => {
+  const labels: CountryLabel[] = BRAND_OPERATING_COUNTRIES.filter(
+    (country) => !excludedCountryIds.has(country.id)
+  ).map((country) => {
     const feature = data.features.find((item) => item.properties.ISO_A3 === country.isoA3);
     const labelLon = feature?.properties.LABEL_X ?? 0;
     const labelLat = feature?.properties.LABEL_Y ?? 0;
@@ -180,7 +202,7 @@ function CountryInfoCard({
         </div>
 
         <div className='p-4 md:p-5'>
-          <p className='font-display text-[1.5rem] leading-tight text-[#3c5142] md:text-[1.625rem]'>
+          <p className='font-display text-[1.5rem] leading-tight text-[#5d2411] md:text-[1.625rem]'>
             {country.name}
           </p>
           <span aria-hidden className='brand-gold-line brand-gold-line--left mt-3' />
@@ -193,7 +215,14 @@ function CountryInfoCard({
   );
 }
 
-export function ExperienceAfricaMap() {
+export function ExperienceAfricaMap({
+  excludedCountryIds,
+  fitWestBufferIsos = DEFAULT_FIT_WEST_BUFFER_ISOS
+}: ExperienceAfricaMapProps = {}) {
+  const excludedIds = useMemo(
+    () => new Set<BrandCountryId>(excludedCountryIds ?? []),
+    [excludedCountryIds]
+  );
   const sectionRef = useRef<HTMLElement>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -266,12 +295,14 @@ export function ExperienceAfricaMap() {
     const { features, labels: nextLabels } = buildMapGeometry(
       geoData,
       mapSize.width,
-      mapSize.height
+      mapSize.height,
+      excludedIds,
+      fitWestBufferIsos
     );
     setRenderFeatures(features);
     setLabels(nextLabels);
     ScrollTrigger.refresh();
-  }, [geoData, mapSize]);
+  }, [excludedIds, fitWestBufferIsos, geoData, mapSize]);
 
   useGSAP(
     () => {
@@ -327,7 +358,13 @@ export function ExperienceAfricaMap() {
         >
           {mapReady ? (
             <svg
-              aria-label='Map of Nature Romp Safaris operating countries in East and Southern Africa'
+              aria-label={
+                excludedIds.has('uganda') &&
+                excludedIds.has('rwanda') &&
+                excludedIds.has('south-africa')
+                  ? 'Map of Nature Romp Safaris safari routes in Kenya and Tanzania'
+                  : 'Map of Nature Romp Safaris operating countries in East and Southern Africa'
+              }
               className='absolute inset-0 block h-full w-full'
               height={mapSize!.height}
               preserveAspectRatio='none'

@@ -333,7 +333,11 @@ export function ArticleEditor({
     setPending(nextStatus);
     setStatus(nextStatus);
     try {
-      const result = await saveArticle({ id: articleId, values, status: nextStatus });
+      const result = await saveArticle({
+        id: articleIdRef.current ?? articleId,
+        values,
+        status: nextStatus
+      });
       setArticleId(result.id);
       setPersistedStatus(nextStatus);
       lastSavedSnapshotRef.current = JSON.stringify(values);
@@ -371,7 +375,9 @@ export function ArticleEditor({
             listeners={{
               onChange: ({ value }) => {
                 if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                if (autoTitleRef.current) {
+                  form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                }
               }
             }}
           >
@@ -444,8 +450,8 @@ export function ArticleEditor({
                         <field.TextField
                           label='SEO title'
                           placeholder={values.title || 'Defaults to the article title'}
-                          maxLength={70}
-                          description='Pre-filled from the title. Override for a custom search title.'
+                          maxLength={SEO_LIMITS.titleMax}
+                          description={`Pre-filled from the title. Override for a custom search title (max ${SEO_LIMITS.titleMax} characters).`}
                         />
                       )}
                     </form.AppField>
@@ -523,14 +529,19 @@ export function ArticleEditor({
 
               <form.AppField name='featured'>
                 {(field) => (
-                  <Label htmlFor='article-featured' className='flex items-center gap-2 text-sm'>
-                    <Checkbox
-                      id='article-featured'
-                      checked={field.state.value}
-                      onCheckedChange={(checked) => field.handleChange(checked === true)}
-                    />
-                    Featured article
-                  </Label>
+                  <div className='space-y-1'>
+                    <Label htmlFor='article-featured' className='flex items-center gap-2 text-sm'>
+                      <Checkbox
+                        id='article-featured'
+                        checked={field.state.value}
+                        onCheckedChange={(checked) => field.handleChange(checked === true)}
+                      />
+                      Featured on homepage
+                    </Label>
+                    <p className='text-muted-foreground text-xs'>
+                      Homepage shows up to 3 featured articles, then fills with the latest posts.
+                    </p>
+                  </div>
                 )}
               </form.AppField>
 

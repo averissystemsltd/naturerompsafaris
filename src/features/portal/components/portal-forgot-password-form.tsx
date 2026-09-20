@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { PortalAuthButton } from '@/features/portal/components/portal-auth-button';
 import { PortalAuthLogo } from '@/features/portal/components/portal-auth-logo';
 import { PortalAuthShell } from '@/features/portal/components/portal-auth-shell';
+import { toPublicAuthError } from '@/lib/auth/public-auth-error';
 import { portalAbsoluteUrl } from '@/lib/portal-url';
 import { createClient } from '@/lib/supabase/browser';
 
@@ -29,7 +30,7 @@ export function PortalForgotPasswordForm() {
     setIsLoading(true);
 
     const supabase = createClient();
-    const redirectTo = portalAbsoluteUrl('/portal/login/reset-password');
+    const redirectTo = portalAbsoluteUrl('/auth/confirm?next=/portal/login/reset-password');
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo
     });
@@ -37,7 +38,7 @@ export function PortalForgotPasswordForm() {
     setIsLoading(false);
 
     if (resetError) {
-      setError(resetError.message);
+      setError(toPublicAuthError(resetError, 'Unable to send a reset email right now.'));
       return;
     }
 

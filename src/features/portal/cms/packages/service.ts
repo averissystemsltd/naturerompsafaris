@@ -9,6 +9,7 @@ import { autoTranslatePackageById } from '@/lib/i18n/auto-translate-content';
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
 import { notifyPublishedContent } from '@/lib/seo/publish-notify';
 import { packageFormSchema, type PackageFormValues } from './schema';
+import { findEnglishIdBySlug, mapLocaleSlugError } from '../shared/reuse-english-slug';
 
 export type SaveStatus = 'draft' | 'published';
 
@@ -68,7 +69,9 @@ export async function savePackage(input: {
     updated_at: now
   };
 
-  let packageId = input.id;
+  let packageId =
+    input.id ??
+    (await findEnglishIdBySlug(supabase, 'package_translations', 'package_id', values.slug));
   if (packageId) {
     const { error } = await supabase.from('packages').update(basePayload).eq('id', packageId);
     if (error) throw new Error(error.message);
@@ -108,10 +111,10 @@ export async function savePackage(input: {
       .from('package_translations')
       .update(translationPayload)
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'package'));
   } else {
     const { error } = await supabase.from('package_translations').insert(translationPayload);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'package'));
   }
 
   revalidatePath('/portal/packages');

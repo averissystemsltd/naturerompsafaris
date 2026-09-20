@@ -32,6 +32,13 @@ function formatDate(value: string): string {
   });
 }
 
+function sourceLabel(source: string | null): string {
+  if (source === 'footer') return 'Website footer';
+  if (source === 'manual') return 'Added in portal';
+  if (source === 'import') return 'Imported';
+  return source ?? '—';
+}
+
 export function SubscribersTable({ rows }: { rows: SubscriberRow[] }) {
   const router = useRouter();
   const [pendingId, setPendingId] = React.useState<string | null>(null);
@@ -74,8 +81,8 @@ export function SubscribersTable({ rows }: { rows: SubscriberRow[] }) {
                 <TableCell>
                   <Badge variant={statusVariant(row.status)}>{row.status}</Badge>
                 </TableCell>
-                <TableCell className='text-muted-foreground text-sm capitalize'>
-                  {row.source ?? '—'}
+                <TableCell className='text-muted-foreground text-sm'>
+                  {sourceLabel(row.source)}
                 </TableCell>
                 <TableCell className='text-muted-foreground text-sm'>
                   {formatDate(row.subscribedAt)}

@@ -6,7 +6,7 @@ import {
   ListingFilters,
   toggleFilterValue
 } from '@/components/public/listing-filters';
-import { BRAND_OPERATING_COUNTRIES } from '@/features/experiences/public/country-map-copy';
+import { BRAND_PUBLIC_COUNTRIES } from '@/features/experiences/public/country-map-copy';
 import type {
   ExperienceListingFiltersState,
   ExperienceMenuGroup
@@ -20,11 +20,11 @@ type ExperienceListingFiltersProps = {
 
 const MENU_GROUP_FILTERS = [
   {
-    label: 'Signature Experiences',
+    label: 'Top Experiences',
     value: 'top_experiences' as const
   },
   {
-    label: 'Wildlife Safaris',
+    label: 'Wildlife Safari',
     value: 'wildlife_safari' as const
   }
 ];
@@ -55,7 +55,7 @@ export function ExperienceListingFilters({ active, onChange }: ExperienceListing
       </ListingFilterGroup>
 
       <ListingFilterGroup title='Country'>
-        {BRAND_OPERATING_COUNTRIES.map((country) => (
+        {BRAND_PUBLIC_COUNTRIES.map((country) => (
           <ListingFilterOption
             checked={active.countries.includes(country.id)}
             id={`filter-country-${country.id}`}

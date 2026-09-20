@@ -34,7 +34,16 @@ file_size_limit = "50MiB"
 [auth]
 enabled = true
 site_url = "http://127.0.0.1:3000"
-additional_redirect_urls = ["http://127.0.0.1:3000"]
+additional_redirect_urls = [
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3000/auth/confirm",
+  "http://127.0.0.1:3000/portal",
+  "http://127.0.0.1:3000/portal/login/reset-password",
+  "http://localhost:3000",
+  "http://localhost:3000/auth/confirm",
+  "http://localhost:3000/portal",
+  "http://localhost:3000/portal/login/reset-password"
+]
 jwt_expiry = 3600
 enable_refresh_token_rotation = true
 refresh_token_reuse_interval = 10
@@ -44,11 +53,35 @@ enable_anonymous_sign_ins = false
 [auth.email]
 enable_signup = true
 double_confirm_changes = true
-enable_confirmations = false
+enable_confirmations = true
 secure_password_change = false
 max_frequency = "1s"
-otp_length = 6
+otp_length = 8
 otp_expiry = 3600
+
+[auth.email.template.confirmation]
+subject = "Your Nature Romp portal verification code"
+content_path = "./supabase/templates/confirmation.html"
+
+[auth.email.template.invite]
+subject = "You're invited to the Nature Romp Safaris portal"
+content_path = "./supabase/templates/invite.html"
+
+[auth.email.template.magic_link]
+subject = "Your Nature Romp portal sign-in code"
+content_path = "./supabase/templates/magic_link.html"
+
+[auth.email.template.recovery]
+subject = "Reset your Nature Romp portal password"
+content_path = "./supabase/templates/recovery.html"
+
+[auth.email.template.email_change]
+subject = "Confirm your new Nature Romp portal email"
+content_path = "./supabase/templates/email_change.html"
+
+[auth.email.template.reauthentication]
+subject = "{{ .Token }} is your Nature Romp verification code"
+content_path = "./supabase/templates/reauthentication.html"
 
 [edge_runtime]
 enabled = true

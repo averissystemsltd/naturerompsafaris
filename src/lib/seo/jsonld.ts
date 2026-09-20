@@ -1,4 +1,4 @@
-import { BRAND_CONTACT_DEFAULTS } from '@/config/brand';
+import { BRAND_CONTACT_DEFAULTS, BRAND_FOOTER_DESCRIPTION, BRAND_SITE_NAME } from '@/config/brand';
 
 import { absoluteUrl } from './absolute-url';
 
@@ -47,6 +47,8 @@ export function buildTravelAgencyJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
     name: BRAND_CONTACT_DEFAULTS.companyName,
+    alternateName: BRAND_SITE_NAME,
+    description: BRAND_FOOTER_DESCRIPTION,
     url: absoluteUrl('/'),
     email: BRAND_CONTACT_DEFAULTS.email,
     telephone: BRAND_CONTACT_DEFAULTS.phonePrimary,

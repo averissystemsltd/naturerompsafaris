@@ -1,15 +1,15 @@
 export type SmtpMailbox = 'enquiry' | 'guest' | 'newsletter';
 
 const MAILBOX_USERS: Record<SmtpMailbox, string> = {
-  enquiry: 'inquiries@naturerompsafaris.co.ke',
-  guest: 'no-reply@naturerompsafaris.co.ke',
-  newsletter: 'news@naturerompsafaris.co.ke'
+  enquiry: 'inquiries@naturerompsafaris.com',
+  guest: 'no-reply@naturerompsafaris.com',
+  newsletter: 'news@naturerompsafaris.com'
 };
 
 const MAILBOX_FROM: Record<SmtpMailbox, string> = {
-  enquiry: 'Nature Romp Safaris <inquiries@naturerompsafaris.co.ke>',
-  guest: 'Nature Romp Safaris <no-reply@naturerompsafaris.co.ke>',
-  newsletter: 'Nature Romp Safaris <news@naturerompsafaris.co.ke>'
+  enquiry: 'Nature Romp Safaris <inquiries@naturerompsafaris.com>',
+  guest: 'Nature Romp Safaris <no-reply@naturerompsafaris.com>',
+  newsletter: 'Nature Romp Safaris <news@naturerompsafaris.com>'
 };
 
 export function isSmtpConfigured() {
@@ -36,14 +36,37 @@ export function smtpFromAddress(mailbox: SmtpMailbox) {
   return process.env[envKey]?.trim() || MAILBOX_FROM[mailbox];
 }
 
+/**
+ * Per-mailbox SMTP password. Each mailbox (inquiries@, no-reply@, news@) can
+ * authenticate with its own password; falls back to the shared SMTP_PASSWORD
+ * when a mailbox-specific one is not set.
+ */
+export function smtpAuthPassword(mailbox: SmtpMailbox) {
+  const envKey = {
+    enquiry: 'SMTP_ENQUIRY_PASSWORD',
+    guest: 'SMTP_GUEST_PASSWORD',
+    newsletter: 'SMTP_NEWSLETTER_PASSWORD'
+  }[mailbox];
+
+  return process.env[envKey]?.trim() || process.env.SMTP_PASSWORD?.trim() || '';
+}
+
 export function enquiryNotificationEmail() {
   return (
     process.env.ENQUIRY_NOTIFICATION_EMAIL?.trim() ||
     process.env.BRAND_ENQUIRY_EMAIL?.trim() ||
-    'info@naturerompsafaris.co.ke'
+    'info@naturerompsafaris.com'
   );
 }
 
 export function enquiryReplyToEmail() {
   return process.env.ENQUIRY_REPLY_TO?.trim() || enquiryNotificationEmail();
+}
+
+/** Optional CC recipient(s) for internal enquiry notifications (comma-separated). */
+export function enquiryCcEmails(): string[] {
+  return (process.env.ENQUIRY_CC_EMAIL?.trim() || '')
+    .split(',')
+    .map((email) => email.trim())
+    .filter(Boolean);
 }

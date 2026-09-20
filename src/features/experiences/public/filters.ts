@@ -1,4 +1,4 @@
-import { BRAND_OPERATING_COUNTRIES, getCountryById, type BrandCountryId } from './country-map-copy';
+import { getCountryById, isPublicBrandCountry, type BrandCountryId } from './country-map-copy';
 import type { PublicExperience } from './types';
 
 export type ExperienceMenuGroup = 'top_experiences' | 'wildlife_safari';
@@ -20,9 +20,8 @@ export function parseExperienceListingFilters(searchParams: {
   country?: string;
   group?: string;
 }): ExperienceListingFiltersState {
-  const allowedCountries = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
   const countries = parseFilterList(searchParams.country).filter((item): item is BrandCountryId =>
-    allowedCountries.has(item as BrandCountryId)
+    isPublicBrandCountry(item)
   );
 
   const groups = parseFilterList(searchParams.group).filter(
@@ -36,7 +35,11 @@ export function filterPublishedExperiences(
   experiences: PublicExperience[],
   filters: ExperienceListingFiltersState
 ): PublicExperience[] {
-  let result = experiences;
+  let result = experiences.filter(
+    (experience) =>
+      experience.countries.length === 0 ||
+      experience.countries.some((country) => isPublicBrandCountry(country))
+  );
 
   if (filters.countries.length) {
     result = result.filter((experience) =>
@@ -59,8 +62,8 @@ export function buildExperienceListingQuery(filters: ExperienceListingFiltersSta
 }
 
 const MENU_GROUP_LABELS = {
-  top_experiences: 'Signature Experiences',
-  wildlife_safari: 'Wildlife Safaris'
+  top_experiences: 'Top Experiences',
+  wildlife_safari: 'Wildlife Safari'
 } as const;
 
 export function buildExperienceEmptyState(filters: ExperienceListingFiltersState) {

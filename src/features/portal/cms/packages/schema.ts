@@ -14,7 +14,7 @@ export const packageFormSchema = z.object({
   packageGroup: z.string(),
   comfortTier: z.enum(['budget', 'mid_range', 'luxury']),
   ogImageId: z.string(),
-  seoTitle: z.string().max(70, 'SEO title should be under 70 characters'),
+  seoTitle: z.string().transform((value) => value.slice(0, SEO_LIMITS.titleMax)),
   seoDescription: z
     .string()
     .max(SEO_LIMITS.metaMax, `SEO description should be under ${SEO_LIMITS.metaMax} characters`)

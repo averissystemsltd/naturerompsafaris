@@ -1,6 +1,12 @@
 import { unstable_cache } from 'next/cache';
 
-import { BRAND_CONTACT_DEFAULTS, BRAND_FAVICON_PATH } from '@/config/brand';
+import {
+  BRAND_CONTACT_DEFAULTS,
+  BRAND_FAVICON_PATH,
+  BRAND_FOOTER_DESCRIPTION,
+  BRAND_SITE_NAME,
+  BRAND_WHATSAPP
+} from '@/config/brand';
 import { DEFAULT_LOCALE } from '@/lib/i18n';
 import { listPublishedAccommodations } from '@/features/accommodations/public/service';
 import type { PublicAccommodation } from '@/features/accommodations/public/types';
@@ -164,8 +170,7 @@ async function resolveMediaByIds(ids: string[]): Promise<Map<string, PublicDesti
   );
 }
 
-const DEFAULT_DESCRIPTION =
-  'Nature Romp Safaris crafts premium Kenya and Tanzania safari holidays with local experts, tailored itineraries, and trusted on-the-ground support.';
+const DEFAULT_DESCRIPTION = BRAND_FOOTER_DESCRIPTION;
 
 function unwrapRelation<T>(value: T | T[] | null | undefined): T | null {
   if (!value) return null;
@@ -204,7 +209,7 @@ function readAnalytics(value: unknown): PublicSiteSettings['analytics'] {
 }
 
 export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
-  return unstable_cache(fetchPublicSiteSettings, ['public-site-settings'], {
+  return unstable_cache(fetchPublicSiteSettings, ['public-site-settings', 'footer-v3'], {
     revalidate: 300,
     tags: ['site-settings']
   })();
@@ -225,20 +230,21 @@ async function fetchPublicSiteSettings(): Promise<PublicSiteSettings> {
     analytics: readAnalytics(data?.analytics),
     companyName: data?.company_name ?? BRAND_CONTACT_DEFAULTS.companyName,
     description: DEFAULT_DESCRIPTION,
-    email: data?.email ?? BRAND_CONTACT_DEFAULTS.email,
+    siteName: BRAND_SITE_NAME,
+    email:
+      process.env.NEXT_PUBLIC_BRAND_EMAIL?.trim() || data?.email || BRAND_CONTACT_DEFAULTS.email,
     faviconUrl: data?.favicon_url ?? BRAND_FAVICON_PATH,
     faviconVersion: data?.updated_at ?? null,
     logoUrl: data?.logo_url ?? null,
     ogImage: data?.og_default_image_url ?? null,
-    phoneOffice: data?.phone_office ?? BRAND_CONTACT_DEFAULTS.phoneOffice,
-    phonePrimary: data?.phone_primary ?? BRAND_CONTACT_DEFAULTS.phonePrimary,
-    phoneSecondary: data?.phone_secondary ?? BRAND_CONTACT_DEFAULTS.phoneSecondary,
+    phoneOffice: data?.phone_office || BRAND_CONTACT_DEFAULTS.phoneOffice,
+    phonePrimary: data?.phone_primary || BRAND_CONTACT_DEFAULTS.phonePrimary,
+    phoneSecondary: '',
     postalAddress: data?.postal_address ?? BRAND_CONTACT_DEFAULTS.postalAddress,
     socialLinks: social,
     tagline: data?.tagline ?? null,
     themeColor: data?.theme_color ?? null,
-    whatsappMessage:
-      data?.whatsapp_message ?? 'Hello Nature Romp Safaris, I would like help planning a safari.'
+    whatsappMessage: data?.whatsapp_message ?? BRAND_WHATSAPP.message
   };
 }
 
@@ -1493,7 +1499,7 @@ export async function getPublicPackageDetail(
 export async function getPublicBlogPosts(locale: string, limit = 3): Promise<PublicBlogPost[]> {
   return unstable_cache(
     () => fetchPublicBlogPosts(locale, limit),
-    ['public-blog-posts-v2', locale, String(limit)],
+    ['public-blog-posts-v3', locale, String(limit)],
     {
       revalidate: 300,
       tags: ['blog-posts']
@@ -1517,6 +1523,7 @@ async function fetchPublicBlogPosts(locale: string, limit = 3): Promise<PublicBl
         id,
         status,
         deleted_at,
+        featured,
         primary_category:blog_categories!blog_posts_primary_category_id_fkey(name)
       ),
       og_image:media_assets!blog_translations_og_image_id_fkey(url, alt)
@@ -1525,17 +1532,26 @@ async function fetchPublicBlogPosts(locale: string, limit = 3): Promise<PublicBl
       .eq('locale', resolvedLocale)
       .not('published_at', 'is', null)
       .order('published_at', { ascending: false })
-      .limit(limit * 3);
+      .limit(Math.max(limit * 6, 12));
 
     return (data ?? [])
       .flatMap((row) => {
-        const post = unwrapRelation(row.post);
+        const post = unwrapRelation(row.post) as {
+          deleted_at: string | null;
+          featured?: boolean;
+          id: string;
+          primary_category?: unknown;
+          status: string;
+        } | null;
         if (!post || post.status !== 'published' || post.deleted_at) return [];
+
+        const category = unwrapRelation(post.primary_category) as { name?: string } | null;
 
         return [
           {
-            category: unwrapRelation(post.primary_category)?.name ?? null,
+            category: category?.name ?? null,
             excerpt: row.excerpt,
+            featured: Boolean(post.featured),
             href: localePath(locale, `/blog/${row.slug}`),
             id: post.id,
             imageAlt: mediaAlt(row.og_image, row.title),
@@ -1546,7 +1562,14 @@ async function fetchPublicBlogPosts(locale: string, limit = 3): Promise<PublicBl
           }
         ];
       })
-      .slice(0, limit);
+      .sort((a, b) => {
+        if (a.featured !== b.featured) return a.featured ? -1 : 1;
+        const aTime = a.publishedAt ? Date.parse(a.publishedAt) : 0;
+        const bTime = b.publishedAt ? Date.parse(b.publishedAt) : 0;
+        return bTime - aTime;
+      })
+      .slice(0, limit)
+      .map(({ featured: _featured, ...post }) => post);
   }
 
   const localized = await queryPosts(locale);
@@ -1555,20 +1578,21 @@ async function fetchPublicBlogPosts(locale: string, limit = 3): Promise<PublicBl
   return queryPosts(DEFAULT_LOCALE);
 }
 
-export async function getHomeReviews(limit = 8): Promise<HomeReviewItem[]> {
-  return unstable_cache(() => fetchHomeReviews(limit), ['home-reviews', String(limit)], {
+export async function getHomeReviews(limit = 12): Promise<HomeReviewItem[]> {
+  return unstable_cache(() => fetchHomeReviews(limit), ['home-reviews-google', String(limit)], {
     revalidate: 300,
     tags: ['reviews']
   })();
 }
 
-async function fetchHomeReviews(limit = 8): Promise<HomeReviewItem[]> {
+async function fetchHomeReviews(limit = 12): Promise<HomeReviewItem[]> {
   const supabase = createEnquiryPublicClient();
   const { data } = await supabase
     .from('reviews')
     .select('id, author_name, author_location, rating, source, body, review_date, avatar_url')
     .eq('status', 'published')
     .eq('featured', true)
+    .eq('source', 'google')
     .order('position', { ascending: true })
     .order('review_date', { ascending: false, nullsFirst: false })
     .limit(limit);

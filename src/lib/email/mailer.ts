@@ -1,9 +1,15 @@
 import nodemailer from 'nodemailer';
 
-import { isSmtpConfigured, smtpAuthUser, type SmtpMailbox } from '@/lib/email/smtp-config';
+import {
+  isSmtpConfigured,
+  smtpAuthPassword,
+  smtpAuthUser,
+  type SmtpMailbox
+} from '@/lib/email/smtp-config';
 
 export type SendMailInput = {
   authMailbox: SmtpMailbox;
+  cc?: string | string[];
   from: string;
   headers?: Record<string, string>;
   html?: string;
@@ -18,9 +24,8 @@ export type SendMailResult =
   | { ok: false; skipped: true }
   | { ok: false; skipped: false; error: string };
 
-function getTransport(authUser: string) {
+function getTransport(authUser: string, password: string) {
   const host = process.env.SMTP_HOST?.trim();
-  const password = process.env.SMTP_PASSWORD?.trim();
   const port = Number(process.env.SMTP_PORT ?? 587);
 
   if (!host || !password) {
@@ -42,7 +47,8 @@ export async function sendMail(input: SendMailInput): Promise<SendMailResult> {
   }
 
   const authUser = smtpAuthUser(input.authMailbox);
-  const transport = getTransport(authUser);
+  const authPassword = smtpAuthPassword(input.authMailbox);
+  const transport = getTransport(authUser, authPassword);
 
   if (!transport) {
     return { ok: false, skipped: true };
@@ -50,6 +56,7 @@ export async function sendMail(input: SendMailInput): Promise<SendMailResult> {
 
   try {
     await transport.sendMail({
+      cc: input.cc,
       from: input.from,
       headers: input.headers,
       html: input.html,

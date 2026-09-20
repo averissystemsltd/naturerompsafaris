@@ -32,9 +32,9 @@ export function AboutHero({
   const contentRef = useRef<HTMLDivElement>(null);
   const hasMedia = heroHasMedia(hero);
   const overlayAlpha = hero ? hero.overlayOpacity : 0.62;
-  const effectiveEyebrow = hero?.eyebrow ?? eyebrow;
-  const effectiveTitle = hero?.heading ?? title;
-  const effectiveDescription = hero?.subheading ?? description;
+  const effectiveEyebrow = eyebrow ?? hero?.eyebrow;
+  const effectiveTitle = title;
+  const effectiveDescription = description ?? hero?.subheading;
 
   useGSAP(
     () => {

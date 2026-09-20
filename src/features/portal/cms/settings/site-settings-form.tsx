@@ -203,9 +203,9 @@ function GeneralTab({ initial }: { initial: GeneralBrandingValues }) {
         <TextField
           id='themeColor'
           label='Theme colour'
-          hint='Browser address-bar colour (hex), e.g. #3C5142.'
+          hint='Browser address-bar colour (hex), e.g. #5D2411.'
           onChange={(themeColor) => set({ themeColor })}
-          placeholder='#3C5142'
+          placeholder='#5D2411'
           value={values.themeColor ?? ''}
         />
       </SectionCard>
@@ -389,7 +389,7 @@ function NotificationsTab({ initial }: { initial: NotificationsValues }) {
           <Textarea
             id='notifyEmails'
             onChange={(event) => setEmailsText(event.target.value)}
-            placeholder='sales@naturerompsafaris.co.ke'
+            placeholder='sales@naturerompsafaris.com'
             rows={3}
             value={emailsText}
           />

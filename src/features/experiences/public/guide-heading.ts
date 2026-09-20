@@ -1,4 +1,4 @@
-import { BRAND_OPERATING_COUNTRIES, getCountryById, type BrandCountryId } from './country-map-copy';
+import { getCountryById, isPublicBrandCountry, type BrandCountryId } from './country-map-copy';
 
 const CATEGORY_HEADINGS: Array<{ match: RegExp; heading: string }> = [
   {
@@ -50,11 +50,8 @@ const CATEGORY_HEADINGS: Array<{ match: RegExp; heading: string }> = [
 function parseCountries(value: unknown): BrandCountryId[] {
   if (!Array.isArray(value)) return [];
 
-  const allowed = new Set(BRAND_OPERATING_COUNTRIES.map((country) => country.id));
-
   return value.filter(
-    (item): item is BrandCountryId =>
-      typeof item === 'string' && allowed.has(item as BrandCountryId)
+    (item): item is BrandCountryId => typeof item === 'string' && isPublicBrandCountry(item)
   );
 }
 

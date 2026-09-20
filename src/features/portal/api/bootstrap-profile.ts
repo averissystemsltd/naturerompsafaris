@@ -1,3 +1,5 @@
+import { toPublicAuthError } from '@/lib/auth/public-auth-error';
+
 async function bootstrapPortalProfile() {
   const response = await fetch('/api/portal/bootstrap-profile', {
     method: 'POST',
@@ -5,7 +7,7 @@ async function bootstrapPortalProfile() {
   });
   if (!response.ok) {
     const body = (await response.json().catch(() => null)) as { error?: string } | null;
-    throw new Error(body?.error ?? 'Could not finish setting up your account.');
+    throw new Error(toPublicAuthError(body?.error, 'Could not finish setting up your account.'));
   }
 }
 

@@ -179,7 +179,9 @@ export function DestinationWizard({
               listeners={{
                 onChange: ({ value }) => {
                   if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                  if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                  if (autoTitleRef.current) {
+                    form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                  }
                 }
               }}
             >

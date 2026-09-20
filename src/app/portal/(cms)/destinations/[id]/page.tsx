@@ -1,12 +1,10 @@
 import { notFound } from 'next/navigation';
 
 import PageContainer from '@/components/layout/page-container';
-import { requirePortalSession } from '@/lib/auth/portal';
 import { DestinationWizard } from '@/features/portal/cms/destinations/destination-wizard';
 import { getDestination, getDestinationFacets } from '@/features/portal/cms/destinations/service';
 
 export default async function EditDestinationPage({ params }: { params: Promise<{ id: string }> }) {
-  await requirePortalSession();
   const { id } = await params;
   const [destination, facets] = await Promise.all([getDestination(id), getDestinationFacets()]);
 

@@ -1,11 +1,13 @@
 import type { TourSafariMarketId } from '@/features/experiences/public/tour-markets';
 
 export type PublicNavItem = {
+  /** Optional flag emoji shown on country tabs in the mega menu. */
+  flag?: string;
   href: string;
   items?: PublicNavItem[];
   label: string;
   sections?: PublicNavSection[];
-  variant?: 'dynamic' | 'mega' | 'simple';
+  variant?: 'columns' | 'dynamic' | 'mega' | 'simple';
 };
 
 export type PublicNavSection = {
@@ -84,6 +86,7 @@ export type PublicSiteSettings = {
   analytics: SiteAnalyticsSettings;
   companyName: string;
   description: string;
+  siteName: string;
   email: string;
   faviconUrl: string | null;
   /** ISO timestamp used to cache-bust favicon/logo metadata after CMS updates. */

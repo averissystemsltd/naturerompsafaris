@@ -9,6 +9,7 @@ import { autoTranslateExperienceById } from '@/lib/i18n/auto-translate-content';
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
 import { notifyPublishedContent } from '@/lib/seo/publish-notify';
 import { experienceFormSchema, type ExperienceFormValues } from './schema';
+import { findEnglishIdBySlug, mapLocaleSlugError } from '../shared/reuse-english-slug';
 
 export type SaveStatus = 'draft' | 'published';
 
@@ -64,7 +65,9 @@ export async function saveExperience(input: {
     updated_at: now
   };
 
-  let experienceId = input.id;
+  let experienceId =
+    input.id ??
+    (await findEnglishIdBySlug(supabase, 'experience_translations', 'experience_id', values.slug));
 
   if (experienceId) {
     const { error } = await supabase.from('experiences').update(basePayload).eq('id', experienceId);
@@ -111,10 +114,10 @@ export async function saveExperience(input: {
       .from('experience_translations')
       .update(translationPayload)
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'experience'));
   } else {
     const { error } = await supabase.from('experience_translations').insert(translationPayload);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'experience'));
   }
 
   revalidatePath('/portal/experiences');

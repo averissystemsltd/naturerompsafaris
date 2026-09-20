@@ -35,7 +35,7 @@ export function SectionAnchorNav({ className, items }: SectionAnchorNavProps) {
         if (visible?.target.id) setActiveHref(`#${visible.target.id}`);
       },
       {
-        rootMargin: '-160px 0px -55% 0px',
+        rootMargin: '-210px 0px -55% 0px',
         threshold: [0.08, 0.2, 0.45]
       }
     );
@@ -48,7 +48,7 @@ export function SectionAnchorNav({ className, items }: SectionAnchorNavProps) {
     <nav
       aria-label='Page sections'
       className={cn(
-        'sticky top-[var(--brand-header-h)] z-40 border-b border-[var(--brand-line)] bg-white',
+        'sticky top-[var(--brand-sticky-offset)] z-40 border-b border-[var(--brand-line)] bg-white',
         className
       )}
     >

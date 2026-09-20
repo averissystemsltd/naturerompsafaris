@@ -249,7 +249,6 @@ export function EnquiryDetailDocument({ enquiry }: EnquiryDetailDocumentProps) {
           <address className='text-right text-sm leading-6 text-[#374151] not-italic sm:max-w-xs'>
             <p className='font-semibold text-[#111827]'>{BRAND_CONTACT_DEFAULTS.companyName}</p>
             <p>{BRAND_CONTACT_DEFAULTS.phonePrimary}</p>
-            <p>{BRAND_CONTACT_DEFAULTS.phoneSecondary}</p>
             <p>
               <a
                 className='text-[#3C5142] print:text-[#111827]'

@@ -79,7 +79,10 @@ export interface SeoAnalysis {
 /** Industry-standard length and density targets, exported for UI counters. */
 export const SEO_LIMITS = {
   titleMin: 30,
-  titleMax: 60,
+  /** Typical SERP display length — over this, Google may truncate. */
+  titleIdealMax: 60,
+  /** Hard cap for inputs and validation. */
+  titleMax: 100,
   /** Hard cap used by the meta-description input. */
   metaMax: 160,
   metaMin: 120,
@@ -189,14 +192,21 @@ export function analyzeSeo(input: SeoAnalysisInput): SeoAnalysis {
       id: 'title-length',
       label: 'SEO title',
       status: 'warn',
-      message: `Title is short (${title.length} chars). Aim for ${SEO_LIMITS.titleMin}–${SEO_LIMITS.titleMax}.`
+      message: `Title is short (${title.length} chars). Aim for ${SEO_LIMITS.titleMin}–${SEO_LIMITS.titleIdealMax}.`
     });
   } else if (title.length > SEO_LIMITS.titleMax) {
     checks.push({
       id: 'title-length',
       label: 'SEO title',
       status: 'warn',
-      message: `Title may be truncated (${title.length} chars). Keep it under ${SEO_LIMITS.titleMax}.`
+      message: `Title is over the ${SEO_LIMITS.titleMax}-character limit (${title.length} chars).`
+    });
+  } else if (title.length > SEO_LIMITS.titleIdealMax) {
+    checks.push({
+      id: 'title-length',
+      label: 'SEO title',
+      status: 'warn',
+      message: `Title may be truncated in Google (${title.length} chars). ${SEO_LIMITS.titleIdealMax} is ideal; ${SEO_LIMITS.titleMax} is the maximum.`
     });
   } else {
     checks.push({

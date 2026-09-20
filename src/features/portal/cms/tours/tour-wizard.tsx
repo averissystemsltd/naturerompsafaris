@@ -479,7 +479,9 @@ export function TourWizard({ id, initialValues, options }: TourWizardProps) {
               listeners={{
                 onChange: ({ value }) => {
                   if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                  if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                  if (autoTitleRef.current) {
+                    form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                  }
                   const parsedDays = parseDaysFromTitle(value);
                   if (parsedDays !== null) {
                     if (autoDaysRef.current) form.setFieldValue('days', String(parsedDays));
@@ -656,18 +658,6 @@ export function TourWizard({ id, initialValues, options }: TourWizardProps) {
               )}
             </form.AppField>
             <div className='grid gap-2'>
-              <Label htmlFor='tour-parks'>National parks</Label>
-              <MultiCombobox
-                id='tour-parks'
-                options={options.parks}
-                value={values.parkIds}
-                onChange={(next) => form.setFieldValue('parkIds', next)}
-                placeholder='Select national parks this safari visits'
-                searchPlaceholder='Search parks…'
-                emptyText='No national parks yet. Add them under National Parks.'
-              />
-            </div>
-            <div className='grid gap-2'>
               <Label htmlFor='tour-destinations'>Destinations</Label>
               <MultiCombobox
                 id='tour-destinations'
@@ -805,7 +795,7 @@ export function TourWizard({ id, initialValues, options }: TourWizardProps) {
                   <field.TextField
                     label='SEO title'
                     placeholder={values.title || 'Defaults to the tour title'}
-                    maxLength={70}
+                    maxLength={SEO_LIMITS.titleMax}
                   />
                 )}
               </form.AppField>
@@ -952,7 +942,6 @@ function ReviewSummary({
       label: 'Itinerary',
       value: values.itineraryDays.length ? `${values.itineraryDays.length} day(s)` : ''
     },
-    { label: 'National parks', value: countLabels(values.parkIds, options.parks) },
     {
       label: 'Safari markets',
       value: values.countries.length ? formatTourSafariMarketSummary(values.countries) : ''

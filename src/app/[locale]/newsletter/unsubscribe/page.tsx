@@ -42,7 +42,7 @@ export default async function NewsletterUnsubscribePage({
         <p className='mt-4 text-[var(--brand-body)]'>
           {success
             ? 'You will no longer receive newsletter emails from Nature Romp Safaris. We’re sorry to see you go — you can resubscribe any time from our website footer.'
-            : 'This unsubscribe link is invalid or has expired. If you keep receiving emails you’d rather not, contact us at info@naturerompsafaris.co.ke and we’ll remove you straight away.'}
+            : 'This unsubscribe link is invalid or has expired. If you keep receiving emails you’d rather not, contact us at info@naturerompsafaris.com and we’ll remove you straight away.'}
         </p>
         <Link
           href={localePath(locale)}

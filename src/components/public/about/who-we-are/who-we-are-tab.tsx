@@ -1,7 +1,10 @@
+'use client';
+
 import { AboutMissionCommitment } from '@/components/public/about/about-mission-commitment';
 import { AboutStoryIntro } from '@/components/public/about/about-story-intro';
 import { HomeDestinationsMap } from '@/components/public/home/home-destinations-map';
 import { HomePartners } from '@/components/public/home/home-partners';
+import { useSitePhoto } from '@/components/public/site-photos-provider';
 import { ABOUT_VISION_MISSION } from '@/lib/public/about-content';
 
 function SectionDivider() {
@@ -12,17 +15,19 @@ function SectionDivider() {
   );
 }
 
-export function WhoWeAreTab() {
+export function WhoWeAreTab({ locale }: { locale: string }) {
+  const visionImageUrl = useSitePhoto('about-vision');
+
   return (
     <div className='bg-white'>
-      <AboutStoryIntro />
+      <AboutStoryIntro locale={locale} />
 
       <HomePartners />
 
       <section
         className='relative isolate bg-cover bg-center bg-fixed'
         style={{
-          backgroundImage: "url('/assets/brand-safaris-kenya.webp')"
+          backgroundImage: `url('${visionImageUrl}')`
         }}
       >
         <div aria-hidden className='absolute inset-0 bg-black/65' />
@@ -40,11 +45,7 @@ export function WhoWeAreTab() {
         </div>
       </section>
 
-      <HomeDestinationsMap
-        description='Five countries, one team. Tap a country on the map to see what we plan there, from the Mara to the Cape.'
-        eyebrow=''
-        title='Where We Operate'
-      />
+      <HomeDestinationsMap locale={locale} />
 
       <SectionDivider />
 

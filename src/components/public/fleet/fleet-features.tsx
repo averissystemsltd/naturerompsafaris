@@ -11,7 +11,7 @@ type FleetFeaturesProps = {
 
 export function FleetFeatures({ locale }: FleetFeaturesProps) {
   const contactHref = localePath(locale, '/contact');
-  const guidesHref = localePath(locale, '/about#team');
+  const guidesHref = localePath(locale, '/about');
 
   return (
     <section className='border-t border-[var(--brand-line)] bg-[var(--brand-ivory)]'>

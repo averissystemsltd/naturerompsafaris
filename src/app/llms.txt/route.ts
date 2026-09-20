@@ -8,7 +8,7 @@ export async function GET() {
   const staticPages = PAGE_HERO_REGISTRY.map((entry) => absoluteUrl(`/en${entry.path}`)).join('\n');
 
   const body = `# Nature Romp Safaris
-> East Africa safari operator based in Nairobi, Kenya. Tailor-made Kenya, Tanzania, Uganda, and Rwanda safaris since 2000.
+> East Africa safari operator based in Nairobi, Kenya. Tailor-made Kenya and Tanzania safari adventures.
 
 ## About
 Nature Romp Safaris plans private safari itineraries with expert guides, lodge and camping options, and Nairobi-based support before, during, and after travel.
@@ -16,8 +16,8 @@ Nature Romp Safaris plans private safari itineraries with expert guides, lodge a
 - Website: ${absoluteUrl('/')}
 - Sitemap: ${sitemapUrl}
 - Contact: ${absoluteUrl('/en/contact')}
-- Email: info@naturerompsafaris.co.ke
-- Phone: +254 731 201 500
+- Email: info@naturerompsafaris.com
+- Phone: +254 739 206698
 
 ## Locales
 Supported languages: ${locales}. Default locale: en.

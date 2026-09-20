@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 
@@ -257,6 +257,7 @@ export async function trashArticles(ids: string[]): Promise<void> {
     .in('id', ids);
   if (error) throw new Error(error.message);
   revalidatePath('/portal/blog');
+  revalidateTag('blog-posts', 'max');
 }
 
 /** Restores trashed articles, re-deriving status from the publish date. */
@@ -294,6 +295,7 @@ export async function restoreArticles(ids: string[]): Promise<void> {
   }
 
   revalidatePath('/portal/blog');
+  revalidateTag('blog-posts', 'max');
 }
 
 /** Permanently deletes articles (translations + join rows cascade). */
@@ -309,6 +311,7 @@ export async function deleteArticlesPermanently(ids: string[]): Promise<void> {
   if (error) throw new Error(error.message);
 
   revalidatePath('/portal/blog');
+  revalidateTag('blog-posts', 'max');
 }
 
 /** Empties the trash — permanently deletes every trashed article. */
@@ -361,4 +364,5 @@ export async function quickEditArticle(input: ArticleQuickEditInput): Promise<vo
   if (translationError) throw new Error(translationError.message);
 
   revalidatePath('/portal/blog');
+  revalidateTag('blog-posts', 'max');
 }

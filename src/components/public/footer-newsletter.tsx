@@ -7,10 +7,11 @@ import { Icons } from '@/components/icons';
 import { subscribeToNewsletter } from '@/components/public/newsletter-actions';
 
 interface FooterNewsletterProps {
+  compact?: boolean;
   locale?: string;
 }
 
-export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
+export function FooterNewsletter({ compact = false, locale = 'en' }: FooterNewsletterProps) {
   const pathname = usePathname();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,35 +40,62 @@ export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
   }
 
   return (
-    <div>
-      <h3 className='brand-footer-heading'>Safari Inspiration</h3>
-      <p className='max-w-sm text-sm leading-6 text-white/75'>
-        Join our newsletter for safari deals, travel tips, and the best times to visit East Africa.
+    <div className={compact ? 'nr-footer__newsletter' : undefined}>
+      <h3 className={compact ? undefined : 'brand-footer-heading'}>
+        {compact ? 'Newsletter' : 'Safari Inspiration'}
+      </h3>
+      <p
+        className={
+          compact ? 'nr-footer__newsletter-copy' : 'max-w-sm text-sm leading-6 text-white/75'
+        }
+      >
+        {compact
+          ? 'Safari deals, seasons, and travel tips.'
+          : 'Join our newsletter for safari deals, travel tips, and the best times to visit East Africa.'}
       </p>
 
       {submitted ? (
-        <p className='mt-4 inline-flex items-center gap-2 text-sm text-white'>
+        <p
+          className={
+            compact
+              ? 'nr-footer__newsletter-ok'
+              : 'mt-4 inline-flex items-center gap-2 text-sm text-white'
+          }
+        >
           <Icons.circleCheck className='h-4 w-4 text-[var(--brand-lime)]' />
           Thank you. Safari inspiration is on its way.
         </p>
       ) : (
-        <form className='mt-4 flex max-w-sm flex-col gap-3' onSubmit={handleSubmit}>
-          <label className='sr-only' htmlFor='footer-newsletter-name'>
-            Your name
-          </label>
-          <input
-            className='min-h-11 rounded-[var(--brand-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--brand-primary-dark)] placeholder:text-[var(--brand-primary-dark)]/45 focus:border-[var(--brand-lime)] focus:outline-none'
-            id='footer-newsletter-name'
-            name='name'
-            placeholder='Your name'
-            type='text'
-          />
+        <form
+          className={compact ? 'nr-footer__newsletter-form' : 'mt-4 flex max-w-sm flex-col gap-3'}
+          onSubmit={handleSubmit}
+        >
+          {compact ? null : (
+            <>
+              <label className='sr-only' htmlFor='footer-newsletter-name'>
+                Your name
+              </label>
+              <input
+                className='min-h-11 rounded-[var(--brand-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--brand-primary-dark)] placeholder:text-[var(--brand-primary-dark)]/45 focus:border-[var(--brand-lime)] focus:outline-none'
+                id='footer-newsletter-name'
+                name='name'
+                placeholder='Your name'
+                type='text'
+              />
+            </>
+          )}
           <label className='sr-only' htmlFor='footer-newsletter-email'>
             Email address
           </label>
-          <div className='flex flex-col gap-3 sm:flex-row'>
+          <div
+            className={compact ? 'nr-footer__newsletter-row' : 'flex flex-col gap-3 sm:flex-row'}
+          >
             <input
-              className='min-h-11 flex-1 rounded-[var(--brand-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--brand-primary-dark)] placeholder:text-[var(--brand-primary-dark)]/45 focus:border-[var(--brand-lime)] focus:outline-none'
+              className={
+                compact
+                  ? 'nr-footer__newsletter-input'
+                  : 'min-h-11 flex-1 rounded-[var(--brand-radius)] border border-white/30 bg-white px-4 text-sm text-[var(--brand-primary-dark)] placeholder:text-[var(--brand-primary-dark)]/45 focus:border-[var(--brand-lime)] focus:outline-none'
+              }
               id='footer-newsletter-email'
               name='email'
               placeholder='Your email address'
@@ -75,12 +103,16 @@ export function FooterNewsletter({ locale = 'en' }: FooterNewsletterProps) {
               type='email'
             />
             <button
-              className='inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[var(--brand-button-radius)] bg-[var(--brand-lime)] px-5 text-sm font-bold uppercase tracking-[0.06em] text-[var(--brand-primary-dark)] transition-colors hover:bg-[var(--brand-lime-hover)] disabled:cursor-not-allowed disabled:opacity-70'
+              className={
+                compact
+                  ? 'nr-footer__newsletter-submit'
+                  : 'inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[var(--brand-button-radius)] bg-[var(--brand-lime)] px-5 text-sm font-bold uppercase tracking-[0.06em] text-[var(--brand-primary-dark)] transition-colors hover:bg-[var(--brand-lime-hover)] disabled:cursor-not-allowed disabled:opacity-70'
+              }
               disabled={isPending}
               type='submit'
             >
               {isPending ? 'Subscribing…' : 'Subscribe'}
-              <Icons.arrowRight className='h-4 w-4' />
+              {compact ? null : <Icons.arrowRight className='h-4 w-4' />}
             </button>
           </div>
         </form>

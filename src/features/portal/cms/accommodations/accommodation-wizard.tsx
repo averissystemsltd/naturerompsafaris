@@ -188,7 +188,9 @@ export function AccommodationWizard({
               listeners={{
                 onChange: ({ value }) => {
                   if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                  if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                  if (autoTitleRef.current) {
+                    form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                  }
                 }
               }}
             >
@@ -473,7 +475,7 @@ export function AccommodationWizard({
                   <field.TextField
                     label='SEO title'
                     placeholder={values.name || 'Defaults to the property name'}
-                    maxLength={70}
+                    maxLength={SEO_LIMITS.titleMax}
                   />
                 )}
               </form.AppField>

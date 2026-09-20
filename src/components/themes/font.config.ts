@@ -12,6 +12,7 @@ import {
   Playfair_Display,
   Noto_Sans_Mono,
   Outfit,
+  Source_Sans_3,
   Space_Mono
 } from 'next/font/google';
 
@@ -90,6 +91,14 @@ const fontPlayfairDisplay = Playfair_Display({
   variable: '--font-playfair-display'
 });
 
+const fontSourceSans = Source_Sans_3({
+  subsets: ['latin'],
+  variable: '--font-source-sans',
+  weight: ['400', '600', '700', '800']
+});
+
+export const publicSiteFontClassName = fontSourceSans.className;
+
 export const fontVariables = cn(
   fontSans.variable,
   fontMono.variable,
@@ -104,5 +113,6 @@ export const fontVariables = cn(
   fontSpaceMono.variable,
   fontJetBrainsMono.variable,
   fontMerriweather.variable,
-  fontPlayfairDisplay.variable
+  fontPlayfairDisplay.variable,
+  fontSourceSans.variable
 );

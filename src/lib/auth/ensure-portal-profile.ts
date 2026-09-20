@@ -1,5 +1,6 @@
 import type { User } from '@supabase/supabase-js';
 
+import { isAllowedPortalSignupEmail, portalSignupDeniedMessage } from '@/lib/auth/signup-allowlist';
 import { createServiceRoleClient } from '@/lib/supabase/service-role';
 import type { createClient } from '@/lib/supabase/server';
 
@@ -24,6 +25,10 @@ export async function ensurePortalProfile(
   supabase: ServerSupabase,
   user: User
 ): Promise<{ ok: true } | { ok: false; error: string }> {
+  if (!isAllowedPortalSignupEmail(user.email)) {
+    return { ok: false, error: portalSignupDeniedMessage() };
+  }
+
   const profile = profilePayload(user);
 
   const { error: sessionError } = await supabase.from('profiles').upsert(profile, {

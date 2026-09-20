@@ -27,6 +27,8 @@ import {
 } from '@/components/ui/table';
 import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
+import { CmsTableRowsSkeleton } from '../../shared/cms-table-skeleton';
+import { cmsListEmptyCopy, EmptyCmsState } from '../../shared/empty-cms-state';
 import { CMS_SURFACE } from '../../shared/surface';
 import { QuickEditRow } from './quick-edit-row';
 import { articlesListKeys, articlesListQueryOptions } from './queries';
@@ -75,10 +77,11 @@ export function BlogArticlesList() {
   const [params, setParams] = useQueryStates(listParsers, { shallow: true });
   const { status, s: search, cat: category, m: month, paged: page } = params;
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isPending } = useQuery({
     ...articlesListQueryOptions({ status, search, category, month, page }),
     placeholderData: keepPreviousData
   });
+  const showSkeleton = isPending || (isFetching && !data);
 
   const items = data?.items ?? [];
   const counts = data?.counts ?? { all: 0, published: 0, draft: 0, trash: 0 };
@@ -87,6 +90,16 @@ export function BlogArticlesList() {
   const pageSize = data?.pageSize ?? 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   const isTrashView = status === 'trash';
+  const hasFilters = Boolean(search || category || month);
+  const emptyCopy = cmsListEmptyCopy({
+    createHref: '/portal/blog/new',
+    createLabel: 'Add article',
+    entityPlural: 'articles',
+    hasFilters,
+    isTrashView,
+    status
+  });
+  const showBulkActions = counts.all > 0 || isTrashView;
 
   // Selection + quick-edit reset whenever the visible result set changes.
   const resetKey = `${status}|${search}|${category}|${month}|${page}`;
@@ -242,30 +255,34 @@ export function BlogArticlesList() {
       {/* Toolbar: bulk actions + filters + count */}
       <div className='flex flex-wrap items-center justify-between gap-3'>
         <div className='flex flex-wrap items-center gap-2'>
-          <Select value={bulkAction || undefined} onValueChange={setBulkAction}>
-            <SelectTrigger size='sm' className='w-40'>
-              <SelectValue placeholder='Bulk actions' />
-            </SelectTrigger>
-            <SelectContent className={CMS_SURFACE}>
-              {isTrashView ? (
-                <>
-                  <SelectItem value='restore'>Restore</SelectItem>
-                  <SelectItem value='delete'>Delete permanently</SelectItem>
-                </>
-              ) : (
-                <SelectItem value='trash'>Move to Trash</SelectItem>
-              )}
-            </SelectContent>
-          </Select>
-          <Button
-            type='button'
-            size='sm'
-            variant='outline'
-            disabled={!selected.length || !bulkAction || isBusy}
-            onClick={applyBulkAction}
-          >
-            Apply
-          </Button>
+          {showBulkActions ? (
+            <>
+              <Select value={bulkAction || undefined} onValueChange={setBulkAction}>
+                <SelectTrigger size='sm' className='w-40'>
+                  <SelectValue placeholder='Bulk actions' />
+                </SelectTrigger>
+                <SelectContent className={CMS_SURFACE}>
+                  {isTrashView ? (
+                    <>
+                      <SelectItem value='restore'>Restore</SelectItem>
+                      <SelectItem value='delete'>Delete permanently</SelectItem>
+                    </>
+                  ) : (
+                    <SelectItem value='trash'>Move to Trash</SelectItem>
+                  )}
+                </SelectContent>
+              </Select>
+              <Button
+                type='button'
+                size='sm'
+                variant='outline'
+                disabled={!selected.length || !bulkAction || isBusy}
+                onClick={applyBulkAction}
+              >
+                Apply
+              </Button>
+            </>
+          ) : null}
 
           <Select
             value={month || 'all'}
@@ -342,13 +359,12 @@ export function BlogArticlesList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {items.length === 0 ? (
+            {showSkeleton ? (
+              <CmsTableRowsSkeleton columns={COLUMN_COUNT} />
+            ) : items.length === 0 ? (
               <TableRow>
-                <TableCell
-                  colSpan={COLUMN_COUNT}
-                  className='py-12 text-center text-muted-foreground'
-                >
-                  {isFetching ? 'Loading…' : 'No articles found.'}
+                <TableCell colSpan={COLUMN_COUNT} className='py-12'>
+                  <EmptyCmsState {...emptyCopy} />
                 </TableCell>
               </TableRow>
             ) : (

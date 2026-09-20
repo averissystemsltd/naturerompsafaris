@@ -16,6 +16,7 @@ import { MediaGalleryField } from '../media/components/media-picker';
 import { Combobox } from '../shared/combobox';
 import { htmlToText, RichTextEditor } from '../shared/rich-text-editor';
 import { SeoAnalyzer } from '../seo/components/seo-analyzer';
+import { SEO_LIMITS } from '../seo/analyze';
 import { WizardShell, type WizardPendingAction } from '../shared/wizard-shell';
 import {
   emptyPackageValues,
@@ -123,7 +124,9 @@ export function PackageWizard({ id, initialValues, tourOptions }: PackageWizardP
               listeners={{
                 onChange: ({ value }) => {
                   if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                  if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                  if (autoTitleRef.current) {
+                    form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                  }
                 }
               }}
             >
@@ -232,7 +235,7 @@ export function PackageWizard({ id, initialValues, tourOptions }: PackageWizardP
           <div className='grid gap-4 lg:grid-cols-[1fr_320px]'>
             <div className='grid gap-4'>
               <form.AppField name='seoTitle'>
-                {(field) => <field.TextField label='SEO title' maxLength={70} />}
+                {(field) => <field.TextField label='SEO title' maxLength={SEO_LIMITS.titleMax} />}
               </form.AppField>
               <form.AppField name='seoDescription'>
                 {(field) => (

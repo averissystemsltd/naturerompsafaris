@@ -1,11 +1,8 @@
 import type { Metadata } from 'next';
 
-import { AboutHero } from '@/components/public/about/about-hero';
-import { AboutTabs } from '@/components/public/about/about-tabs';
+import { AboutPageContent } from '@/components/public/about/about-page-content';
 import { ABOUT_HERO_DEFAULTS } from '@/lib/public/about-content';
-import { localePath } from '@/lib/public/locale-path';
-import { getPageHero } from '@/lib/public/site-data';
-import { getPublishedTeamMembers } from '@/lib/public/team';
+import { getHomeReviews, getPageHero } from '@/lib/public/site-data';
 import { buildListingPageMetadata } from '@/lib/seo/listing-metadata';
 
 type AboutPageProps = {
@@ -14,32 +11,23 @@ type AboutPageProps = {
 
 export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const pageHero = await getPageHero('about');
+  const ogImage = pageHero?.slides[0]?.mediaUrl ?? null;
+
   return buildListingPageMetadata({
     canonicalPath: `/${locale}/about`,
     defaultDescription: ABOUT_HERO_DEFAULTS.description,
     defaultTitle: ABOUT_HERO_DEFAULTS.title,
-    heroKey: 'about',
+    imageUrl: ogImage,
     locale
   });
 }
 
+export const revalidate = 300;
+
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params;
-  const [pageHero, teamMembers] = await Promise.all([
-    getPageHero('about'),
-    getPublishedTeamMembers()
-  ]);
+  const [pageHero, reviews] = await Promise.all([getPageHero('about'), getHomeReviews(12)]);
 
-  return (
-    <>
-      <AboutHero
-        breadcrumbs={[{ href: localePath(locale), label: 'Home' }, { label: 'About Us' }]}
-        description={ABOUT_HERO_DEFAULTS.description}
-        eyebrow={ABOUT_HERO_DEFAULTS.eyebrow}
-        hero={pageHero}
-        title={pageHero?.heading ?? ABOUT_HERO_DEFAULTS.title}
-      />
-      <AboutTabs locale={locale} teamMembers={teamMembers} />
-    </>
-  );
+  return <AboutPageContent hero={pageHero} locale={locale} reviews={reviews} />;
 }

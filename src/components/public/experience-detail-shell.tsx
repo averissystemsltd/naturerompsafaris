@@ -93,7 +93,7 @@ export function ExperienceDetailShell({
 
       <main className='bg-white'>
         <ExperienceScrollReveal
-          className='brand-section scroll-mt-36 bg-white'
+          className='brand-section scroll-mt-[calc(var(--brand-sticky-offset)+3.5rem)] bg-white'
           id='experience-overview'
         >
           <div className='brand-container'>
@@ -117,7 +117,10 @@ export function ExperienceDetailShell({
             ) : null}
 
             {experience.highlights.length ? (
-              <section className='mx-auto mt-14 max-w-5xl scroll-mt-36' id='experience-expect'>
+              <section
+                className='mx-auto mt-14 max-w-5xl scroll-mt-[calc(var(--brand-sticky-offset)+3.5rem)]'
+                id='experience-expect'
+              >
                 <div className='mx-auto max-w-2xl text-center'>
                   <p className='brand-eyebrow'>What To Expect</p>
                   <h2 className='brand-heading mt-3 font-display text-3xl leading-tight'>
@@ -143,7 +146,7 @@ export function ExperienceDetailShell({
         </ExperienceScrollReveal>
 
         <ExperienceScrollReveal
-          className='brand-section scroll-mt-36 border-y border-[var(--brand-line)] bg-white'
+          className='brand-section scroll-mt-[calc(var(--brand-sticky-offset)+3.5rem)] border-y border-[var(--brand-line)] bg-white'
           id='experience-trips'
           stagger
         >
@@ -168,7 +171,7 @@ export function ExperienceDetailShell({
 
         {accommodations.length ? (
           <ExperienceScrollReveal
-            className='brand-section scroll-mt-36 bg-white'
+            className='brand-section scroll-mt-[calc(var(--brand-sticky-offset)+3.5rem)] bg-white'
             id='experience-lodges'
             stagger
           >
@@ -266,7 +269,7 @@ export function ExperienceDetailShell({
           </div>
         </ExperienceScrollReveal>
 
-        <div id='experience-faqs'>
+        <div className='scroll-mt-[calc(var(--brand-sticky-offset)+3.5rem)]' id='experience-faqs'>
           <ExperienceFaqSection faqs={experience.faqs} />
         </div>
       </main>

@@ -25,7 +25,7 @@ type ExperiencesPageProps = {
 };
 
 const experiencesDescription =
-  'Explore Nature Romp Safaris experiences for family travel, honeymoons, migration routes, private guiding, and special-interest trips across Kenya, Tanzania, Uganda, Rwanda, and South Africa.';
+  'Explore Nature Romp Safaris experiences for family travel, honeymoons, migration routes, private guiding, and special-interest trips across Kenya and Tanzania.';
 
 export async function generateMetadata({ params }: ExperiencesPageProps): Promise<Metadata> {
   const { locale } = await params;

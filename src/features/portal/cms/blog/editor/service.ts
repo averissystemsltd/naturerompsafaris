@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 import { autoTranslateBlogPostById } from '@/lib/i18n/auto-translate-content';
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
@@ -10,6 +10,7 @@ import { requirePortalSession } from '@/lib/auth/portal';
 import { createClient } from '@/lib/supabase/server';
 import { slugify } from '@/lib/utils';
 import { articleFormSchema, type ArticleFormValues } from './schema';
+import { findEnglishIdBySlug, mapLocaleSlugError } from '../../shared/reuse-english-slug';
 
 export type SaveStatus = 'draft' | 'published';
 
@@ -68,7 +69,8 @@ export async function saveArticle(input: {
       ? values.primaryCategoryId
       : (values.categoryIds[0] ?? null);
 
-  let postId = input.id;
+  let postId =
+    input.id ?? (await findEnglishIdBySlug(supabase, 'blog_translations', 'post_id', values.slug));
 
   if (postId) {
     const { error } = await supabase
@@ -129,10 +131,10 @@ export async function saveArticle(input: {
       .from('blog_translations')
       .update(translationPayload)
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'article'));
   } else {
     const { error } = await supabase.from('blog_translations').insert(translationPayload);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'article'));
   }
 
   // Sync category + tag join tables (replace the full set each save).
@@ -151,6 +153,7 @@ export async function saveArticle(input: {
   }
 
   revalidatePath('/portal/blog');
+  revalidateTag('blog-posts', 'max');
   if (input.status === 'published') {
     notifyPublishedContent({ pathPrefix: 'blog', slug: values.slug });
     scheduleAutoTranslate(() => autoTranslateBlogPostById(postId));

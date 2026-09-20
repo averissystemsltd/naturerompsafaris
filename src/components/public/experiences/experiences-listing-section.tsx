@@ -1,11 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState, useTransition } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { ExperienceCard } from '@/components/public/cards/content-cards';
 import { ExperienceListingFilters } from '@/components/public/experiences/experience-listing-filters';
-import { ExperienceScrollReveal } from '@/components/public/experiences/experience-scroll-reveal';
 import { EmptyState, ListingShell } from '@/components/public/page-shell';
 import { formatExperienceCountryCodes } from '@/features/experiences/public/country-map-copy';
 import {
@@ -34,9 +33,10 @@ export function ExperiencesListingSection({
 }: ExperiencesListingSectionProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
   const basePath = localePath(locale, '/experiences');
 
-  const filters = useMemo(
+  const urlFilters = useMemo(
     () =>
       parseExperienceListingFilters({
         country: searchParams.get('country') ?? undefined,
@@ -44,6 +44,11 @@ export function ExperiencesListingSection({
       }),
     [searchParams]
   );
+  const [filters, setFilters] = useState(urlFilters);
+
+  useEffect(() => {
+    setFilters(urlFilters);
+  }, [urlFilters]);
 
   const filteredExperiences = useMemo(
     () => filterPublishedExperiences(experiences, filters),
@@ -52,12 +57,15 @@ export function ExperiencesListingSection({
   const emptyState = useMemo(() => buildExperienceEmptyState(filters), [filters]);
 
   function handleFiltersChange(next: ReturnType<typeof parseExperienceListingFilters>) {
+    setFilters(next);
     const query = buildExperienceListingQuery(next);
-    router.replace(query ? `${basePath}?${query}` : basePath, { scroll: false });
+    startTransition(() => {
+      router.replace(query ? `${basePath}?${query}` : basePath, { scroll: false });
+    });
   }
 
   return (
-    <ExperienceScrollReveal id={id}>
+    <div id={id}>
       <ListingShell
         className='bg-white'
         filters={<ExperienceListingFilters active={filters} onChange={handleFiltersChange} />}
@@ -95,6 +103,6 @@ export function ExperiencesListingSection({
           />
         )}
       </ListingShell>
-    </ExperienceScrollReveal>
+    </div>
   );
 }

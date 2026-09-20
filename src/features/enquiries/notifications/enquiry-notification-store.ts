@@ -12,6 +12,7 @@ export type EnquiryNotification = {
 
 type EnquiryNotificationState = {
   addNotification: (notification: Omit<EnquiryNotification, 'id' | 'read'>) => void;
+  hydratePending: (notifications: Array<Omit<EnquiryNotification, 'id' | 'read'>>) => void;
   markAllRead: () => void;
   markRead: (id: string) => void;
   notifications: EnquiryNotification[];
@@ -35,6 +36,24 @@ export const useEnquiryNotificationStore = create<EnquiryNotificationState>((set
           },
           ...state.notifications
         ].slice(0, 50)
+      };
+    }),
+
+  hydratePending: (notifications) =>
+    set((state) => {
+      const existingIds = new Set(state.notifications.map((item) => item.enquiryId));
+      const incoming = notifications
+        .filter((item) => !existingIds.has(item.enquiryId))
+        .map((item) => ({
+          ...item,
+          id: crypto.randomUUID(),
+          read: true
+        }));
+
+      if (!incoming.length) return state;
+
+      return {
+        notifications: [...incoming, ...state.notifications].slice(0, 50)
       };
     }),
 

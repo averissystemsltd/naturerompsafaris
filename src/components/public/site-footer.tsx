@@ -3,10 +3,16 @@ import Link from 'next/link';
 
 import { Icons } from '@/components/icons';
 import { FooterNewsletter } from '@/components/public/footer-newsletter';
-import { FooterSocialLinks } from '@/components/public/footer-social-links';
-import { BRAND_KATO, BRAND_LOGO_HEIGHT, BRAND_LOGO_PATH, BRAND_LOGO_WIDTH } from '@/config/brand';
+import { PublicSocialLinks } from '@/components/public/public-social-links';
+import {
+  BRAND_FOOTER_DESCRIPTION,
+  BRAND_LOGO_PATH,
+  BRAND_PHONE,
+  BRAND_WHATSAPP
+} from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 import type { PublicFooterColumn, PublicSiteSettings } from '@/lib/public/types';
+import { whatsAppHref } from '@/lib/public/whatsapp';
 
 type SiteFooterProps = {
   footerColumns: PublicFooterColumn[];
@@ -17,118 +23,110 @@ type SiteFooterProps = {
 function FooterLinkColumn({ column }: { column: PublicFooterColumn }) {
   return (
     <nav aria-label={column.title}>
-      <h3 className='brand-footer-heading'>{column.title}</h3>
-      <ul className='space-y-2.5'>
-        {column.links.map((link) => (
-          <li key={`${column.title}-${link.href}`}>
-            <Link className='brand-footer-link' href={link.href}>
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <h3>{column.title}</h3>
+      {column.links.map((link) => (
+        <Link href={link.href} key={`${column.title}-${link.href}`}>
+          {link.label}
+        </Link>
+      ))}
     </nav>
   );
 }
 
+function phoneHref(phone: string) {
+  return phone.replace(/[^\d+]/g, '');
+}
+
 export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterProps) {
   const homeHref = localePath(locale);
-
-  const linkColumns = footerColumns.filter((column) => column.title !== 'Help & Policies');
+  const logoSrc = siteSettings.logoUrl || BRAND_LOGO_PATH;
+  const quickLinks = footerColumns.find((column) => column.title === 'Quick Links');
+  const safariLinks = footerColumns.find((column) => column.title === 'Our Safaris');
   const policyColumn = footerColumns.find((column) => column.title === 'Help & Policies');
+  const phone = siteSettings.phonePrimary || BRAND_PHONE;
+  const whatsappLink = whatsAppHref(
+    BRAND_WHATSAPP.phone || phone,
+    siteSettings.whatsappMessage || BRAND_WHATSAPP.message
+  );
+  const description = siteSettings.description || BRAND_FOOTER_DESCRIPTION;
 
   return (
-    <footer className='brand-footer bg-[var(--brand-primary)] text-white'>
-      <div className='brand-container py-14 lg:py-16'>
-        <div className='grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-12'>
-          {/* Brand */}
-          <div className='lg:col-span-4'>
-            <Link className='inline-flex items-center' href={homeHref}>
-              <Image
-                alt={siteSettings.companyName}
-                className='h-[52px] w-auto max-w-none'
-                height={BRAND_LOGO_HEIGHT}
-                src={BRAND_LOGO_PATH}
-                width={BRAND_LOGO_WIDTH}
-              />
-            </Link>
-            <p className='mt-5 max-w-sm text-sm leading-7 text-white/75'>
-              {siteSettings.description ||
-                'Committed to safaris done the right way across Kenya, Tanzania, Uganda, Rwanda, and South Africa. Tailored to you, guided by people who have known these parks since 2000.'}
-            </p>
-            <div className='mt-6 flex w-full flex-col items-start'>
-              <FooterSocialLinks siteSettings={siteSettings} />
-            </div>
-          </div>
-
-          {/* Menu columns */}
-          {linkColumns.map((column) => (
-            <div className='lg:col-span-2' key={column.title}>
-              <FooterLinkColumn column={column} />
-            </div>
-          ))}
-
-          {/* Newsletter */}
-          <div className='md:col-span-2 lg:col-span-4'>
-            <FooterNewsletter locale={locale} />
-          </div>
-        </div>
-      </div>
-
-      {/* KATO credential strip */}
-      <div className='border-t border-white/10 bg-[var(--brand-primary-dark)]'>
-        <div className='brand-container flex flex-col items-center justify-center gap-3 py-4 text-center sm:flex-row sm:gap-5'>
-          <a
-            className='inline-flex shrink-0 items-center hover:opacity-90'
-            href={BRAND_KATO.url}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt={BRAND_KATO.alt}
-              className='h-7 w-7 shrink-0 object-contain'
-              height={28}
-              src={BRAND_KATO.logoPath}
-              width={28}
+    <footer className='nr-footer'>
+      <div className='nr-footer__grid'>
+        <div className='nr-footer__brand'>
+          <Link className='nr-footer__logo' href={homeHref}>
+            <Image
+              alt={siteSettings.companyName}
+              height={45}
+              src={logoSrc}
+              style={{ height: 45, width: 'auto' }}
+              width={132}
             />
-          </a>
-          <p className='inline-flex items-center gap-2 text-sm font-medium text-white/90'>
-            <Icons.badgeCheck className='h-4 w-4 text-[var(--brand-lime)]' />
-            KATO Registered · Licensed Tour Operator · KPSGA Member
-          </p>
+          </Link>
+          <p className='nr-footer__about'>{description}</p>
+          <Link className='nr-footer__quote' href={localePath(locale, '/contact')}>
+            Request a custom quote
+            <Icons.arrowRight />
+          </Link>
+          <PublicSocialLinks className='nr-footer__social' socialLinks={siteSettings.socialLinks} />
+        </div>
+        {quickLinks ? <FooterLinkColumn column={quickLinks} /> : null}
+        {safariLinks ? <FooterLinkColumn column={safariLinks} /> : null}
+        <div className='nr-footer__contact-col'>
+          <h3>Contact Us</h3>
+          <dl className='nr-footer__details'>
+            <div className='nr-footer__detail'>
+              <dt>Mobile &amp; Whatsapp:</dt>
+              <dd>
+                <div className='nr-footer__actions'>
+                  <a
+                    className='nr-footer__action nr-footer__action--call'
+                    href={`tel:${phoneHref(phone)}`}
+                  >
+                    <Icons.phone aria-hidden />
+                    Call {phone}
+                  </a>
+                  <span aria-hidden className='nr-footer__action-sep' />
+                  <a
+                    className='nr-footer__action nr-footer__action--whatsapp'
+                    href={whatsappLink}
+                    rel='noopener noreferrer'
+                    target='_blank'
+                  >
+                    <Icons.whatsapp aria-hidden />
+                    WhatsApp chat
+                  </a>
+                </div>
+              </dd>
+            </div>
+            <div className='nr-footer__detail'>
+              <dt>Email:</dt>
+              <dd>
+                <a
+                  className='nr-footer__action nr-footer__action--email'
+                  href={`mailto:${siteSettings.email}`}
+                >
+                  {siteSettings.email}
+                </a>
+              </dd>
+            </div>
+          </dl>
+          <FooterNewsletter compact locale={locale} />
         </div>
       </div>
-
-      {/* Copyright + legal */}
-      <div className='border-t border-white/10 bg-[#263528]'>
-        <div className='brand-container flex flex-col items-center gap-4 py-5 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left'>
-          <p className='max-w-2xl text-xs leading-5 text-white/55 md:max-w-none md:shrink-0'>
-            © {new Date().getFullYear()} {siteSettings.companyName}. All rights reserved.
-            {siteSettings.postalAddress ? (
-              <>
-                <span aria-hidden className='text-white/35'>
-                  {' '}
-                  ·{' '}
-                </span>
-                {siteSettings.postalAddress}
-              </>
-            ) : null}
-          </p>
+      <div className='nr-footer__bottom'>
+        <div className='nr-footer__bottom-inner'>
+          <div className='nr-footer__copyright'>
+            Copyright &copy; {new Date().getFullYear()} {siteSettings.companyName}.{' '}
+            {siteSettings.siteName}.
+          </div>
           {policyColumn ? (
-            <nav aria-label='Legal policies' className='md:shrink-0'>
-              <ul className='flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:justify-end'>
-                {policyColumn.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      className='text-xs text-white/55 transition-colors hover:text-white'
-                      href={link.href}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <nav aria-label='Legal policies' className='nr-footer__legal'>
+              {policyColumn.links.map((link) => (
+                <Link href={link.href} key={link.href} prefetch>
+                  {link.label}
+                </Link>
+              ))}
             </nav>
           ) : null}
         </div>

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 
+import { BRAND_FOOTER_DESCRIPTION, BRAND_SITE_NAME } from '@/config/brand';
+
 import { absoluteUrl } from './absolute-url';
 
-const SITE_NAME = 'Nature Romp Safaris';
+const SITE_NAME = BRAND_SITE_NAME;
 
 type BuildMetadataInput = {
   canonicalPath: string;
@@ -33,8 +35,7 @@ export function buildMetadata({
   type = 'website'
 }: BuildMetadataInput): Metadata {
   const canonical = absoluteUrl(canonicalPath);
-  const safeDescription =
-    description || 'Plan a tailored East Africa safari with Nature Romp Safaris.';
+  const safeDescription = description || BRAND_FOOTER_DESCRIPTION;
   const ogImages = imageUrl ? [{ url: imageUrl, alt: imageAlt || title }] : undefined;
   const absoluteLanguages = toAbsoluteLanguages(languages);
 

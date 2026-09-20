@@ -31,7 +31,7 @@ export const accommodationFormSchema = z.object({
   amenities: z.array(z.string()),
   gallery: z.array(z.string()),
   // SEO
-  seoTitle: z.string().max(70, 'SEO title should be under 70 characters'),
+  seoTitle: z.string().transform((value) => value.slice(0, SEO_LIMITS.titleMax)),
   seoDescription: z
     .string()
     .max(SEO_LIMITS.metaMax, `SEO description should be under ${SEO_LIMITS.metaMax} characters`),

@@ -11,7 +11,7 @@ export type BrandCountryMapEntry = {
   image: string;
   /** Operating-country polygon fill on the map */
   fill: string;
-  /** Label dot marker — matches brand color per country */
+  /** Label dot marker. Matches brand color per country. */
   dotFill: string;
 };
 
@@ -79,6 +79,20 @@ export const BRAND_OPERATING_COUNTRIES: BrandCountryMapEntry[] = [
   }
 ];
 
+/** Countries shown on the public site. CMS may still store a wider set. */
+export const BRAND_PUBLIC_COUNTRY_IDS = ['kenya', 'tanzania'] as const;
+
+export type BrandPublicCountryId = (typeof BRAND_PUBLIC_COUNTRY_IDS)[number];
+
+export const BRAND_PUBLIC_COUNTRIES = BRAND_OPERATING_COUNTRIES.filter(
+  (country): country is BrandCountryMapEntry & { id: BrandPublicCountryId } =>
+    (BRAND_PUBLIC_COUNTRY_IDS as readonly string[]).includes(country.id)
+);
+
+export function isPublicBrandCountry(id: string): id is BrandPublicCountryId {
+  return (BRAND_PUBLIC_COUNTRY_IDS as readonly string[]).includes(id);
+}
+
 export const DEFAULT_BRAND_COUNTRY_ID: BrandCountryId = 'kenya';
 
 export const OPERATING_ISO_TO_ID = Object.fromEntries(
@@ -90,9 +104,12 @@ export function getCountryById(id: BrandCountryId) {
 }
 
 export function formatExperienceCountryCodes(countries: BrandCountryId[]) {
-  return countries.map((id) => getCountryById(id).code);
+  return countries.filter(isPublicBrandCountry).map((id) => getCountryById(id).code);
 }
 
 export function formatExperienceCountryNames(countries: BrandCountryId[]) {
-  return countries.map((id) => getCountryById(id).name.toUpperCase()).join(', ');
+  return countries
+    .filter(isPublicBrandCountry)
+    .map((id) => getCountryById(id).name.toUpperCase())
+    .join(', ');
 }

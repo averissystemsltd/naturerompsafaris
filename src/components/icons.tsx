@@ -12,6 +12,7 @@ import {
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandTwitter,
+  IconBrandTiktok,
   IconBrandWhatsapp,
   IconBrandYoutube,
   IconBrightness,
@@ -86,6 +87,7 @@ import {
   IconSelector,
   IconSend,
   IconSettings,
+  IconShieldCheck,
   IconShare,
   IconSlash,
   IconSparkles,
@@ -185,6 +187,7 @@ export const Icons = {
   facebook: IconBrandFacebook,
   instagram: IconBrandInstagram,
   linkedin: IconBrandLinkedin,
+  tiktok: IconBrandTiktok,
   twitter: IconBrandTwitter,
   whatsapp: IconBrandWhatsapp,
   youtube: IconBrandYoutube,
@@ -254,6 +257,7 @@ export const Icons = {
   wallet: IconWallet,
   badgeCheck: IconRosetteDiscountCheck,
   lock: IconLock,
+  shieldCheck: IconShieldCheck,
 
   // Data / Charts
   trendingDown: IconTrendingDown,

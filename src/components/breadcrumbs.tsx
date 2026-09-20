@@ -30,7 +30,9 @@ export function Breadcrumbs() {
                 <Icons.slash />
               </BreadcrumbSeparator>
             )}
-            {index === items.length - 1 && <BreadcrumbPage>{item.title}</BreadcrumbPage>}
+            {index === items.length - 1 && (
+              <BreadcrumbPage className='truncate'>{item.title}</BreadcrumbPage>
+            )}
           </Fragment>
         ))}
       </BreadcrumbList>

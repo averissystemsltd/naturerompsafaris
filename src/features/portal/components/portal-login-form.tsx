@@ -12,6 +12,7 @@ import { PortalAuthButton } from '@/features/portal/components/portal-auth-butto
 import { PortalAuthLogo } from '@/features/portal/components/portal-auth-logo';
 import { PortalAuthShell } from '@/features/portal/components/portal-auth-shell';
 import { bootstrapPortalProfile } from '@/features/portal/api/bootstrap-profile';
+import { toPublicAuthError } from '@/lib/auth/public-auth-error';
 import { createClient } from '@/lib/supabase/browser';
 import { cn } from '@/lib/utils';
 
@@ -35,10 +36,15 @@ export function PortalLoginForm() {
 
   useEffect(() => {
     if (searchParams.get('confirm') === '1') {
-      setInfo('Account created. Sign in with your email and password to access the portal.');
+      setInfo('Account created. Check your email for the 8-digit verification code, then sign in.');
     }
     if (searchParams.get('setup') === '1') {
       setInfo('Finishing account setup…');
+    }
+    if (searchParams.get('error') === 'auth') {
+      setError(
+        'This confirmation link is invalid or has expired. Enter the verification code from your email or request a new one.'
+      );
     }
   }, [searchParams]);
 
@@ -77,25 +83,16 @@ export function PortalLoginForm() {
 
     if (signInError) {
       setIsLoading(false);
-      setError(signInError.message);
+      if (signInError.code === 'email_not_confirmed') {
+        router.push(`/portal/login/verify?email=${encodeURIComponent(email)}`);
+        return;
+      }
+      setError(toPublicAuthError(signInError, 'Email or password is incorrect.'));
       return;
     }
-
-    try {
-      await bootstrapPortalProfile();
-    } catch (bootstrapError) {
-      setIsLoading(false);
-      setError(
-        bootstrapError instanceof Error
-          ? bootstrapError.message
-          : 'Signed in but profile setup failed.'
-      );
-      return;
-    }
-
-    setIsLoading(false);
 
     const next = searchParams.get('next') || '/portal';
+    void bootstrapPortalProfile();
     router.push(next);
     router.refresh();
   }
@@ -121,7 +118,7 @@ export function PortalLoginForm() {
         <form className='space-y-5' onSubmit={handleSubmit}>
           <div className='space-y-2'>
             <Label className={labelClassName} htmlFor='email'>
-              Enter email id
+              Email
             </Label>
             <Input
               autoComplete='email'
@@ -137,7 +134,7 @@ export function PortalLoginForm() {
 
           <div className='space-y-2'>
             <Label className={labelClassName} htmlFor='password'>
-              Enter password
+              Password
             </Label>
             <div className='relative'>
               <Input
@@ -173,7 +170,7 @@ export function PortalLoginForm() {
                 id='remember-me'
                 onCheckedChange={(checked) => setRememberMe(checked === true)}
               />
-              <span className='text-[14px] text-[#6B7280]'>Remember me?</span>
+              <span className='text-[14px] text-[#6B7280]'>Remember email</span>
             </label>
             <Link
               className='text-[14px] font-medium text-[#3C5142] hover:underline'
@@ -191,13 +188,7 @@ export function PortalLoginForm() {
           </PortalAuthButton>
         </form>
 
-        <div className='mt-8 flex items-center gap-3'>
-          <div className='h-px flex-1 bg-[#E5E7EB]' />
-          <span className='text-[13px] text-[#9CA3AF]'>Or sign in with</span>
-          <div className='h-px flex-1 bg-[#E5E7EB]' />
-        </div>
-
-        <p className='mt-6 text-center text-[13px] leading-relaxed text-[#9CA3AF]'>
+        <p className='mt-8 text-center text-[13px] leading-relaxed text-[#9CA3AF]'>
           Nature Romp Safaris team portal. Access is limited to approved staff accounts.
         </p>
       </div>

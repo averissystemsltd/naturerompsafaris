@@ -10,6 +10,7 @@ import { autoTranslateNationalParkById } from '@/lib/i18n/auto-translate-content
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
 import { notifyPublishedContent } from '@/lib/seo/publish-notify';
 import { nationalParkFormSchema, type NationalParkFormValues } from './schema';
+import { findEnglishIdBySlug, mapLocaleSlugError } from '../shared/reuse-english-slug';
 
 export type SaveStatus = 'draft' | 'published';
 
@@ -75,7 +76,9 @@ export async function saveNationalPark(input: {
     updated_at: now
   };
 
-  let parkId = input.id;
+  let parkId =
+    input.id ??
+    (await findEnglishIdBySlug(supabase, 'national_park_translations', 'park_id', values.slug));
 
   if (parkId) {
     const { error } = await supabase.from('national_parks').update(basePayload).eq('id', parkId);
@@ -120,10 +123,10 @@ export async function saveNationalPark(input: {
       .from('national_park_translations')
       .update(translationPayload)
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'national park'));
   } else {
     const { error } = await supabase.from('national_park_translations').insert(translationPayload);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'national park'));
   }
 
   revalidatePath('/portal/national-parks');

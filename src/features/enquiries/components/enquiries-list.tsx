@@ -32,6 +32,8 @@ import {
   getEnquiryBudgetTierLabel,
   getEnquiryDestinationLabel
 } from '@/features/enquiries/utils/enquiry-display-fields';
+import { CmsEnquiryRowsSkeleton } from '@/features/portal/cms/shared/cms-table-skeleton';
+import { EmptyCmsState } from '@/features/portal/cms/shared/empty-cms-state';
 import { CMS_SURFACE } from '@/features/portal/cms/shared/surface';
 import { cn } from '@/lib/utils';
 
@@ -210,14 +212,16 @@ export function EnquiriesList() {
     setExpandedId(null);
   }, [status, type, search, page]);
 
-  const { data, isFetching, refetch } = useQuery({
+  const { data, isFetching, isPending, refetch } = useQuery({
     ...enquiriesListQueryOptions({ enquiryType: type, page, search, status }),
     placeholderData: keepPreviousData,
     refetchInterval: 30_000
   });
+  const showSkeleton = isPending || (isFetching && !data);
 
   const items = data?.items ?? [];
   const total = data?.total ?? 0;
+  const hasFilters = status !== 'all' || type !== 'all' || Boolean(search);
   const pageSize = data?.pageSize ?? 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   const pendingCount = data?.counts.pending ?? 0;
@@ -313,7 +317,6 @@ export function EnquiriesList() {
       <div className='flex items-center justify-between text-sm'>
         <p className='text-muted-foreground'>
           {total} {total === 1 ? 'enquiry' : 'enquiries'}
-          {isFetching ? ' · refreshing…' : null}
         </p>
       </div>
 
@@ -331,10 +334,17 @@ export function EnquiriesList() {
           <span aria-hidden='true' className='size-8 shrink-0' />
         </div>
 
-        {!items.length ? (
-          <p className='text-muted-foreground py-12 text-center text-sm'>
-            {isFetching ? 'Loading enquiries…' : 'No enquiries match your filters.'}
-          </p>
+        {showSkeleton ? (
+          <CmsEnquiryRowsSkeleton />
+        ) : !items.length ? (
+          <EmptyCmsState
+            message={
+              hasFilters
+                ? 'Try a different search or clear the filters.'
+                : 'New quotes and contact forms from the website will appear here.'
+            }
+            title={hasFilters ? 'No matching enquiries' : 'No enquiries yet'}
+          />
         ) : (
           items.map((enquiry) => (
             <EnquiryAccordionItem

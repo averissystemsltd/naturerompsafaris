@@ -84,7 +84,7 @@ export function ExperienceTripsExplorer({
         )}
       >
         {!hideFilters ? (
-          <aside className='brand-contact-credentials-box h-fit lg:sticky lg:top-[calc(var(--brand-header-h)+5.25rem)]'>
+          <aside className='brand-contact-credentials-box h-fit lg:sticky lg:top-[calc(var(--brand-sticky-offset)+5.25rem)]'>
             <div className='space-y-6'>
               <FilterGroup label='Duration'>
                 {durationOptions.map((option) => (

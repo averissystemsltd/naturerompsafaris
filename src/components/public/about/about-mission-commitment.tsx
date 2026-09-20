@@ -1,8 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 
+import { useSitePhoto } from '@/components/public/site-photos-provider';
 import { ABOUT_VISION_MISSION, ABOUT_WHY_TRAVEL } from '@/lib/public/about-content';
 
 export function AboutMissionCommitment() {
+  const missionImageUrl = useSitePhoto('about-mission');
   return (
     <section className='grid lg:grid-cols-2 lg:items-stretch'>
       <div className='relative bg-[var(--brand-primary-dark)] px-6 py-14 md:px-10 md:py-16 lg:px-12 lg:py-20'>
@@ -45,7 +49,7 @@ export function AboutMissionCommitment() {
           className='object-cover object-[center_38%]'
           fill
           sizes='(max-width:1024px) 100vw, 50vw'
-          src={ABOUT_VISION_MISSION.missionImageUrl}
+          src={missionImageUrl}
         />
         <div
           aria-hidden

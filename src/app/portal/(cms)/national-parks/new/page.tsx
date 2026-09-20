@@ -4,10 +4,8 @@ import {
   getDestinationParentOptions,
   getNationalParkFacets
 } from '@/features/portal/cms/national-parks/service';
-import { requirePortalSession } from '@/lib/auth/portal';
 
 export default async function NewNationalParkPage() {
-  await requirePortalSession();
   const [facets, destinationOptions] = await Promise.all([
     getNationalParkFacets(),
     getDestinationParentOptions()

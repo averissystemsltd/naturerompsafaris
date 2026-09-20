@@ -4,7 +4,7 @@ import { ContactAdvantagesList } from '@/components/public/contact/contact-advan
 import { ContactScrollReveal } from '@/components/public/contact/contact-scroll-reveal';
 import { ContactSidebarMap } from '@/components/public/contact/contact-sidebar-map';
 import { Icons } from '@/components/icons';
-import { BRAND_CONTACT_DEFAULTS, BRAND_WHATSAPP } from '@/config/brand';
+import { BRAND_CONTACT_DEFAULTS, BRAND_PHONE, BRAND_WHATSAPP } from '@/config/brand';
 import type { PublicSiteSettings } from '@/lib/public/types';
 import { whatsAppHref } from '@/lib/public/whatsapp';
 
@@ -13,13 +13,12 @@ type ContactDetailsProps = {
 };
 
 export function ContactDetails({ siteSettings }: ContactDetailsProps) {
+  const contactPhone = siteSettings.phonePrimary || BRAND_PHONE;
   const whatsappLink = whatsAppHref(
-    BRAND_WHATSAPP.phone,
+    BRAND_WHATSAPP.phone || contactPhone,
     siteSettings.whatsappMessage || BRAND_WHATSAPP.message
   );
-
-  const phonePrimaryHref = `tel:${siteSettings.phonePrimary.replace(/[^\d+]/g, '')}`;
-  const phoneSecondaryHref = `tel:${siteSettings.phoneSecondary.replace(/[^\d+]/g, '')}`;
+  const phoneHref = `tel:${contactPhone.replace(/[^\d+]/g, '')}`;
 
   return (
     <aside className='brand-contact-sidebar-inner space-y-8'>
@@ -33,25 +32,26 @@ export function ContactDetails({ siteSettings }: ContactDetailsProps) {
                 <dt className='brand-contact-sidebar-label'>Mobile &amp; Whatsapp:</dt>
                 <dd className='brand-contact-sidebar-value'>
                   <span className='brand-contact-sidebar-phones'>
-                    <a className='brand-contact-sidebar-link' href={phonePrimaryHref}>
-                      {siteSettings.phonePrimary}
+                    <a
+                      className='brand-contact-sidebar-link brand-contact-sidebar-link--call'
+                      href={phoneHref}
+                    >
+                      <Icons.phone aria-hidden />
+                      Call {contactPhone}
                     </a>
-                    <span aria-hidden className='brand-contact-sidebar-separator'>
-                      |
+                    <span className='brand-contact-sidebar-whatsapp-pair'>
+                      <span aria-hidden className='brand-contact-sidebar-separator' />
+                      <a
+                        className='brand-contact-sidebar-link brand-contact-sidebar-link--whatsapp'
+                        href={whatsappLink}
+                        rel='noopener noreferrer'
+                        target='_blank'
+                      >
+                        <Icons.whatsapp aria-hidden />
+                        WhatsApp chat
+                      </a>
                     </span>
-                    <a className='brand-contact-sidebar-link' href={phoneSecondaryHref}>
-                      {siteSettings.phoneSecondary}
-                    </a>
                   </span>
-                  <a
-                    className='brand-contact-sidebar-link brand-contact-sidebar-link--whatsapp'
-                    href={whatsappLink}
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
-                    WhatsApp chat
-                    <Icons.externalLink aria-hidden />
-                  </a>
                 </dd>
               </div>
 

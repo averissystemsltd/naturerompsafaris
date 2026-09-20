@@ -32,13 +32,6 @@ export const portalNavGroups: NavGroup[] = [
         items: []
       },
       {
-        title: 'National Parks',
-        url: '/portal/national-parks',
-        icon: 'park',
-        access: { minRole: 'viewer' },
-        items: []
-      },
-      {
         title: 'Safari Tours',
         url: '/portal/tours',
         icon: 'compass',

@@ -1,4 +1,5 @@
 import {
+  enquiryCcEmails,
   enquiryNotificationEmail,
   enquiryReplyToEmail,
   isSmtpConfigured,
@@ -50,7 +51,7 @@ function enquiryTypeLabel(type: EnquiryRecord['enquiryType']) {
 
 function buildPlainTextBody(enquiry: EnquiryRecord) {
   const lines = [
-    `New ${enquiryTypeLabel(enquiry.enquiryType)} enquiry from naturerompsafaris.co.ke`,
+    `New ${enquiryTypeLabel(enquiry.enquiryType)} enquiry from naturerompsafaris.com`,
     '',
     `Name: ${enquiry.name}`,
     `Email: ${enquiry.email}`,
@@ -155,8 +156,10 @@ export async function sendEnquiryNotificationEmail(enquiry: EnquiryRecord) {
   }
 
   const subject = `[Nature Romp Safaris] ${enquiryTypeLabel(enquiry.enquiryType)} — ${enquiry.name}`;
+  const cc = enquiryCcEmails();
   const result = await sendMail({
     authMailbox: 'enquiry',
+    cc: cc.length ? cc : undefined,
     from: smtpFromAddress('enquiry'),
     html: buildHtmlBody(enquiry),
     replyTo: enquiryReplyToEmail(),

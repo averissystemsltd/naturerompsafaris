@@ -4,10 +4,8 @@ import PageContainer from '@/components/layout/page-container';
 import { TourWizard } from '@/features/portal/cms/tours/tour-wizard';
 import { getTour, getTourRelationOptions } from '@/features/portal/cms/tours/service';
 import { toTourFormValues } from '@/features/portal/cms/tours/schema';
-import { requirePortalSession } from '@/lib/auth/portal';
 
 export default async function EditTourPage({ params }: { params: Promise<{ id: string }> }) {
-  await requirePortalSession();
   const { id } = await params;
   const [tour, options] = await Promise.all([getTour(id), getTourRelationOptions()]);
 

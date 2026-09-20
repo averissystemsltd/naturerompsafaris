@@ -93,9 +93,9 @@ export function HomeArticles({ locale, posts = [] }: { locale: string; posts?: P
       <ContourBackground opacity={0.06} />
       <div className='brand-container relative'>
         <SectionHeader
-          description='Safari stories, destination guides, and practical travel tips from our team in the field.'
-          eyebrow='Safari Journal'
-          title='Latest Articles & Insights'
+          description='Safari stories, destination notes, and practical packing advice from the Nature Romp team in Nairobi.'
+          eyebrow='From the journal'
+          title='Featured safari articles'
         />
 
         <ScrollReveal className='mt-12 grid gap-6 md:grid-cols-3 md:gap-8' stagger>

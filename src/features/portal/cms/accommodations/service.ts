@@ -8,6 +8,7 @@ import { autoTranslateAccommodationById } from '@/lib/i18n/auto-translate-conten
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
 import { notifyPublishedContent } from '@/lib/seo/publish-notify';
 import { accommodationFormSchema, type AccommodationFormValues } from './schema';
+import { findEnglishIdBySlug, mapLocaleSlugError } from '../shared/reuse-english-slug';
 
 export type SaveStatus = 'draft' | 'published';
 
@@ -62,7 +63,14 @@ export async function saveAccommodation(input: {
     updated_at: now
   };
 
-  let accommodationId = input.id;
+  let accommodationId =
+    input.id ??
+    (await findEnglishIdBySlug(
+      supabase,
+      'accommodation_translations',
+      'accommodation_id',
+      values.slug
+    ));
 
   if (accommodationId) {
     const { error } = await supabase
@@ -109,10 +117,10 @@ export async function saveAccommodation(input: {
       .from('accommodation_translations')
       .update(translationPayload)
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'accommodation'));
   } else {
     const { error } = await supabase.from('accommodation_translations').insert(translationPayload);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'accommodation'));
   }
 
   revalidatePath('/portal/accommodations');

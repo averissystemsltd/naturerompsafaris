@@ -25,7 +25,7 @@ export const HOME_SHOWCASE_ITEMS: HomeShowcaseItem[] = [
     title: 'The Great Migration',
     location: 'Maasai Mara, Kenya & Serengeti, Tanzania',
     description:
-      'Time your safari with the river crossings, when more than a million wildebeest brave the Mara River. We position you at the right camps on the right dates.',
+      'Time your safari with the river crossings, when more than a million wildebeest brave the Mara River. Nature Romp positions you at the right camps on the right dates.',
     imageUrl: '/assets/Saruni-Basecamp-The-Great-Migration-river-crossing.jpg',
     imageAlt: 'Wildebeest crossing the Mara River during the Great Migration',
     href: '/experiences?category=Migration%20Safaris'
@@ -36,7 +36,7 @@ export const HOME_SHOWCASE_ITEMS: HomeShowcaseItem[] = [
     title: 'Hot Air Balloon Safaris',
     location: 'Maasai Mara, Kenya',
     description:
-      'Drift over the plains at sunrise and land to a champagne bush breakfast. A quarter century of relationships means we secure the best baskets in peak season.',
+      'Drift over the plains at sunrise and land to a champagne bush breakfast. We book baskets early in peak Mara season so you are not left on a waitlist.',
     imageUrl: '/assets/Masai-Mara-Hot-Air-Balloon-Safari-with-Champagne-Breakfast.jpg',
     imageAlt: 'Hot air balloon safari over the Maasai Mara at sunrise',
     href: '/experiences?category=Luxury%20Safaris'
@@ -81,7 +81,7 @@ export const HOME_SHOWCASE_ITEMS: HomeShowcaseItem[] = [
     title: 'Private 4x4 Safari Adventures',
     location: 'Across Kenya, Tanzania, Uganda & Rwanda',
     description:
-      'Your own vehicle, your own pace, a driver-guide who knows where the light falls best. The original safari, done properly and tailored entirely to you.',
+      'Your own vehicle, your own pace, a driver-guide who knows where the light falls best. Private 4x4 safari, the way Nature Romp runs Kenya and Tanzania.',
     imageUrl: '/assets/brand-safaris-kenya.webp',
     imageAlt: 'Nature Romp Safaris 4x4 vehicle on the plains of Kenya',
     href: '/experiences?category=4X4%20Safari%20Tours'
@@ -123,34 +123,29 @@ export type HomeFaq = {
 /** Homepage FAQs. Plain editorial content, safe to edit freely. */
 export const HOME_FAQS: HomeFaq[] = [
   {
-    question: 'When is the best time to go on safari in East Africa?',
+    question: 'When is the best time for a Kenya or Tanzania safari?',
     answer:
-      'It depends on what you want to see. The Great Migration river crossings in the Maasai Mara peak from July to October, while the calving season runs January to March. Wildlife viewing is excellent year round, and our planners will match your dates to the best parks and experiences.'
+      'It depends on what you want to see. Great Migration river crossings in the Maasai Mara usually peak from July to October. Calving on the southern Serengeti runs January to March. Wildlife viewing is strong year round, and Nature Romp matches your dates to the parks that work, not a generic high-season pitch.'
   },
   {
-    question: 'Are your safaris private or group tours?',
+    question: 'Are Nature Romp safaris private or group tours?',
     answer:
-      'Both. Most of our guests travel on private safaris with their own vehicle and driver-guide, but we also arrange small group departures and tailor-made itineraries for families, couples, and larger parties.'
+      'Most guests travel private: your own 4x4 and driver-guide. We also arrange small groups when that fits the budget. Families, couples, and friends who want the vehicle to themselves should say so when they request a quote.'
   },
   {
     question: 'What does a Nature Romp safari include?',
     answer:
-      'Typically park fees, accommodation, a private 4x4 with a professional driver-guide, transfers, and game drives as set out in your itinerary. We send a clear day-by-day plan and a transparent price before you book, with no hidden costs.'
+      'Typically park fees, lodges or camps, a private 4x4 with a driver-guide, airport transfers, and game drives as written in your itinerary. You see the day-by-day plan and the price before you pay a deposit. Meals, flights, and optional extras such as a balloon are listed so nothing is a surprise.'
   },
   {
-    question: 'Do you arrange gorilla trekking permits for Uganda and Rwanda?',
+    question: 'Can you combine Kenya and Tanzania in one trip?',
     answer:
-      'Yes. We handle gorilla and chimpanzee permits, forest logistics, and lodge access, and we can combine primate trekking with savannah parks or a beach extension.'
+      'Yes. Mara into Serengeti, Amboseli under Kilimanjaro, then a beach in Diani or Zanzibar if you want the coast. Nature Romp handles the border, the vehicles, and the nights in between so you are not stitching two operators together.'
   },
   {
-    question: 'How do I pay, and is my booking protected?',
+    question: 'How do I pay for my safari?',
     answer:
-      'You secure your safari with a deposit and settle the balance before travel under clear payment terms. As a KATO bonded and licensed tour operator, your booking is protected to recognised industry standards.'
-  },
-  {
-    question: 'Can you combine a safari with a beach holiday?',
-    answer:
-      'Absolutely. Safari and beach combinations to Diani, Mombasa, or Zanzibar are some of our most popular itineraries, and we coordinate every flight and transfer in between.'
+      'You secure the trip with a deposit paid to Nature Romp Safaris Ltd, then settle the balance before travel. We do not collect card payments on this website. The Payment Terms page sets out amounts, due dates, currency, and refunds.'
   }
 ];
 
@@ -175,14 +170,15 @@ export type HomeExperienceCategory = {
   href: string;
 };
 
-/** Published experience slugs ordered by typical safari search demand (highest first). */
+/** Homepage grid slugs: Nature Romp core types first, then the rest of the catalogue. */
 export const HOME_EXPERIENCE_SEARCH_POPULARITY_SLUGS = [
   'great-migration-safaris',
   'big-5-safaris',
-  'gorilla-trekking-safaris',
-  'luxury-safaris',
-  'family-safaris',
   'safari-beach-holidays',
+  'mountain-climbing',
+  'family-safaris',
+  'tailor-made-safaris',
+  'luxury-safaris',
   'hot-air-baloon-safaris',
   'honeymoon-safaris',
   '4x4-safari-tours',
@@ -190,24 +186,25 @@ export const HOME_EXPERIENCE_SEARCH_POPULARITY_SLUGS = [
   'fly-in-safaris',
   'maasai-cultural-encounters',
   'conservation-safaris',
-  'tailor-made-safaris',
-  'mountain-climbing',
+  'gorilla-trekking-safaris',
   'bird-watching-safaris',
   'night-game-drives',
   'excursions'
 ] as const;
 
-/** Fallback grid ids aligned with the same popularity order as published slugs. */
+/** Fallback grid ids aligned with the same homepage core order. */
 const HOME_EXPERIENCE_FALLBACK_POPULARITY_IDS = [
   'migration',
   'big-five',
-  'gorilla',
-  'luxury',
-  'family',
   'beach',
+  'mountain',
+  'family',
+  'tailor-made',
+  'luxury',
   'honeymoon',
   'photography',
   'walking',
+  'gorilla',
   'fly-in'
 ] as const;
 
@@ -251,7 +248,8 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
   {
     id: 'family',
     title: 'Family Safaris',
-    blurb: 'Paced itineraries and child-friendly lodges for travelers of every age.',
+    blurb:
+      'Paced days and child-friendly lodges, with a private vehicle so nobody is stuck on a group clock.',
     imageUrl: '/assets/Elephant-in-Amboseli-National-Park-2.jpeg',
     imageAlt: 'Elephant herd viewed on a family safari in Amboseli',
     href: '/experiences?category=Family%20Safaris'
@@ -275,7 +273,8 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
   {
     id: 'migration',
     title: 'Migration Safaris',
-    blurb: 'Front-row dates for the wildebeest crossings in the Mara and Serengeti.',
+    blurb:
+      'River crossings in the Maasai Mara and Serengeti, timed to your dates rather than a brochure month.',
     imageUrl: '/assets/great%20migration%20of%20wildebeasts%20in%20across%20mara%20river.jpg',
     imageAlt: 'Wildebeest migration crossing the Mara River',
     href: '/experiences?category=Migration%20Safaris'
@@ -283,7 +282,8 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
   {
     id: 'big-five',
     title: 'Big 5 Safaris',
-    blurb: 'Lion, leopard, elephant, buffalo, and rhino across our flagship parks.',
+    blurb:
+      'Lion, leopard, elephant, buffalo, and rhino across Mara, Amboseli, Tsavo, Serengeti, and Ngorongoro.',
     imageUrl: '/assets/brand-safaris-kenya.webp',
     imageAlt: 'Safari vehicle searching for the Big Five on the Kenyan plains',
     href: '/experiences?category=Big%205%20Safaris'
@@ -316,10 +316,20 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
   {
     id: 'beach',
     title: 'Safari & Beach Holidays',
-    blurb: 'Pair your game drives with Diani, Zanzibar, or the Kenyan coast.',
+    blurb:
+      'Game drives, then Diani, Mombasa, or Zanzibar. Nature Romp coordinates the flights and the nights in between.',
     imageUrl: '/assets/brand-safaris-kenya.webp',
     imageAlt: 'Safari and beach combination holiday in East Africa',
     href: '/experiences?category=Safari%20%26%20Beach%20Holidays'
+  },
+  {
+    id: 'mountain',
+    title: 'Mount Kenya and Kilimanjaro',
+    blurb:
+      'Guided climbs on Mount Kenya or Kilimanjaro, with safari days before or after if you want both.',
+    imageUrl: '/assets/Elephant-in-Amboseli-National-Park-2.jpeg',
+    imageAlt: 'Mount Kilimanjaro rising behind Amboseli National Park',
+    href: '/experiences?category=Mountain%20Climbing'
   },
   {
     id: 'fly-in',
@@ -341,7 +351,8 @@ export const HOME_EXPERIENCE_CATEGORIES: HomeExperienceCategory[] = [
   {
     id: 'tailor-made',
     title: 'Tailor-Made Safaris',
-    blurb: 'Built from scratch around your dates, budget, and travel style.',
+    blurb:
+      'Built from scratch around your dates, budget, and how you like to travel. Most Nature Romp trips start here.',
     imageUrl: '/assets/Saruni-Basecamp-The-Great-Migration-river-crossing.jpg',
     imageAlt: 'Tailor-made safari experience in East Africa',
     href: '/contact'

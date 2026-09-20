@@ -34,27 +34,27 @@ const FLEET_SLIDER_IMAGES = [
 ];
 
 const FLEET_HIGHLIGHTS = [
-  'Roomy four by four cruisers with a pop up roof, charging points, and space to stand when a sighting calls for it.',
-  'KPSGA certified guides who know the parks, read animal behaviour, and pace each day the way you actually want to travel.',
-  'Serviced on a regular schedule for East African roads, long days in the park, and those extra stops for the photo you came for.',
-  'Ready for night drives where parks allow them, with spotlights and safety kit on board.'
+  'An off-road 4x4 Land Cruiser with a pop-up roof, so you can stand for a clear 360-degree view.',
+  'Higher seating than a minivan, which means everyone can photograph, not only the people in front.',
+  'All-wheel drive for Mara tracks, crater rims, and the kilometres that get rough after rain.',
+  'The same vehicle and the same driver-guide from airport pickup to your last morning in camp.'
 ];
 
 export function HomeFleetGuides({ locale }: { locale: string }) {
   return (
-    <section className='border-t border-[var(--brand-line)] bg-white'>
-      <div className='brand-container py-16 md:py-20'>
-        <div className='grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14'>
+    <section className='border-t border-[var(--brand-line)] bg-[var(--brand-warm-gray)]'>
+      <div className='brand-container brand-section'>
+        <div className='grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16'>
           <ScrollReveal from='left'>
-            <p className='brand-eyebrow'>How You Travel With Us</p>
+            <p className='brand-eyebrow'>How you travel with us</p>
             <h2 className='brand-heading mt-3 font-display text-[clamp(1.875rem,4vw,3rem)] leading-[1.1]'>
-              Your Vehicle and Guide Stay With You the Whole Way
+              Your Land Cruiser and guide stay with you the whole way
             </h2>
             <span className='brand-gold-line brand-gold-line--left' />
             <p className='brand-body mt-6 max-w-xl text-base leading-8'>
-              From airport pickup to your last morning in the bush, you ride in the same private
-              vehicle with the same people who already know how you like your day paced. No handoffs
-              halfway through the trip, and no strangers turning up on day three.
+              Nature Romp safaris run in a private 4x4 Land Cruiser, not a packed minivan unless you
+              ask for one. The pop-up roof, the extra height for photos, and a guide who already
+              knows how you like the day paced: that is the difference guests remember.
             </p>
             <TrustedChecklist items={FLEET_HIGHLIGHTS} />
             <BrandButtonGroup className='mt-8'>
@@ -68,7 +68,7 @@ export function HomeFleetGuides({ locale }: { locale: string }) {
               </BrandButton>
               <BrandButton
                 className='group'
-                href={localePath(locale, '/about#team')}
+                href={localePath(locale, '/about')}
                 variant='accent-outline'
               >
                 <Icons.teams className='h-4 w-4 shrink-0 transition-transform duration-500 ease-out group-hover:scale-110' />

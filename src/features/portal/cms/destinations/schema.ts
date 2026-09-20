@@ -39,9 +39,7 @@ export const destinationFormSchema = z.object({
   /** Ordered media_assets ids; the first is the cover image. */
   gallery: z.array(z.string()),
   // SEO
-  seoTitle: z
-    .string()
-    .max(SEO_LIMITS.titleMax, `SEO title should be under ${SEO_LIMITS.titleMax} characters`),
+  seoTitle: z.string().transform((value) => value.slice(0, SEO_LIMITS.titleMax)),
   seoDescription: z
     .string()
     .max(SEO_LIMITS.metaMax, `SEO description should be under ${SEO_LIMITS.metaMax} characters`),

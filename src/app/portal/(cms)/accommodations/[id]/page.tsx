@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 
 import PageContainer from '@/components/layout/page-container';
-import { requirePortalSession } from '@/lib/auth/portal';
 import { AccommodationWizard } from '@/features/portal/cms/accommodations/accommodation-wizard';
 import {
   getAccommodation,
@@ -14,7 +13,6 @@ export default async function EditAccommodationPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requirePortalSession();
   const { id } = await params;
   const [accommodation, facets, destinationOptions] = await Promise.all([
     getAccommodation(id),

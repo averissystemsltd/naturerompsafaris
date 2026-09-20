@@ -298,7 +298,7 @@ export function ContactForm({ locale, sidebar, sourcePath }: ContactFormProps) {
                   className={cn(
                     'min-w-0 flex-1 rounded-[var(--brand-button-radius)] px-2 py-2 text-center text-[11px] font-medium leading-tight transition-colors sm:px-4 sm:py-2.5 sm:text-sm sm:leading-normal',
                     activeType === tab.id
-                      ? 'bg-[#3C5142] text-white'
+                      ? 'bg-[#5D2411] text-white'
                       : 'border border-[var(--brand-line)] bg-white text-[var(--brand-muted)] hover:border-[var(--brand-primary)]/30 hover:text-[var(--brand-heading)]'
                   )}
                   key={tab.id}

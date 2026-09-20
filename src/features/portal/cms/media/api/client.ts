@@ -139,12 +139,16 @@ export async function updateMediaAsset(
   return toAsset(data);
 }
 
-/** Permanently removes the object from Storage and its row. Irreversible. */
+/** Permanently removes the row and its Storage object. Irreversible. */
 export async function deleteMediaAsset(asset: Pick<MediaAsset, 'id' | 'path'>): Promise<void> {
   const supabase = createClient();
-  const { error: storageError } = await supabase.storage.from(MEDIA_BUCKET).remove([asset.path]);
-  if (storageError) throw new Error(storageError.message);
 
+  // Delete the row first: any OG-image references are cleared via ON DELETE SET
+  // NULL. Removing the object first would orphan the row (and break its URL) if
+  // the row delete failed for any reason.
   const { error } = await supabase.from('media_assets').delete().eq('id', asset.id);
   if (error) throw new Error(error.message);
+
+  const { error: storageError } = await supabase.storage.from(MEDIA_BUCKET).remove([asset.path]);
+  if (storageError) throw new Error(storageError.message);
 }

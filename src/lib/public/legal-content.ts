@@ -1,4 +1,4 @@
-import { BRAND_CONTACT_DEFAULTS } from '@/config/brand';
+import { BRAND_CONTACT_DEFAULTS, BRAND_LEGAL_NAME } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
 
 export type LegalSection = {
@@ -24,9 +24,11 @@ export type LegalFooterLink = {
   label: string;
 };
 
-const company = BRAND_CONTACT_DEFAULTS.companyName;
+const company = BRAND_LEGAL_NAME;
+const tradingName = BRAND_CONTACT_DEFAULTS.companyName;
 const email = BRAND_CONTACT_DEFAULTS.email;
 const address = BRAND_CONTACT_DEFAULTS.addressShort;
+const legalParties = `${company} ("${tradingName}", "we", "us")`;
 
 export const LEGAL_PAGES: LegalPageDefinition[] = [
   {
@@ -34,14 +36,14 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     title: 'Privacy Policy',
     eyebrow: 'Legal',
     description:
-      'How Nature Romp Safaris collects, uses, stores, and protects personal data in line with GDPR and international privacy standards.',
-    lastUpdated: '2026-06-22',
+      'How Nature Romp Safaris Ltd collects, uses, stores, and protects personal data in line with GDPR and international privacy standards.',
+    lastUpdated: '2026-09-14',
     sections: [
       {
         id: 'introduction',
         title: '1. Introduction',
         paragraphs: [
-          `${company} ("Nature Romp Safaris", "we", "us") respects your privacy and is committed to protecting personal data. This Privacy Policy explains how we process information when you visit our website, enquire about a safari, book travel services, or communicate with us.`,
+          `${legalParties} respects your privacy and is committed to protecting personal data. This Privacy Policy explains how we process information when you visit our website, enquire about a safari, book travel services, or communicate with us.`,
           'This policy is designed to meet the transparency requirements of the EU General Data Protection Regulation (GDPR), the UK GDPR, and comparable international privacy frameworks.'
         ]
       },
@@ -62,8 +64,8 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         listItems: [
           'Identity and contact data (name, email, phone, nationality, passport details where required for bookings)',
           'Booking and travel data (dates, destinations, group size, preferences, dietary or accessibility requirements)',
-          'Payment-related data (billing details; card data is processed by our payment providers — we do not store full card numbers)',
-          'Technical data (IP address, browser type, device identifiers, cookies — see our Cookie Policy)',
+          'Payment-related data (billing details; card data is processed by our payment providers. We do not store full card numbers)',
+          'Technical data (IP address, browser type, device identifiers, cookies. See our [Cookie Policy](/cookie-policy))',
           'Communications (emails, calls, WhatsApp messages, enquiry forms, feedback and reviews)',
           'Marketing preferences (newsletter opt-in where applicable)'
         ]
@@ -75,10 +77,10 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
           'We process personal data only where a lawful basis applies under GDPR Article 6:'
         ],
         listItems: [
-          'Contract — to prepare quotes, confirm bookings, and deliver safari services',
-          'Legitimate interests — to respond to enquiries, improve our website, prevent fraud, and operate our business securely',
-          'Consent — for optional marketing communications and non-essential cookies where required',
-          'Legal obligation — for tax, accounting, tourism licensing, and regulatory record-keeping'
+          'Contract: to prepare quotes, confirm bookings, and deliver safari services',
+          'Legitimate interests: to respond to enquiries, improve our website, prevent fraud, and operate our business securely',
+          'Consent: for optional marketing communications and non-essential cookies where required',
+          'Legal obligation: for tax, accounting, tourism licensing, and regulatory record-keeping'
         ]
       },
       {
@@ -143,11 +145,12 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
   {
     slug: 'cookie-policy',
     title: 'Cookie Policy',
+    eyebrow: 'Legal',
     description:
-      'How Nature Romp Safaris uses cookies and similar technologies to improve your browsing experience and understand website performance.',
-    lastUpdated: '2026-06-25',
+      'How Nature Romp Safaris Ltd uses cookies and similar technologies to improve your browsing experience and understand website performance.',
+    lastUpdated: '2026-09-14',
     intro: [
-      'This Cookie Policy explains how Nature Romp Safaris may use cookies and similar technologies on our website to improve user experience, understand website performance, and support our online services.',
+      `This Cookie Policy explains how ${legalParties} may use cookies and similar technologies on our website to improve user experience, understand website performance, and support our online services.`,
       'By using our website, you agree to the use of cookies as described in this policy, unless you disable them through your browser settings.'
     ],
     sections: [
@@ -269,14 +272,18 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     title: 'Terms & Conditions',
     eyebrow: 'Legal',
     description:
-      'General terms governing use of the Nature Romp Safaris website and safari booking services.',
-    lastUpdated: '2026-06-22',
+      'General terms governing use of the Nature Romp Safaris Ltd website and safari booking services.',
+    lastUpdated: '2026-09-14',
+    intro: [
+      `These Terms & Conditions apply to use of the Nature Romp Safaris website and to safari bookings made with ${legalParties}.`,
+      'Please read them together with our [Privacy Policy](/privacy-policy), [Cookie Policy](/cookie-policy), [Payment Terms](/payment-terms), and [Service Level Agreement](/service-level-agreement).'
+    ],
     sections: [
       {
         id: 'agreement',
         title: '1. Agreement',
         paragraphs: [
-          `By accessing this website or booking services with ${company}, you agree to these Terms & Conditions together with our Privacy Policy, Cookie Policy, Payment Terms, and Service Level Agreement where applicable.`,
+          `By accessing this website or booking services with ${legalParties}, you agree to these Terms & Conditions together with our [Privacy Policy](/privacy-policy), [Cookie Policy](/cookie-policy), [Payment Terms](/payment-terms), and [Service Level Agreement](/service-level-agreement) where applicable.`,
           'If you do not agree, please do not use our website or services.'
         ]
       },
@@ -284,7 +291,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'services',
         title: '2. Our Services',
         paragraphs: [
-          'Nature Romp Safaris arranges tailor-made and packaged safari tours, transfers, accommodation, and related travel services in East Africa. We act as an agent for certain suppliers and as a principal where stated in your booking confirmation.',
+          `${tradingName} arranges tailor-made and packaged safari tours, transfers, accommodation, and related travel services in Kenya and Tanzania. We act as an agent for certain suppliers and as a principal where stated in your booking confirmation.`,
           'Itineraries, prices, and availability on this website are indicative until confirmed in writing.'
         ]
       },
@@ -300,7 +307,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'pricing',
         title: '4. Pricing',
         paragraphs: [
-          'Prices are quoted in the currency stated in your proposal. They may change before confirmation due to park fee adjustments, fuel surcharges, exchange rates, or supplier price changes. Confirmed bookings are subject to our Payment Terms.'
+          'Prices are quoted in the currency stated in your proposal. They may change before confirmation due to park fee adjustments, fuel surcharges, exchange rates, or supplier price changes. Confirmed bookings are subject to our [Payment Terms](/payment-terms).'
         ]
       },
       {
@@ -322,7 +329,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'intellectual-property',
         title: '7. Intellectual Property',
         paragraphs: [
-          'Website content, logos, and materials are owned by Nature Romp Safaris or licensors. You may not reproduce or distribute content without written permission.'
+          `Website content, logos, and materials are owned by ${company} or licensors. You may not reproduce or distribute content without written permission.`
         ]
       },
       {
@@ -341,10 +348,10 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
     title: 'Payment Terms',
     eyebrow: 'Legal',
     description:
-      'Deposits, payment schedules, currency, refunds, and billing conditions for Nature Romp Safaris bookings.',
-    lastUpdated: '2026-06-25',
+      'Deposits, payment schedules, currency, refunds, and billing conditions for Nature Romp Safaris Ltd bookings.',
+    lastUpdated: '2026-09-14',
     intro: [
-      'These Payment Terms apply to all safari, tour, accommodation, transport, group travel, incentive travel, and related travel arrangements booked with Nature Romp Safaris.',
+      `These Payment Terms apply to all safari, tour, accommodation, transport, group travel, incentive travel, and related travel arrangements booked with ${legalParties}.`,
       'By confirming a booking with us, the client agrees to the payment terms outlined below.'
     ],
     sections: [
@@ -352,7 +359,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         id: 'booking-confirmation',
         title: '1. Booking Confirmation',
         paragraphs: [
-          'A booking is considered confirmed once Nature Romp Safaris has issued a written confirmation and the required deposit has been received within the stated payment period.',
+          `A booking is considered confirmed once ${company} has issued a written confirmation and the required deposit has been received within the stated payment period.`,
           'All bookings are subject to availability at the time of confirmation. Accommodation, transport, flights, guides, park arrangements, and other services can only be secured once the required payment has been received.'
         ]
       },
@@ -501,7 +508,7 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
         title: '15. Cancellations and Refunds',
         listAfterParagraphIndex: 1,
         paragraphs: [
-          'Cancellation fees shall apply in accordance with the Nature Romp Safaris Terms and Conditions and Cancellation Policy.',
+          'Cancellation fees shall apply in accordance with the Nature Romp Safaris [Terms & Conditions](/terms-conditions).',
           'Refunds, where applicable, will be subject to:',
           'Cancellations must be submitted in writing and will take effect from the date received by Nature Romp Safaris.'
         ],
@@ -527,11 +534,12 @@ export const LEGAL_PAGES: LegalPageDefinition[] = [
   {
     slug: 'service-level-agreement',
     title: 'Service Level Agreement',
+    eyebrow: 'Legal',
     description:
-      'Service standards, support commitments, and responsibilities when booking safaris, tours, and travel services with Nature Romp Safaris.',
-    lastUpdated: '2026-06-25',
+      'Service standards, support commitments, and responsibilities when booking safaris, tours, and travel services with Nature Romp Safaris Ltd.',
+    lastUpdated: '2026-09-14',
     intro: [
-      'This Service Level Agreement outlines the level of service, support, communication, and responsibility clients can expect when booking a safari, tour, transfer, accommodation arrangement, or related travel service with Nature Romp Safaris.',
+      `This Service Level Agreement outlines the level of service, support, communication, and responsibility clients can expect when booking a safari, tour, transfer, accommodation arrangement, or related travel service with ${legalParties}.`,
       'At Nature Romp Safaris, we are committed to providing reliable, professional, and well-coordinated safari experiences while recognizing that travel in natural environments may be affected by factors beyond our control.'
     ],
     sections: [

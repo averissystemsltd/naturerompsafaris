@@ -26,6 +26,7 @@ import { cn } from '@/lib/utils';
 import { deleteMediaAsset, updateMediaAsset, uploadMediaFile } from '../api/client';
 import { mediaInfiniteListQueryOptions, mediaKeys } from '../api/queries';
 import type { MediaAsset } from '../api/types';
+import { CmsMediaGridSkeleton } from '../../shared/cms-table-skeleton';
 import { CMS_SURFACE } from '../../shared/surface';
 
 interface MediaLibraryProps {
@@ -156,10 +157,7 @@ export function MediaLibrary({
           <input {...getInputProps()} />
 
           {showInitialLoading ? (
-            <div className='text-muted-foreground flex h-40 items-center justify-center text-sm'>
-              <Icons.spinner className='mr-2 size-4 animate-spin' />
-              Loading media…
-            </div>
+            <CmsMediaGridSkeleton />
           ) : items.length === 0 ? (
             <div className='flex h-40 flex-col items-center justify-center gap-2 text-center'>
               <Icons.media className='text-muted-foreground size-8' />

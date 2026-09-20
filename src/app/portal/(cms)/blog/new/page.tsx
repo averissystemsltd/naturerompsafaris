@@ -1,10 +1,8 @@
 import PageContainer from '@/components/layout/page-container';
 import { ArticleEditor } from '@/features/portal/cms/blog/editor/article-editor';
 import { getArticleTaxonomies } from '@/features/portal/cms/blog/editor/service';
-import { requirePortalSession } from '@/lib/auth/portal';
 
 export default async function NewArticlePage() {
-  await requirePortalSession();
   const taxonomies = await getArticleTaxonomies();
 
   return (

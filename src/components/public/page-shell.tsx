@@ -82,8 +82,8 @@ export function PageHero({
   );
 }
 
-const listingStickyTop = 'calc(var(--brand-topbar-h) + var(--brand-header-h) + 1rem)';
-const listingStickyMaxHeight = 'calc(100vh - var(--brand-topbar-h) - var(--brand-header-h) - 2rem)';
+const listingStickyTop = 'calc(var(--brand-sticky-offset) + 1rem)';
+const listingStickyMaxHeight = 'calc(100vh - var(--brand-sticky-offset) - 2rem)';
 
 export function ListingShell({
   children,

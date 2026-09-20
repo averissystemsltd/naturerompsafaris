@@ -202,59 +202,55 @@ export function ExperienceCard({
   };
 }) {
   return (
-    <article className='group flex h-full flex-col overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white'>
-      <Link
-        className='relative block aspect-[4/3] overflow-hidden bg-[var(--brand-primary)]'
-        href={item.href}
-      >
-        {item.imageUrl ? (
-          <Image
-            alt={item.imageAlt || item.title}
-            className='object-cover transition-transform duration-500 group-hover:scale-105'
-            fill
-            sizes='(max-width:768px) 100vw, 33vw'
-            src={item.imageUrl}
-          />
-        ) : (
-          <div className='absolute inset-0 bg-[var(--brand-primary-light)]' />
-        )}
-        {item.category ? (
-          <span className='absolute left-3 top-3 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-ink)]'>
-            {item.category}
-          </span>
-        ) : null}
-      </Link>
-      <div className='flex flex-1 flex-col p-5'>
-        <h3 className='brand-heading font-display text-2xl leading-tight'>
-          <Link className='transition-colors hover:text-[var(--brand-primary)]' href={item.href}>
-            {item.title}
-          </Link>
-        </h3>
-        {item.excerpt ? (
-          <p className='brand-body mt-3 line-clamp-3 flex-1 text-[15px] leading-7'>
-            {item.excerpt}
-          </p>
-        ) : null}
-        <div className='mt-5 flex items-center justify-between gap-4 border-t border-[var(--brand-line)] pt-4'>
-          <Link
-            className={cn(
-              'inline-flex items-center gap-1 border border-[var(--brand-primary)] px-4 py-2 text-xs font-bold uppercase tracking-wide',
-              'text-[var(--brand-primary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white',
-              'rounded-[var(--brand-radius)]'
-            )}
-            href={item.href}
-          >
-            View Details
-            <Icons.arrowRight className='h-3.5 w-3.5' />
-          </Link>
-          {item.countryCodes?.length ? (
-            <p className='inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-muted)]'>
-              <Icons.mapPin className='size-3.5 shrink-0 text-[var(--brand-primary)]' />
-              {item.countryCodes.join(', ')}
-            </p>
+    <article className='group flex h-full flex-col overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white transition-shadow hover:shadow-md'>
+      <Link className='flex h-full flex-col' href={item.href} prefetch>
+        <div className='relative aspect-[4/3] overflow-hidden bg-[var(--brand-primary)]'>
+          {item.imageUrl ? (
+            <Image
+              alt={item.imageAlt || item.title}
+              className='object-cover transition-transform duration-500 group-hover:scale-105'
+              fill
+              sizes='(max-width:768px) 100vw, 33vw'
+              src={item.imageUrl}
+            />
+          ) : (
+            <div className='absolute inset-0 bg-[var(--brand-primary-light)]' />
+          )}
+          {item.category ? (
+            <span className='absolute left-3 top-3 rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--brand-ink)]'>
+              {item.category}
+            </span>
           ) : null}
         </div>
-      </div>
+        <div className='flex flex-1 flex-col p-5'>
+          <h3 className='brand-heading font-display text-2xl leading-tight transition-colors group-hover:text-[var(--brand-primary)]'>
+            {item.title}
+          </h3>
+          {item.excerpt ? (
+            <p className='brand-body mt-3 line-clamp-3 flex-1 text-[15px] leading-7'>
+              {item.excerpt}
+            </p>
+          ) : null}
+          <div className='mt-5 flex items-center justify-between gap-4 border-t border-[var(--brand-line)] pt-4'>
+            <span
+              className={cn(
+                'inline-flex items-center gap-1 border border-[var(--brand-primary)] px-4 py-2 text-xs font-bold uppercase tracking-wide',
+                'text-[var(--brand-primary)] transition-colors group-hover:bg-[var(--brand-primary)] group-hover:text-white',
+                'rounded-[var(--brand-radius)]'
+              )}
+            >
+              View Details
+              <Icons.arrowRight className='h-3.5 w-3.5' />
+            </span>
+            {item.countryCodes?.length ? (
+              <p className='inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-muted)]'>
+                <Icons.mapPin className='size-3.5 shrink-0 text-[var(--brand-primary)]' />
+                {item.countryCodes.join(', ')}
+              </p>
+            ) : null}
+          </div>
+        </div>
+      </Link>
     </article>
   );
 }

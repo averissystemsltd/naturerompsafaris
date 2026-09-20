@@ -9,6 +9,7 @@ import { autoTranslateDestinationById } from '@/lib/i18n/auto-translate-content'
 import { scheduleAutoTranslate } from '@/lib/i18n/schedule-auto-translate';
 import { notifyPublishedContent } from '@/lib/seo/publish-notify';
 import { destinationFormSchema, type DestinationFormValues } from './schema';
+import { findEnglishIdBySlug, mapLocaleSlugError } from '../shared/reuse-english-slug';
 
 export type SaveStatus = 'draft' | 'published';
 
@@ -53,7 +54,14 @@ export async function saveDestination(input: {
     updated_at: now
   };
 
-  let destinationId = input.id;
+  let destinationId =
+    input.id ??
+    (await findEnglishIdBySlug(
+      supabase,
+      'destination_translations',
+      'destination_id',
+      values.slug
+    ));
 
   if (destinationId) {
     const { error } = await supabase
@@ -103,10 +111,10 @@ export async function saveDestination(input: {
       .from('destination_translations')
       .update(translationPayload)
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'destination'));
   } else {
     const { error } = await supabase.from('destination_translations').insert(translationPayload);
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(mapLocaleSlugError(error.message, 'destination'));
   }
 
   revalidatePath('/portal/destinations');

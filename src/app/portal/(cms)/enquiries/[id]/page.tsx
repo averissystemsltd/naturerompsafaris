@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { enquiryDetailQueryOptions } from '@/features/enquiries/api/queries';
 import { EnquiryDetailView } from '@/features/enquiries/components/enquiry-detail-view';
-import { requirePortalSession } from '@/lib/auth/portal';
 import { getQueryClient } from '@/lib/query-client';
 
 function EnquiryDetailSkeleton() {
@@ -26,7 +25,6 @@ export default async function PortalEnquiryDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requirePortalSession();
   const { id } = await params;
   const queryClient = getQueryClient();
   void queryClient.prefetchQuery(enquiryDetailQueryOptions(id));

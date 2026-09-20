@@ -101,7 +101,11 @@ function toCsv(rows: SubscriberRow[]): string {
       row.name ?? '',
       row.status,
       row.locale,
-      row.source ?? '',
+      row.source === 'footer'
+        ? 'Website footer'
+        : row.source === 'manual'
+          ? 'Added in portal'
+          : (row.source ?? ''),
       new Date(row.subscribedAt).toISOString()
     ]
       .map((value) => `"${String(value).replace(/"/g, '""')}"`)

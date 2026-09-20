@@ -442,7 +442,9 @@ export function ExperienceWizard({
               listeners={{
                 onChange: ({ value }) => {
                   if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                  if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                  if (autoTitleRef.current) {
+                    form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                  }
                 }
               }}
             >
@@ -675,7 +677,7 @@ export function ExperienceWizard({
                   <field.TextField
                     label='SEO title'
                     placeholder={values.title || 'Defaults to the experience title'}
-                    maxLength={70}
+                    maxLength={SEO_LIMITS.titleMax}
                     description='Pre-filled from the experience title. Override for a custom search title.'
                   />
                 )}

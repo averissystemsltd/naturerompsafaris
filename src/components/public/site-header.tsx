@@ -3,27 +3,23 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Icons } from '@/components/icons';
-import {
-  BRAND_LOGO_HEIGHT,
-  BRAND_LOGO_PATH,
-  BRAND_LOGO_WIDTH,
-  BRAND_TRIPADVISOR,
-  BRAND_WHATSAPP
-} from '@/config/brand';
+import { PublicSocialLinks } from '@/components/public/public-social-links';
+import { BRAND_LOGO_PATH, BRAND_PHONE, BRAND_WHATSAPP } from '@/config/brand';
 import { localePath, stripLocalePrefix } from '@/lib/public/locale-path';
 import { SUPPORTED_LOCALES } from '@/lib/i18n';
-import type { PublicMegaMenu, PublicNavItem, PublicSiteSettings } from '@/lib/public/types';
+import type { PublicNavItem, PublicSiteSettings } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
 
 type SiteHeaderProps = {
   locale: string;
   navItems: PublicNavItem[];
   siteSettings: PublicSiteSettings;
-  destinationsMenu?: PublicMegaMenu;
 };
+
+const HEADER_CTA_LABEL = 'Help Me Plan';
 
 function phoneHref(phone: string) {
   return phone.replace(/[^\d+]/g, '');
@@ -34,730 +30,398 @@ function whatsAppHref(phone: string, message: string) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 }
 
-function getDropdownPositionClass(label: string) {
-  if (label === 'About Us') {
-    return 'left-0 translate-x-0';
-  }
-
-  if (label === 'Destinations') {
-    return 'left-0 translate-x-0';
-  }
-
-  if (label === 'Experiences') {
-    return 'left-1/2 -translate-x-1/2';
-  }
-
-  return 'left-1/2 -translate-x-1/2';
-}
-
-function getDefaultCountryIndex(columns: PublicMegaMenu['columns']) {
-  const withDestinations = columns.findIndex((column) => column.destinations.length > 0);
-  return withDestinations >= 0 ? withDestinations : 0;
-}
-
 function hasNavChildren(item: PublicNavItem) {
-  return Boolean(item.items?.length || item.sections?.some((section) => section.items.length));
+  return Boolean(item.items?.length);
 }
 
-export function SiteHeader({ locale, navItems, siteSettings, destinationsMenu }: SiteHeaderProps) {
-  const pathname = usePathname();
+function splitColumns(items: PublicNavItem[]) {
+  const mid = Math.ceil(items.length / 2);
+  return [items.slice(0, mid), items.slice(mid)] as const;
+}
+
+function viewAllLabel(parentLabel: string) {
+  if (/accommodation/i.test(parentLabel)) return 'View all accommodations';
+  if (/experience/i.test(parentLabel)) return 'View all experiences';
+  return 'View all destinations';
+}
+
+function countNoun(parentLabel: string, count: number) {
+  if (/accommodation/i.test(parentLabel)) return count === 1 ? 'stay' : 'stays';
+  if (/experience/i.test(parentLabel)) return count === 1 ? 'experience' : 'experiences';
+  return count === 1 ? 'destination' : 'destinations';
+}
+
+export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) {
+  const pathname = usePathname() || `/${locale}`;
+  const headerRef = useRef<HTMLElement | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
-  const [isAtTop, setIsAtTop] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => setIsAtTop(window.scrollY <= 40);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  // Which country tab is previewed inside the currently open dynamic dropdown.
+  const [activeChildHref, setActiveChildHref] = useState<string | null>(null);
 
   useEffect(() => {
     setMobileOpen(false);
     setOpenGroup(null);
   }, [pathname]);
 
+  // Reset the previewed tab whenever a different dropdown opens so it defaults
+  // to that group's first country.
+  useEffect(() => {
+    setActiveChildHref(null);
+  }, [openGroup]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const header = headerRef.current;
+    if (!header) return;
+
+    const updateOffset = () => {
+      const navwrap = header.querySelector<HTMLElement>('.nr-navwrap');
+      const bottom = (navwrap ?? header).getBoundingClientRect().bottom;
+      header.style.setProperty('--mobile-header-offset', `${Math.max(0, Math.round(bottom))}px`);
+    };
+
+    updateOffset();
+    window.addEventListener('resize', updateOffset);
+    return () => window.removeEventListener('resize', updateOffset);
+  }, [mobileOpen]);
+
   const homeHref = localePath(locale);
+  const logoSrc = siteSettings.logoUrl || BRAND_LOGO_PATH;
+  const contactPhone = siteSettings.phonePrimary || BRAND_PHONE;
   const whatsappHref = whatsAppHref(
-    BRAND_WHATSAPP.phone,
+    BRAND_WHATSAPP.phone || contactPhone,
     siteSettings.whatsappMessage || BRAND_WHATSAPP.message
   );
-  const navOnlyItems = navItems.filter((item) => item.label !== 'Home');
+  const phones = [contactPhone].filter(Boolean);
+
+  const closeNav = () => {
+    setMobileOpen(false);
+    setOpenGroup(null);
+  };
+
+  const renderCta = (className: string) => (
+    <a
+      className={className}
+      href={whatsappHref}
+      onClick={closeNav}
+      rel='noopener noreferrer'
+      target='_blank'
+    >
+      <span className='nr-header-cta__label'>{HEADER_CTA_LABEL}</span>
+      <Icons.whatsapp aria-hidden className='nr-header-cta__icon' />
+    </a>
+  );
 
   return (
-    <>
-      {/* Top utility row — desktop only; scrolls away when not at top */}
-      <div
-        className={cn(
-          'hidden border-b border-white/10 bg-[var(--brand-primary-dark)] text-white transition-opacity duration-300 lg:block',
-          isAtTop ? 'opacity-100' : 'hidden'
-        )}
-      >
-        <div className='brand-container flex min-h-[var(--brand-topbar-h)] flex-wrap items-center justify-between gap-4 py-3 lg:grid lg:grid-cols-[auto_1fr_auto] lg:items-center'>
-          <Link className='inline-flex shrink-0 items-center' href={homeHref}>
-            <Image
-              alt={siteSettings.companyName}
-              className='h-[54px] w-auto max-w-none'
-              height={BRAND_LOGO_HEIGHT}
-              priority
-              src={BRAND_LOGO_PATH}
-              width={BRAND_LOGO_WIDTH}
-            />
-          </Link>
-
-          <TripAdvisorBadge />
-
-          <div className='hidden items-center justify-end gap-8 lg:flex'>
-            <div className='text-right text-sm leading-6'>
-              <div className='flex items-center justify-end gap-2'>
-                <Icons.phone className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
-                <span className='whitespace-nowrap text-white/90'>
-                  <a
-                    className='hover:text-white'
-                    href={`tel:${phoneHref(siteSettings.phoneSecondary)}`}
-                  >
-                    {siteSettings.phoneSecondary}
-                  </a>
-                  <span className='px-1 text-white/50'>/</span>
-                  <a
-                    className='hover:text-white'
-                    href={`tel:${phoneHref(siteSettings.phonePrimary)}`}
-                  >
-                    {siteSettings.phonePrimary}
-                  </a>
-                </span>
-              </div>
-              <a
-                className='mt-1 flex items-center justify-end gap-2 hover:text-white'
-                href={`mailto:${siteSettings.email}`}
-              >
-                <Icons.mail className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
-                {siteSettings.email}
-              </a>
-            </div>
-            <a
-              aria-label='Help me plan my safari on WhatsApp'
-              className='group brand-fill-hover inline-flex min-h-9 items-center justify-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-lime)] bg-transparent px-4 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--brand-lime)] transition-colors duration-200 hover:text-[var(--brand-primary-dark)]'
-              href={whatsappHref}
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <span>Help Me Plan</span>
-              <Icons.whatsapp aria-hidden className='hidden h-5 w-5 shrink-0 group-hover:block' />
+    <header className={cn('nr-header', mobileOpen && 'nr-header--nav-open')} ref={headerRef}>
+      <div className='nr-topbar'>
+        <div className='nr-topbar__inner'>
+          <div aria-label='Contact Nature Romp Safaris' className='nr-topbar__contact'>
+            <a className='nr-topbar__link' href={`mailto:${siteSettings.email}`}>
+              <Icons.mail className='nr-topbar__icon' />
+              <span>{siteSettings.email}</span>
             </a>
+            {phones.length ? (
+              <span className='nr-topbar__phones'>
+                <Icons.phone aria-hidden className='nr-topbar__icon' />
+                {phones.map((number, index) => (
+                  <span className='nr-topbar__phones-item' key={number}>
+                    {index > 0 ? (
+                      <span aria-hidden className='nr-topbar__phones-sep'>
+                        /
+                      </span>
+                    ) : null}
+                    <a
+                      className='nr-topbar__link nr-topbar__link--phone'
+                      href={`tel:${phoneHref(number)}`}
+                    >
+                      {number}
+                    </a>
+                  </span>
+                ))}
+              </span>
+            ) : null}
+          </div>
+
+          <div className='nr-topbar__aside'>
+            <PublicSocialLinks socialLinks={siteSettings.socialLinks} />
+            <LanguageSelector locale={locale} pathname={pathname} />
           </div>
         </div>
       </div>
 
-      {/* Nav pins to viewport top once user scrolls past the utility bar */}
-      <header
-        className={cn(
-          'z-50 overflow-visible border-b border-white/10 bg-[var(--brand-primary)] text-white',
-          isAtTop ? 'relative' : 'fixed inset-x-0 top-0 border-b border-[var(--brand-primary-dark)]'
-        )}
-      >
-        <div className='brand-container relative flex h-[var(--brand-header-h)] items-center justify-between gap-3 overflow-visible lg:justify-center lg:pr-16'>
-          <Link className='inline-flex shrink-0 items-center lg:hidden' href={homeHref}>
+      <div className='nr-navwrap'>
+        <div className='nr-nav'>
+          <Link
+            aria-label={`${siteSettings.companyName} home`}
+            className='nr-logo'
+            href={homeHref}
+            onClick={closeNav}
+          >
             <Image
               alt={siteSettings.companyName}
-              className='h-11 w-auto max-w-[min(52vw,200px)]'
-              height={BRAND_LOGO_HEIGHT}
+              className='nr-logo__image'
+              height={48}
               priority
-              src={BRAND_LOGO_PATH}
-              width={BRAND_LOGO_WIDTH}
+              src={logoSrc}
+              width={148}
             />
           </Link>
 
-          <nav aria-label='Primary' className='hidden overflow-visible lg:block'>
-            <ul className='flex flex-nowrap items-center gap-x-4 overflow-visible xl:gap-x-7'>
-              {navOnlyItems.map((item) => {
-                const isOpen = openGroup === item.label;
-                const hasChildren = hasNavChildren(item);
-                const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          <button
+            aria-expanded={mobileOpen}
+            aria-label='Toggle navigation'
+            className='nr-menu-toggle'
+            onClick={() => setMobileOpen((value) => !value)}
+            type='button'
+          >
+            {mobileOpen ? <Icons.close /> : <Icons.menu />}
+          </button>
 
+          <nav
+            aria-label='Primary navigation'
+            className={cn('nr-mainnav', mobileOpen && 'nr-mainnav--open')}
+          >
+            {navItems.map((item) => {
+              const isOpen = openGroup === item.label;
+              const children = hasNavChildren(item);
+              const isColumns = item.variant === 'columns';
+              const isDynamic = item.variant === 'dynamic';
+
+              if (!children) {
                 return (
-                  <li
-                    className='relative shrink-0'
-                    key={item.label}
-                    onMouseEnter={() => hasChildren && setOpenGroup(item.label)}
-                    onMouseLeave={() => hasChildren && setOpenGroup(null)}
-                  >
-                    <Link
-                      className={cn(
-                        'inline-flex items-center gap-1.5 whitespace-nowrap border-b-2 border-transparent py-6 text-[15px] font-normal uppercase leading-none tracking-normal transition-colors xl:text-base',
-                        'hover:border-[var(--brand-lime)] hover:text-[var(--brand-lime)]',
-                        isActive && 'border-[var(--brand-lime)] text-[var(--brand-lime)]'
-                      )}
-                      href={item.href}
-                    >
-                      {item.label}
-                      {hasChildren ? (
-                        <Icons.chevronDown className={cn('h-3.5 w-3.5', isOpen && 'rotate-180')} />
-                      ) : null}
-                    </Link>
-                    {isOpen && item.variant === 'mega' && destinationsMenu ? (
-                      <DestinationsMegaPanel
-                        key={destinationsMenu.columns.map((column) => column.country).join('-')}
-                        menu={destinationsMenu}
-                        viewAllHref={item.href}
-                      />
-                    ) : isOpen && item.variant === 'dynamic' && item.sections?.length ? (
-                      <ExperiencesMegaPanel sections={item.sections} />
-                    ) : hasChildren && isOpen ? (
-                      <div
-                        className={cn(
-                          'absolute top-full z-50 min-w-[210px] pt-0',
-                          getDropdownPositionClass(item.label)
-                        )}
-                      >
-                        <ul className='overflow-hidden rounded-b-[var(--brand-radius)] border border-[var(--brand-line)] bg-white py-1'>
-                          {(item.items ?? []).map((child) => (
-                            <li key={`${item.label}-${child.href}`}>
-                              <Link
-                                className='block px-4 py-2.5 text-[15px] leading-snug text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white'
-                                href={child.href}
-                              >
-                                {child.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
-                  </li>
+                  <Link href={item.href} key={item.label} onClick={closeNav}>
+                    {item.label}
+                  </Link>
                 );
-              })}
-            </ul>
-          </nav>
+              }
 
-          <div className='flex shrink-0 items-center gap-2 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:gap-3'>
-            <LanguageSelector locale={locale} pathname={pathname} />
-            <button
-              aria-expanded={mobileOpen}
-              aria-label='Toggle menu'
-              className='inline-flex h-10 w-10 items-center justify-center rounded-[var(--brand-button-radius)] border border-white/25 text-white transition-colors hover:border-white hover:text-white lg:hidden'
-              onClick={() => setMobileOpen((v) => !v)}
-              type='button'
-            >
-              {mobileOpen ? (
-                <Icons.close className='h-5 w-5' />
-              ) : (
-                <Icons.menu className='h-5 w-5' />
-              )}
-            </button>
-          </div>
-        </div>
+              const tabs = item.items ?? [];
+              const activeChild = isDynamic
+                ? (tabs.find((tab) => tab.href === activeChildHref) ?? tabs[0] ?? null)
+                : null;
+              const previewRows = activeChild?.items ?? [];
+              const [previewLeft, previewRight] = splitColumns(previewRows);
+              const showCountryRail = isDynamic && tabs.length > 1;
+              const previewCount = previewRows.length;
 
-        {mobileOpen ? (
-          <div className='border-t border-white/10 bg-[var(--brand-primary)] lg:hidden'>
-            <div className='brand-container flex max-h-[min(calc(100dvh-var(--brand-header-h)),560px)] flex-col'>
-              <div className='flex-1 overflow-y-auto overscroll-contain bg-[var(--brand-primary)] py-3'>
-                <nav aria-label='Mobile primary'>
-                  {navOnlyItems.map((item) => {
-                    const expanded = openGroup === item.label;
-                    const hasChildren = hasNavChildren(item);
-                    const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
-
-                    return (
-                      <div className='border-b border-white/10 last:border-b-0' key={item.label}>
-                        <div className='flex items-center justify-between gap-3'>
-                          <Link
-                            className={cn(
-                              'flex-1 py-3.5 text-[15px] font-normal uppercase tracking-normal transition-colors',
-                              isActive
-                                ? 'text-[var(--brand-lime)]'
-                                : 'text-white hover:text-[var(--brand-lime)]'
-                            )}
-                            href={item.href}
-                            onClick={() => setMobileOpen(false)}
+              return (
+                <div
+                  className={cn(
+                    'nr-navgroup',
+                    isDynamic && 'nr-navgroup--dynamic',
+                    isColumns && 'nr-navgroup--columns',
+                    isOpen && 'nr-navgroup--open'
+                  )}
+                  key={item.label}
+                  onMouseEnter={() => setOpenGroup(item.label)}
+                  onMouseLeave={() => setOpenGroup(null)}
+                >
+                  <div className='nr-navgroup__row'>
+                    <Link href={item.href} onClick={closeNav}>
+                      {item.label}
+                    </Link>
+                    <button
+                      aria-expanded={isOpen}
+                      aria-label={`Toggle ${item.label} menu`}
+                      className='nr-navgroup__toggle'
+                      onClick={() =>
+                        setOpenGroup((value) => (value === item.label ? null : item.label))
+                      }
+                      type='button'
+                    >
+                      <Icons.chevronDown />
+                    </button>
+                  </div>
+                  {isDynamic ? (
+                    <div className='nr-submenu nr-submenu--dynamic'>
+                      <div className='nr-submenu-mega'>
+                        {showCountryRail ? (
+                          <nav
+                            aria-label={`${item.label} groups`}
+                            className='nr-submenu-mega__rail'
                           >
-                            {item.label}
-                          </Link>
-                          {hasChildren ? (
-                            <button
-                              aria-expanded={expanded}
-                              aria-label={`Toggle ${item.label}`}
-                              className='inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--brand-button-radius)] border border-white/15 text-white transition-colors hover:border-white/30 hover:text-white'
-                              onClick={() => setOpenGroup(expanded ? null : item.label)}
-                              type='button'
-                            >
-                              <Icons.chevronDown
-                                className={cn(
-                                  'h-4 w-4 transition-transform',
-                                  expanded && 'rotate-180'
-                                )}
-                              />
-                            </button>
-                          ) : null}
-                        </div>
-                        {hasChildren && expanded ? (
-                          <div className='space-y-3 pb-3 pl-3'>
-                            {item.variant === 'mega' && destinationsMenu ? (
-                              <DestinationsMobileMenu
-                                menu={destinationsMenu}
-                                onNavigate={() => setMobileOpen(false)}
-                                viewAllHref={item.href}
-                              />
-                            ) : item.sections?.length ? (
-                              item.sections.map((section) => (
-                                <div key={`mobile-${item.label}-${section.label}`}>
-                                  <p className='pb-1 pt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--brand-lime)]'>
-                                    {section.label}
-                                  </p>
-                                  <ul className='space-y-0.5'>
-                                    {section.items.map((child) => (
-                                      <li key={`mobile-${child.href}`}>
-                                        <Link
-                                          className='block py-2 text-sm text-white/85 transition-colors hover:text-white'
-                                          href={child.href}
-                                          onClick={() => setMobileOpen(false)}
-                                        >
+                            <ul>
+                              {tabs.map((child) => {
+                                const isActive =
+                                  child.href === (activeChild?.href ?? tabs[0]?.href);
+                                const count = child.items?.length ?? 0;
+                                return (
+                                  <li key={`${item.label}-${child.href}`}>
+                                    <button
+                                      className={cn(
+                                        'nr-submenu-mega__tab',
+                                        isActive && 'nr-submenu-mega__tab--active'
+                                      )}
+                                      onClick={() => setActiveChildHref(child.href)}
+                                      onFocus={() => setActiveChildHref(child.href)}
+                                      onMouseEnter={() => setActiveChildHref(child.href)}
+                                      type='button'
+                                    >
+                                      <span className='nr-submenu-mega__tab-label'>
+                                        {child.flag ? (
+                                          <span aria-hidden className='nr-submenu-mega__flag'>
+                                            {child.flag}
+                                          </span>
+                                        ) : null}
+                                        <span className='nr-submenu-mega__tab-text'>
                                           {child.label}
+                                        </span>
+                                      </span>
+                                      {count > 0 ? (
+                                        <span className='nr-submenu-mega__count'>{count}</span>
+                                      ) : null}
+                                    </button>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </nav>
+                        ) : null}
+                        <div className='nr-submenu-mega__pane'>
+                          {activeChild ? (
+                            <div className='nr-submenu-mega__heading'>
+                              <Link href={activeChild.href} onClick={closeNav}>
+                                <span>{activeChild.label}</span>
+                                <Icons.chevronRight />
+                              </Link>
+                              {previewCount > 0 ? (
+                                <span className='nr-submenu-mega__meta'>
+                                  {previewCount} {countNoun(item.label, previewCount)}
+                                </span>
+                              ) : null}
+                            </div>
+                          ) : null}
+                          {previewCount ? (
+                            <div
+                              className={cn(
+                                'nr-submenu-mega__grid',
+                                previewRight.length > 0 && 'nr-submenu-mega__grid--two'
+                              )}
+                            >
+                              {[previewLeft, previewRight].map((column, index) =>
+                                column.length ? (
+                                  <ul key={`${activeChild?.href ?? item.label}-col-${index}`}>
+                                    {column.map((row) => (
+                                      <li key={row.href}>
+                                        <Link href={row.href} onClick={closeNav}>
+                                          {row.label}
                                         </Link>
                                       </li>
                                     ))}
                                   </ul>
-                                </div>
-                              ))
-                            ) : (
-                              <ul className='space-y-0.5'>
-                                {(item.items ?? []).map((child) => (
-                                  <li key={`mobile-${child.href}`}>
-                                    <Link
-                                      className='block py-2.5 text-sm text-white/85 transition-colors hover:text-white'
-                                      href={child.href}
-                                      onClick={() => setMobileOpen(false)}
-                                    >
-                                      {child.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-                          </div>
-                        ) : null}
-                      </div>
-                    );
-                  })}
-                </nav>
-              </div>
-
-              <div className='shrink-0 space-y-3 border-t border-white/10 bg-[var(--brand-primary-dark)] py-4'>
-                <div className='space-y-2.5 text-sm leading-6 text-white/85'>
-                  <div className='flex min-h-10 items-center gap-2.5 px-1'>
-                    <Icons.phone className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
-                    <span className='text-white/90'>
-                      <a
-                        className='hover:text-white'
-                        href={`tel:${phoneHref(siteSettings.phoneSecondary)}`}
-                      >
-                        {siteSettings.phoneSecondary}
-                      </a>
-                      <span className='px-1 text-white/50'>/</span>
-                      <a
-                        className='hover:text-white'
-                        href={`tel:${phoneHref(siteSettings.phonePrimary)}`}
-                      >
-                        {siteSettings.phonePrimary}
-                      </a>
-                    </span>
-                  </div>
-                  <a
-                    className='flex min-h-10 items-center gap-2.5 rounded-[var(--brand-button-radius)] px-1 transition-colors hover:text-white'
-                    href={`mailto:${siteSettings.email}`}
-                  >
-                    <Icons.mail className='h-4 w-4 shrink-0 text-[var(--brand-lime)]' />
-                    <span className='truncate'>{siteSettings.email}</span>
-                  </a>
-                </div>
-                <a
-                  aria-label='Help me plan my safari on WhatsApp'
-                  className='group brand-fill-hover flex min-h-11 w-full items-center justify-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-lime)] bg-transparent px-4 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--brand-lime)] transition-colors hover:text-[var(--brand-primary-dark)]'
-                  href={whatsappHref}
-                  onClick={() => setMobileOpen(false)}
-                  rel='noopener noreferrer'
-                  target='_blank'
-                >
-                  <span>Help Me Plan</span>
-                  <Icons.whatsapp aria-hidden className='h-5 w-5 shrink-0' />
-                </a>
-              </div>
-            </div>
-          </div>
-        ) : null}
-      </header>
-      {isAtTop ? null : <div aria-hidden className='h-[var(--brand-header-h)] shrink-0' />}
-    </>
-  );
-}
-
-function ExperiencesMegaPanel({ sections }: { sections: NonNullable<PublicNavItem['sections']> }) {
-  const visibleSections = sections.filter((section) => section.items.length);
-
-  return (
-    <div
-      className={cn(
-        'absolute top-full z-50 w-[min(520px,calc(100vw-2rem))]',
-        getDropdownPositionClass('Experiences')
-      )}
-    >
-      <div className='grid grid-cols-2 gap-8 rounded-b-[var(--brand-radius)] border border-[var(--brand-line)] bg-white px-6 py-5 text-left shadow-2xl'>
-        {visibleSections.length ? (
-          visibleSections.map((section) => (
-            <div key={section.label}>
-              <p className='mb-3 text-sm font-bold uppercase tracking-[0.06em] text-[var(--brand-muted)]'>
-                {section.label}
-              </p>
-              <ul className='space-y-2'>
-                {section.items.map((child) => (
-                  <li key={child.href}>
-                    <Link
-                      className='block text-[15px] leading-snug text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-primary)]'
-                      href={child.href}
-                    >
-                      {child.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        ) : (
-          <div className='col-span-2'>
-            <p className='text-sm text-[var(--brand-muted)]'>
-              Experience categories will appear here as they are added in the portal.
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-const DESTINATIONS_FIRST_COLUMN_COUNT = 10;
-
-function splitDestinationLinks<T>(items: T[], firstColumnCount = DESTINATIONS_FIRST_COLUMN_COUNT) {
-  if (items.length <= firstColumnCount) {
-    return { primary: items, secondary: [] as T[] };
-  }
-
-  return {
-    primary: items.slice(0, firstColumnCount),
-    secondary: items.slice(firstColumnCount)
-  };
-}
-
-function DestinationsMegaPanel({
-  menu,
-  viewAllHref
-}: {
-  menu: PublicMegaMenu;
-  viewAllHref: string;
-}) {
-  const [activeIndex, setActiveIndex] = useState(() => getDefaultCountryIndex(menu.columns));
-  const activeColumn = menu.columns[activeIndex] ?? menu.columns[0];
-
-  if (!activeColumn) {
-    return null;
-  }
-
-  const { primary, secondary } = splitDestinationLinks(activeColumn.destinations);
-  const usesTwoColumns = secondary.length > 0;
-
-  return (
-    <div className={cn('absolute top-full z-50 pt-2', getDropdownPositionClass('Destinations'))}>
-      <div className='w-[min(720px,calc(100vw-2rem))] overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white text-left shadow-[0_24px_60px_-28px_rgba(15,35,24,0.45)]'>
-        <div className='flex max-h-[min(420px,62vh)]'>
-          <nav
-            aria-label='Safari countries'
-            className='w-[148px] shrink-0 border-r border-[var(--brand-line)] bg-[var(--brand-ivory)]/70 py-2'
-          >
-            <ul>
-              {menu.columns.map((column, index) => {
-                const isActive = index === activeIndex;
-                const destinationCount = column.destinations.length;
-
-                return (
-                  <li key={column.country}>
-                    <button
-                      className={cn(
-                        'flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-[13px] transition-colors',
-                        isActive
-                          ? 'bg-white font-semibold text-[var(--brand-primary)] shadow-[inset_3px_0_0_var(--brand-lime)]'
-                          : 'text-[var(--brand-muted)] hover:bg-white/80 hover:text-[var(--brand-primary)]'
-                      )}
-                      onMouseEnter={() => setActiveIndex(index)}
-                      type='button'
-                    >
-                      <span className='flex min-w-0 items-center gap-2'>
-                        {column.flag ? (
-                          <span aria-hidden className='text-base leading-none'>
-                            {column.flag}
-                          </span>
-                        ) : null}
-                        <span className='truncate'>{column.country}</span>
-                      </span>
-                      {destinationCount ? (
-                        <span
-                          className={cn(
-                            'shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums',
-                            isActive
-                              ? 'bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]'
-                              : 'bg-white text-[var(--brand-muted)]'
+                                ) : null
+                              )}
+                            </div>
+                          ) : (
+                            <p className='nr-submenu-preview__empty'>
+                              No published {item.label.toLowerCase()} for {activeChild?.label} yet.
+                            </p>
                           )}
-                        >
-                          {destinationCount}
-                        </span>
-                      ) : null}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+                          <div className='nr-submenu-mega__footer'>
+                            <Link href={item.href} onClick={closeNav}>
+                              {viewAllLabel(item.label)}
+                            </Link>
+                            <Link href={localePath(locale, '/contact')} onClick={closeNav}>
+                              Plan my safari
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : isColumns ? (
+                    <div
+                      className={cn(
+                        'nr-submenu nr-submenu--columns',
+                        tabs.some((column) => (column.items?.length ?? 0) >= 8) &&
+                          'nr-submenu--columns-wide'
+                      )}
+                    >
+                      {tabs.map((column) => {
+                        const rows = column.items ?? [];
+                        const split = rows.length >= 8;
+                        const chunks = split ? splitColumns(rows) : [rows];
+
+                        return (
+                          <div
+                            className={cn('nr-submenu-col', split && 'nr-submenu-col--split')}
+                            key={`${item.label}-${column.href}`}
+                          >
+                            <p className='nr-submenu-col__heading'>{column.label}</p>
+                            <div className={cn(split && 'nr-submenu-col__split')}>
+                              {chunks.map((chunk, index) => (
+                                <ul key={`${column.href}-${index}`}>
+                                  {chunk.map((row) => (
+                                    <li key={row.href}>
+                                      <Link href={row.href} onClick={closeNav} prefetch>
+                                        {row.label}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className='nr-submenu'>
+                      <div className='nr-submenu__links'>
+                        {tabs.map((child) => (
+                          <Link
+                            href={child.href}
+                            key={`${item.label}-${child.href}`}
+                            onClick={closeNav}
+                          >
+                            <span>{child.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            {mobileOpen ? renderCta('nr-header-cta nr-header-cta--mobile') : null}
           </nav>
 
-          <div className='brand-thin-scrollbar min-w-0 flex-1 overflow-y-auto px-5 py-4'>
-            <div className='mb-3 flex items-center justify-between gap-3 border-b border-[var(--brand-line)] pb-3'>
-              <Link
-                className='inline-flex items-center gap-1.5 font-display text-lg font-semibold text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-lime)]'
-                href={activeColumn.href}
-              >
-                {activeColumn.country}
-                <Icons.chevronRight className='h-4 w-4' />
-              </Link>
-              {activeColumn.destinations.length ? (
-                <span className='text-xs font-medium uppercase tracking-[0.08em] text-[var(--brand-muted)]'>
-                  {activeColumn.destinations.length} guides
-                </span>
-              ) : null}
-            </div>
-
-            {activeColumn.destinations.length ? (
-              <div className={cn(usesTwoColumns && 'grid grid-cols-2 gap-x-10')}>
-                <ul className='space-y-0.5'>
-                  {primary.map((destination) => (
-                    <li key={destination.href}>
-                      <Link
-                        className='group/link flex items-center gap-2 rounded-[var(--brand-radius)] px-2 py-2 text-[14px] leading-snug text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-ivory)] hover:text-[var(--brand-primary)]'
-                        href={destination.href}
-                      >
-                        <span
-                          aria-hidden
-                          className='h-1 w-1 shrink-0 rounded-full bg-[var(--brand-lime)] opacity-0 transition-opacity group-hover/link:opacity-100'
-                        />
-                        {destination.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                {usesTwoColumns ? (
-                  <ul className='space-y-0.5'>
-                    {secondary.map((destination) => (
-                      <li key={destination.href}>
-                        <Link
-                          className='group/link flex items-center gap-2 rounded-[var(--brand-radius)] px-2 py-2 text-[14px] leading-snug text-[var(--brand-muted)] transition-colors hover:bg-[var(--brand-ivory)] hover:text-[var(--brand-primary)]'
-                          href={destination.href}
-                        >
-                          <span
-                            aria-hidden
-                            className='h-1 w-1 shrink-0 rounded-full bg-[var(--brand-lime)] opacity-0 transition-opacity group-hover/link:opacity-100'
-                          />
-                          {destination.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            ) : (
-              <div className='py-2'>
-                <p className='text-sm text-[var(--brand-muted)]'>
-                  Safari routes for {activeColumn.country} are being added.
-                </p>
-                <Link
-                  className='mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-lime)]'
-                  href={activeColumn.href}
-                >
-                  Explore {activeColumn.country}
-                  <Icons.arrowRight className='h-3.5 w-3.5' />
-                </Link>
-              </div>
-            )}
-          </div>
+          {renderCta('nr-header-cta nr-header-cta--desktop')}
         </div>
-
-        <div className='flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-[var(--brand-line)] bg-[var(--brand-ivory)]/40 px-5 py-2.5'>
-          <Link
-            className='group/all inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--brand-primary)] transition-colors hover:text-[var(--brand-lime)]'
-            href={viewAllHref}
-          >
-            View all destinations
-            <Icons.arrowRight className='h-3.5 w-3.5 transition-transform duration-300 group-hover/all:translate-x-1' />
-          </Link>
-          {menu.featured ? (
-            <Link
-              className='inline-flex items-center gap-1 text-xs text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-primary)]'
-              href={menu.featured.href}
-            >
-              {menu.featured.cta}
-              <Icons.arrowRight className='h-3 w-3' />
-            </Link>
-          ) : null}
-        </div>
+        {mobileOpen ? (
+          <button
+            aria-label='Close navigation'
+            className='nr-nav-backdrop'
+            onClick={closeNav}
+            type='button'
+          />
+        ) : null}
       </div>
-    </div>
+    </header>
   );
 }
 
-function DestinationsMobileMenu({
-  menu,
-  onNavigate,
-  viewAllHref
-}: {
-  menu: PublicMegaMenu;
-  onNavigate: () => void;
-  viewAllHref: string;
-}) {
-  const [expandedCountry, setExpandedCountry] = useState<string | null>(null);
-
-  return (
-    <div className='space-y-0.5'>
-      {menu.columns.map((column) => {
-        const isExpanded = expandedCountry === column.country;
-        const hasDestinations = column.destinations.length > 0;
-
-        return (
-          <div key={column.country}>
-            {hasDestinations ? (
-              <button
-                aria-expanded={isExpanded}
-                className='flex w-full items-center justify-between gap-2 py-2.5 text-left text-sm font-medium text-white/90 transition-colors hover:text-white'
-                onClick={() => setExpandedCountry(isExpanded ? null : column.country)}
-                type='button'
-              >
-                <span>{column.country}</span>
-                <Icons.chevronDown
-                  className={cn('h-3.5 w-3.5 shrink-0 text-white/70', isExpanded && 'rotate-180')}
-                />
-              </button>
-            ) : (
-              <Link
-                className='flex w-full items-center justify-between gap-2 py-2.5 text-sm font-medium text-white/90 transition-colors hover:text-white'
-                href={column.href}
-                onClick={onNavigate}
-              >
-                <span>{column.country}</span>
-                <span className='text-xs text-[var(--brand-lime)]'>View</span>
-              </Link>
-            )}
-            {isExpanded && hasDestinations ? (
-              <ul className='mb-1 space-y-0.5 border-l border-white/15 pl-3'>
-                <li>
-                  <Link
-                    className='block py-1.5 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--brand-lime)]'
-                    href={column.href}
-                    onClick={onNavigate}
-                  >
-                    All {column.country}
-                  </Link>
-                </li>
-                {column.destinations.map((destination) => (
-                  <li key={destination.href}>
-                    <Link
-                      className='block py-1.5 text-sm text-white/75 transition-colors hover:text-white'
-                      href={destination.href}
-                      onClick={onNavigate}
-                    >
-                      {destination.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
-        );
-      })}
-      <Link
-        className='mt-2 inline-flex items-center gap-1.5 py-2 text-xs font-semibold uppercase tracking-[0.06em] text-[var(--brand-lime)]'
-        href={viewAllHref}
-        onClick={onNavigate}
-      >
-        View all destinations
-        <Icons.arrowRight className='h-3.5 w-3.5' />
-      </Link>
-    </div>
-  );
-}
-
-function TripAdvisorBadge() {
-  return (
-    <a
-      className='hidden items-center justify-center gap-2.5 hover:opacity-90 lg:flex'
-      href={BRAND_TRIPADVISOR.url}
-      rel='noopener noreferrer'
-      target='_blank'
-    >
-      {/* Official TripAdvisor wordmark (dark-background variant) */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        alt='Tripadvisor'
-        className='h-7 w-[133px] shrink-0 object-contain object-left'
-        height={28}
-        src={BRAND_TRIPADVISOR.wordmarkPath}
-        width={133}
-      />
-      <span className='flex items-center gap-2'>
-        <span className='text-sm font-normal leading-none text-white'>
-          {BRAND_TRIPADVISOR.rating}
-        </span>
-        <TripAdvisorRatingDots />
-      </span>
-      <span className='text-sm font-normal uppercase leading-none text-white'>
-        {BRAND_TRIPADVISOR.reviewLabel}
-      </span>
-    </a>
-  );
-}
-
-function TripAdvisorRatingDots() {
-  return (
-    <svg aria-hidden className='h-4 w-[97px] shrink-0' fill='none' viewBox='0 0 97 16'>
-      <circle cx='8.35156' cy='8' fill='#00AA6C' r='8' />
-      <circle cx='28.3516' cy='8' fill='#00AA6C' r='8' />
-      <circle cx='48.3516' cy='8' fill='#00AA6C' r='8' />
-      <circle cx='68.3516' cy='8' fill='#00AA6C' r='8' />
-      <circle cx='88.3516' cy='8' fill='#00AA6C' r='8' />
-    </svg>
-  );
-}
-
-function LanguageSelector({
-  className,
-  locale,
-  pathname
-}: {
-  className?: string;
-  locale: string;
-  pathname: string;
-}) {
+function LanguageSelector({ locale, pathname }: { locale: string; pathname: string }) {
   const basePath = stripLocalePrefix(pathname, locale);
 
   return (
-    <details className={cn('relative', className)}>
-      <summary className='flex h-10 min-w-10 cursor-pointer list-none items-center justify-center gap-1 rounded-[var(--brand-button-radius)] border border-white/25 px-2.5 text-xs font-semibold uppercase tracking-wide transition-colors hover:border-white hover:text-white [&::-webkit-details-marker]:hidden'>
-        <Icons.world className='h-3.5 w-3.5 shrink-0' />
+    <details className='nr-lang'>
+      <summary>
+        <Icons.world />
         <span>{locale}</span>
       </summary>
-      <ul className='absolute right-0 top-full z-50 mt-2 min-w-[120px] overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-line)] bg-white py-1'>
+      <ul>
         {SUPPORTED_LOCALES.map((code) => (
           <li key={code}>
-            <Link
-              className={cn(
-                'block px-3 py-2 text-sm uppercase text-[var(--brand-muted)] hover:bg-[var(--brand-ivory)]',
-                code === locale && 'font-semibold text-[var(--brand-primary)]'
-              )}
-              href={localePath(code, basePath)}
-            >
+            <Link className={cn(code === locale && 'is-active')} href={localePath(code, basePath)}>
               {code}
             </Link>
           </li>

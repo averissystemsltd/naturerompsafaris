@@ -156,8 +156,8 @@ export function ExperiencePricingSelector({
   if (!experienceIds.length) {
     return (
       <div className='rounded-lg border border-dashed p-6 text-sm text-muted-foreground'>
-        Link at least one experience under Parks &amp; Links — pricing tables come from that
-        experience and update automatically when you edit the experience.
+        Link at least one experience on the Links step — pricing tables come from that experience
+        and update automatically when you edit the experience.
       </div>
     );
   }

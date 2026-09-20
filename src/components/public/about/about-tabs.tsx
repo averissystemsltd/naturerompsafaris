@@ -9,7 +9,6 @@ import { TeamMembersSection } from '@/components/public/about/team-members-secti
 import { WhoWeAreTab } from '@/components/public/about/who-we-are/who-we-are-tab';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { ABOUT_TEAM_SECTION } from '@/lib/public/about-content';
-import { localePath } from '@/lib/public/locale-path';
 import { ABOUT_TAB_IDS, type AboutTabId } from '@/lib/public/about-placeholders';
 import { groupTeamMembersByRole, type PublicTeamMember } from '@/lib/public/team';
 
@@ -31,8 +30,6 @@ export function AboutTabs({ locale, teamMembers }: AboutTabsProps) {
   const [activeTab, setActiveTab] = useState<AboutTabId>('about');
   const [bioMember, setBioMember] = useState<PublicTeamMember | null>(null);
   const [bioOpen, setBioOpen] = useState(false);
-
-  const contactHref = localePath(locale, '/contact');
 
   const membersByRole = useMemo(() => groupTeamMembersByRole(teamMembers), [teamMembers]);
 
@@ -73,7 +70,7 @@ export function AboutTabs({ locale, teamMembers }: AboutTabsProps) {
       <AboutTabBar activeTab={activeTab} onTabChange={handleTabChange} />
 
       <TabsContent className='mt-0' value='about'>
-        <WhoWeAreTab />
+        <WhoWeAreTab locale={locale} />
       </TabsContent>
 
       <TabsContent className='mt-0' value='team'>
@@ -121,7 +118,7 @@ export function AboutTabs({ locale, teamMembers }: AboutTabsProps) {
       <div aria-hidden className='brand-container bg-white'>
         <div className='h-px w-full bg-[var(--brand-line)]' />
       </div>
-      <AboutAdvantagesSection contactHref={contactHref} />
+      <AboutAdvantagesSection locale={locale} />
 
       <TeamMemberDetailDialog
         member={bioMember}

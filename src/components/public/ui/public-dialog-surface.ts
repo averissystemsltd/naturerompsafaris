@@ -1,3 +1,4 @@
+import { publicSiteFontClassName } from '@/components/themes/font.config';
 import { cn } from '@/lib/utils';
 
 /**
@@ -6,14 +7,15 @@ import { cn } from '@/lib/utils';
  */
 export const PUBLIC_LIGHT_DIALOG = cn(
   'public-site',
+  publicSiteFontClassName,
   'border-[var(--brand-line)] bg-white text-[var(--brand-ink)]',
-  '[--brand-primary:#3c5142] [--brand-primary-dark:#2f4034] [--brand-primary-light:#4a6354]',
-  '[--brand-accent:#3c5142] [--brand-accent-hover:#2f4034] [--brand-lime:#a9c038]',
-  '[--brand-ivory:#f8f5ef] [--brand-ink:#1a1a1a] [--brand-muted:#5c665f] [--brand-line:#e4dfd4]',
-  '[--background:#ffffff] [--foreground:#1a1a1a] [--card:#ffffff]',
-  '[--popover:#ffffff] [--popover-foreground:#1a1a1a]',
-  '[--muted:#f8f5ef] [--muted-foreground:#5c665f]',
-  '[--accent:#f8f5ef] [--accent-foreground:#1a1a1a]',
-  '[--border:#e4dfd4] [--input:#e4dfd4] [--ring:#3c5142]',
+  '[--brand-primary:#5d2411] [--brand-primary-dark:#4a1c0d] [--brand-primary-light:#7a3a22]',
+  '[--brand-accent:#5d2411] [--brand-accent-hover:#36e95a] [--brand-lime:#36e95a]',
+  '[--brand-ivory:#eae5e3] [--brand-ink:#101610] [--brand-muted:#5c665f] [--brand-line:#e8eadf]',
+  '[--background:#ffffff] [--foreground:#101610] [--card:#ffffff]',
+  '[--popover:#ffffff] [--popover-foreground:#101610]',
+  '[--muted:#eae5e3] [--muted-foreground:#5c665f]',
+  '[--accent:#eae5e3] [--accent-foreground:#101610]',
+  '[--border:#e8eadf] [--input:#e8eadf] [--ring:#5d2411]',
   '[&>button]:text-[var(--brand-ink)] [&>button]:opacity-70 [&>button]:hover:opacity-100'
 );

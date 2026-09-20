@@ -13,5 +13,5 @@ export const CMS_SURFACE = cn(
   'bg-white text-neutral-900 border-[#E5E7EB]',
   '[--background:#ffffff] [--foreground:#111827] [--card:#ffffff] [--popover:#ffffff] [--popover-foreground:#111827]',
   '[--muted:#f3f4f6] [--muted-foreground:#6b7280] [--accent:#f3f4f6] [--accent-foreground:#111827]',
-  '[--border:#e5e7eb] [--input:#e5e7eb] [--primary:#3c5142] [--primary-foreground:#ffffff] [--ring:#3c5142]'
+  '[--border:#e5e7eb] [--input:#e5e7eb] [--primary:#5d2411] [--primary-foreground:#ffffff] [--ring:#5d2411]'
 );

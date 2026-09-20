@@ -1,8 +1,9 @@
-import { localePath } from './locale-path';
+import type { PublicAccommodation } from '@/features/accommodations/public/types';
+
 import { buildLegalFooterLinks } from './legal-content';
+import { localePath } from './locale-path';
 import type {
   PublicDestination,
-  PublicExperience,
   PublicExperienceMenuItem,
   PublicFooterColumn,
   PublicMegaMenu,
@@ -99,108 +100,172 @@ function uniqueLinks(links: PublicNavItem[]): PublicNavItem[] {
   });
 }
 
+function titleCaseCountry(value: string) {
+  return value
+    .trim()
+    .split(/\s+/)
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(' ');
+}
+
+type CountryMenuRecord = { country: string | null; href: string; name: string };
+
+/**
+ * Groups published records (destinations/accommodations) by country into hover
+ * mega-menu tabs. Each tab links to the filtered listing and carries its own
+ * items (the actual published records) which the header renders as a preview
+ * column. Preset operating countries lead the order; any extra countries found
+ * in the data follow alphabetically. Countries with no published records are
+ * omitted, so the menu always mirrors what is live.
+ */
+function buildCountryMenuTabs(
+  locale: string,
+  basePath: string,
+  records: CountryMenuRecord[]
+): PublicNavItem[] {
+  const byCountry = new Map<string, CountryMenuRecord[]>();
+  for (const record of records) {
+    const key = (record.country ?? '').trim().toLowerCase();
+    if (!key) continue;
+    byCountry.set(key, [...(byCountry.get(key) ?? []), record]);
+  }
+
+  const presetKeys = COUNTRY_COLUMNS.map((column) => column.country.toLowerCase());
+  const extraKeys = [...byCountry.keys()]
+    .filter((key) => !presetKeys.includes(key))
+    .toSorted((a, b) => a.localeCompare(b));
+
+  return [...presetKeys, ...extraKeys]
+    .filter((key) => byCountry.has(key))
+    .map((key) => {
+      const group = byCountry.get(key) ?? [];
+      const preset = COUNTRY_COLUMNS.find((column) => column.country.toLowerCase() === key);
+      const sampleCountry = group[0]?.country ?? key;
+      const label = preset?.country ?? titleCaseCountry(sampleCountry);
+      const slug = preset?.slug ?? countrySlug(sampleCountry);
+
+      return {
+        flag: preset?.flag ?? '🌍',
+        label,
+        href: lp(locale, `${basePath}?country=${slug}`),
+        items: group
+          .toSorted((a, b) => a.name.localeCompare(b.name))
+          .map((record) => ({ label: record.name, href: record.href }))
+      } satisfies PublicNavItem;
+    });
+}
+
+const EXPERIENCE_MENU_GROUPS: Array<{
+  id: PublicExperienceMenuItem['menuGroup'];
+  label: string;
+}> = [
+  { id: 'top_experiences', label: 'Top Experiences' },
+  { id: 'wildlife_safari', label: 'Wildlife Safari' }
+];
+
+function buildExperienceMenuTabs(
+  locale: string,
+  items: PublicExperienceMenuItem[]
+): PublicNavItem[] {
+  const grouped = EXPERIENCE_MENU_GROUPS.map((group) => ({
+    label: group.label,
+    href: lp(locale, `/experiences?group=${group.id}`),
+    items: items
+      .filter((item) => item.menuGroup === group.id)
+      .map((item) => ({ label: item.label, href: item.href }))
+  })).filter((group) => group.items.length > 0);
+
+  return grouped;
+}
+
+export function safariTourNavItems(locale: string): PublicNavItem[] {
+  const path = (route: string) => lp(locale, route);
+  return [
+    { label: 'Kenya Safaris', href: path('/tours?country=kenya') },
+    { label: 'Tanzania Safaris', href: path('/tours?country=tanzania') },
+    { label: 'Kenya & Tanzania Safaris', href: path('/tours') }
+  ];
+}
+
 export function buildPublicNavigation(
   locale: string,
-  _destinations: PublicDestination[],
-  _experiences: PublicExperience[] = [],
+  destinations: PublicDestination[] = [],
+  accommodations: PublicAccommodation[] = [],
   experienceMenuItems: PublicExperienceMenuItem[] = []
 ): PublicNavItem[] {
   const path = (route: string) => lp(locale, route);
-  const topExperienceItems = experienceMenuItems.filter(
-    (item) => item.menuGroup === 'top_experiences'
+
+  // Experiences: published items only, shown as two titled columns on hover.
+  const experienceTabs = buildExperienceMenuTabs(locale, experienceMenuItems);
+
+  const destinationTabs = buildCountryMenuTabs(
+    locale,
+    '/destinations',
+    destinations.map((destination) => ({
+      country: destination.country,
+      href: destination.href,
+      name: destination.name
+    }))
   );
-  const wildlifeExperienceItems = experienceMenuItems.filter(
-    (item) => item.menuGroup === 'wildlife_safari'
+
+  const accommodationTabs = buildCountryMenuTabs(
+    locale,
+    '/accommodations',
+    accommodations.map((accommodation) => ({
+      country: accommodation.country,
+      href: accommodation.href,
+      name: accommodation.name
+    }))
   );
 
   return [
-    { label: 'Home', href: path('/'), variant: 'simple' },
-    {
-      label: 'About Us',
-      href: path('/about'),
-      items: [
-        { label: 'Our Story', href: path('/about') },
-        { label: 'Our Safari Vehicles', href: path('/our-fleet') }
-      ],
-      variant: 'simple'
-    },
+    { label: 'About Us', href: path('/about'), variant: 'simple' },
     {
       label: 'Destinations',
       href: path('/destinations'),
-      items: [
-        { label: 'Kenya', href: path('/destinations?country=kenya') },
-        { label: 'Tanzania', href: path('/destinations?country=tanzania') },
-        { label: 'Uganda', href: path('/destinations?country=uganda') },
-        { label: 'Rwanda', href: path('/destinations?country=rwanda') },
-        { label: 'South Africa', href: path('/destinations?country=south-africa') }
-      ],
-      variant: 'mega'
+      items: destinationTabs,
+      variant: destinationTabs.length ? 'dynamic' : 'simple'
     },
     {
       label: 'Safari Tours',
       href: path('/tours'),
+      items: safariTourNavItems(locale),
       variant: 'simple'
     },
     {
       label: 'Experiences',
       href: path('/experiences'),
-      sections: [
-        {
-          label: 'Top Experiences',
-          items: topExperienceItems
-        },
-        {
-          label: 'Wildlife Safari',
-          items: wildlifeExperienceItems
-        }
-      ],
-      variant: 'dynamic'
+      items: experienceTabs,
+      variant: experienceTabs.length ? 'columns' : 'simple'
     },
     {
-      label: 'Accommodations',
+      label: 'Accommodation',
       href: path('/accommodations'),
-      variant: 'simple'
-    },
-    {
-      label: 'National Parks',
-      href: path('/national-parks'),
-      variant: 'simple'
+      items: accommodationTabs,
+      variant: accommodationTabs.length ? 'dynamic' : 'simple'
     },
     { label: 'Blog', href: path('/blog'), variant: 'simple' },
     { label: 'Contact Us', href: path('/contact'), variant: 'simple' }
   ];
 }
 
-export function buildFooterNavigation(
-  locale: string,
-  _destinations: PublicDestination[],
-  _experiences: PublicExperience[] = []
-): PublicFooterColumn[] {
+export function buildFooterNavigation(locale: string): PublicFooterColumn[] {
   const path = (route: string) => lp(locale, route);
 
-  const exploreLinks = uniqueLinks([
-    { label: 'Destinations', href: path('/destinations') },
+  const quickLinks = uniqueLinks([
+    { label: 'Travel Information', href: path('/blog') },
     { label: 'Safari Tours', href: path('/tours') },
-    { label: 'Safari Experiences', href: path('/experiences') },
-    { label: 'National Parks', href: path('/national-parks') },
-    { label: 'Accommodations', href: path('/accommodations') }
+    { label: 'Safari Packages', href: path('/safari-packages') },
+    { label: 'Contact', href: path('/contact') }
   ]);
 
-  const companyLinks = uniqueLinks([
-    { label: 'About Us', href: path('/about') },
-    { label: 'Our Safari Vehicles', href: path('/our-fleet') },
-    { label: 'Travel Blog', href: path('/blog') },
-    { label: 'Contact Us', href: path('/contact') }
-  ]);
+  const safariLinks = uniqueLinks(safariTourNavItems(locale));
 
-  const policyLinks = buildLegalFooterLinks(locale).map((link) => ({
-    label: link.label,
-    href: link.href
-  }));
+  const policyLinks = buildLegalFooterLinks(locale);
 
   return [
-    { title: 'Explore', links: exploreLinks },
-    { title: 'Company', links: companyLinks },
+    { title: 'Quick Links', links: quickLinks },
+    { title: 'Our Safaris', links: safariLinks },
     { title: 'Help & Policies', links: policyLinks }
   ];
 }

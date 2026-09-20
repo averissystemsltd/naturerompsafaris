@@ -7,14 +7,12 @@ import {
   getNationalPark,
   getNationalParkFacets
 } from '@/features/portal/cms/national-parks/service';
-import { requirePortalSession } from '@/lib/auth/portal';
 
 export default async function EditNationalParkPage({
   params
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requirePortalSession();
   const { id } = await params;
   const [park, facets, destinationOptions] = await Promise.all([
     getNationalPark(id),

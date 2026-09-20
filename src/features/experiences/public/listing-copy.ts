@@ -1,5 +1,4 @@
-export const EXPERIENCE_LISTING_INTRO_TITLE =
-  'Safari Experiences in Kenya, Tanzania, Uganda, Rwanda & South Africa';
+export const EXPERIENCE_LISTING_INTRO_TITLE = 'Safari Experiences in Kenya and Tanzania';
 
 export const EXPERIENCE_CATEGORY_BLURBS: Record<string, string> = {
   Family:
@@ -40,19 +39,19 @@ export function buildExperienceListingIntro(categories: string[]) {
 
   const tertiary: IntroParagraph = categoryList
     ? [
-        { text: 'Browse curated routes for ' },
+        { text: 'Browse ' },
         { text: categoryList.toLowerCase(), emphasis: 'strong' },
         {
-          text: ' travel, each built around real park access, lodge quality, and the pace that suits your group.'
+          text: ', each built around real park access, the lodges we trust, and a pace that suits your group.'
         }
       ]
     : [
-        { text: 'Browse curated routes for ' },
+        { text: 'Browse routes for ' },
         {
           text: 'family trips, honeymoons, migration travel, and private guiding',
           emphasis: 'strong'
         },
-        { text: ', each built around real park access and lodge quality.' }
+        { text: ', each built around real park access and lodges we trust.' }
       ];
 
   return {
@@ -60,18 +59,18 @@ export function buildExperienceListingIntro(categories: string[]) {
       { text: 'At ' },
       { text: 'Nature Romp Safaris', emphasis: 'green' },
       {
-        text: ', safari experiences are not one-size-fits-all products. They are travel styles that shape how long you stay in each park, which lodges we recommend, and how your days unfold on the ground.'
+        text: ', an experience is the way you want to travel. It shapes how long you stay in each park, which lodges we recommend, and how your days unfold on the ground in Kenya and Tanzania.'
       }
     ] satisfies IntroParagraph,
     secondary: [
-      { text: 'Whether you are planning a first family trip to the ' },
+      { text: 'Planning a first family trip to the ' },
       { text: 'Maasai Mara', emphasis: 'green' },
       { text: ', a quiet honeymoon in the ' },
       { text: 'Serengeti', emphasis: 'green' },
       { text: ', or a ' },
       { text: 'migration', emphasis: 'strong' },
       {
-        text: '-focused route timed for the herds, our planners match the right tours, camps, and guides to the way you actually want to travel.'
+        text: ' route timed for the herds? We match the tours, camps, and guides to how you actually want to travel.'
       }
     ] satisfies IntroParagraph,
     tertiary

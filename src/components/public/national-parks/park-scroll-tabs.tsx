@@ -44,7 +44,7 @@ export function ParkScrollTabs({ tabs }: { tabs: ParkTab[] }) {
   }, [tabs]);
 
   return (
-    <div className='sticky top-[var(--brand-header-h)] z-30 border-b border-[var(--brand-line)] bg-white'>
+    <div className='sticky top-[var(--brand-sticky-offset)] z-30 border-b border-[var(--brand-line)] bg-white'>
       <div className='brand-container flex overflow-x-auto'>
         {tabs.map((tab) => (
           <button

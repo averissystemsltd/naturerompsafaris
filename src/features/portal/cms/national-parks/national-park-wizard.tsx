@@ -172,7 +172,9 @@ export function NationalParkWizard({
               listeners={{
                 onChange: ({ value }) => {
                   if (autoSlugRef.current) form.setFieldValue('slug', slugify(value));
-                  if (autoTitleRef.current) form.setFieldValue('seoTitle', value);
+                  if (autoTitleRef.current) {
+                    form.setFieldValue('seoTitle', value.slice(0, SEO_LIMITS.titleMax));
+                  }
                 }
               }}
             >
@@ -399,7 +401,7 @@ export function NationalParkWizard({
                   <field.TextField
                     label='SEO title'
                     placeholder={values.name || 'Defaults to the park name'}
-                    maxLength={70}
+                    maxLength={SEO_LIMITS.titleMax}
                     description='Pre-filled from the park name. Override for a custom search title.'
                   />
                 )}

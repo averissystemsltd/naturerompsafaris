@@ -6,11 +6,11 @@ import { MetaThemeColorSync } from '@/components/themes/meta-theme-color-sync';
 import { ThemeCookieScript } from '@/components/themes/theme-cookie-script';
 import ThemeProvider from '@/components/themes/theme-provider';
 import { cn } from '@/lib/utils';
+import { BRAND_FOOTER_DESCRIPTION, BRAND_SITE_NAME } from '@/config/brand';
 import { getPublicSiteSettings } from '@/lib/public/site-data';
 import { buildFaviconMetadataIcons } from '@/lib/site-favicon';
 import { normalizeSiteVerificationToken } from '@/lib/site-verification';
 import type { Metadata, Viewport } from 'next';
-import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import '../styles/globals.css';
 
@@ -24,11 +24,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: 'Nature Romp Safaris | Kenya & Tanzania Safari Holidays',
-      template: '%s | Nature Romp Safaris'
+      default: `${BRAND_SITE_NAME} | ${settings.companyName}`,
+      template: `%s | ${settings.companyName}`
     },
-    description:
-      'Premium Kenya and Tanzania safari holidays with Nature Romp Safaris — tailor-made itineraries, expert guides, and trusted local support.',
+    description: settings.description || BRAND_FOOTER_DESCRIPTION,
     icons: buildFaviconMetadataIcons(settings.faviconUrl, {
       cacheKey: settings.faviconVersion
     }),
@@ -46,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export async function generateViewport(): Promise<Viewport> {
   const settings = await getPublicSiteSettings();
   return {
-    themeColor: settings.themeColor ?? '#3C5142'
+    themeColor: settings.themeColor ?? '#5D2411'
   };
 }
 
@@ -69,7 +68,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       >
         <ThemeCookieScript />
-        <NextTopLoader color='var(--primary)' showSpinner={false} />
         <NuqsAdapter>
           <ThemeProvider {...THEME_PROVIDER_PROPS}>
             <MetaThemeColorSync />

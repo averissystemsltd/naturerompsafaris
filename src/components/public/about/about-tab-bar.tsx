@@ -20,7 +20,7 @@ export function AboutTabBar({ activeTab, onTabChange }: AboutTabBarProps) {
     if (!sentinel) return;
 
     const observer = new IntersectionObserver(([entry]) => setIsStuck(!entry.isIntersecting), {
-      rootMargin: '-1px 0px 0px 0px',
+      rootMargin: '-128px 0px 0px 0px',
       threshold: [0, 1]
     });
 
@@ -33,7 +33,7 @@ export function AboutTabBar({ activeTab, onTabChange }: AboutTabBarProps) {
       <div aria-hidden className='h-0' ref={sentinelRef} />
       <div
         className={cn(
-          'sticky top-[var(--brand-header-h)] z-30 -mt-px',
+          'sticky top-[var(--brand-sticky-offset)] z-30 -mt-px',
           'border-b border-[var(--brand-line)] bg-white transition-shadow duration-200',
           isStuck && 'shadow-[0_8px_24px_-18px_rgba(28,42,31,0.35)]'
         )}

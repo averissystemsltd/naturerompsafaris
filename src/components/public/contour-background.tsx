@@ -20,7 +20,7 @@ export function ContourBackground({ className, opacity = 0.1 }: ContourBackgroun
       >
         <g
           fill='none'
-          stroke='#3c5142'
+          stroke='#5d2411'
           strokeLinecap='round'
           strokeLinejoin='round'
           strokeWidth='1'

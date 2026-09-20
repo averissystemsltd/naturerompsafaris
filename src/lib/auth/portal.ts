@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { redirect } from 'next/navigation';
 
 import { ensurePortalProfile } from '@/lib/auth/ensure-portal-profile';
@@ -11,58 +12,91 @@ export interface PortalSession {
   role: PortalRole;
 }
 
-export async function getPortalSession(): Promise<PortalSession | null> {
+const PROFILE_CACHE_TTL_MS = 60_000;
+const profileCache = new Map<string, { expires: number; session: PortalSession }>();
+
+function getCachedProfile(userId: string): PortalSession | null {
+  const cached = profileCache.get(userId);
+  if (!cached) return null;
+  if (cached.expires <= Date.now()) {
+    profileCache.delete(userId);
+    return null;
+  }
+  return cached.session;
+}
+
+function setCachedProfile(session: PortalSession): void {
+  profileCache.set(session.userId, {
+    expires: Date.now() + PROFILE_CACHE_TTL_MS,
+    session
+  });
+}
+
+async function loadProfile(userId: string, email: string): Promise<PortalSession | null> {
+  const cached = getCachedProfile(userId);
+  if (cached) return cached;
+
   const supabase = await createClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) return null;
-
   const { data: profile } = await supabase
     .from('profiles')
     .select('full_name, role, status')
-    .eq('id', user.id)
+    .eq('id', userId)
     .maybeSingle();
 
   if (!profile || profile.status !== 'active' || !isPortalRole(profile.role)) {
     return null;
   }
 
-  return {
-    userId: user.id,
-    email: user.email ?? '',
+  const session: PortalSession = {
+    email,
     fullName: profile.full_name,
-    role: profile.role
+    role: profile.role,
+    userId
   };
+  setCachedProfile(session);
+  return session;
 }
 
-export async function requirePortalSession(redirectTo = '/portal/login'): Promise<PortalSession> {
+async function readPortalSession(): Promise<PortalSession | null> {
   const supabase = await createClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
+  const { data: claimsData } = await supabase.auth.getClaims();
+  const userId = typeof claimsData?.claims?.sub === 'string' ? claimsData.claims.sub : null;
+  if (!userId) return null;
 
-  if (!user) {
-    redirect(redirectTo);
-  }
-
-  let session = await getPortalSession();
-  if (session) return session;
-
-  const ensured = await ensurePortalProfile(supabase, user);
-  if (ensured.ok) {
-    session = await getPortalSession();
-    if (session) return session;
-  }
-
-  redirect('/portal/login?setup=1');
+  const email = typeof claimsData?.claims?.email === 'string' ? claimsData.claims.email : '';
+  return loadProfile(userId, email);
 }
 
-export async function requireSuperAdmin(): Promise<PortalSession> {
+export const getPortalSession = cache(readPortalSession);
+
+export const requirePortalSession = cache(
+  async (redirectTo = '/portal/login'): Promise<PortalSession> => {
+    const session = await readPortalSession();
+    if (session) return session;
+
+    const supabase = await createClient();
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      redirect(redirectTo);
+    }
+
+    const ensured = await ensurePortalProfile(supabase, user);
+    if (ensured.ok) {
+      const created = await loadProfile(user.id, user.email ?? '');
+      if (created) return created;
+    }
+
+    redirect('/portal/login?setup=1');
+  }
+);
+
+export const requireSuperAdmin = cache(async (): Promise<PortalSession> => {
   const session = await requirePortalSession();
   if (session.role !== 'admin' && session.role !== 'owner') {
     redirect('/portal');
   }
   return session;
-}
+});

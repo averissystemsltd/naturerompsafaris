@@ -1,51 +1,97 @@
 export const ABOUT_HERO_DEFAULTS = {
-  eyebrow: 'About Nature Romp Safaris',
-  title: 'East Africa Safari Experts Since 2000',
+  title: 'About Us',
   description:
-    'Meet the Nairobi team, the guides on the ground, and the fleet that carries you from park to park. This is where you learn who plans your safari, how we work, and what a Nature Romp journey feels like.'
+    'Nature Romp Safaris operates Kenya and Tanzania safaris. We plan private itineraries around your dates, budget and how you like to travel, and stay with the trip from the first quote to the last day on the road.'
+} as const;
+
+export const ABOUT_OPERATIONS = {
+  title: 'Where We Operate',
+  description:
+    'Two countries. Kenya on its own, Tanzania on its own, or both in one itinerary. Tap a country on the map.',
+  kenyaCopy:
+    'Kenya safaris as a trip of their own, planned around your dates, budget, and how you like to travel.',
+  tanzaniaCopy: 'Tanzania safaris as a trip of their own, or continue from Kenya in one itinerary.'
 } as const;
 
 export const ABOUT_STORY = {
   title: 'Who We Are',
   paragraphs: [
-    'Nature Romp Safaris was established in 2000 with a vision to make East Africa a truly memorable destination for travelers worldwide.',
-    'More than twenty years later, we still plan every itinerary by hand: the parks, the lodges, the driving days, and the guide who stays with you throughout. We operate across Kenya, Tanzania, Uganda, and Rwanda with a Nairobi team that answers before you travel and stays reachable while you are on the road.'
-  ]
+    'Nature Romp Safaris is a trusted East African travel company crafting personalized Kenya Tanzania safari adventures, wildlife holidays, beach extensions, mountain climbing trips and private safari itineraries.',
+    'Our team focuses on clear communication, reliable transport, local expertise and smooth travel planning across Kenya and Tanzania.',
+    'You send dates, who is travelling, and how you like to travel. We send a private itinerary with the price and what is included, usually within 24 hours. On the road, the same driver-guide stays with you.',
+    'Nature Romp Safaris crafts bespoke adventures across Kenya and Tanzania around you, your story, your pace, and your budget.'
+  ],
+  imageUrl: '/assets/Elephant-in-Amboseli-National-Park-2.jpeg',
+  imageAlt: 'Elephants crossing Amboseli with Mount Kilimanjaro behind, on a Nature Romp safari',
+  insetImageUrl: '/assets/brand-fleet-guests.png',
+  insetImageAlt: 'Nature Romp Safaris team with a branded safari vehicle',
+  imageNote:
+    'We plan the itinerary. The same vehicle and driver-guide carry it out from the first pickup to the last park gate.',
+  ctaLabel: 'View Our Tours'
 } as const;
 
-export const ABOUT_STORY_IMAGE = {
-  imageUrl: '/assets/leopard-lake-nakuru.png',
-  imageAlt: 'Leopard resting in a tree near Lake Nakuru, Kenya'
+export const ABOUT_GALLERY = {
+  title: 'Our Past Safaris at a Glance',
+  items: [
+    {
+      src: '/assets/brand-safaris-kenya.webp',
+      alt: 'Wildlife on a Kenya safari planned by Nature Romp Safaris'
+    },
+    {
+      src: '/assets/brand-fleet-mara-gate.png',
+      alt: 'Nature Romp safari vehicle at a Maasai Mara park gate'
+    },
+    {
+      src: '/assets/brand-fleet-lion.png',
+      alt: 'Guests watching a lion from a Nature Romp game drive'
+    },
+    {
+      src: '/assets/brand-4x4-safaris-fleet.png',
+      alt: 'Nature Romp 4x4 safari vehicles ready for a game drive'
+    },
+    {
+      src: '/assets/brand-bird-watching-safaris-2.png',
+      alt: 'Bird watching on a Nature Romp safari in Kenya'
+    },
+    {
+      src: '/assets/brand-fleet-branded.png',
+      alt: 'Branded Nature Romp Land Cruiser on safari'
+    }
+  ]
 } as const;
 
 export type AboutAdvantageItem = {
   iconSrc: string;
+  title: string;
   text: string;
 };
 
 export const ABOUT_WHY_TRAVEL = {
-  eyebrow: 'Why Choose Us',
-  title: 'Committed to the Best, Still Personal',
+  title: 'We Make Your Safari a Story Worth Telling',
   intro:
-    'Every itinerary is shaped around your dates, pace, and interests, with competitive pricing that never feels off the shelf. You work directly with planners who know the parks, the lodges, and the roads between them.',
-  advantagesTitle: 'Advantages of Booking With Nature Romp Safaris',
+    'Handpicked routes, expert guides, and planning that stays with you from the first reply to the last game drive. Your safari is tailored to your pace, style, and interests.',
   ctaLabel: 'Help Me Plan',
+  secondaryCtaLabel: 'View Safari Tours',
   items: [
     {
       iconSrc: '/assets/cta-icon-1.svg',
-      text: 'Personalized service by East Africa travel experts with first hand knowledge'
+      title: 'Stress-Free Planning',
+      text: 'Transport, accommodation, and logistics handled carefully for a secure journey.'
     },
     {
       iconSrc: '/assets/cta-icon-2.svg',
-      text: 'Customizable safaris built around your dates, pace, and preferences'
+      title: 'Authentic Journeys',
+      text: 'Real local connections and routes that go beyond the typical tourist trails.'
     },
     {
       iconSrc: '/assets/cta-icon-3.svg',
-      text: 'Verified guest reviews and booking security from an established Nairobi operator'
+      title: 'Expert Safari Guides',
+      text: 'Guides who know the parks and ground conditions in Kenya and Tanzania.'
     },
     {
       iconSrc: '/assets/cta-icon-4.svg',
-      text: 'Booking security and Nairobi support before, during, and after your trip'
+      title: 'Personalized Service',
+      text: 'We tailor each safari around your interests, pace, comfort level, and budget.'
     }
   ] satisfies AboutAdvantageItem[]
 };

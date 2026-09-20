@@ -15,6 +15,7 @@ import {
 } from '@/features/experiences/public/country-map-copy';
 import { parseTourSafariMarkets } from '@/features/experiences/public/tour-markets';
 import { revalidateTourPublicPaths } from '@/features/portal/cms/tours/revalidate-public-paths';
+import { findEnglishIdBySlug } from '@/features/portal/cms/shared/reuse-english-slug';
 import {
   mapLegacyPricingTiersToPublic,
   normalizeLegacyPricingTier,
@@ -238,7 +239,10 @@ export async function saveTour(input: {
 
     const supabase = await genericClient();
     const now = new Date().toISOString();
-    const isNew = !input.id;
+    let tourId =
+      input.id ??
+      (await findEnglishIdBySlug(supabase, 'tour_translations', 'tour_id', values.slug));
+    const isNew = !tourId;
 
     const usesExperiencePricing =
       values.pricingExperienceId.trim().length > 0 && values.pricingTableKeys.length > 0;
@@ -261,8 +265,6 @@ export async function saveTour(input: {
       status: input.status,
       updated_at: now
     };
-
-    let tourId = input.id;
 
     if (tourId) {
       const { error } = await supabase.from('tours').update(basePayload).eq('id', tourId);

@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 import { withSentryConfig } from '@sentry/nextjs';
 
+import { sanitizePrerenderManifest } from './src/lib/dev/sanitize-prerender-manifest';
+
 // Define the base Next.js configuration
 const baseConfig: NextConfig = {
   devIndicators: false,
@@ -15,7 +17,12 @@ const baseConfig: NextConfig = {
       'framer-motion',
       '@tanstack/react-table',
       'lucide-react'
-    ]
+    ],
+    staleTimes: {
+      dynamic: 30,
+      static: 180
+    },
+    optimisticRouting: true
   },
   images: {
     // Serve original images directly (Supabase/local assets) instead of routing
@@ -53,6 +60,24 @@ const baseConfig: NextConfig = {
         destination: '/api/site-favicon'
       }
     ];
+  },
+  webpack: (config, { dev }) => {
+    // Windows webpack persistent cache + dual compilers can concatenate
+    // prerender-manifest.json, which Next then JSON.parse()s on every request.
+    if (dev && process.platform === 'win32') {
+      config.cache = false;
+      config.plugins = config.plugins ?? [];
+      config.plugins.push({
+        apply(compiler: {
+          hooks: { afterEmit: { tap: (name: string, fn: () => void) => void } };
+        }) {
+          compiler.hooks.afterEmit.tap('SanitizePrerenderManifest', () => {
+            sanitizePrerenderManifest();
+          });
+        }
+      });
+    }
+    return config;
   }
 };
 

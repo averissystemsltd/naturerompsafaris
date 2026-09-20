@@ -9,7 +9,7 @@
 /* Brand-colored headers for every data table (shadcn Table, by data-slot).
    Unlayered so it wins over the `text-foreground` utility on the cells. */
 [data-slot='table-header'] [data-slot='table-head'] {
-  background-color: #3c5142;
+  background-color: #5d2411;
   color: #ffffff;
   font-weight: 600;
 }

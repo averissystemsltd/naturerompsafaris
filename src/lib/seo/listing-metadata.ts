@@ -33,7 +33,6 @@ export async function buildListingPageMetadata({
   const pageHero = heroKey ? await getPageHero(heroKey) : null;
   const title = pageHero?.heading ?? defaultTitle;
   const description = pageHero?.subheading ?? defaultDescription;
-  const metaTitle = title.includes('Nature Romp') ? title : `${title} | Nature Romp Safaris`;
   const languages = Object.fromEntries(
     SUPPORTED_LOCALES.map((supportedLocale) => [
       supportedLocale,
@@ -44,10 +43,10 @@ export async function buildListingPageMetadata({
   return buildMetadata({
     canonicalPath,
     description,
-    imageAlt: imageAlt ?? metaTitle,
+    imageAlt: imageAlt ?? title,
     imageUrl: imageUrl ?? undefined,
     languages,
     noIndex: hasFilters,
-    title: metaTitle
+    title
   });
 }

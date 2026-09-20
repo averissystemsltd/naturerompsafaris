@@ -101,13 +101,21 @@ export async function proxy(request: NextRequest) {
       }
     );
 
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
-
     const isLoginRoute = pathname.startsWith('/portal/login');
+    const hasAuthCookie = request.cookies
+      .getAll()
+      .some((cookie) => cookie.name.includes('-auth-token'));
 
-    if (isPortalRoute && !isLoginRoute && !user) {
+    // Signed-in portal page navigations skip the Auth round-trip so sidebar
+    // clicks can paint immediately. Login and cookieless requests still verify.
+    if (isPortalRoute && !isLoginRoute && hasAuthCookie) {
+      return response;
+    }
+
+    const { data: claimsData } = await supabase.auth.getClaims();
+    const signedIn = Boolean(claimsData?.claims);
+
+    if (isPortalRoute && !isLoginRoute && !signedIn) {
       const loginUrl = new URL('/portal/login', request.url);
       loginUrl.searchParams.set('next', pathname);
       return redirectTo(loginUrl);

@@ -135,7 +135,7 @@ export const tourFormSchema = z.object({
   accommodationIds: z.array(z.string()),
   fleetIds: z.array(z.string()),
   // SEO
-  seoTitle: z.string().max(70, 'SEO title should be under 70 characters'),
+  seoTitle: z.string().transform((value) => value.slice(0, SEO_LIMITS.titleMax)),
   seoDescription: z
     .string()
     .max(SEO_LIMITS.metaMax, `SEO description should be under ${SEO_LIMITS.metaMax} characters`),
@@ -199,7 +199,7 @@ export const tourWizardSteps = [
   { title: 'Basics & Route', description: 'Title, duration, price, and map start / end points.' },
   { title: 'Itinerary', description: 'Day-by-day plan shown on the public tour page.' },
   {
-    title: 'Parks & Links',
+    title: 'Links',
     description: 'Safari markets, parks, destinations, experiences, lodges, and inclusions.'
   },
   { title: 'Gallery', description: 'Choose the images shown on this tour.' },

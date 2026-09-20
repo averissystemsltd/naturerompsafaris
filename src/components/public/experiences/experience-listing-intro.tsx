@@ -1,6 +1,3 @@
-'use client';
-
-import { ExperienceScrollReveal } from '@/components/public/experiences/experience-scroll-reveal';
 import {
   EXPERIENCE_LISTING_INTRO_TITLE,
   type IntroParagraph
@@ -49,26 +46,24 @@ function IntroParagraphText({ segments }: { segments: IntroParagraph }) {
 
 export function ExperienceListingIntro({ intro }: ExperienceListingIntroProps) {
   return (
-    <ExperienceScrollReveal>
-      <section className='border-b border-[var(--brand-line)] bg-white'>
-        <div className='brand-container py-16 md:py-20 lg:py-24'>
-          <div className='mx-auto max-w-4xl text-center'>
-            <h2 className='brand-heading font-display text-3xl leading-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]'>
-              {EXPERIENCE_LISTING_INTRO_TITLE}
-            </h2>
-            <span aria-hidden className='brand-gold-line mt-6 [width:90px]' />
-            <div
-              className={cn(
-                'brand-body mx-auto mt-8 max-w-[52rem] space-y-5 text-lg leading-relaxed md:text-xl md:leading-[1.75]'
-              )}
-            >
-              <IntroParagraphText segments={intro.lead} />
-              <IntroParagraphText segments={intro.secondary} />
-              <IntroParagraphText segments={intro.tertiary} />
-            </div>
+    <section className='border-b border-[var(--brand-line)] bg-white'>
+      <div className='brand-container py-16 md:py-20 lg:py-24'>
+        <div className='mx-auto max-w-4xl text-center'>
+          <h2 className='brand-heading font-display text-3xl leading-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]'>
+            {EXPERIENCE_LISTING_INTRO_TITLE}
+          </h2>
+          <span aria-hidden className='brand-gold-line mt-6 [width:90px]' />
+          <div
+            className={cn(
+              'brand-body mx-auto mt-8 max-w-[52rem] space-y-5 text-lg leading-relaxed md:text-xl md:leading-[1.75]'
+            )}
+          >
+            <IntroParagraphText segments={intro.lead} />
+            <IntroParagraphText segments={intro.secondary} />
+            <IntroParagraphText segments={intro.tertiary} />
           </div>
         </div>
-      </section>
-    </ExperienceScrollReveal>
+      </div>
+    </section>
   );
 }
