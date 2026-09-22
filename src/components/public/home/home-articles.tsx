@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Icons } from '@/components/icons';
-import { ContourBackground } from '@/components/public/contour-background';
 import { BrandButton } from '@/components/public/ui/brand-button';
 import { ScrollReveal } from '@/components/public/ui/scroll-reveal';
 import { SectionHeader } from '@/components/public/ui/section-header';
@@ -89,8 +88,7 @@ export function HomeArticles({ locale, posts = [] }: { locale: string; posts?: P
   if (!articles.length) return null;
 
   return (
-    <section className='brand-section relative overflow-hidden bg-[var(--brand-ivory)]'>
-      <ContourBackground opacity={0.06} />
+    <section className='brand-section nr-dot-grid relative overflow-hidden'>
       <div className='brand-container relative'>
         <SectionHeader
           description='Safari stories, destination notes, and practical packing advice from the Nature Romp team in Nairobi.'

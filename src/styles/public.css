@@ -92,6 +92,58 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   padding-block: clamp(4.25rem, 7.5vw, 6.75rem);
 }
 
+.public-site .nr-dot-grid {
+  background-color: var(--brand-ivory);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--brand-primary) 12%, transparent) 1px,
+    transparent 1.2px
+  );
+  background-size: 22px 22px;
+}
+
+.public-site .nr-about-gallery {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.public-site .nr-about-gallery > figure {
+  min-width: 0;
+}
+
+.public-site .nr-about-gallery > :nth-child(1) {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .public-site .nr-about-gallery {
+    gap: 14px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .public-site .nr-about-gallery > :nth-child(1) {
+    grid-column: span 4;
+  }
+
+  .public-site .nr-about-gallery > :nth-child(2),
+  .public-site .nr-about-gallery > :nth-child(3),
+  .public-site .nr-about-gallery > :nth-child(4),
+  .public-site .nr-about-gallery > :nth-child(5),
+  .public-site .nr-about-gallery > :nth-child(8),
+  .public-site .nr-about-gallery > :nth-child(9),
+  .public-site .nr-about-gallery > :nth-child(10) {
+    grid-column: span 2;
+  }
+
+  .public-site .nr-about-gallery > :nth-child(6),
+  .public-site .nr-about-gallery > :nth-child(7),
+  .public-site .nr-about-gallery > :nth-child(11),
+  .public-site .nr-about-gallery > :nth-child(12) {
+    grid-column: span 3;
+  }
+}
+
 .public-site .brand-dual-actions {
   display: flex;
   flex-direction: row;

@@ -32,32 +32,7 @@ export const ABOUT_STORY = {
 
 export const ABOUT_GALLERY = {
   title: 'Our Past Safaris at a Glance',
-  items: [
-    {
-      src: '/assets/brand-safaris-kenya.webp',
-      alt: 'Wildlife on a Kenya safari planned by Nature Romp Safaris'
-    },
-    {
-      src: '/assets/brand-fleet-mara-gate.png',
-      alt: 'Nature Romp safari vehicle at a Maasai Mara park gate'
-    },
-    {
-      src: '/assets/brand-fleet-lion.png',
-      alt: 'Guests watching a lion from a Nature Romp game drive'
-    },
-    {
-      src: '/assets/brand-4x4-safaris-fleet.png',
-      alt: 'Nature Romp 4x4 safari vehicles ready for a game drive'
-    },
-    {
-      src: '/assets/brand-bird-watching-safaris-2.png',
-      alt: 'Bird watching on a Nature Romp safari in Kenya'
-    },
-    {
-      src: '/assets/brand-fleet-branded.png',
-      alt: 'Branded Nature Romp Land Cruiser on safari'
-    }
-  ]
+  itemAlt: 'Guests, wildlife, and landscapes from Nature Romp Safaris'
 } as const;
 
 export type AboutAdvantageItem = {
