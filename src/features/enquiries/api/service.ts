@@ -36,7 +36,7 @@ function mapRow(row: Record<string, unknown>): Enquiry {
     name: row.name as string,
     phone: (row.phone as string | null) ?? null,
     preferredDates: (row.preferred_dates as string | null) ?? null,
-    referenceCode: (row.reference_code as string | null) ?? 'BENS-PENDING',
+    referenceCode: (row.reference_code as string | null) ?? 'NRS-PENDING',
     sourcePath: (row.source_path as string | null) ?? null,
     status: row.status as EnquiryStatus,
     topic: (row.topic as string | null) ?? null,

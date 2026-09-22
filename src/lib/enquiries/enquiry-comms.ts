@@ -76,7 +76,7 @@ function buildEmailSubject(enquiry: EnquiryCommsInput) {
         ? 'message'
         : 'enquiry';
 
-  if (reference && reference !== 'BENS-PENDING') {
+  if (reference && reference !== 'NRS-PENDING') {
     return `Re: Your ${enquiryLabel} ${reference} – Nature Romp Safaris`;
   }
 
@@ -112,7 +112,7 @@ function buildEmailBody(enquiry: EnquiryCommsInput) {
     lines.push('');
   }
 
-  if (reference && reference !== 'BENS-PENDING') {
+  if (reference && reference !== 'NRS-PENDING') {
     lines.push(`Reference: ${reference}`);
     lines.push('');
   }
@@ -164,7 +164,7 @@ export function buildEnquiryWhatsAppMessage(enquiry: EnquiryCommsInput) {
     tripLines.forEach((line) => lines.push(`• ${line}`));
   }
 
-  if (reference && reference !== 'BENS-PENDING') {
+  if (reference && reference !== 'NRS-PENDING') {
     lines.push('');
     lines.push(`Reference: ${reference}`);
   }

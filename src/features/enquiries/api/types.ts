@@ -50,7 +50,7 @@ export interface Enquiry {
   name: string;
   phone: string | null;
   preferredDates: string | null;
-  /** Branded enquiry reference (BENS-YYYY-NNNNN), linked to id for audit. */
+  /** Branded enquiry reference (NRS-YYYY-NNNNN), linked to id for audit. */
   referenceCode: string;
   sourcePath: string | null;
   status: EnquiryStatus;

@@ -35,7 +35,7 @@ function buildPlainTextBody(payload: GuestEnquiryConfirmationPayload) {
     'Our safari experts aim to respond within 24 hours with thoughtful guidance based on what you shared.'
   ];
 
-  if (reference && reference !== 'BENS-PENDING') {
+  if (reference && reference !== 'NRS-PENDING') {
     lines.push('', `Your enquiry reference: ${reference}`);
   }
 
@@ -56,7 +56,7 @@ function buildHtmlBody(payload: GuestEnquiryConfirmationPayload) {
   const heading = enquiryTypeHeading(payload.enquiryType);
 
   const referenceBlock =
-    reference && reference !== 'BENS-PENDING'
+    reference && reference !== 'NRS-PENDING'
       ? `<p style="margin:0 0 16px;font-family:monospace;font-size:14px;color:${BRAND_COLORS.primary};">Reference: ${reference}</p>`
       : '';
 
@@ -84,7 +84,7 @@ function buildHtmlBody(payload: GuestEnquiryConfirmationPayload) {
 function buildSubject(payload: GuestEnquiryConfirmationPayload) {
   const reference = payload.referenceCode?.trim();
 
-  if (reference && reference !== 'BENS-PENDING') {
+  if (reference && reference !== 'NRS-PENDING') {
     return `We received your enquiry ${reference} – ${BRAND_CONTACT_DEFAULTS.companyName}`;
   }
 

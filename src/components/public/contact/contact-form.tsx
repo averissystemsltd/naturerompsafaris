@@ -102,7 +102,7 @@ const safariQuoteSchema = z.object({
   budgetTier: z.string().min(1, 'Select a budget preference'),
   children: z.number().int().min(0),
   country: z.string().min(2, 'Country is required'),
-  destinations: z.string().min(2, 'Select at least one destination country'),
+  destinations: z.string().min(2, 'Select Kenya, Tanzania, or Kenya & Tanzania'),
   email: z.email('Enter a valid email'),
   infants: z.number().int().min(0),
   message: z.string().optional(),

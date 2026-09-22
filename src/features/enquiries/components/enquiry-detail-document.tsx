@@ -92,7 +92,7 @@ function TripDetailsTable({ rows }: { rows: TripTableRow[] }) {
     <div className='enquiry-trip-table overflow-x-auto rounded-md border border-[#E5E7EB] print:overflow-visible'>
       <table className='w-full border-collapse text-sm'>
         <thead>
-          <tr className='enquiry-trip-table-head border-b border-[#2F4034] bg-[#3C5142] print:bg-[#3C5142]'>
+          <tr className='enquiry-trip-table-head border-b border-[#4A1C0D] bg-[#5D2411] print:bg-[#5D2411]'>
             <th
               className='w-[38%] px-4 py-3 text-left text-[11px] font-semibold tracking-wide text-white uppercase'
               scope='col'
@@ -251,14 +251,14 @@ export function EnquiryDetailDocument({ enquiry }: EnquiryDetailDocumentProps) {
             <p>{BRAND_CONTACT_DEFAULTS.phonePrimary}</p>
             <p>
               <a
-                className='text-[#3C5142] print:text-[#111827]'
+                className='text-[#5D2411] print:text-[#111827]'
                 href={`mailto:${BRAND_CONTACT_DEFAULTS.email}`}
               >
                 {BRAND_CONTACT_DEFAULTS.email}
               </a>
             </p>
             <p>
-              <a className='text-[#3C5142] print:text-[#111827]' href={websiteUrl}>
+              <a className='text-[#5D2411] print:text-[#111827]' href={websiteUrl}>
                 {websiteLabel}
               </a>
             </p>
@@ -279,7 +279,7 @@ export function EnquiryDetailDocument({ enquiry }: EnquiryDetailDocumentProps) {
 
           <p className='mt-1 text-sm text-[#6B7280]'>
             Reference{' '}
-            <span className='font-semibold tracking-wide text-[#3C5142] print:text-[#111827]'>
+            <span className='font-semibold tracking-wide text-[#5D2411] print:text-[#111827]'>
               {enquiry.referenceCode}
             </span>
             {' · '}
@@ -296,7 +296,7 @@ export function EnquiryDetailDocument({ enquiry }: EnquiryDetailDocumentProps) {
                 Email
               </dt>
               <dd className='mt-1 text-sm leading-6 text-[#111827]'>
-                <a className='text-[#3C5142] print:text-[#111827]' href={`mailto:${enquiry.email}`}>
+                <a className='text-[#5D2411] print:text-[#111827]' href={`mailto:${enquiry.email}`}>
                   {enquiry.email}
                 </a>
               </dd>
@@ -348,7 +348,7 @@ export function EnquiryDetailDocument({ enquiry }: EnquiryDetailDocumentProps) {
               {
                 label: 'Reference',
                 value: (
-                  <span className='font-semibold tracking-wide text-[#3C5142] print:text-[#111827]'>
+                  <span className='font-semibold tracking-wide text-[#5D2411] print:text-[#111827]'>
                     {enquiry.referenceCode}
                   </span>
                 )
