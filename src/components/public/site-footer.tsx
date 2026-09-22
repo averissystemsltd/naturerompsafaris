@@ -11,6 +11,7 @@ import {
   BRAND_WHATSAPP
 } from '@/config/brand';
 import { localePath } from '@/lib/public/locale-path';
+import { phoneHref, publicCallPhones } from '@/lib/public/phones';
 import type { PublicFooterColumn, PublicSiteSettings } from '@/lib/public/types';
 import { whatsAppHref } from '@/lib/public/whatsapp';
 
@@ -33,10 +34,6 @@ function FooterLinkColumn({ column }: { column: PublicFooterColumn }) {
   );
 }
 
-function phoneHref(phone: string) {
-  return phone.replace(/[^\d+]/g, '');
-}
-
 export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterProps) {
   const homeHref = localePath(locale);
   const logoSrc = siteSettings.logoUrl || BRAND_LOGO_PATH;
@@ -44,6 +41,7 @@ export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterPr
   const safariLinks = footerColumns.find((column) => column.title === 'Our Safaris');
   const policyColumn = footerColumns.find((column) => column.title === 'Help & Policies');
   const phone = siteSettings.phonePrimary || BRAND_PHONE;
+  const phones = publicCallPhones(siteSettings);
   const whatsappLink = whatsAppHref(
     BRAND_WHATSAPP.phone || phone,
     siteSettings.whatsappMessage || BRAND_WHATSAPP.message
@@ -79,13 +77,24 @@ export function SiteFooter({ footerColumns, locale, siteSettings }: SiteFooterPr
               <dt>Mobile &amp; Whatsapp:</dt>
               <dd>
                 <div className='nr-footer__actions'>
-                  <a
-                    className='nr-footer__action nr-footer__action--call'
-                    href={`tel:${phoneHref(phone)}`}
-                  >
-                    <Icons.phone aria-hidden />
-                    Call {phone}
-                  </a>
+                  <span className='nr-footer__phones'>
+                    {phones.map((number, index) => (
+                      <span className='nr-footer__phones-item' key={number}>
+                        {index > 0 ? (
+                          <span aria-hidden className='nr-footer__phones-sep'>
+                            /
+                          </span>
+                        ) : null}
+                        <a
+                          className='nr-footer__action nr-footer__action--call'
+                          href={`tel:${phoneHref(number)}`}
+                        >
+                          {index === 0 ? <Icons.phone aria-hidden /> : null}
+                          {number}
+                        </a>
+                      </span>
+                    ))}
+                  </span>
                   <span aria-hidden className='nr-footer__action-sep' />
                   <a
                     className='nr-footer__action nr-footer__action--whatsapp'

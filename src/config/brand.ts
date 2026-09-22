@@ -27,6 +27,7 @@ export const CONTACT_PAGE_COPY = {
 } as const;
 
 export const BRAND_PHONE = envText('NEXT_PUBLIC_PHONE_PRIMARY', '+254 739 206698');
+export const BRAND_PHONE_SECONDARY = envText('NEXT_PUBLIC_PHONE_SECONDARY', '+254 716 512 606');
 
 /** Registered legal entity used on policy and booking documents. */
 export const BRAND_LEGAL_NAME = 'Nature Romp Safaris Ltd';
@@ -36,7 +37,7 @@ export const BRAND_CONTACT_DEFAULTS = {
   email: envText('NEXT_PUBLIC_BRAND_EMAIL', 'info@naturerompsafaris.com'),
   secondaryEmail: envText('NEXT_PUBLIC_BRAND_EMAIL_SECONDARY', 'naturerompsafaris@gmail.com'),
   phonePrimary: BRAND_PHONE,
-  phoneSecondary: '',
+  phoneSecondary: BRAND_PHONE_SECONDARY,
   phoneOffice: envText('NEXT_PUBLIC_PHONE_OFFICE', BRAND_PHONE),
   addressShort:
     'Nature Romp Safaris, Embassy House, Mezzanine, Harambee Avenue, P.O Box 10323, 00100-GPO, Nairobi, Kenya',

@@ -51,7 +51,9 @@ export function buildTravelAgencyJsonLd() {
     description: BRAND_FOOTER_DESCRIPTION,
     url: absoluteUrl('/'),
     email: BRAND_CONTACT_DEFAULTS.email,
-    telephone: BRAND_CONTACT_DEFAULTS.phonePrimary,
+    telephone: [BRAND_CONTACT_DEFAULTS.phonePrimary, BRAND_CONTACT_DEFAULTS.phoneSecondary].filter(
+      Boolean
+    ),
     address: {
       '@type': 'PostalAddress',
       streetAddress: BRAND_CONTACT_DEFAULTS.addressShort,

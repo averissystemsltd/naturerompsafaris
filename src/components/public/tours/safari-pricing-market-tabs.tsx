@@ -19,7 +19,7 @@ function localRatesWhatsAppHref(safariName: string) {
   const trip = safariName.trim() || 'this safari';
   return whatsAppHref(
     BRAND_WHATSAPP.phone,
-    `Hello Nature Romp Safaris! I'm looking at "${trip}" and would like the Kenya Shilling (KSh) rates for this safari. Please share the local price when you can.`
+    `Hello Nature Romp Safaris! I'm looking at "${trip}" and would like the resident Kenya Shilling (KES) rates for this safari. Please share the local price when you can.`
   );
 }
 
@@ -29,13 +29,14 @@ function LocalRatesUnavailable({ safariName }: { safariName: string }) {
   return (
     <div className='brand-contact-credentials-box'>
       <p className='text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-gold)]'>
-        Local rates · KSh
+        Resident rates · KES
       </p>
       <h3 className='brand-heading font-display mt-2 text-xl'>Please check back later</h3>
       <p className='brand-body mt-3 text-sm leading-7'>
-        Kenya Shilling prices for <strong className='text-[var(--brand-heading)]'>{trip}</strong>{' '}
-        are not published yet. International USD rates are on the other tab. WhatsApp us if you need
-        a local quote for this safari in the meantime.
+        Resident Kenya Shilling prices for{' '}
+        <strong className='text-[var(--brand-heading)]'>{trip}</strong> are not published yet.
+        Non-resident USD rates are on the other tab. WhatsApp us if you need a resident quote for
+        this safari in the meantime.
       </p>
       <a
         className='mt-5 inline-flex items-center gap-2 rounded-[var(--brand-button-radius)] bg-[#25D366] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-[#1ebe5d]'
@@ -44,7 +45,7 @@ function LocalRatesUnavailable({ safariName }: { safariName: string }) {
         target='_blank'
       >
         <Icons.whatsapp className='h-4 w-4' />
-        WhatsApp for KSh rates
+        WhatsApp for KES rates
       </a>
     </div>
   );
@@ -59,7 +60,7 @@ export function SafariPricingMarketTabs({
 
   return (
     <div>
-      <div aria-label='Price currency' className='brand-pricing-market' role='tablist'>
+      <div aria-label='Rate type' className='brand-pricing-market' role='tablist'>
         <button
           aria-selected={market === 'usd'}
           className={cn('brand-pricing-market__tab', market === 'usd' && 'is-active')}
@@ -67,7 +68,7 @@ export function SafariPricingMarketTabs({
           role='tab'
           type='button'
         >
-          USD
+          Non-Resident Rates (USD)
         </button>
         <button
           aria-selected={market === 'local'}
@@ -76,7 +77,7 @@ export function SafariPricingMarketTabs({
           role='tab'
           type='button'
         >
-          Local · KSh
+          Resident Rates (KES)
         </button>
       </div>
 

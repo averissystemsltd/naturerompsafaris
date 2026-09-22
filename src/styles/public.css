@@ -824,38 +824,38 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
 
 /* Pricing tier cards — soft shell with inset table */
 .public-site .brand-pricing-market {
-  display: inline-flex;
-  border: 1px solid rgb(60 81 66 / 16%);
-  border-radius: 999px;
-  background: #fff;
-  padding: 0.2rem;
-  gap: 0.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .public-site .brand-pricing-market__tab {
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--brand-muted);
+  background: #fff;
+  border: 1px solid rgb(60 81 66 / 22%);
+  border-radius: var(--brand-radius);
+  color: var(--brand-heading);
   cursor: pointer;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  min-height: 2.15rem;
-  padding: 0 1rem;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  min-height: 2.65rem;
+  padding: 0.55rem 1rem;
+  touch-action: manipulation;
   transition:
-    background-color 160ms ease,
-    color 160ms ease;
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
 .public-site .brand-pricing-market__tab:hover {
+  border-color: var(--brand-lime);
   color: var(--brand-heading);
 }
 
 .public-site .brand-pricing-market__tab.is-active {
-  background: var(--brand-primary);
-  color: #fff;
+  background: var(--brand-lime);
+  border-color: var(--brand-lime);
+  color: var(--brand-primary-dark);
 }
 
 .public-site .brand-pricing-tier {
@@ -1179,6 +1179,17 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   flex-wrap: wrap;
   gap: 0.5rem 0.85rem;
   line-height: 1.6;
+}
+
+.public-site .brand-contact-sidebar-phones-item {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.public-site .brand-contact-sidebar-phones-sep {
+  color: var(--brand-muted);
+  user-select: none;
 }
 
 .public-site .brand-contact-sidebar-link {
@@ -3103,6 +3114,16 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
 }
 
 .public-site .nr-mainnav > a,
+.public-site .nr-navgroup__row > a,
+.public-site .nr-navgroup__toggle,
+.public-site .nr-menu-toggle,
+.public-site .nr-submenu a,
+.public-site .nr-submenu-mega__tab {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.public-site .nr-mainnav > a,
 .public-site .nr-navgroup__row > a {
   align-items: center;
   color: var(--nr-nav-ink);
@@ -3110,8 +3131,8 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   gap: 6px;
   padding: 22px 0;
   transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
+    border-color 0.12s ease,
+    color 0.12s ease;
   white-space: nowrap;
 }
 
@@ -3195,9 +3216,9 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   top: 68px;
   transform: translateY(10px);
   transition:
-    opacity 0.18s ease,
-    transform 0.18s ease,
-    visibility 0.18s ease;
+    opacity 0.08s ease,
+    transform 0.08s ease,
+    visibility 0.08s ease;
   visibility: hidden;
   z-index: 90;
 }
@@ -3816,6 +3837,24 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   white-space: nowrap;
 }
 
+.public-site .nr-footer__phones {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+}
+
+.public-site .nr-footer__phones-item {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.public-site .nr-footer__phones-sep {
+  color: rgba(255, 255, 255, 0.8);
+  user-select: none;
+}
+
 .public-site .nr-footer__action svg {
   flex-shrink: 0;
   height: 1rem;
@@ -4158,6 +4197,7 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
     right: auto;
     top: auto;
     transform: none;
+    transition: none;
     visibility: visible;
     width: auto;
   }
@@ -4337,8 +4377,58 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
     width: calc(100% - 32px);
   }
 
+  .public-site .nr-footer {
+    overflow: hidden;
+  }
+
+  .public-site .nr-footer::before {
+    background-position: 78% 82%;
+    background-size: cover;
+  }
+
+  .public-site .nr-footer::after {
+    background: linear-gradient(
+      180deg,
+      rgba(93, 36, 17, 0.9) 0%,
+      rgba(93, 36, 17, 0.68) 28%,
+      rgba(93, 36, 17, 0.4) 52%,
+      rgba(93, 36, 17, 0.18) 76%,
+      rgba(93, 36, 17, 0.1) 100%
+    );
+  }
+
   .public-site .nr-footer__grid {
+    gap: 28px 32px;
     grid-template-columns: 1fr 1fr;
+    padding: 48px 0 36px;
+  }
+
+  .public-site .nr-footer__brand {
+    grid-column: 1 / -1;
+    max-width: 42rem;
+  }
+
+  .public-site .nr-footer__about {
+    max-width: none;
+  }
+
+  .public-site .nr-footer__bottom-inner {
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .public-site .nr-footer__copyright {
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .public-site .nr-footer__legal {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
 }
 
@@ -4349,6 +4439,15 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
 
   .public-site .nr-footer__grid {
     grid-template-columns: 1fr;
+  }
+
+  .public-site .nr-footer__brand {
+    grid-column: auto;
+  }
+
+  .public-site .nr-footer::before {
+    background-position: 80% 78%;
+    background-size: cover;
   }
 
   .public-site .nr-footer__newsletter-row {

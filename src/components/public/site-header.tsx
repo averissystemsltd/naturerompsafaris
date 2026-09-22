@@ -8,7 +8,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Icons } from '@/components/icons';
 import { PublicSocialLinks } from '@/components/public/public-social-links';
 import { BRAND_LOGO_PATH, BRAND_PHONE, BRAND_WHATSAPP } from '@/config/brand';
+import { whatsAppHref } from '@/lib/public/whatsapp';
 import { localePath, stripLocalePrefix } from '@/lib/public/locale-path';
+import { phoneHref, publicCallPhones } from '@/lib/public/phones';
 import { SUPPORTED_LOCALES } from '@/lib/i18n';
 import type { PublicNavItem, PublicSiteSettings } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
@@ -20,15 +22,6 @@ type SiteHeaderProps = {
 };
 
 const HEADER_CTA_LABEL = 'Help Me Plan';
-
-function phoneHref(phone: string) {
-  return phone.replace(/[^\d+]/g, '');
-}
-
-function whatsAppHref(phone: string, message: string) {
-  const digits = phone.replace(/\D/g, '');
-  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
-}
 
 function hasNavChildren(item: PublicNavItem) {
   return Boolean(item.items?.length);
@@ -42,7 +35,8 @@ function splitColumns(items: PublicNavItem[]) {
 function viewAllLabel(parentLabel: string) {
   if (/accommodation/i.test(parentLabel)) return 'View all accommodations';
   if (/experience/i.test(parentLabel)) return 'View all experiences';
-  return 'View all destinations';
+  if (/destination/i.test(parentLabel)) return 'View all destinations';
+  return `View all ${parentLabel.toLowerCase()}`;
 }
 
 function useCompactNav() {
@@ -111,11 +105,11 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
   const homeHref = localePath(locale);
   const logoSrc = siteSettings.logoUrl || BRAND_LOGO_PATH;
   const contactPhone = siteSettings.phonePrimary || BRAND_PHONE;
+  const phones = publicCallPhones(siteSettings);
   const whatsappHref = whatsAppHref(
     BRAND_WHATSAPP.phone || contactPhone,
     siteSettings.whatsappMessage || BRAND_WHATSAPP.message
   );
-  const phones = [contactPhone].filter(Boolean);
 
   const closeNav = () => {
     setMobileOpen(false);
@@ -248,7 +242,17 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
                   onMouseLeave={compactNav ? undefined : () => setOpenGroup(null)}
                 >
                   <div className='nr-navgroup__row'>
-                    <Link href={item.href} onClick={closeNav}>
+                    <Link
+                      href={item.href}
+                      onClick={(event) => {
+                        if (compactNav) {
+                          event.preventDefault();
+                          setOpenGroup((value) => (value === item.label ? null : item.label));
+                          return;
+                        }
+                        closeNav();
+                      }}
+                    >
                       {item.label}
                     </Link>
                     <button
@@ -400,6 +404,9 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
                     ) : (
                       <div className='nr-submenu'>
                         <div className='nr-submenu__links'>
+                          <Link href={item.href} onClick={closeNav}>
+                            <span>{viewAllLabel(item.label)}</span>
+                          </Link>
                           {tabs.map((child) => (
                             <Link
                               href={child.href}
@@ -420,12 +427,12 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
               <div className='nr-mainnav__sheet-end'>
                 {renderCta('nr-header-cta nr-header-cta--mobile')}
                 <div className='nr-mainnav__sheet-contact'>
-                  {contactPhone ? (
-                    <a href={`tel:${phoneHref(contactPhone)}`}>
+                  {phones.map((number) => (
+                    <a href={`tel:${phoneHref(number)}`} key={number}>
                       <Icons.phone aria-hidden />
-                      <span>{contactPhone}</span>
+                      <span>{number}</span>
                     </a>
-                  ) : null}
+                  ))}
                   <a href={`mailto:${siteSettings.email}`}>
                     <Icons.mail aria-hidden />
                     <span>{siteSettings.email}</span>

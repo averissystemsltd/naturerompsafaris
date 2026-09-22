@@ -239,7 +239,7 @@ async function fetchPublicSiteSettings(): Promise<PublicSiteSettings> {
     ogImage: data?.og_default_image_url ?? null,
     phoneOffice: data?.phone_office || BRAND_CONTACT_DEFAULTS.phoneOffice,
     phonePrimary: data?.phone_primary || BRAND_CONTACT_DEFAULTS.phonePrimary,
-    phoneSecondary: '',
+    phoneSecondary: data?.phone_secondary || BRAND_CONTACT_DEFAULTS.phoneSecondary,
     postalAddress: data?.postal_address ?? BRAND_CONTACT_DEFAULTS.postalAddress,
     socialLinks: social,
     tagline: data?.tagline ?? null,

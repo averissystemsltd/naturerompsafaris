@@ -19,7 +19,7 @@ Nature Romp Safaris plans private safari itineraries with expert guides, lodge a
 - Sitemap: ${sitemapUrl}
 - Contact: ${crawlAbsoluteUrl('/en/contact')}
 - Email: info@naturerompsafaris.com
-- Phone: +254 739 206698
+- Phone: +254 739 206698 / +254 716 512 606
 
 ## Locales
 Supported languages: ${locales}. Default locale: en.

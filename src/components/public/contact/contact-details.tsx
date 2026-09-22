@@ -6,6 +6,7 @@ import { ContactSidebarMap } from '@/components/public/contact/contact-sidebar-m
 import { Icons } from '@/components/icons';
 import { BRAND_CONTACT_DEFAULTS, BRAND_PHONE, BRAND_WHATSAPP } from '@/config/brand';
 import type { PublicSiteSettings } from '@/lib/public/types';
+import { phoneHref, publicCallPhones } from '@/lib/public/phones';
 import { whatsAppHref } from '@/lib/public/whatsapp';
 
 type ContactDetailsProps = {
@@ -14,11 +15,11 @@ type ContactDetailsProps = {
 
 export function ContactDetails({ siteSettings }: ContactDetailsProps) {
   const contactPhone = siteSettings.phonePrimary || BRAND_PHONE;
+  const phones = publicCallPhones(siteSettings);
   const whatsappLink = whatsAppHref(
     BRAND_WHATSAPP.phone || contactPhone,
     siteSettings.whatsappMessage || BRAND_WHATSAPP.message
   );
-  const phoneHref = `tel:${contactPhone.replace(/[^\d+]/g, '')}`;
 
   return (
     <aside className='brand-contact-sidebar-inner space-y-8'>
@@ -32,13 +33,22 @@ export function ContactDetails({ siteSettings }: ContactDetailsProps) {
                 <dt className='brand-contact-sidebar-label'>Mobile &amp; Whatsapp:</dt>
                 <dd className='brand-contact-sidebar-value'>
                   <span className='brand-contact-sidebar-phones'>
-                    <a
-                      className='brand-contact-sidebar-link brand-contact-sidebar-link--call'
-                      href={phoneHref}
-                    >
-                      <Icons.phone aria-hidden />
-                      Call {contactPhone}
-                    </a>
+                    {phones.map((number, index) => (
+                      <span className='brand-contact-sidebar-phones-item' key={number}>
+                        {index > 0 ? (
+                          <span aria-hidden className='brand-contact-sidebar-phones-sep'>
+                            /
+                          </span>
+                        ) : null}
+                        <a
+                          className='brand-contact-sidebar-link brand-contact-sidebar-link--call'
+                          href={`tel:${phoneHref(number)}`}
+                        >
+                          {index === 0 ? <Icons.phone aria-hidden /> : null}
+                          {number}
+                        </a>
+                      </span>
+                    ))}
                     <span className='brand-contact-sidebar-whatsapp-pair'>
                       <span aria-hidden className='brand-contact-sidebar-separator' />
                       <a
