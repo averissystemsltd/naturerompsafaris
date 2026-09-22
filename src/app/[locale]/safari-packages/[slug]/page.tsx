@@ -158,7 +158,11 @@ export default async function SafariPackageDetailPage({ params }: SafariPackageD
                     availability.
                   </p>
                   <div className='mt-6'>
-                    <TourPricingTable locale={locale} tiers={[safariPackage.pricingTier]} />
+                    <TourPricingTable
+                      locale={locale}
+                      safariName={safariPackage.title}
+                      tiers={[safariPackage.pricingTier]}
+                    />
                   </div>
                 </section>
               ) : null}

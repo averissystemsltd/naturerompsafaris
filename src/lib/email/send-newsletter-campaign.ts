@@ -4,6 +4,7 @@
 
 import { sendMail } from '@/lib/email/mailer';
 import { isSmtpConfigured, smtpFromAddress } from '@/lib/email/smtp-config';
+import { crawlAbsoluteUrl } from '@/lib/seo/absolute-url';
 
 export interface CampaignRecipient {
   email: string;
@@ -24,10 +25,7 @@ export interface SendCampaignResult {
 }
 
 function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com').replace(
-    /\/$/,
-    ''
-  );
+  return crawlAbsoluteUrl('/').replace(/\/$/, '');
 }
 
 function unsubscribeUrl(token: string): string {

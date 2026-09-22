@@ -7,6 +7,7 @@ import { ThemeCookieScript } from '@/components/themes/theme-cookie-script';
 import ThemeProvider from '@/components/themes/theme-provider';
 import { cn } from '@/lib/utils';
 import { BRAND_FOOTER_DESCRIPTION, BRAND_SITE_NAME } from '@/config/brand';
+import { crawlAbsoluteUrl } from '@/lib/seo/absolute-url';
 import { getPublicSiteSettings } from '@/lib/public/site-data';
 import { buildFaviconMetadataIcons } from '@/lib/site-favicon';
 import { normalizeSiteVerificationToken } from '@/lib/site-verification';
@@ -19,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { analytics } = settings;
   const googleVerification = normalizeSiteVerificationToken(analytics.googleSiteVerification);
   const bingVerification = normalizeSiteVerificationToken(analytics.bingSiteVerification);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com';
+  const siteUrl = crawlAbsoluteUrl('/');
 
   return {
     metadataBase: new URL(siteUrl),

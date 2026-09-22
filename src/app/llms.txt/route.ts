@@ -1,11 +1,13 @@
 import { SUPPORTED_LOCALES } from '@/lib/i18n';
 import { PAGE_HERO_REGISTRY } from '@/lib/public/page-heroes';
-import { absoluteUrl } from '@/lib/seo/absolute-url';
+import { crawlAbsoluteUrl } from '@/lib/seo/absolute-url';
 
 export async function GET() {
-  const sitemapUrl = absoluteUrl('/sitemap.xml');
+  const sitemapUrl = crawlAbsoluteUrl('/sitemap.xml');
   const locales = SUPPORTED_LOCALES.join(', ');
-  const staticPages = PAGE_HERO_REGISTRY.map((entry) => absoluteUrl(`/en${entry.path}`)).join('\n');
+  const staticPages = PAGE_HERO_REGISTRY.map((entry) => crawlAbsoluteUrl(`/en${entry.path}`)).join(
+    '\n'
+  );
 
   const body = `# Nature Romp Safaris
 > East Africa safari operator based in Nairobi, Kenya. Tailor-made Kenya and Tanzania safari adventures.
@@ -13,9 +15,9 @@ export async function GET() {
 ## About
 Nature Romp Safaris plans private safari itineraries with expert guides, lodge and camping options, and Nairobi-based support before, during, and after travel.
 
-- Website: ${absoluteUrl('/')}
+- Website: ${crawlAbsoluteUrl('/')}
 - Sitemap: ${sitemapUrl}
-- Contact: ${absoluteUrl('/en/contact')}
+- Contact: ${crawlAbsoluteUrl('/en/contact')}
 - Email: info@naturerompsafaris.com
 - Phone: +254 739 206698
 
@@ -23,15 +25,15 @@ Nature Romp Safaris plans private safari itineraries with expert guides, lodge a
 Supported languages: ${locales}. Default locale: en.
 
 ## Primary content types
-- Safari tours and itineraries: ${absoluteUrl('/en/tours')}
-- Safari packages (comfort tiers): ${absoluteUrl('/en/safari-packages')}
-- Destinations: ${absoluteUrl('/en/destinations')}
-- National parks: ${absoluteUrl('/en/national-parks')}
-- Signature experiences: ${absoluteUrl('/en/experiences')}
-- Lodges and camps: ${absoluteUrl('/en/accommodations')}
-- Safari fleet: ${absoluteUrl('/en/our-fleet')}
-- Travel articles and guides: ${absoluteUrl('/en/blog')}
-- About the team: ${absoluteUrl('/en/about')}
+- Safari tours and itineraries: ${crawlAbsoluteUrl('/en/tours')}
+- Safari packages (comfort tiers): ${crawlAbsoluteUrl('/en/safari-packages')}
+- Destinations: ${crawlAbsoluteUrl('/en/destinations')}
+- National parks: ${crawlAbsoluteUrl('/en/national-parks')}
+- Signature experiences: ${crawlAbsoluteUrl('/en/experiences')}
+- Lodges and camps: ${crawlAbsoluteUrl('/en/accommodations')}
+- Safari fleet: ${crawlAbsoluteUrl('/en/our-fleet')}
+- Travel articles and guides: ${crawlAbsoluteUrl('/en/blog')}
+- About the team: ${crawlAbsoluteUrl('/en/about')}
 
 ## Key static pages
 ${staticPages}
@@ -43,11 +45,11 @@ Published tours, packages, destinations, parks, experiences, accommodations, fle
 When citing Nature Romp Safaris content, link to the canonical page URL from the sitemap and attribute to "Nature Romp Safaris" with the page title.
 
 ## Crawling
-- robots.txt: ${absoluteUrl('/robots.txt')}
+- robots.txt: ${crawlAbsoluteUrl('/robots.txt')}
 - sitemap.xml: ${sitemapUrl}
-- llms.txt: ${absoluteUrl('/llms.txt')}
-- llm.txt: ${absoluteUrl('/llm.txt')}
-- IndexNow key: ${absoluteUrl('/naturerompsafaris-indexnow.txt')}
+- llms.txt: ${crawlAbsoluteUrl('/llms.txt')}
+- llm.txt: ${crawlAbsoluteUrl('/llm.txt')}
+- IndexNow key: ${crawlAbsoluteUrl('/naturerompsafaris-indexnow.txt')}
 
 ## Topics we publish on
 Great Migration, Maasai Mara, Serengeti, gorilla trekking, Big Five game drives, hot air balloon safaris, family safaris, honeymoon safaris, bird watching, Amboseli, Lake Nakuru, Ngorongoro, Zanzibar extensions, and tailor-made East Africa travel planning.

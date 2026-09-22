@@ -1,6 +1,6 @@
 # Nature Romp Safaris — SEO / AEO / GEO Content Map
 
-Production site: **https://kenyatanzaniasafariadventures.com**
+Production site: **https://www.kenyatanzaniasafariadventures.com**
 
 This document maps every indexable route, metadata sources, structured data, crawl files, and instant-indexing behavior.
 
@@ -19,10 +19,10 @@ This document maps every indexable route, metadata sources, structured data, cra
 
 1. Create a **Domain** property for `kenyatanzaniasafariadventures.com` (covers apex + www). DNS TXT is the most reliable verification.
 2. Or use a URL-prefix property and paste the HTML tag into **Portal → Settings → Analytics** (`googleSiteVerification`).
-3. Submit sitemap: `https://kenyatanzaniasafariadventures.com/sitemap.xml`
+3. Submit sitemap: `https://www.kenyatanzaniasafariadventures.com/sitemap.xml` (do not submit the apex URL; Vercel 308s it to www and Search Console cannot read the redirect).
 4. Request indexing for `/en` after the sitemap is accepted.
 
-Prefer one live host. Sitemap URLs use `NEXT_PUBLIC_SITE_URL` (apex). If Vercel currently 308s apex → www, set the **apex as Primary** in Vercel Domains so sitemap locations match what visitors hit.
+Prefer one live host. Sitemap URLs use the www host because Vercel 308s apex → www. Submit the www sitemap in Search Console.
 
 ### Bing Webmaster setup (manual)
 

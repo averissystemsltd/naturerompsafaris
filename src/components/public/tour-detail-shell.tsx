@@ -12,6 +12,7 @@ import { MountainRoutePricingTable } from '@/components/public/experiences/mount
 import { RouteAccommodationsSection } from '@/components/public/tours/route-accommodations-section';
 import { TourInquiryPanel } from '@/components/public/tours/tour-inquiry-panel';
 import { ItineraryTimeline } from '@/components/public/tours/itinerary-timeline';
+import { SafariPricingMarketTabs } from '@/components/public/tours/safari-pricing-market-tabs';
 import { TourPricingTable } from '@/components/public/tours/tour-pricing-table';
 import {
   isMountainTourPricing,
@@ -233,13 +234,22 @@ export function TourDetailShell({
                 )}
                 <div className='mt-6'>
                   {isMountainLayout && mountainPricingTier ? (
-                    <MountainRoutePricingTable
-                      currency={mountainPricingTier.currency}
-                      notes={mountainPricingTier.notes}
-                      rows={mountainPricingRowsFromTier(mountainPricingTier)}
+                    <SafariPricingMarketTabs
+                      international={
+                        <MountainRoutePricingTable
+                          currency={mountainPricingTier.currency}
+                          notes={mountainPricingTier.notes}
+                          rows={mountainPricingRowsFromTier(mountainPricingTier)}
+                        />
+                      }
+                      safariName={displayTitle}
                     />
                   ) : (
-                    <TourPricingTable locale={locale} tiers={visiblePricing} />
+                    <TourPricingTable
+                      locale={locale}
+                      safariName={displayTitle}
+                      tiers={visiblePricing}
+                    />
                   )}
                 </div>
               </section>

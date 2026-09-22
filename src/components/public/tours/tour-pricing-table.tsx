@@ -3,13 +3,19 @@
 import * as React from 'react';
 
 import { Icons } from '@/components/icons';
+import { SafariPricingMarketTabs } from '@/components/public/tours/safari-pricing-market-tabs';
 import { isDayTripPricingTierPublic } from '@/features/portal/cms/tours/legacy-pricing';
-import { formatTourPrice } from '@/lib/public/tour-format';
+import {
+  formatTourPrice,
+  hasPublishedTourPrices,
+  splitTourPricingByMarket
+} from '@/lib/public/tour-format';
 import type { PublicTourPricingTier } from '@/lib/public/types';
 import { cn } from '@/lib/utils';
 
 type TourPricingTableProps = {
   locale?: string;
+  safariName?: string;
   tiers: PublicTourPricingTier[];
 };
 
@@ -133,26 +139,28 @@ function PricingTableIntro({
   );
 }
 
-export function TourPricingTable({ tiers }: TourPricingTableProps) {
-  if (!tiers.length) {
-    return (
-      <div className='brand-contact-credentials-box'>
-        <h3 className='brand-heading font-display text-xl'>Pricing on Request</h3>
-        <p className='brand-body mt-2 text-sm leading-6'>
-          Pricing can vary by dates, group size, and lodge availability. Send an enquiry and the
-          team will prepare the correct quote.
-        </p>
-        <button
-          className='mt-5 inline-flex items-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-primary)] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition hover:bg-[var(--brand-primary)] hover:text-white'
-          onClick={openTourInquiry}
-          type='button'
-        >
-          <Icons.mail className='h-4 w-4' />
-          Request Prices
-        </button>
-      </div>
-    );
-  }
+function PricingOnRequest() {
+  return (
+    <div className='brand-contact-credentials-box'>
+      <h3 className='brand-heading font-display text-xl'>Pricing on Request</h3>
+      <p className='brand-body mt-2 text-sm leading-6'>
+        Pricing can vary by dates, group size, and lodge availability. Send an enquiry and the team
+        will prepare the correct quote.
+      </p>
+      <button
+        className='mt-5 inline-flex items-center gap-2 rounded-[var(--brand-button-radius)] border border-[var(--brand-primary)] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-[var(--brand-primary)] transition hover:bg-[var(--brand-primary)] hover:text-white'
+        onClick={openTourInquiry}
+        type='button'
+      >
+        <Icons.mail className='h-4 w-4' />
+        Request Prices
+      </button>
+    </div>
+  );
+}
+
+function PricingTierTables({ tiers }: { tiers: PublicTourPricingTier[] }) {
+  if (!tiers.length) return <PricingOnRequest />;
 
   return (
     <div className='space-y-6'>
@@ -265,5 +273,20 @@ export function TourPricingTable({ tiers }: TourPricingTableProps) {
         );
       })}
     </div>
+  );
+}
+
+export function TourPricingTable({ safariName = '', tiers }: TourPricingTableProps) {
+  if (!tiers.length) return <PricingOnRequest />;
+
+  const { international, local } = splitTourPricingByMarket(tiers);
+  const localReady = hasPublishedTourPrices(local);
+
+  return (
+    <SafariPricingMarketTabs
+      international={<PricingTierTables tiers={international} />}
+      local={localReady ? <PricingTierTables tiers={local} /> : undefined}
+      safariName={safariName}
+    />
   );
 }

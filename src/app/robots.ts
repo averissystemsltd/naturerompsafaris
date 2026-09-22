@@ -5,7 +5,7 @@ import {
   BANDWIDTH_SCRAPER_USER_AGENTS,
   LLM_ALLOWED_PATHS
 } from '@/lib/seo/ai-crawler-agents';
-import { absoluteUrl } from '@/lib/seo/absolute-url';
+import { crawlAbsoluteUrl } from '@/lib/seo/absolute-url';
 import { DISALLOWED_ROBOTS_PATHS } from '@/lib/seo/robots';
 
 const PRIVATE_PATHS = [
@@ -35,7 +35,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/'
       }
     ],
-    sitemap: absoluteUrl('/sitemap.xml'),
-    host: absoluteUrl('/')
+    sitemap: crawlAbsoluteUrl('/sitemap.xml'),
+    host: crawlAbsoluteUrl('/')
   };
 }

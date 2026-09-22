@@ -1,10 +1,9 @@
 import type { NextRequest } from 'next/server';
 
+import { crawlAbsoluteUrl } from '@/lib/seo/absolute-url';
+
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://kenyatanzaniasafariadventures.com').replace(
-    /\/$/,
-    ''
-  );
+  return crawlAbsoluteUrl('/').replace(/\/$/, '');
 }
 
 export function getPortalHost() {

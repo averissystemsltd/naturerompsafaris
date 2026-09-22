@@ -26,10 +26,33 @@ export function formatComfortTierLabel(
   return variant === 'short' ? option.label : option.packageLabel;
 }
 
+export function isLocalKesCurrency(currency?: string | null) {
+  return /^(kes|ksh|kshs)$/i.test((currency ?? '').trim());
+}
+
+export function splitTourPricingByMarket(tiers: PublicTourPricingTier[]) {
+  const international: PublicTourPricingTier[] = [];
+  const local: PublicTourPricingTier[] = [];
+
+  for (const tier of tiers) {
+    if (isLocalKesCurrency(tier.currency)) local.push(tier);
+    else international.push(tier);
+  }
+
+  return { international, local };
+}
+
+export function hasPublishedTourPrices(tiers: PublicTourPricingTier[]) {
+  return tiers.some((tier) =>
+    tier.seasons.some((season) => season.cells.some((cell) => Boolean(cell.price)))
+  );
+}
+
 export function formatTourPrice(price?: number | null, currency = 'USD') {
   if (!price) return null;
   const amount = price.toLocaleString('en-US', { maximumFractionDigits: 0 });
   if (currency === 'USD') return `$${amount}`;
+  if (isLocalKesCurrency(currency)) return `KSh ${amount}`;
   return `${currency} ${amount}`;
 }
 

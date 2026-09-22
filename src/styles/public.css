@@ -823,6 +823,41 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
 }
 
 /* Pricing tier cards — soft shell with inset table */
+.public-site .brand-pricing-market {
+  display: inline-flex;
+  border: 1px solid rgb(60 81 66 / 16%);
+  border-radius: 999px;
+  background: #fff;
+  padding: 0.2rem;
+  gap: 0.15rem;
+}
+
+.public-site .brand-pricing-market__tab {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brand-muted);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  min-height: 2.15rem;
+  padding: 0 1rem;
+  text-transform: uppercase;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.public-site .brand-pricing-market__tab:hover {
+  color: var(--brand-heading);
+}
+
+.public-site .brand-pricing-market__tab.is-active {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
 .public-site .brand-pricing-tier {
   background-color: var(--brand-contact-cream);
   border: 0;
