@@ -1,16 +1,17 @@
 import type { MetadataRoute } from 'next';
 
+import {
+  AI_SCRAPER_USER_AGENTS,
+  BANDWIDTH_SCRAPER_USER_AGENTS,
+  LLM_ALLOWED_PATHS
+} from '@/lib/seo/ai-crawler-agents';
 import { absoluteUrl } from '@/lib/seo/absolute-url';
-import { AI_SCRAPER_USER_AGENTS } from '@/lib/seo/ai-crawler-agents';
 import { DISALLOWED_ROBOTS_PATHS } from '@/lib/seo/robots';
 
-const DEFAULT_DISALLOW = [
+const PRIVATE_PATHS = [
   ...DISALLOWED_ROBOTS_PATHS,
-  '/dashboard',
-  '/auth',
   '/sign-in',
   '/sign-up',
-  '/monitoring',
   '/v1/',
   '/*/newsletter/unsubscribe',
   '/*/thank-you'
@@ -22,10 +23,15 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: DEFAULT_DISALLOW
+        disallow: PRIVATE_PATHS
       },
       {
         userAgent: [...AI_SCRAPER_USER_AGENTS],
+        allow: [...LLM_ALLOWED_PATHS],
+        disallow: '/'
+      },
+      {
+        userAgent: [...BANDWIDTH_SCRAPER_USER_AGENTS],
         disallow: '/'
       }
     ],

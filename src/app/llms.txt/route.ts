@@ -45,7 +45,9 @@ When citing Nature Romp Safaris content, link to the canonical page URL from the
 ## Crawling
 - robots.txt: ${absoluteUrl('/robots.txt')}
 - sitemap.xml: ${sitemapUrl}
-- IndexNow key: ${absoluteUrl('/brand-safaris-indexnow.txt')}
+- llms.txt: ${absoluteUrl('/llms.txt')}
+- llm.txt: ${absoluteUrl('/llm.txt')}
+- IndexNow key: ${absoluteUrl('/naturerompsafaris-indexnow.txt')}
 
 ## Topics we publish on
 Great Migration, Maasai Mara, Serengeti, gorilla trekking, Big Five game drives, hot air balloon safaris, family safaris, honeymoon safaris, bird watching, Amboseli, Lake Nakuru, Ngorongoro, Zanzibar extensions, and tailor-made East Africa travel planning.

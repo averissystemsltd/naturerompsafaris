@@ -54,7 +54,6 @@ function staticUrls(): SitemapUrlEntry[] {
   return SUPPORTED_LOCALES.flatMap((locale) =>
     STATIC_PATHS.map((entry) => ({
       changeFrequency: entry.changeFrequency,
-      lastModified: new Date(),
       path: entry.path ? `/${locale}/${entry.path}` : `/${locale}`,
       priority: entry.priority
     }))
@@ -88,88 +87,106 @@ function mapRows(data: unknown): TranslationRow[] {
   });
 }
 
+async function safeRows(
+  query: PromiseLike<{ data: unknown; error: { message?: string } | null }>
+): Promise<TranslationRow[]> {
+  try {
+    const { data, error } = await query;
+    if (error) return [];
+    return mapRows(data);
+  } catch {
+    return [];
+  }
+}
+
 async function fetchTourTranslations() {
-  const { data } = await sitemapClient()
-    .from('tour_translations')
-    .select('locale, slug, published_at, updated_at, tour:tours!inner(status, deleted_at)')
-    .not('published_at', 'is', null)
-    .eq('tour.status', 'published')
-    .is('tour.deleted_at', null);
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('tour_translations')
+      .select('locale, slug, published_at, updated_at, tour:tours!inner(status)')
+      .not('published_at', 'is', null)
+      .eq('tour.status', 'published')
+  );
 }
 
 async function fetchPackageTranslations() {
-  const { data } = await sitemapClient()
-    .from('package_translations')
-    .select('locale, slug, published_at, updated_at, package:packages!inner(status, deleted_at)')
-    .not('published_at', 'is', null)
-    .eq('package.status', 'published')
-    .is('package.deleted_at', null);
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('package_translations')
+      .select('locale, slug, published_at, updated_at, package:packages!inner(status)')
+      .not('published_at', 'is', null)
+      .eq('package.status', 'published')
+  );
 }
 
 async function fetchDestinationTranslations() {
-  const { data } = await sitemapClient()
-    .from('destination_translations')
-    .select(
-      'locale, slug, published_at, updated_at, destination:destinations!inner(status, deleted_at)'
-    )
-    .not('published_at', 'is', null)
-    .eq('destination.status', 'published')
-    .is('destination.deleted_at', null);
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('destination_translations')
+      .select(
+        'locale, slug, published_at, updated_at, destination:destinations!inner(status, deleted_at)'
+      )
+      .not('published_at', 'is', null)
+      .eq('destination.status', 'published')
+      .is('destination.deleted_at', null)
+  );
 }
 
 async function fetchBlogTranslations() {
-  const { data } = await sitemapClient()
-    .from('blog_translations')
-    .select('locale, slug, published_at, updated_at, post:blog_posts!inner(status, deleted_at)')
-    .not('published_at', 'is', null)
-    .eq('post.status', 'published')
-    .is('post.deleted_at', null);
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('blog_translations')
+      .select('locale, slug, published_at, updated_at, post:blog_posts!inner(status, deleted_at)')
+      .not('published_at', 'is', null)
+      .eq('post.status', 'published')
+      .is('post.deleted_at', null)
+  );
 }
 
 async function fetchExperienceTranslations() {
-  const { data } = await sitemapClient()
-    .from('experience_translations')
-    .select(
-      'locale, slug, published_at, updated_at, experience:experiences!inner(status, deleted_at)'
-    )
-    .not('published_at', 'is', null)
-    .eq('experience.status', 'published')
-    .is('experience.deleted_at', null);
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('experience_translations')
+      .select(
+        'locale, slug, published_at, updated_at, experience:experiences!inner(status, deleted_at)'
+      )
+      .not('published_at', 'is', null)
+      .eq('experience.status', 'published')
+      .is('experience.deleted_at', null)
+  );
 }
 
 async function fetchAccommodationTranslations() {
-  const { data } = await sitemapClient()
-    .from('accommodation_translations')
-    .select(
-      'locale, slug, published_at, updated_at, accommodation:accommodations!inner(status, deleted_at)'
-    )
-    .not('published_at', 'is', null)
-    .eq('accommodation.status', 'published')
-    .is('accommodation.deleted_at', null);
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('accommodation_translations')
+      .select(
+        'locale, slug, published_at, updated_at, accommodation:accommodations!inner(status, deleted_at)'
+      )
+      .not('published_at', 'is', null)
+      .eq('accommodation.status', 'published')
+      .is('accommodation.deleted_at', null)
+  );
 }
 
 async function fetchNationalParkTranslations() {
-  const { data } = await sitemapClient()
-    .from('national_park_translations')
-    .select('locale, slug, published_at, updated_at, park:national_parks!inner(status)')
-    .not('published_at', 'is', null)
-    .eq('park.status', 'published');
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('national_park_translations')
+      .select('locale, slug, published_at, updated_at, park:national_parks!inner(status)')
+      .not('published_at', 'is', null)
+      .eq('park.status', 'published')
+  );
 }
 
 async function fetchFleetTranslations() {
-  const { data } = await sitemapClient()
-    .from('fleet_vehicle_translations')
-    .select('locale, slug, published_at, updated_at, vehicle:fleet_vehicles!inner(status)')
-    .not('published_at', 'is', null)
-    .eq('vehicle.status', 'published');
-  return mapRows(data);
+  return safeRows(
+    sitemapClient()
+      .from('fleet_vehicle_translations')
+      .select('locale, slug, published_at, updated_at, vehicle:fleet_vehicles!inner(status)')
+      .not('published_at', 'is', null)
+      .eq('vehicle.status', 'published')
+  );
 }
 
 export async function getAllSitemapUrls(): Promise<SitemapUrlEntry[]> {

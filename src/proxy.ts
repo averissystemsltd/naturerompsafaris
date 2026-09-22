@@ -9,6 +9,7 @@ import {
   getSiteUrl,
   isPortalRequestHost
 } from '@/lib/portal-url';
+import { isEdgeBlockedScraper } from '@/lib/seo/ai-crawler-agents';
 
 const PUBLIC_FILE = /\.(.*)$/;
 
@@ -17,6 +18,13 @@ function redirectTo(url: string | URL) {
 }
 
 export async function proxy(request: NextRequest) {
+  if (isEdgeBlockedScraper(request.headers.get('user-agent'))) {
+    return new NextResponse(null, {
+      status: 403,
+      headers: { 'Cache-Control': 'public, max-age=86400' }
+    });
+  }
+
   const { pathname } = request.nextUrl;
   const search = request.nextUrl.search;
   const requestHost = getRequestHost(request);

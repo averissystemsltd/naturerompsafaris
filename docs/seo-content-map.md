@@ -1,6 +1,6 @@
 # Nature Romp Safaris — SEO / AEO / GEO Content Map
 
-Production site: **https://naturerompsafaris.com**
+Production site: **https://kenyatanzaniasafariadventures.com**
 
 This document maps every indexable route, metadata sources, structured data, crawl files, and instant-indexing behavior.
 
@@ -11,21 +11,24 @@ This document maps every indexable route, metadata sources, structured data, cra
 | Asset | URL | Implementation |
 |-------|-----|----------------|
 | Sitemap | `/sitemap.xml` | `src/app/sitemap.ts` — dynamic, all published routes × locales |
-| Robots | `/robots.txt` | `src/app/robots.ts` — disallows portal/admin/api/dashboard |
-| LLMs file | `/llms.txt` | `src/app/llms.txt/route.ts` — AEO/GEO site summary for AI crawlers |
+| Robots | `/robots.txt` | `src/app/robots.ts` — allows Google/Bing; blocks AI training scrapers except `/llms.txt`; blocks bandwidth scrapers |
+| LLMs file | `/llms.txt` and `/llm.txt` | `src/app/llms.txt/route.ts` — AEO/GEO site summary for AI crawlers |
 | IndexNow key | `/naturerompsafaris-indexnow.txt` | `src/app/naturerompsafaris-indexnow.txt/route.ts` |
 
 ### Google Search Console setup (manual)
 
-1. Verify ownership at [Google Search Console](https://search.google.com/search-console) using the verification code in **Portal → Settings → Analytics** (`googleSiteVerification` → root layout metadata).
-2. Submit sitemap: `https://naturerompsafaris.com/sitemap.xml`
-3. Request indexing for homepage after first deploy of this SEO stack.
+1. Create a **Domain** property for `kenyatanzaniasafariadventures.com` (covers apex + www). DNS TXT is the most reliable verification.
+2. Or use a URL-prefix property and paste the HTML tag into **Portal → Settings → Analytics** (`googleSiteVerification`).
+3. Submit sitemap: `https://kenyatanzaniasafariadventures.com/sitemap.xml`
+4. Request indexing for `/en` after the sitemap is accepted.
+
+Prefer one live host. Sitemap URLs use `NEXT_PUBLIC_SITE_URL` (apex). If Vercel currently 308s apex → www, set the **apex as Primary** in Vercel Domains so sitemap locations match what visitors hit.
 
 ### Bing Webmaster setup (manual)
 
-1. Verify at [Bing Webmaster Tools](https://www.bing.com/webmasters) via `bingSiteVerification` in CMS settings.
+1. Verify at [Bing Webmaster Tools](https://www.bing.com/webmasters) via `bingSiteVerification` in CMS settings, or import the Google Search Console property.
 2. Submit the same sitemap URL.
-3. IndexNow is auto-configured when `INDEXNOW_API_KEY` is set in production env.
+3. IndexNow is already live: publishing a tour, package, destination, experience, accommodation, national park, or blog post submits those URLs to Bing/Yandex partners. The public key file is `/naturerompsafaris-indexnow.txt`.
 
 ---
 
@@ -174,6 +177,7 @@ Env:
 src/app/sitemap.ts
 src/app/robots.ts
 src/app/llms.txt/route.ts
+src/app/llm.txt/route.ts
 src/app/naturerompsafaris-indexnow.txt/route.ts
 src/lib/seo/sitemap-data.ts
 src/lib/seo/indexing.ts

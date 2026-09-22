@@ -1,3 +1,5 @@
+import { after } from 'next/server';
+
 import { absoluteUrl } from './absolute-url';
 import { submitGoogleIndexing } from './google-indexing';
 
@@ -72,5 +74,12 @@ export async function notifySearchEngines(pathsOrUrls: string[]) {
 }
 
 export function notifySearchEnginesLater(pathsOrUrls: string[]) {
-  void notifySearchEngines(pathsOrUrls);
+  const urls = [...pathsOrUrls];
+  try {
+    after(() => {
+      void notifySearchEngines(urls);
+    });
+  } catch {
+    void notifySearchEngines(urls);
+  }
 }
