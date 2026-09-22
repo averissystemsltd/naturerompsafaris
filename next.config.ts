@@ -62,14 +62,10 @@ const baseConfig: NextConfig = {
     ];
   },
   async redirects() {
+    // Do not 301 www.kenyatanzaniasafariadventures.com here. Vercel Domains
+    // already owns apex/www. A second hop in this file caused ERR_TOO_MANY_REDIRECTS.
     const publicSite = 'https://kenyatanzaniasafariadventures.com';
     return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.kenyatanzaniasafariadventures.com' }],
-        destination: `${publicSite}/:path*`,
-        permanent: true
-      },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'naturerompsafaris.com' }],

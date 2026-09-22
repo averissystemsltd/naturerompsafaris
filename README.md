@@ -91,10 +91,10 @@ Build settings are pinned in `vercel.json`. Leave the Vercel dashboard overrides
 - Output: leave empty (Next.js, not standalone)
 
 1. Import `.env.vercel` (not `.env.local`) into the Vercel project for Production, Preview, and Development.
-2. Connect these Vercel domains before the first production build:
-   - `kenyatanzaniasafariadventures.com` (public site)
-   - `www.kenyatanzaniasafariadventures.com` (301 to apex)
-   - `portal.kenyatanzaniasafariadventures.com` (CMS)
+2. Connect these Vercel domains. Set the apex as **Primary** and do **not** enable “Redirect to www” (that fights the app and loops):
+   - `kenyatanzaniasafariadventures.com` (primary public site)
+   - `www.kenyatanzaniasafariadventures.com` (redirect **to apex**, not the other way)
+   - `portal.kenyatanzaniasafariadventures.com` (CMS, no redirect)
 3. Keep `naturerompsafaris.com` on cPanel for mail. Point its web traffic with a 301 to `https://kenyatanzaniasafariadventures.com` (cPanel, or add the domain on Vercel — Next.js already 301s that host).
 4. In Supabase → Authentication → URL Configuration, set Site URL to `https://kenyatanzaniasafariadventures.com` and add redirect URLs:
    - `https://kenyatanzaniasafariadventures.com/auth/confirm`
