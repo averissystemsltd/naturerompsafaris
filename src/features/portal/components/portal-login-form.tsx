@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import { TurnstileField, useTurnstileGate } from '@/components/public/turnstile-field';
 import { Icons } from '@/components/icons';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -33,6 +34,7 @@ export function PortalLoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const turnstile = useTurnstileGate();
 
   useEffect(() => {
     if (searchParams.get('confirm') === '1') {
@@ -63,6 +65,12 @@ export function PortalLoginForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
+
+    if (turnstile.required && !turnstile.token) {
+      setError('Complete the security check before signing in.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -78,10 +86,12 @@ export function PortalLoginForm() {
     const supabase = createClient();
     const { error: signInError } = await supabase.auth.signInWithPassword({
       email,
-      password
+      password,
+      options: { captchaToken: turnstile.token ?? undefined }
     });
 
     if (signInError) {
+      turnstile.resetTurnstile();
       setIsLoading(false);
       if (signInError.code === 'email_not_confirmed') {
         router.push(`/portal/login/verify?email=${encodeURIComponent(email)}`);
@@ -183,7 +193,9 @@ export function PortalLoginForm() {
           {info ? <p className='text-[14px] text-[#3C5142]'>{info}</p> : null}
           {error ? <p className='text-[14px] text-red-600'>{error}</p> : null}
 
-          <PortalAuthButton isLoading={isLoading} type='submit'>
+          <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
+
+          <PortalAuthButton disabled={!turnstile.canSubmit} isLoading={isLoading} type='submit'>
             Login
           </PortalAuthButton>
         </form>

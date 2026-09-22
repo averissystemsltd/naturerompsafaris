@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import { TurnstileField, useTurnstileGate } from '@/components/public/turnstile-field';
 import { Input } from '@/components/ui/input';
 import {
   InputOTP,
@@ -38,6 +39,7 @@ export function PortalVerifyEmailForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const verifyingRef = useRef(false);
+  const turnstile = useTurnstileGate();
 
   async function verifyCode(token: string) {
     if (verifyingRef.current) return;
@@ -105,6 +107,11 @@ export function PortalVerifyEmailForm() {
       return;
     }
 
+    if (turnstile.required && !turnstile.token) {
+      setError('Complete the security check before resending a code.');
+      return;
+    }
+
     setError(null);
     setInfo(null);
     setIsResending(true);
@@ -114,6 +121,7 @@ export function PortalVerifyEmailForm() {
       type: 'signup',
       email: normalizedEmail,
       options: {
+        captchaToken: turnstile.token ?? undefined,
         emailRedirectTo: portalAbsoluteUrl('/auth/confirm?next=/portal')
       }
     });
@@ -121,6 +129,7 @@ export function PortalVerifyEmailForm() {
     setIsResending(false);
 
     if (resendError) {
+      turnstile.resetTurnstile();
       setError(toPublicAuthError(resendError, 'Unable to resend the code right now.'));
       return;
     }
@@ -193,6 +202,8 @@ export function PortalVerifyEmailForm() {
           {info ? <p className='text-[14px] text-[#3C5142]'>{info}</p> : null}
           {error ? <p className='text-[14px] text-red-600'>{error}</p> : null}
 
+          <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
+
           <PortalAuthButton isLoading={isLoading} type='submit'>
             Verify and continue
           </PortalAuthButton>
@@ -202,7 +213,7 @@ export function PortalVerifyEmailForm() {
           Didn&apos;t get a code?{' '}
           <button
             className='font-medium text-[#3C5142] hover:underline disabled:opacity-60'
-            disabled={isResending || isLoading}
+            disabled={isResending || isLoading || !turnstile.canSubmit}
             onClick={() => {
               void handleResend();
             }}

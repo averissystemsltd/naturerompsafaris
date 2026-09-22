@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { TurnstileField, useTurnstileGate } from '@/components/public/turnstile-field';
 import { Icons } from '@/components/icons';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -51,6 +52,7 @@ export function PortalSignUpForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const turnstile = useTurnstileGate();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -76,6 +78,11 @@ export function PortalSignUpForm() {
       return;
     }
 
+    if (turnstile.required && !turnstile.token) {
+      setError('Complete the security check before creating an account.');
+      return;
+    }
+
     setIsLoading(true);
 
     const supabase = createClient();
@@ -83,12 +90,14 @@ export function PortalSignUpForm() {
       email: parsed.data.email,
       password: parsed.data.password,
       options: {
+        captchaToken: turnstile.token ?? undefined,
         data: { full_name: parsed.data.fullName },
         emailRedirectTo: portalAbsoluteUrl('/auth/confirm?next=/portal')
       }
     });
 
     if (signUpError) {
+      turnstile.resetTurnstile();
       setIsLoading(false);
       const blocked = /not allowed|42501/i.test(signUpError.message);
       setError(blocked ? portalSignupDeniedMessage() : toPublicAuthError(signUpError));
@@ -234,7 +243,9 @@ export function PortalSignUpForm() {
             </p>
           ) : null}
 
-          <PortalAuthButton isLoading={isLoading} type='submit'>
+          <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
+
+          <PortalAuthButton disabled={!turnstile.canSubmit} isLoading={isLoading} type='submit'>
             Create account
           </PortalAuthButton>
         </form>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { TurnstileField, useTurnstileGate } from '@/components/public/turnstile-field';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { PortalAuthButton } from '@/features/portal/components/portal-auth-button';
@@ -22,22 +23,31 @@ export function PortalForgotPasswordForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const turnstile = useTurnstileGate();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
     setSuccess(null);
+
+    if (turnstile.required && !turnstile.token) {
+      setError('Complete the security check before sending a reset link.');
+      return;
+    }
+
     setIsLoading(true);
 
     const supabase = createClient();
     const redirectTo = portalAbsoluteUrl('/auth/confirm?next=/portal/login/reset-password');
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+      captchaToken: turnstile.token ?? undefined,
       redirectTo
     });
 
     setIsLoading(false);
 
     if (resetError) {
+      turnstile.resetTurnstile();
       setError(toPublicAuthError(resetError, 'Unable to send a reset email right now.'));
       return;
     }
@@ -79,7 +89,9 @@ export function PortalForgotPasswordForm() {
           {error ? <p className='text-[14px] text-red-600'>{error}</p> : null}
           {success ? <p className='text-[14px] text-[#3C5142]'>{success}</p> : null}
 
-          <PortalAuthButton isLoading={isLoading} type='submit'>
+          <TurnstileField onTokenChange={turnstile.setToken} resetSignal={turnstile.resetSignal} />
+
+          <PortalAuthButton disabled={!turnstile.canSubmit} isLoading={isLoading} type='submit'>
             Send reset link
           </PortalAuthButton>
         </form>
