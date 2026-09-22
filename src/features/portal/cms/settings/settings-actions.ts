@@ -2,7 +2,7 @@
 
 import { revalidatePath, revalidateTag } from 'next/cache';
 
-import { requireSuperAdmin } from '@/lib/auth/portal';
+import { assertSuperAdmin } from '@/lib/auth/portal';
 import { createClient } from '@/lib/supabase/server';
 import type { TablesUpdate } from '@/types/database.types';
 import {
@@ -28,7 +28,7 @@ function compact(record: Record<string, string | null>): Record<string, string> 
 }
 
 async function persist(patch: SiteSettingsUpdate): Promise<void> {
-  await requireSuperAdmin();
+  await assertSuperAdmin();
   const supabase = await createClient();
   const { error } = await supabase
     .from('site_settings')

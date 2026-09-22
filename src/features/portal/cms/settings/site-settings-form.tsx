@@ -12,13 +12,6 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { MediaUrlField } from './media-url-field';
-import {
-  saveContact,
-  saveGeneralBranding,
-  saveNotifications,
-  saveSeoAnalytics,
-  saveSocial
-} from './settings-actions';
 import type {
   ContactValues,
   GeneralBrandingValues,
@@ -159,12 +152,23 @@ function SectionCard({
   );
 }
 
-function useTabSave<T>(action: (values: T) => Promise<unknown>) {
+const SETTINGS_TABS = ['general', 'contact', 'social', 'notifications', 'seo'] as const;
+type SettingsTab = (typeof SETTINGS_TABS)[number];
+
+function useTabSave<T>(tab: SettingsTab) {
   const [isPending, startTransition] = useTransition();
   function save(values: T) {
     startTransition(async () => {
       try {
-        await action(values);
+        const response = await fetch('/api/portal/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tab, values })
+        });
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null;
+        if (!response.ok) {
+          throw new Error(payload?.error || 'Could not save settings.');
+        }
         toast.success('Settings saved.');
       } catch (error) {
         toast.error(error instanceof Error ? error.message : 'Could not save settings.');
@@ -180,7 +184,7 @@ function useTabSave<T>(action: (values: T) => Promise<unknown>) {
 
 function GeneralTab({ initial }: { initial: GeneralBrandingValues }) {
   const [values, setValues] = useState(initial);
-  const { isPending, save } = useTabSave(saveGeneralBranding);
+  const { isPending, save } = useTabSave('general');
   const set = (patch: Partial<GeneralBrandingValues>) => setValues((v) => ({ ...v, ...patch }));
 
   return (
@@ -246,7 +250,7 @@ function GeneralTab({ initial }: { initial: GeneralBrandingValues }) {
 
 function ContactTab({ initial }: { initial: ContactValues }) {
   const [values, setValues] = useState(initial);
-  const { isPending, save } = useTabSave(saveContact);
+  const { isPending, save } = useTabSave('contact');
   const set = (patch: Partial<ContactValues>) => setValues((v) => ({ ...v, ...patch }));
 
   return (
@@ -334,7 +338,7 @@ const SOCIAL_FIELDS: { key: keyof SocialValues; label: string; placeholder: stri
 
 function SocialTab({ initial }: { initial: SocialValues }) {
   const [values, setValues] = useState(initial);
-  const { isPending, save } = useTabSave(saveSocial);
+  const { isPending, save } = useTabSave('social');
   const set = (patch: Partial<SocialValues>) => setValues((v) => ({ ...v, ...patch }));
 
   return (
@@ -371,7 +375,7 @@ function NotificationsTab({ initial }: { initial: NotificationsValues }) {
   const [enquiryEmailEnabled, setEmailEnabled] = useState(initial.enquiryEmailEnabled);
   const [enquiryWhatsappEnabled, setWhatsappEnabled] = useState(initial.enquiryWhatsappEnabled);
   const [whatsappNotifyPhone, setPhone] = useState(initial.whatsappNotifyPhone ?? '');
-  const { isPending, save } = useTabSave(saveNotifications);
+  const { isPending, save } = useTabSave('notifications');
 
   function onSave() {
     const notifyEmails = emailsText
@@ -434,7 +438,7 @@ function NotificationsTab({ initial }: { initial: NotificationsValues }) {
 
 function SeoTab({ initial }: { initial: SeoAnalyticsValues }) {
   const [values, setValues] = useState(initial);
-  const { isPending, save } = useTabSave(saveSeoAnalytics);
+  const { isPending, save } = useTabSave('seo');
   const set = (patch: Partial<SeoAnalyticsValues>) => setValues((v) => ({ ...v, ...patch }));
 
   return (
@@ -526,7 +530,7 @@ function SeoTab({ initial }: { initial: SeoAnalyticsValues }) {
           <LockedSecretField
             id='gaMeasurementId'
             label='Google Analytics ID'
-            hint='e.g. G-XXXXXXXXXX'
+            hint='Paste G-XXXXXXXXXX, or the full Google tag (gtag.js) snippet. We store only the ID.'
             onChange={(gaMeasurementId) => set({ gaMeasurementId })}
             placeholder='G-XXXXXXXXXX'
             value={values.gaMeasurementId ?? ''}

@@ -1,6 +1,12 @@
 import { z } from 'zod';
 
 import { BRAND_FAVICON_PATH } from '@/config/brand';
+import {
+  normalizeGaMeasurementId,
+  normalizeGoogleAdsId,
+  normalizeGtmId,
+  normalizeMetaPixelId
+} from '@/lib/public/analytics-ids';
 import { normalizeSiteVerificationToken } from '@/lib/site-verification';
 import type { Tables } from '@/types/database.types';
 
@@ -59,13 +65,37 @@ const optionalVerificationToken = z
   .transform((value) => normalizeSiteVerificationToken(value))
   .nullable();
 
+const optionalGaMeasurementId = z
+  .string()
+  .trim()
+  .transform((value) => normalizeGaMeasurementId(value))
+  .nullable();
+
+const optionalGoogleAdsId = z
+  .string()
+  .trim()
+  .transform((value) => normalizeGoogleAdsId(value))
+  .nullable();
+
+const optionalGtmId = z
+  .string()
+  .trim()
+  .transform((value) => normalizeGtmId(value))
+  .nullable();
+
+const optionalMetaPixelId = z
+  .string()
+  .trim()
+  .transform((value) => normalizeMetaPixelId(value))
+  .nullable();
+
 export const seoAnalyticsSchema = z.object({
   seoTitle: optionalText,
   seoDescription: optionalText,
-  gaMeasurementId: optionalText,
-  googleAdsId: optionalText,
-  gtmId: optionalText,
-  metaPixelId: optionalText,
+  gaMeasurementId: optionalGaMeasurementId,
+  googleAdsId: optionalGoogleAdsId,
+  gtmId: optionalGtmId,
+  metaPixelId: optionalMetaPixelId,
   googleSiteVerification: optionalVerificationToken,
   bingSiteVerification: optionalVerificationToken
 });
@@ -131,10 +161,10 @@ export function settingsFromRow(row: Tables<'site_settings'> | null): SettingsFo
     seo: {
       seoTitle: str(seo.title),
       seoDescription: str(seo.description),
-      gaMeasurementId: str(analytics.gaMeasurementId),
-      googleAdsId: str(analytics.googleAdsId),
-      gtmId: str(analytics.gtmId),
-      metaPixelId: str(analytics.metaPixelId),
+      gaMeasurementId: normalizeGaMeasurementId(str(analytics.gaMeasurementId)) ?? '',
+      googleAdsId: normalizeGoogleAdsId(str(analytics.googleAdsId)) ?? '',
+      gtmId: normalizeGtmId(str(analytics.gtmId)) ?? '',
+      metaPixelId: normalizeMetaPixelId(str(analytics.metaPixelId)) ?? '',
       googleSiteVerification:
         normalizeSiteVerificationToken(str(analytics.googleSiteVerification)) ?? '',
       bingSiteVerification:

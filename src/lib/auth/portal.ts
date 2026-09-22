@@ -100,3 +100,15 @@ export const requireSuperAdmin = cache(async (): Promise<PortalSession> => {
   }
   return session;
 });
+
+/** Same gate as requireSuperAdmin, but throws instead of redirecting (API routes). */
+export async function assertSuperAdmin(): Promise<PortalSession> {
+  const session = await getPortalSession();
+  if (!session) {
+    throw new Error('Sign in again to save settings.');
+  }
+  if (session.role !== 'admin' && session.role !== 'owner') {
+    throw new Error('Only admins can change site settings.');
+  }
+  return session;
+}

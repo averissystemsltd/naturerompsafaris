@@ -28,6 +28,12 @@ import {
   parseTourSafariMarkets,
   type TourSafariMarketId
 } from '@/features/experiences/public/tour-markets';
+import {
+  normalizeGaMeasurementId,
+  normalizeGoogleAdsId,
+  normalizeGtmId,
+  normalizeMetaPixelId
+} from '@/lib/public/analytics-ids';
 import { normalizeSiteVerificationToken } from '@/lib/site-verification';
 import { localePath } from './locale-path';
 import { activeHeroSlides, normalizeHeroSlides } from './hero-slides';
@@ -199,20 +205,24 @@ function readAnalytics(value: unknown): PublicSiteSettings['analytics'] {
       ? (record[key] as string).trim()
       : null;
   return {
-    gaMeasurementId: str('gaMeasurementId'),
-    googleAdsId: str('googleAdsId'),
-    gtmId: str('gtmId'),
-    metaPixelId: str('metaPixelId'),
+    gaMeasurementId: normalizeGaMeasurementId(str('gaMeasurementId')),
+    googleAdsId: normalizeGoogleAdsId(str('googleAdsId')),
+    gtmId: normalizeGtmId(str('gtmId')),
+    metaPixelId: normalizeMetaPixelId(str('metaPixelId')),
     googleSiteVerification: normalizeSiteVerificationToken(str('googleSiteVerification')),
     bingSiteVerification: normalizeSiteVerificationToken(str('bingSiteVerification'))
   };
 }
 
 export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
-  return unstable_cache(fetchPublicSiteSettings, ['public-site-settings', 'footer-v3'], {
-    revalidate: 300,
-    tags: ['site-settings']
-  })();
+  return unstable_cache(
+    fetchPublicSiteSettings,
+    ['public-site-settings', 'footer-v3', 'analytics-v1'],
+    {
+      revalidate: 300,
+      tags: ['site-settings']
+    }
+  )();
 }
 
 async function fetchPublicSiteSettings(): Promise<PublicSiteSettings> {

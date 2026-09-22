@@ -1,5 +1,11 @@
 import Script from 'next/script';
 
+import {
+  normalizeGaMeasurementId,
+  normalizeGoogleAdsId,
+  normalizeGtmId,
+  normalizeMetaPixelId
+} from '@/lib/public/analytics-ids';
 import type { SiteAnalyticsSettings } from '@/lib/public/types';
 
 /**
@@ -11,7 +17,10 @@ import type { SiteAnalyticsSettings } from '@/lib/public/types';
  * double-loading the library.
  */
 export function SiteAnalytics({ analytics }: { analytics: SiteAnalyticsSettings }) {
-  const { gaMeasurementId, googleAdsId, gtmId, metaPixelId } = analytics;
+  const gaMeasurementId = normalizeGaMeasurementId(analytics.gaMeasurementId);
+  const googleAdsId = normalizeGoogleAdsId(analytics.googleAdsId);
+  const gtmId = normalizeGtmId(analytics.gtmId);
+  const metaPixelId = normalizeMetaPixelId(analytics.metaPixelId);
   const gtagPrimaryId = gaMeasurementId || googleAdsId;
 
   return (

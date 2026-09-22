@@ -22,7 +22,14 @@ const baseConfig: NextConfig = {
       dynamic: 30,
       static: 180
     },
-    optimisticRouting: true
+    optimisticRouting: true,
+    serverActions: {
+      allowedOrigins: [
+        'portal.kenyatanzaniasafariadventures.com',
+        'www.kenyatanzaniasafariadventures.com',
+        'kenyatanzaniasafariadventures.com'
+      ]
+    }
   },
   images: {
     // Serve original images directly (Supabase/local assets) instead of routing
