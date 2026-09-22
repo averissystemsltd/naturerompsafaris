@@ -45,6 +45,20 @@ function viewAllLabel(parentLabel: string) {
   return 'View all destinations';
 }
 
+function useCompactNav() {
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 1100px)');
+    const sync = () => setCompact(media.matches);
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
+
+  return compact;
+}
+
 function countNoun(parentLabel: string, count: number) {
   if (/accommodation/i.test(parentLabel)) return count === 1 ? 'stay' : 'stays';
   if (/experience/i.test(parentLabel)) return count === 1 ? 'experience' : 'experiences';
@@ -54,6 +68,7 @@ function countNoun(parentLabel: string, count: number) {
 export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) {
   const pathname = usePathname() || `/${locale}`;
   const headerRef = useRef<HTMLElement | null>(null);
+  const compactNav = useCompactNav();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   // Which country tab is previewed inside the currently open dynamic dropdown.
@@ -121,7 +136,14 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
   );
 
   return (
-    <header className={cn('nr-header', mobileOpen && 'nr-header--nav-open')} ref={headerRef}>
+    <header
+      className={cn(
+        'nr-header',
+        compactNav && 'nr-header--compact',
+        mobileOpen && 'nr-header--nav-open'
+      )}
+      ref={headerRef}
+    >
       <div className='nr-topbar'>
         <div className='nr-topbar__inner'>
           <div aria-label='Contact Nature Romp Safaris' className='nr-topbar__contact'>
@@ -222,8 +244,8 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
                     isOpen && 'nr-navgroup--open'
                   )}
                   key={item.label}
-                  onMouseEnter={() => setOpenGroup(item.label)}
-                  onMouseLeave={() => setOpenGroup(null)}
+                  onMouseEnter={compactNav ? undefined : () => setOpenGroup(item.label)}
+                  onMouseLeave={compactNav ? undefined : () => setOpenGroup(null)}
                 >
                   <div className='nr-navgroup__row'>
                     <Link href={item.href} onClick={closeNav}>
@@ -241,157 +263,177 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
                       <Icons.chevronDown />
                     </button>
                   </div>
-                  {isDynamic ? (
-                    <div className='nr-submenu nr-submenu--dynamic'>
-                      <div className='nr-submenu-mega'>
-                        {showCountryRail ? (
-                          <nav
-                            aria-label={`${item.label} groups`}
-                            className='nr-submenu-mega__rail'
-                          >
-                            <ul>
-                              {tabs.map((child) => {
-                                const isActive =
-                                  child.href === (activeChild?.href ?? tabs[0]?.href);
-                                const count = child.items?.length ?? 0;
-                                return (
-                                  <li key={`${item.label}-${child.href}`}>
-                                    <button
-                                      className={cn(
-                                        'nr-submenu-mega__tab',
-                                        isActive && 'nr-submenu-mega__tab--active'
-                                      )}
-                                      onClick={() => setActiveChildHref(child.href)}
-                                      onFocus={() => setActiveChildHref(child.href)}
-                                      onMouseEnter={() => setActiveChildHref(child.href)}
-                                      type='button'
-                                    >
-                                      <span className='nr-submenu-mega__tab-label'>
-                                        {child.flag ? (
-                                          <span aria-hidden className='nr-submenu-mega__flag'>
-                                            {child.flag}
-                                          </span>
-                                        ) : null}
-                                        <span className='nr-submenu-mega__tab-text'>
-                                          {child.label}
-                                        </span>
-                                      </span>
-                                      {count > 0 ? (
-                                        <span className='nr-submenu-mega__count'>{count}</span>
-                                      ) : null}
-                                    </button>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </nav>
-                        ) : null}
-                        <div className='nr-submenu-mega__pane'>
-                          {activeChild ? (
-                            <div className='nr-submenu-mega__heading'>
-                              <Link href={activeChild.href} onClick={closeNav}>
-                                <span>{activeChild.label}</span>
-                                <Icons.chevronRight />
-                              </Link>
-                              {previewCount > 0 ? (
-                                <span className='nr-submenu-mega__meta'>
-                                  {previewCount} {countNoun(item.label, previewCount)}
-                                </span>
-                              ) : null}
-                            </div>
-                          ) : null}
-                          {previewCount ? (
-                            <div
-                              className={cn(
-                                'nr-submenu-mega__grid',
-                                previewRight.length > 0 && 'nr-submenu-mega__grid--two'
-                              )}
+                  {!compactNav || isOpen ? (
+                    isDynamic ? (
+                      <div className='nr-submenu nr-submenu--dynamic'>
+                        <div className='nr-submenu-mega'>
+                          {showCountryRail ? (
+                            <nav
+                              aria-label={`${item.label} groups`}
+                              className='nr-submenu-mega__rail'
                             >
-                              {[previewLeft, previewRight].map((column, index) =>
-                                column.length ? (
-                                  <ul key={`${activeChild?.href ?? item.label}-col-${index}`}>
-                                    {column.map((row) => (
+                              <ul>
+                                {tabs.map((child) => {
+                                  const isActive =
+                                    child.href === (activeChild?.href ?? tabs[0]?.href);
+                                  const count = child.items?.length ?? 0;
+                                  return (
+                                    <li key={`${item.label}-${child.href}`}>
+                                      <button
+                                        className={cn(
+                                          'nr-submenu-mega__tab',
+                                          isActive && 'nr-submenu-mega__tab--active'
+                                        )}
+                                        onClick={() => setActiveChildHref(child.href)}
+                                        onFocus={() => setActiveChildHref(child.href)}
+                                        onMouseEnter={() => setActiveChildHref(child.href)}
+                                        type='button'
+                                      >
+                                        <span className='nr-submenu-mega__tab-label'>
+                                          {child.flag ? (
+                                            <span aria-hidden className='nr-submenu-mega__flag'>
+                                              {child.flag}
+                                            </span>
+                                          ) : null}
+                                          <span className='nr-submenu-mega__tab-text'>
+                                            {child.label}
+                                          </span>
+                                        </span>
+                                        {count > 0 ? (
+                                          <span className='nr-submenu-mega__count'>{count}</span>
+                                        ) : null}
+                                      </button>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </nav>
+                          ) : null}
+                          <div className='nr-submenu-mega__pane'>
+                            {activeChild ? (
+                              <div className='nr-submenu-mega__heading'>
+                                <Link href={activeChild.href} onClick={closeNav}>
+                                  <span>{activeChild.label}</span>
+                                  <Icons.chevronRight />
+                                </Link>
+                                {previewCount > 0 ? (
+                                  <span className='nr-submenu-mega__meta'>
+                                    {previewCount} {countNoun(item.label, previewCount)}
+                                  </span>
+                                ) : null}
+                              </div>
+                            ) : null}
+                            {previewCount ? (
+                              <div
+                                className={cn(
+                                  'nr-submenu-mega__grid',
+                                  previewRight.length > 0 && 'nr-submenu-mega__grid--two'
+                                )}
+                              >
+                                {[previewLeft, previewRight].map((column, index) =>
+                                  column.length ? (
+                                    <ul key={`${activeChild?.href ?? item.label}-col-${index}`}>
+                                      {column.map((row) => (
+                                        <li key={row.href}>
+                                          <Link href={row.href} onClick={closeNav}>
+                                            {row.label}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  ) : null
+                                )}
+                              </div>
+                            ) : (
+                              <p className='nr-submenu-preview__empty'>
+                                No published {item.label.toLowerCase()} for {activeChild?.label}{' '}
+                                yet.
+                              </p>
+                            )}
+                            <div className='nr-submenu-mega__footer'>
+                              <Link href={item.href} onClick={closeNav}>
+                                {viewAllLabel(item.label)}
+                              </Link>
+                              <Link href={localePath(locale, '/contact')} onClick={closeNav}>
+                                Plan my safari
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : isColumns ? (
+                      <div
+                        className={cn(
+                          'nr-submenu nr-submenu--columns',
+                          tabs.some((column) => (column.items?.length ?? 0) >= 8) &&
+                            'nr-submenu--columns-wide'
+                        )}
+                      >
+                        {tabs.map((column) => {
+                          const rows = column.items ?? [];
+                          const split = rows.length >= 8;
+                          const chunks = split ? splitColumns(rows) : [rows];
+
+                          return (
+                            <div
+                              className={cn('nr-submenu-col', split && 'nr-submenu-col--split')}
+                              key={`${item.label}-${column.href}`}
+                            >
+                              <p className='nr-submenu-col__heading'>{column.label}</p>
+                              <div className={cn(split && 'nr-submenu-col__split')}>
+                                {chunks.map((chunk, index) => (
+                                  <ul key={`${column.href}-${index}`}>
+                                    {chunk.map((row) => (
                                       <li key={row.href}>
-                                        <Link href={row.href} onClick={closeNav}>
+                                        <Link href={row.href} onClick={closeNav} prefetch>
                                           {row.label}
                                         </Link>
                                       </li>
                                     ))}
                                   </ul>
-                                ) : null
-                              )}
+                                ))}
+                              </div>
                             </div>
-                          ) : (
-                            <p className='nr-submenu-preview__empty'>
-                              No published {item.label.toLowerCase()} for {activeChild?.label} yet.
-                            </p>
-                          )}
-                          <div className='nr-submenu-mega__footer'>
-                            <Link href={item.href} onClick={closeNav}>
-                              {viewAllLabel(item.label)}
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className='nr-submenu'>
+                        <div className='nr-submenu__links'>
+                          {tabs.map((child) => (
+                            <Link
+                              href={child.href}
+                              key={`${item.label}-${child.href}`}
+                              onClick={closeNav}
+                            >
+                              <span>{child.label}</span>
                             </Link>
-                            <Link href={localePath(locale, '/contact')} onClick={closeNav}>
-                              Plan my safari
-                            </Link>
-                          </div>
+                          ))}
                         </div>
                       </div>
-                    </div>
-                  ) : isColumns ? (
-                    <div
-                      className={cn(
-                        'nr-submenu nr-submenu--columns',
-                        tabs.some((column) => (column.items?.length ?? 0) >= 8) &&
-                          'nr-submenu--columns-wide'
-                      )}
-                    >
-                      {tabs.map((column) => {
-                        const rows = column.items ?? [];
-                        const split = rows.length >= 8;
-                        const chunks = split ? splitColumns(rows) : [rows];
-
-                        return (
-                          <div
-                            className={cn('nr-submenu-col', split && 'nr-submenu-col--split')}
-                            key={`${item.label}-${column.href}`}
-                          >
-                            <p className='nr-submenu-col__heading'>{column.label}</p>
-                            <div className={cn(split && 'nr-submenu-col__split')}>
-                              {chunks.map((chunk, index) => (
-                                <ul key={`${column.href}-${index}`}>
-                                  {chunk.map((row) => (
-                                    <li key={row.href}>
-                                      <Link href={row.href} onClick={closeNav} prefetch>
-                                        {row.label}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </ul>
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className='nr-submenu'>
-                      <div className='nr-submenu__links'>
-                        {tabs.map((child) => (
-                          <Link
-                            href={child.href}
-                            key={`${item.label}-${child.href}`}
-                            onClick={closeNav}
-                          >
-                            <span>{child.label}</span>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                    )
+                  ) : null}
                 </div>
               );
             })}
-            {mobileOpen ? renderCta('nr-header-cta nr-header-cta--mobile') : null}
+            {mobileOpen ? (
+              <div className='nr-mainnav__sheet-end'>
+                {renderCta('nr-header-cta nr-header-cta--mobile')}
+                <div className='nr-mainnav__sheet-contact'>
+                  {contactPhone ? (
+                    <a href={`tel:${phoneHref(contactPhone)}`}>
+                      <Icons.phone aria-hidden />
+                      <span>{contactPhone}</span>
+                    </a>
+                  ) : null}
+                  <a href={`mailto:${siteSettings.email}`}>
+                    <Icons.mail aria-hidden />
+                    <span>{siteSettings.email}</span>
+                  </a>
+                </div>
+                <LanguageSelector locale={locale} pathname={pathname} variant='sheet' />
+              </div>
+            ) : null}
           </nav>
 
           {renderCta('nr-header-cta nr-header-cta--desktop')}
@@ -409,8 +451,36 @@ export function SiteHeader({ locale, navItems, siteSettings }: SiteHeaderProps) 
   );
 }
 
-function LanguageSelector({ locale, pathname }: { locale: string; pathname: string }) {
+function LanguageSelector({
+  locale,
+  pathname,
+  variant = 'topbar'
+}: {
+  locale: string;
+  pathname: string;
+  variant?: 'topbar' | 'sheet';
+}) {
   const basePath = stripLocalePrefix(pathname, locale);
+
+  if (variant === 'sheet') {
+    return (
+      <nav aria-label='Language' className='nr-lang-sheet'>
+        <p className='nr-lang-sheet__label'>Language</p>
+        <ul>
+          {SUPPORTED_LOCALES.map((code) => (
+            <li key={code}>
+              <Link
+                className={cn(code === locale && 'is-active')}
+                href={localePath(code, basePath)}
+              >
+                {code}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  }
 
   return (
     <details className='nr-lang'>

@@ -83,6 +83,21 @@ export const SITE_PHOTO_FALLBACKS: SitePhotoMap = {
   'about-mission': EXISTING.guests
 };
 
+export const DROPPED_SITE_PHOTO_FILES = [
+  '1740052257854.jpeg',
+  '1740056052647.jpeg',
+  '1740056058538.jpeg',
+  '1760102841171.jpeg',
+  '1760102841172.jpeg',
+  '46f98398-3530-41ec-9d60-c5a887791471.jpeg',
+  'Colubus-monkey-in-Rwanda.webp',
+  'Nature-Romp-Masai-Village-Visit.jpg',
+  'Nature-Romp-Safari-Vehicle.jpg',
+  'a.gavino_1750926719038.jpeg',
+  'image-3-1-e1754493940909.png',
+  'kikinetworktraveladventures_1750926875293.jpeg'
+].map(droppedPhoto);
+
 const BODY_PREFERRED: Partial<SitePhotoMap> = {
   'home-who-field': droppedPhoto('1740052257854.jpeg'),
   'home-who-inset': droppedPhoto('Nature-Romp-Masai-Village-Visit.jpg'),
@@ -156,9 +171,7 @@ function shuffle<T>(items: T[], random: () => number): T[] {
 /** Heroes keep their own media. Dropped files are assigned to body slots only. */
 export function assignSitePhotos(files: string[]): SitePhotoMap {
   const assigned = { ...SITE_PHOTO_FALLBACKS };
-  if (files.length === 0) return assigned;
-
-  const available = new Set(files);
+  const available = new Set([...DROPPED_SITE_PHOTO_FILES, ...files]);
   const used = new Set<string>();
 
   for (const slot of BODY_PHOTO_SLOTS) {
