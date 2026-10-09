@@ -1,62 +1,60 @@
-import Image from 'next/image';
-
 import { SectionHeader } from '@/components/public/ui/section-header';
+import { BRAND_KPSGA, BRAND_MAGICAL_KENYA, BRAND_TRA } from '@/config/brand';
 
-type Partner = {
-  name: string;
-  logoUrl?: string;
-};
+const TRUSTED_LOGOS = [BRAND_TRA, BRAND_MAGICAL_KENYA, BRAND_KPSGA] as const;
 
-/**
- * Accreditations and partners. Drop logo files into /public/assets/partners and
- * set `logoUrl` to show an image instead of the text badge fallback.
- */
-const PARTNERS: Partner[] = [
-  { name: 'KATO', logoUrl: '/assets/kato-logo.jpg' },
-  { name: 'ATTA', logoUrl: '/assets/ATTA-Logo-with-Icon-4.jpg' },
-  { name: 'TripAdvisor', logoUrl: '/assets/tripadvisor-logo-primary.svg' },
-  { name: 'SafariBookings.com', logoUrl: '/assets/safari_bookings.png' },
-  { name: 'Magical Kenya', logoUrl: '/assets/magicalkenya.jpg' },
-  { name: 'KPSGA', logoUrl: '/assets/KPSGA.jpg' },
-  { name: 'Tourism Regulatory Authority', logoUrl: '/assets/TRA.png' }
-];
+const MARQUEE_SEQUENCE = [...TRUSTED_LOGOS, ...TRUSTED_LOGOS, ...TRUSTED_LOGOS, ...TRUSTED_LOGOS];
 
-function PartnerBadge({ partner }: { partner: Partner }) {
+function TrustedLogo({
+  partner,
+  decorative = false
+}: {
+  partner: (typeof TRUSTED_LOGOS)[number];
+  decorative?: boolean;
+}) {
   return (
-    <div className='mx-8 flex h-24 w-48 shrink-0 items-center justify-center md:mx-12 md:w-52'>
-      {partner.logoUrl ? (
-        <Image
-          alt={partner.name}
-          className='max-h-16 w-auto object-contain transition duration-300 hover:scale-105'
-          height={72}
-          src={partner.logoUrl}
-          width={180}
-        />
-      ) : (
-        <span className='text-center text-sm font-semibold leading-tight text-[var(--brand-primary)]'>
-          {partner.name}
-        </span>
-      )}
-    </div>
+    <a
+      aria-hidden={decorative ? true : undefined}
+      className='mx-8 flex h-16 w-52 shrink-0 items-center justify-center md:mx-12 md:h-[4.5rem] md:w-60'
+      href={partner.url}
+      rel='noopener noreferrer'
+      tabIndex={decorative ? -1 : undefined}
+      target='_blank'
+    >
+      {/* Native img keeps official logo artwork at its designed proportions. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        alt={partner.alt}
+        className='max-h-12 w-auto max-w-[11.5rem] object-contain md:max-h-14 md:max-w-[13rem]'
+        height={partner.logoHeight}
+        src={partner.logoPath}
+        width={partner.logoWidth}
+      />
+    </a>
   );
 }
 
 export function HomePartners() {
-  const loop = [...PARTNERS, ...PARTNERS];
-
   return (
-    <section className='border-y border-[var(--brand-line)] bg-white'>
-      <div className='brand-container py-14 md:py-16'>
+    <section
+      aria-labelledby='trusted-by-heading'
+      className='border-y border-[var(--brand-line)] bg-white'
+    >
+      <div className='brand-container pt-14 md:pt-16'>
         <SectionHeader
-          description='Nature Romp Safaris works alongside the bodies and partners that keep East African travel safe, responsible, and world class.'
+          description='Nature Romp Safaris works with the authorities and associations that license and recognise travel in Kenya.'
           title='Trusted & Recognised'
+          titleId='trusted-by-heading'
         />
       </div>
 
-      <div className='brand-marquee-track overflow-hidden pb-14'>
-        <div className='brand-marquee'>
-          {loop.map((partner, index) => (
-            <PartnerBadge key={`${partner.name}-${index}`} partner={partner} />
+      <div className='brand-marquee-track mt-10 overflow-hidden pb-14 md:pb-16'>
+        <div className='brand-marquee brand-marquee--trusted'>
+          {MARQUEE_SEQUENCE.map((partner, index) => (
+            <TrustedLogo key={`${partner.alt}-${index}`} partner={partner} />
+          ))}
+          {MARQUEE_SEQUENCE.map((partner, index) => (
+            <TrustedLogo decorative key={`${partner.alt}-loop-${index}`} partner={partner} />
           ))}
         </div>
       </div>

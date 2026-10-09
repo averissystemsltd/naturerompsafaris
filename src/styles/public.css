@@ -1023,6 +1023,16 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   vertical-align: middle;
 }
 
+.public-site .brand-pricing-tier--group-joining .brand-pricing-tier__head th:nth-child(2),
+.public-site .brand-pricing-tier--group-joining .brand-pricing-tier__price {
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.public-site .brand-pricing-tier--group-joining .brand-pricing-tier__price strong {
+  font-size: 1.125rem;
+}
+
 .public-site .brand-pricing-tier--day-trip {
   padding-top: 0.875rem;
 }
@@ -2551,6 +2561,10 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
   animation: brand-marquee 32s linear infinite;
 }
 
+.public-site .brand-marquee--trusted {
+  animation-duration: 42s;
+}
+
 .public-site .brand-marquee-track:hover .brand-marquee {
   animation-play-state: paused;
 }
@@ -2567,7 +2581,6 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
 }
 
 .public-site .brand-google-review-card {
-  min-height: 17.5rem;
   flex: 0 0 100%;
   min-width: 0;
 }
@@ -2611,6 +2624,11 @@ body:has(.team-member-dialog[data-state='open']) [data-slot='dialog-overlay'] {
     animation: none;
     flex-wrap: wrap;
     justify-content: center;
+    width: auto;
+  }
+
+  .public-site .brand-marquee > a[aria-hidden='true'] {
+    display: none;
   }
 }
 

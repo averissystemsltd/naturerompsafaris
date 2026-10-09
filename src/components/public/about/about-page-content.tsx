@@ -4,6 +4,7 @@ import { AboutStoryIntro } from '@/components/public/about/about-story-intro';
 import { BookingAdvantagesCta } from '@/components/public/booking-advantages-cta';
 import { HomeDestinationsMap } from '@/components/public/home/home-destinations-map';
 import { HomeGoogleReviews } from '@/components/public/home/home-google-reviews';
+import { HomePartners } from '@/components/public/home/home-partners';
 import { ABOUT_HERO_DEFAULTS, ABOUT_OPERATIONS } from '@/lib/public/about-content';
 import type { HomeReviewItem } from '@/lib/public/home-reviews';
 import { localePath } from '@/lib/public/locale-path';
@@ -26,6 +27,7 @@ export function AboutPageContent({ hero, locale, reviews }: AboutPageContentProp
         title={ABOUT_HERO_DEFAULTS.title}
       />
       <AboutStoryIntro locale={locale} />
+      <HomePartners />
       <HomeDestinationsMap
         description={ABOUT_OPERATIONS.description}
         eyebrow=''

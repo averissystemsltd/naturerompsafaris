@@ -115,11 +115,35 @@ export const BRAND_CONTACT_RESPONSE = {
 } as const;
 
 export const BRAND_SAFARI_BOOKINGS = {
-  url: 'https://www.safaribookings.com/',
+  url: 'https://www.safaribookings.com/p6290',
   logoPath: '/assets/safari_bookings.png',
-  logoWidth: 200,
-  logoHeight: 80,
-  alt: 'SafariBookings.com'
+  logoWidth: 348,
+  logoHeight: 145,
+  alt: 'SafariBookings'
+} as const;
+
+export const BRAND_TRA = {
+  url: 'https://tra.go.ke/',
+  logoPath: '/assets/tra-logo.png',
+  logoWidth: 584,
+  logoHeight: 204,
+  alt: 'Tourism Regulatory Authority'
+} as const;
+
+export const BRAND_MAGICAL_KENYA = {
+  url: 'https://magicalkenya.com/',
+  logoPath: '/assets/magicalkenya.jpg',
+  logoWidth: 1024,
+  logoHeight: 605,
+  alt: 'Magical Kenya'
+} as const;
+
+export const BRAND_KPSGA = {
+  url: 'https://safariguides.org/',
+  logoPath: '/assets/kpsga-logo.png',
+  logoWidth: 364,
+  logoHeight: 139,
+  alt: 'Kenya Professional Safari Guides Association'
 } as const;
 
 // WhatsApp business number for the public floating button, header, and contact

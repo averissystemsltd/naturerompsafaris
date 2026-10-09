@@ -4,9 +4,27 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Icons } from '@/components/icons';
 import { SectionHeader } from '@/components/public/ui/section-header';
-import { BRAND_GOOGLE_REVIEWS } from '@/config/brand';
+import { BRAND_GOOGLE_REVIEWS, BRAND_SAFARI_BOOKINGS, BRAND_TRIPADVISOR } from '@/config/brand';
 import { FALLBACK_GOOGLE_HOME_REVIEWS, type HomeReviewItem } from '@/lib/public/home-reviews';
 import { cn } from '@/lib/utils';
+
+const REVIEW_PLATFORMS = [
+  {
+    ...BRAND_SAFARI_BOOKINGS,
+    detail: 'Nature Romp Safaris operator profile.',
+    name: 'SafariBookings'
+  },
+  {
+    ...BRAND_TRIPADVISOR,
+    detail: 'Nature Romp Safaris traveller reviews.',
+    name: 'Tripadvisor'
+  },
+  {
+    ...BRAND_GOOGLE_REVIEWS,
+    detail: `${BRAND_GOOGLE_REVIEWS.rating} average star rating.`,
+    name: 'Google Reviews'
+  }
+] as const;
 
 const AVATAR_COLORS = ['#EA4335', '#FB8C00', '#34A853', '#4285F4', '#AB47BC', '#00ACC1'];
 const REVIEW_PREVIEW_LENGTH = 180;
@@ -111,27 +129,46 @@ function GoogleReviewCard({
   const dateLabel = formatReviewDate(review.reviewDate);
 
   return (
-    <article className='brand-google-review-card flex h-full flex-col border border-[var(--brand-line)] bg-white p-6'>
-      <div className='flex items-start gap-3'>
+    <article className='brand-google-review-card flex h-full flex-col px-1 md:px-5'>
+      <StarRating rating={review.rating} />
+      <blockquote className='mt-4 flex-1 text-base leading-8 text-[var(--brand-heading)]'>
+        <span
+          aria-hidden
+          className='mr-1 font-display text-3xl leading-none text-[var(--brand-gold)]'
+        >
+          &ldquo;
+        </span>
+        {expanded || !canExpand ? review.body : preview}
+      </blockquote>
+      {canExpand ? (
+        <button
+          className='mt-3 self-start text-sm font-semibold text-[var(--brand-primary)] transition-opacity hover:opacity-70'
+          onClick={onToggle}
+          type='button'
+        >
+          {expanded ? 'Read less' : 'Read more'}
+        </button>
+      ) : null}
+      <footer className='mt-6 flex items-center gap-3'>
         {review.avatarUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            alt={review.authorName}
-            className='h-11 w-11 shrink-0 rounded-full object-cover'
-            height={44}
+            alt=''
+            className='h-10 w-10 shrink-0 rounded-full object-cover'
+            height={40}
             src={review.avatarUrl}
-            width={44}
+            width={40}
           />
         ) : (
           <span
-            className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white'
+            className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white'
             style={{ backgroundColor: avatarColor(review.authorName) }}
           >
             {initials(review.authorName)}
           </span>
         )}
         <div className='min-w-0 flex-1'>
-          <p className='truncate text-[15px] font-semibold text-[var(--brand-heading)]'>
+          <p className='truncate text-sm font-semibold text-[var(--brand-heading)]'>
             {review.authorName}
           </p>
           {dateLabel ? (
@@ -139,25 +176,7 @@ function GoogleReviewCard({
           ) : null}
         </div>
         <GoogleGlyph className='h-5 w-5 shrink-0' />
-      </div>
-
-      <div className='mt-3'>
-        <StarRating rating={review.rating} />
-      </div>
-
-      <p className='mt-3 flex-1 text-sm leading-7 text-[var(--brand-ink)]'>
-        {expanded || !canExpand ? review.body : preview}
-      </p>
-
-      {canExpand ? (
-        <button
-          className='mt-2 self-start text-sm text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-heading)]'
-          onClick={onToggle}
-          type='button'
-        >
-          {expanded ? 'Read less' : 'Read more'}
-        </button>
-      ) : null}
+      </footer>
     </article>
   );
 }
@@ -264,7 +283,7 @@ function GoogleReviewsSlider({ items }: { items: HomeReviewItem[] }) {
     >
       <button
         aria-label='Previous reviews'
-        className='absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-[var(--brand-line)] bg-[var(--brand-warm-gray)] text-[var(--brand-heading)] transition-colors hover:border-[var(--brand-heading)] hover:text-[var(--brand-primary)]'
+        className='absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center text-[var(--brand-heading)] transition-opacity hover:opacity-60'
         onClick={() => goTo(index - 1)}
         type='button'
       >
@@ -272,7 +291,7 @@ function GoogleReviewsSlider({ items }: { items: HomeReviewItem[] }) {
       </button>
       <button
         aria-label='Next reviews'
-        className='absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-[var(--brand-line)] bg-[var(--brand-warm-gray)] text-[var(--brand-heading)] transition-colors hover:border-[var(--brand-heading)] hover:text-[var(--brand-primary)]'
+        className='absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center text-[var(--brand-heading)] transition-opacity hover:opacity-60'
         onClick={() => goTo(index + 1)}
         type='button'
       >
@@ -313,26 +332,47 @@ export function HomeGoogleReviews({ reviews }: { reviews?: HomeReviewItem[] }) {
     >
       <div className='brand-container brand-section'>
         <SectionHeader
+          description='Open the Nature Romp Safaris page on SafariBookings, Tripadvisor, or Google.'
           eyebrow='Guest reviews'
           title='Our customer reviews'
           titleId='home-reviews-heading'
         />
 
-        <div className='mt-12'>
-          <GoogleReviewsSlider items={items} />
-        </div>
+        <ul className='mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+          {REVIEW_PLATFORMS.map((platform) => (
+            <li
+              className={
+                platform.name === 'Google Reviews' ? 'md:col-span-2 lg:col-span-1' : undefined
+              }
+              key={platform.name}
+            >
+              <a
+                className='group flex h-full flex-col items-center border border-[var(--brand-line)] bg-white px-6 py-8 text-center transition-colors hover:border-[var(--brand-primary)]'
+                href={platform.url}
+                rel='noopener noreferrer'
+                target='_blank'
+              >
+                <span className='flex h-16 w-full items-center justify-center'>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    alt=''
+                    className='max-h-14 w-auto max-w-[200px] object-contain transition-transform group-hover:scale-[1.02]'
+                    height={platform.logoHeight}
+                    src={platform.logoPath}
+                    width={platform.logoWidth}
+                  />
+                </span>
+                <span className='brand-heading mt-5 font-display text-xl'>{platform.name}</span>
+                <span className='mt-2 max-w-xs text-sm leading-7 text-[var(--brand-muted)]'>
+                  {platform.detail}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
 
-        <div className='mt-8 flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--brand-muted)]'>
-          <p>Showing our latest reviews</p>
-          <a
-            className='inline-flex items-center gap-2 font-semibold text-[var(--brand-heading)] transition-opacity hover:opacity-80'
-            href={BRAND_GOOGLE_REVIEWS.url}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            <GoogleGlyph className='h-4 w-4 shrink-0' />
-            Google {BRAND_GOOGLE_REVIEWS.rating} average
-          </a>
+        <div className='mt-14'>
+          <GoogleReviewsSlider items={items} />
         </div>
       </div>
     </section>

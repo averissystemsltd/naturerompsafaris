@@ -101,14 +101,14 @@ export const PLACEHOLDER_PARTNERS: AboutPartner[] = [
     description:
       'Our guides and driver-guides align with KPSGA professional certification standards.',
     category: 'industry',
-    url: 'https://kpsga.org/'
+    url: 'https://safariguides.org/'
   },
   {
     id: 'partner-safaribookings',
     name: 'SafariBookings.com',
     description: 'Verified operator profile with guest reviews and transparent safari listings.',
     category: 'platform',
-    url: 'https://www.safaribookings.com/'
+    url: 'https://www.safaribookings.com/p6290'
   },
   {
     id: 'partner-olpejeta',

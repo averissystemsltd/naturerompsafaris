@@ -63,6 +63,14 @@ const HomeExperiencesGrid = dynamic(
   { loading: () => null }
 );
 
+const HomePartners = dynamic(
+  () =>
+    import('@/components/public/home/home-partners').then((module) => ({
+      default: module.HomePartners
+    })),
+  { loading: () => null }
+);
+
 const HomeGoogleReviews = dynamic(
   () =>
     import('@/components/public/home/home-google-reviews').then((module) => ({
@@ -105,6 +113,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <HomeHero hero={homeHero} locale={locale} slides={heroSlides} />
       <Suspense fallback={null}>
         <HomeWhyChooseUs locale={locale} />
+        <HomePartners />
         <HomeDestinationsMap locale={locale} showCountryTiles />
         <HomeExperiencesGrid experiences={experiences} locale={locale} />
         <HomeFeaturedTours locale={locale} tours={tours} />
