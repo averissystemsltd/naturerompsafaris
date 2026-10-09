@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import {
   ListingFilterGroup,
   ListingFilterOption,
@@ -30,17 +32,31 @@ const MENU_GROUP_FILTERS = [
 ];
 
 export function ExperienceListingFilters({ active, onChange }: ExperienceListingFiltersProps) {
+  const draftRef = useRef(active);
+
+  useEffect(() => {
+    draftRef.current = active;
+  }, [active]);
+
   const activeCount = active.countries.length + active.groups.length;
 
   function update(partial: Partial<ExperienceListingFiltersState>) {
-    onChange({ ...active, ...partial });
+    const next = { ...draftRef.current, ...partial };
+    draftRef.current = next;
+    onChange(next);
+  }
+
+  function clear() {
+    const next = { countries: [], groups: [] } satisfies ExperienceListingFiltersState;
+    draftRef.current = next;
+    onChange(next);
   }
 
   return (
     <ListingFilters
       activeCount={activeCount}
       clearLabel='Clear all'
-      onClear={() => onChange({ countries: [], groups: [] })}
+      onClear={clear}
       title='Experiences'
     >
       <ListingFilterGroup title='Show'>
@@ -50,7 +66,7 @@ export function ExperienceListingFilters({ active, onChange }: ExperienceListing
           label='All experiences'
           name='experience-scope'
           type='radio'
-          onChange={() => onChange({ countries: [], groups: [] })}
+          onChange={clear}
         />
       </ListingFilterGroup>
 
@@ -63,7 +79,10 @@ export function ExperienceListingFilters({ active, onChange }: ExperienceListing
             label={country.name}
             onChange={() =>
               update({
-                countries: toggleFilterValue(active.countries, country.id) as BrandCountryId[]
+                countries: toggleFilterValue(
+                  draftRef.current.countries,
+                  country.id
+                ) as BrandCountryId[]
               })
             }
           />
@@ -79,7 +98,10 @@ export function ExperienceListingFilters({ active, onChange }: ExperienceListing
             label={entry.label}
             onChange={() =>
               update({
-                groups: toggleFilterValue(active.groups, entry.value) as ExperienceMenuGroup[]
+                groups: toggleFilterValue(
+                  draftRef.current.groups,
+                  entry.value
+                ) as ExperienceMenuGroup[]
               })
             }
           />

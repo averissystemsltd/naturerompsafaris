@@ -9,7 +9,8 @@ import {
   ListingFilterOption,
   ListingFilterRange,
   ListingFilters,
-  toggleFilterValue
+  toggleFilterValue,
+  useDraftFilters
 } from '@/components/public/listing-filters';
 import type { PublicTourCatalogFacets, PublicTourPricingTier } from '@/lib/public/types';
 import { localePath } from '@/lib/public/locale-path';
@@ -86,11 +87,20 @@ const EMPTY_FILTERS: TourCatalogActive = {
 export function TourCatalogFilters({ active, facets, locale }: TourCatalogFiltersProps) {
   const router = useRouter();
   const basePath = localePath(locale, '/tours');
-
-  const destination = active.destination ?? [];
-  const experience = active.experience ?? [];
-  const park = active.park ?? [];
-  const pricingTiers = active.pricingTiers ?? [];
+  const normalizedActive = {
+    ...active,
+    destination: active.destination ?? [],
+    experience: active.experience ?? [],
+    park: active.park ?? [],
+    pricingTiers: active.pricingTiers ?? []
+  };
+  const { commit, draft, draftRef } = useDraftFilters(normalizedActive, buildQuery, (query) => {
+    router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
+  });
+  const destination = draft.destination ?? [];
+  const experience = draft.experience ?? [];
+  const park = draft.park ?? [];
+  const pricingTiers = draft.pricingTiers ?? [];
 
   const durationMin = facets.durationBounds?.min ?? TOUR_CATALOG_DURATION_BOUNDS.min;
   const durationMax = facets.durationBounds?.max ?? TOUR_CATALOG_DURATION_BOUNDS.max;
@@ -108,29 +118,17 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
 
   React.useEffect(() => {
     setDurationRange([
-      asNumber(active.durationMin, durationMin),
-      asNumber(active.durationMax, durationMax)
+      asNumber(draft.durationMin, durationMin),
+      asNumber(draft.durationMax, durationMax)
     ]);
-  }, [active.durationMin, active.durationMax, durationMin, durationMax]);
+  }, [draft.durationMin, draft.durationMax, durationMin, durationMax]);
 
   React.useEffect(() => {
-    setPriceRange([asNumber(active.priceMin, priceMin), asNumber(active.priceMax, priceMax)]);
-  }, [active.priceMin, active.priceMax, priceMin, priceMax]);
-
-  function navigate(next: TourCatalogActive) {
-    const query = buildQuery(next);
-    router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
-  }
+    setPriceRange([asNumber(draft.priceMin, priceMin), asNumber(draft.priceMax, priceMax)]);
+  }, [draft.priceMin, draft.priceMax, priceMin, priceMax]);
 
   function update(partial: Partial<TourCatalogActive>) {
-    navigate({
-      ...active,
-      destination,
-      experience,
-      park,
-      pricingTiers,
-      ...partial
-    });
+    commit({ ...draftRef.current, ...partial });
   }
 
   const countries = TOUR_CATALOG_COUNTRIES.filter(
@@ -141,13 +139,7 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
     (tier) => !facets.pricingTiers?.length || facets.pricingTiers.includes(tier.value)
   );
 
-  const activeCount = countActiveFilters({
-    ...active,
-    destination,
-    experience,
-    park,
-    pricingTiers
-  });
+  const activeCount = countActiveFilters(draft);
 
   return (
     <ListingFilters
@@ -156,13 +148,13 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
       onClear={() => {
         setDurationRange([durationMin, durationMax]);
         setPriceRange([priceMin, priceMax]);
-        navigate(EMPTY_FILTERS);
+        commit(EMPTY_FILTERS);
       }}
       title='Safari tours'
     >
       <ListingFilterGroup title='Country'>
         <ListingFilterOption
-          checked={!active.country}
+          checked={!draft.country}
           id='tour-country-all'
           label='All countries'
           name='tour-country'
@@ -171,7 +163,7 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
         />
         {countries.map(({ country, slug }) => (
           <ListingFilterOption
-            checked={active.country === slug}
+            checked={draft.country === slug}
             id={`tour-country-${slug}`}
             key={slug}
             label={country}
@@ -194,7 +186,11 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
               id={`tour-destination-${label.replace(/\W+/g, '-').toLowerCase()}`}
               key={label}
               label={label}
-              onChange={() => update({ destination: toggleFilterValue(destination, label) })}
+              onChange={() =>
+                update({
+                  destination: toggleFilterValue(draftRef.current.destination, label)
+                })
+              }
             />
           ))}
         </ListingFilterDropdown>
@@ -212,7 +208,7 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
               id={`tour-park-${item.slug}`}
               key={item.slug}
               label={item.label}
-              onChange={() => update({ park: toggleFilterValue(park, item.slug) })}
+              onChange={() => update({ park: toggleFilterValue(draftRef.current.park, item.slug) })}
             />
           ))}
         </ListingFilterDropdown>
@@ -230,7 +226,11 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
               id={`tour-experience-${label.replace(/\W+/g, '-').toLowerCase()}`}
               key={label}
               label={label}
-              onChange={() => update({ experience: toggleFilterValue(experience, label) })}
+              onChange={() =>
+                update({
+                  experience: toggleFilterValue(draftRef.current.experience, label)
+                })
+              }
             />
           ))}
         </ListingFilterDropdown>
@@ -247,7 +247,7 @@ export function TourCatalogFilters({ active, facets, locale }: TourCatalogFilter
               onChange={() =>
                 update({
                   pricingTiers: toggleFilterValue(
-                    pricingTiers,
+                    draftRef.current.pricingTiers,
                     tier.value
                   ) as PublicTourPricingTier['tier'][]
                 })

@@ -11,6 +11,63 @@ export function toggleFilterValue(current: string[], value: string): string[] {
   return current.includes(value) ? current.filter((item) => item !== value) : [...current, value];
 }
 
+function sameQuery(left: string, right: string) {
+  const a = new URLSearchParams(left);
+  const b = new URLSearchParams(right);
+  a.sort();
+  b.sort();
+  return a.toString() === b.toString();
+}
+
+/**
+ * Keeps the latest filter selection on the client.
+ * Catalog pages apply filters with a server navigation, so a second click can
+ * otherwise rebuild the query from props that have not caught up yet and drop
+ * the first choice.
+ */
+export function useDraftFilters<T>(
+  active: T,
+  buildQuery: (value: T) => string,
+  navigate: (query: string) => void
+) {
+  const propsRef = React.useRef(active);
+  propsRef.current = active;
+  const draftRef = React.useRef(active);
+  const [draft, setDraft] = React.useState(active);
+  const navigateRef = React.useRef(navigate);
+  navigateRef.current = navigate;
+  const timerRef = React.useRef<number | null>(null);
+  const activeQuery = buildQuery(active);
+
+  React.useEffect(() => {
+    return () => {
+      if (timerRef.current) window.clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (timerRef.current) return;
+    const queryFromUrl = window.location.search.replace(/^\?/, '');
+    if (!sameQuery(activeQuery, queryFromUrl)) return;
+    draftRef.current = propsRef.current;
+    setDraft(propsRef.current);
+  }, [activeQuery]);
+
+  function commit(next: T) {
+    draftRef.current = next;
+    setDraft(next);
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+    // One navigation for a burst of clicks, so an earlier server response
+    // cannot replace the latest selection.
+    timerRef.current = window.setTimeout(() => {
+      timerRef.current = null;
+      navigateRef.current(buildQuery(draftRef.current));
+    }, 80);
+  }
+
+  return { commit, draft, draftRef };
+}
+
 type ListingFiltersProps = {
   activeCount?: number;
   children: React.ReactNode;

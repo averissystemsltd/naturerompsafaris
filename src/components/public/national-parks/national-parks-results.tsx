@@ -14,13 +14,18 @@ import type { ParkListItem } from '@/lib/public/national-parks';
 import { cn } from '@/lib/utils';
 
 type NationalParksResultsProps = {
+  hasFilters?: boolean;
   locale: string;
   parks: ParkListItem[];
 };
 
 const MAX_COMPARE = 2;
 
-export function NationalParksResults({ locale, parks }: NationalParksResultsProps) {
+export function NationalParksResults({
+  hasFilters = false,
+  locale,
+  parks
+}: NationalParksResultsProps) {
   const [view] = useNationalParkView();
   const [compareIds, setCompareIds] = React.useState<string[]>([]);
   const countLabel = `${parks.length} ${parks.length === 1 ? 'park or reserve' : 'parks and reserves'} found`;
@@ -45,10 +50,14 @@ export function NationalParksResults({ locale, parks }: NationalParksResultsProp
       <>
         <p className='mb-6 text-sm font-medium text-[var(--brand-muted)]'>{countLabel}</p>
         <EmptyState
-          actionHref={localePath(locale, '/contact')}
-          actionLabel='Ask a Safari Planner'
-          message='No published national park guides yet. Add and publish parks in the portal under National Parks, or ask our team which reserves fit your dates and wildlife interests.'
-          title='No parks published yet'
+          actionHref={localePath(locale, hasFilters ? '/national-parks' : '/contact')}
+          actionLabel={hasFilters ? 'Clear filters' : 'Ask a Safari Planner'}
+          message={
+            hasFilters
+              ? 'No parks match these filters. Clear them to see every published guide.'
+              : 'No published national park guides yet. Add and publish parks in the portal under National Parks, or ask our team which reserves fit your dates and wildlife interests.'
+          }
+          title={hasFilters ? 'No parks match these filters' : 'No parks published yet'}
         />
       </>
     );

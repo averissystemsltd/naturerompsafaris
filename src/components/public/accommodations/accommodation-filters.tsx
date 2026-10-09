@@ -10,7 +10,8 @@ import {
   ListingFilterOption,
   ListingFilterRange,
   ListingFilters,
-  toggleFilterValue
+  toggleFilterValue,
+  useDraftFilters
 } from '@/components/public/listing-filters';
 import {
   ACCOMMODATION_COMFORT_LEVELS,
@@ -90,6 +91,9 @@ export function AccommodationFilters({
 }: AccommodationFiltersProps) {
   const router = useRouter();
   const basePath = localePath(locale, '/accommodations');
+  const { commit, draft, draftRef } = useDraftFilters(active, buildQuery, (query) => {
+    router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
+  });
 
   // Prefer countries that actually have published stays; fall back to the full preset list.
   const countries = (
@@ -116,7 +120,7 @@ export function AccommodationFilters({
     (value) => facets.comfortLevels.length === 0 || facets.comfortLevels.includes(value)
   );
 
-  const selectedCountries = active.countries
+  const selectedCountries = draft.countries
     .map((country) => normalizeCountryValue(country) ?? country)
     .filter(Boolean);
 
@@ -128,8 +132,8 @@ export function AccommodationFilters({
 
   const sliderMin = priceBounds.min;
   const sliderMax = Math.max(priceBounds.max, sliderMin + 100);
-  const activeMin = active.minPrice ? Number(active.minPrice) : sliderMin;
-  const activeMax = active.maxPrice ? Number(active.maxPrice) : sliderMax;
+  const activeMin = draft.minPrice ? Number(draft.minPrice) : sliderMin;
+  const activeMax = draft.maxPrice ? Number(draft.maxPrice) : sliderMax;
   const [priceRange, setPriceRange] = React.useState<[number, number]>([
     Number.isFinite(activeMin) ? activeMin : sliderMin,
     Number.isFinite(activeMax) ? activeMax : sliderMax
@@ -137,18 +141,13 @@ export function AccommodationFilters({
 
   React.useEffect(() => {
     setPriceRange([
-      active.minPrice ? Number(active.minPrice) : sliderMin,
-      active.maxPrice ? Number(active.maxPrice) : sliderMax
+      draft.minPrice ? Number(draft.minPrice) : sliderMin,
+      draft.maxPrice ? Number(draft.maxPrice) : sliderMax
     ]);
-  }, [active.minPrice, active.maxPrice, sliderMin, sliderMax]);
-
-  function navigate(next: AccommodationActive) {
-    const query = buildQuery(next);
-    router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
-  }
+  }, [draft.minPrice, draft.maxPrice, sliderMin, sliderMax]);
 
   function update(partial: Partial<AccommodationActive>) {
-    const next = { ...active, ...partial };
+    const next = { ...draftRef.current, ...partial };
 
     if (partial.countries) {
       const nextCountries = partial.countries
@@ -162,10 +161,10 @@ export function AccommodationFilters({
       });
     }
 
-    navigate(next);
+    commit(next);
   }
 
-  const activeCount = countActiveFilters(active);
+  const activeCount = countActiveFilters(draft);
 
   return (
     <ListingFilters
@@ -173,22 +172,22 @@ export function AccommodationFilters({
       clearLabel='Clear all'
       onClear={() => {
         setPriceRange([sliderMin, sliderMax]);
-        navigate(EMPTY_FILTERS);
+        commit(EMPTY_FILTERS);
       }}
       title='Accommodations'
     >
       <ListingFilterGroup title='Country'>
         {countries.map((country) => {
-          const checked = active.countries.some(
-            (value) => normalizeCountryValue(value) === country
-          );
+          const checked = draft.countries.some((value) => normalizeCountryValue(value) === country);
           return (
             <ListingFilterOption
               key={country}
               checked={checked}
               id={`filter-country-${country.replace(/\W+/g, '-').toLowerCase()}`}
               label={formatCountryLabel(country) ?? country}
-              onChange={() => update({ countries: toggleFilterValue(active.countries, country) })}
+              onChange={() =>
+                update({ countries: toggleFilterValue(draftRef.current.countries, country) })
+              }
             />
           );
         })}
@@ -200,7 +199,7 @@ export function AccommodationFilters({
             ? undefined
             : 'Showing all destinations. Select a country to narrow the list.'
         }
-        selectedCount={active.destinations.length}
+        selectedCount={draft.destinations.length}
         title='Destination'
         triggerLabel='Select destinations'
       >
@@ -208,12 +207,12 @@ export function AccommodationFilters({
           destinations.map((destination) => (
             <ListingFilterOption
               key={destination.slug}
-              checked={active.destinations.includes(destination.slug)}
+              checked={draft.destinations.includes(destination.slug)}
               id={`filter-destination-${destination.slug}`}
               label={destination.label}
               onChange={() =>
                 update({
-                  destinations: toggleFilterValue(active.destinations, destination.slug)
+                  destinations: toggleFilterValue(draftRef.current.destinations, destination.slug)
                 })
               }
             />
@@ -231,11 +230,13 @@ export function AccommodationFilters({
         {propertyTypes.map((type) => (
           <ListingFilterOption
             key={type}
-            checked={active.propertyTypes.includes(type)}
+            checked={draft.propertyTypes.includes(type)}
             id={`filter-type-${type.replace(/\s+/g, '-').toLowerCase()}`}
             label={type}
             onChange={() =>
-              update({ propertyTypes: toggleFilterValue(active.propertyTypes, type) })
+              update({
+                propertyTypes: toggleFilterValue(draftRef.current.propertyTypes, type)
+              })
             }
           />
         ))}
@@ -245,11 +246,13 @@ export function AccommodationFilters({
         {comfortLevels.map((level) => (
           <ListingFilterOption
             key={level}
-            checked={active.comfortLevels.includes(level)}
+            checked={draft.comfortLevels.includes(level)}
             id={`filter-comfort-${level}`}
             label={formatComfortLevelLabel(level) ?? level}
             onChange={() =>
-              update({ comfortLevels: toggleFilterValue(active.comfortLevels, level) })
+              update({
+                comfortLevels: toggleFilterValue(draftRef.current.comfortLevels, level)
+              })
             }
           />
         ))}
@@ -257,17 +260,19 @@ export function AccommodationFilters({
 
       {facets.regions.length ? (
         <ListingFilterDropdown
-          selectedCount={active.regions.length}
+          selectedCount={draft.regions.length}
           title='Location'
           triggerLabel='Select locations'
         >
           {facets.regions.map((region) => (
             <ListingFilterOption
               key={region}
-              checked={active.regions.includes(region)}
+              checked={draft.regions.includes(region)}
               id={`filter-region-${region.replace(/\s+/g, '-').toLowerCase()}`}
               label={region}
-              onChange={() => update({ regions: toggleFilterValue(active.regions, region) })}
+              onChange={() =>
+                update({ regions: toggleFilterValue(draftRef.current.regions, region) })
+              }
             />
           ))}
         </ListingFilterDropdown>

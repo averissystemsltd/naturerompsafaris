@@ -88,7 +88,11 @@ export default async function NationalParksPage({ params, searchParams }: Nation
       <ListingShell
         filters={<NationalParkFilters active={activeFilters} facets={facets} locale={locale} />}
       >
-        <NationalParksResults locale={locale} parks={parks} />
+        <NationalParksResults
+          hasFilters={Object.values(query).some((value) => Boolean(value?.trim()))}
+          locale={locale}
+          parks={parks}
+        />
       </ListingShell>
     </>
   );

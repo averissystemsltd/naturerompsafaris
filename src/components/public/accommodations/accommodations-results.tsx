@@ -12,10 +12,15 @@ import { cn } from '@/lib/utils';
 
 type AccommodationsResultsProps = {
   accommodations: PublicAccommodation[];
+  hasFilters?: boolean;
   locale: string;
 };
 
-export function AccommodationsResults({ accommodations, locale }: AccommodationsResultsProps) {
+export function AccommodationsResults({
+  accommodations,
+  hasFilters = false,
+  locale
+}: AccommodationsResultsProps) {
   const [view] = useAccommodationView();
   const countLabel = `${accommodations.length} ${accommodations.length === 1 ? 'property' : 'properties'} found`;
 
@@ -24,10 +29,14 @@ export function AccommodationsResults({ accommodations, locale }: Accommodations
       <>
         <p className='mb-6 text-sm font-medium text-[var(--brand-muted)]'>{countLabel}</p>
         <EmptyState
-          actionHref={localePath(locale, '/contact')}
-          actionLabel='Request a custom quote'
-          message='Published accommodations will appear here once they are added through the Nature Romp CMS.'
-          title='No properties match your filters'
+          actionHref={localePath(locale, hasFilters ? '/accommodations' : '/contact')}
+          actionLabel={hasFilters ? 'Clear filters' : 'Request a custom quote'}
+          message={
+            hasFilters
+              ? 'No stays match these filters. Clear them to see every published property.'
+              : 'Published accommodations will appear here once they are added through the Nature Romp CMS.'
+          }
+          title={hasFilters ? 'No properties match your filters' : 'No properties published yet'}
         />
       </>
     );

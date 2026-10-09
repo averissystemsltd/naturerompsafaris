@@ -114,7 +114,11 @@ export default async function AccommodationsPage({
           />
         }
       >
-        <AccommodationsResults accommodations={accommodations} locale={locale} />
+        <AccommodationsResults
+          accommodations={accommodations}
+          hasFilters={Object.values(query).some((value) => Boolean(value?.trim()))}
+          locale={locale}
+        />
       </ListingShell>
     </>
   );

@@ -7,7 +7,8 @@ import {
   ListingFilterGroup,
   ListingFilterOption,
   ListingFilters,
-  toggleFilterValue
+  toggleFilterValue,
+  useDraftFilters
 } from '@/components/public/listing-filters';
 import type { ParkFilterFacets } from '@/lib/public/national-parks';
 import { localePath } from '@/lib/public/locale-path';
@@ -48,26 +49,26 @@ function countActive(active: NationalParkFiltersProps['active']) {
 export function NationalParkFilters({ active, facets, locale }: NationalParkFiltersProps) {
   const router = useRouter();
   const basePath = localePath(locale, '/national-parks');
+  const { commit, draft, draftRef } = useDraftFilters(active, buildQuery, (query) => {
+    router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
+  });
   const hasFacetValues =
     facets.countries.length ||
     facets.regions.length ||
     facets.wildlife.length ||
     facets.activities.length;
 
-  function navigate(next: NationalParkFiltersProps['active']) {
-    const query = buildQuery(next);
-    router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
-  }
-
   function update(partial: Partial<NationalParkFiltersProps['active']>) {
-    navigate({ ...active, ...partial });
+    commit({ ...draftRef.current, ...partial });
   }
 
   return (
     <ListingFilters
-      activeCount={countActive(active)}
+      activeCount={countActive(draft)}
       clearLabel='Clear all'
-      onClear={() => router.push(basePath, { scroll: false })}
+      onClear={() => {
+        commit({ activities: [], countries: [], regions: [], wildlife: [] });
+      }}
       title='National parks'
     >
       {!hasFacetValues ? (
@@ -80,11 +81,13 @@ export function NationalParkFilters({ active, facets, locale }: NationalParkFilt
         <ListingFilterGroup title='Country'>
           {facets.countries.map((country) => (
             <ListingFilterOption
-              checked={active.countries.includes(country)}
+              checked={draft.countries.includes(country)}
               id={filterId('country', country)}
               key={country}
               label={country}
-              onChange={() => update({ countries: toggleFilterValue(active.countries, country) })}
+              onChange={() =>
+                update({ countries: toggleFilterValue(draftRef.current.countries, country) })
+              }
             />
           ))}
         </ListingFilterGroup>
@@ -92,17 +95,19 @@ export function NationalParkFilters({ active, facets, locale }: NationalParkFilt
 
       {facets.regions.length ? (
         <ListingFilterDropdown
-          selectedCount={active.regions.length}
+          selectedCount={draft.regions.length}
           title='Region'
           triggerLabel='Select regions'
         >
           {facets.regions.map((region) => (
             <ListingFilterOption
-              checked={active.regions.includes(region)}
+              checked={draft.regions.includes(region)}
               id={filterId('region', region)}
               key={region}
               label={region}
-              onChange={() => update({ regions: toggleFilterValue(active.regions, region) })}
+              onChange={() =>
+                update({ regions: toggleFilterValue(draftRef.current.regions, region) })
+              }
             />
           ))}
         </ListingFilterDropdown>
@@ -110,17 +115,19 @@ export function NationalParkFilters({ active, facets, locale }: NationalParkFilt
 
       {facets.wildlife.length ? (
         <ListingFilterDropdown
-          selectedCount={active.wildlife.length}
+          selectedCount={draft.wildlife.length}
           title='Wildlife'
           triggerLabel='Select wildlife'
         >
           {facets.wildlife.map((animal) => (
             <ListingFilterOption
-              checked={active.wildlife.includes(animal)}
+              checked={draft.wildlife.includes(animal)}
               id={filterId('wildlife', animal)}
               key={animal}
               label={animal}
-              onChange={() => update({ wildlife: toggleFilterValue(active.wildlife, animal) })}
+              onChange={() =>
+                update({ wildlife: toggleFilterValue(draftRef.current.wildlife, animal) })
+              }
             />
           ))}
         </ListingFilterDropdown>
@@ -128,18 +135,18 @@ export function NationalParkFilters({ active, facets, locale }: NationalParkFilt
 
       {facets.activities.length ? (
         <ListingFilterDropdown
-          selectedCount={active.activities.length}
+          selectedCount={draft.activities.length}
           title='Activities'
           triggerLabel='Select activities'
         >
           {facets.activities.map((activity) => (
             <ListingFilterOption
-              checked={active.activities.includes(activity)}
+              checked={draft.activities.includes(activity)}
               id={filterId('activity', activity)}
               key={activity}
               label={activity}
               onChange={() =>
-                update({ activities: toggleFilterValue(active.activities, activity) })
+                update({ activities: toggleFilterValue(draftRef.current.activities, activity) })
               }
             />
           ))}
